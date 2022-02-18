@@ -38,9 +38,9 @@ public class TokenProvider {
         return createToken(email, accessExpired, accessTokenSecretKey);
     }
 
-//    public String createRefreshToken(String email) {
-//        String refreshToken =  createToken(email, accessExpired, accessTokenSecretKey);
-//    }
+    public String createRefreshToken(String email) {
+        return createToken(email, refreshExpired, refreshTokenSecretKey);
+    }
 
     private String createToken(String email, Long expiredTime, String secretKey) {
         Date now = new Date();
