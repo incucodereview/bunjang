@@ -1,10 +1,10 @@
-package com.min.bunjang.member.domain;
+package com.min.bunjang.member.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Entity;
@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "Member")
@@ -27,9 +28,11 @@ public class Member implements UserDetails {
     private String email;
     private String password;
 
+    private MemberRole memberRole;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singletonList(new SimpleGrantedAuthority(memberRole.name()));
     }
 
     @Override
