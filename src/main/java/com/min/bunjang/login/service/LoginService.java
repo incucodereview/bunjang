@@ -1,4 +1,4 @@
-package com.min.bunjang.login.controller;
+package com.min.bunjang.login.service;
 
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.login.dto.LoginResponse;

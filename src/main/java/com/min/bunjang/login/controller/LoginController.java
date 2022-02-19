@@ -2,6 +2,7 @@ package com.min.bunjang.login.controller;
 
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.login.dto.LoginResponse;
+import com.min.bunjang.login.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
