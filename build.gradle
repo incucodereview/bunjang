@@ -40,6 +40,7 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     implementation 'org.hibernate.validator:hibernate-validator:6.1.7.Final'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    testCompile('io.rest-assured:rest-assured')
 }
 
 tasks.named('test') {

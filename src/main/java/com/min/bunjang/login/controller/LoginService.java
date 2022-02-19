@@ -25,9 +25,7 @@ public class LoginService {
     @Transactional
     public LoginResponse login(LoginRequest loginRequest) {
         Member member = memberRepository.findByEmail(loginRequest.getEmail()).orElseThrow(NotExistMemberException::new);
-        if (!bCryptPasswordEncoder.matches(loginRequest.getPassword(), member.getPassword())){
-            throw new NotMacheEmailAndPasswordException();
-        }
+        member.verifyMatchPassword(loginRequest.getPassword(), bCryptPasswordEncoder);
 
         String accessToken = tokenProvider.createAccessToken(member.getEmail());
         String refreshToken = tokenProvider.createRefreshToken(member.getEmail());
@@ -35,4 +33,5 @@ public class LoginService {
 
         return LoginResponse.of(accessToken, refreshToken);
     }
+
 }
