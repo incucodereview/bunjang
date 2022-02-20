@@ -1,38 +1,38 @@
-package com.min.bunjang.acceptance;
+package com.min.bunjang.login.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.min.bunjang.common.AcceptanceTestConfig;
-import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.login.controller.LoginControllerPath;
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.login.dto.LoginResponse;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
+import com.min.bunjang.token.model.RefreshToken;
+import com.min.bunjang.token.repository.RefreshTokenRepository;
+import net.bytebuddy.asm.Advice;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.awt.*;
 import java.time.LocalDate;
 
-@ActiveProfiles("h2")
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class LoginAcceptanceTest extends AcceptanceTestConfig {
+import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("h2")
+@SpringBootTest
+class LoginServiceTest {
     @Autowired
     private MemberRepository memberRepository;
 
+    @Autowired
+    private LoginService loginService;
+
     @Test
-    void name() {
+    @DisplayName("로그인 로직이 정상동작한다.")
+    void login_200() {
         //given
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String email = "email";
@@ -49,10 +49,9 @@ public class LoginAcceptanceTest extends AcceptanceTestConfig {
 
         LoginRequest loginRequest = new LoginRequest(email, password);
         //when
-        RestResponse<LoginResponse> loginResponse = postApi(LoginControllerPath.LOGIN, loginRequest, new TypeReference<RestResponse<LoginResponse>>() {}, "");
+        LoginResponse loginResponse = loginService.login(loginRequest);
         //then
-        Assertions.assertThat(loginResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-        Assertions.assertThat(loginResponse.getResult().getAccessToken()).isNotNull();
-        Assertions.assertThat(loginResponse.getResult().getRefreshToken()).isNotNull();
+        Assertions.assertThat(loginResponse.getAccessToken()).isNotNull();
+        Assertions.assertThat(loginResponse.getRefreshToken()).isNotNull();
     }
 }

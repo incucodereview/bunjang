@@ -23,7 +23,7 @@ public class LoginService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
-    public LoginResponse login(LoginRequest loginRequest) {
+    public LoginResponse login(LoginRequest loginRequest) throws RuntimeException{
         Member member = memberRepository.findByEmail(loginRequest.getEmail()).orElseThrow(NotExistMemberException::new);
         member.verifyMatchPassword(loginRequest.getPassword(), bCryptPasswordEncoder);
 

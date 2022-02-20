@@ -63,6 +63,8 @@ public class Member implements UserDetails {
         this.name = name;
         this.phone = phone;
         this.birthDate = birthDate;
+        this.joinDate = joinDate;
+        this.updatedDate = updatedDate;
         this.memberRole = memberRole;
     }
 
