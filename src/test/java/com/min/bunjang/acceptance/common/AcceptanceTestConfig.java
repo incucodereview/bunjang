@@ -1,4 +1,4 @@
-package com.min.bunjang.common;
+package com.min.bunjang.acceptance.common;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
