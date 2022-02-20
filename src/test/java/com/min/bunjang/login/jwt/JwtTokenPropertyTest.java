@@ -1,5 +1,6 @@
 package com.min.bunjang.login.jwt;
 
+import com.min.bunjang.login.jwt.properties.JwtTokenProperty;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

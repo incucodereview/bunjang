@@ -11,6 +11,7 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -54,5 +55,10 @@ public class LoginAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(loginResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
         Assertions.assertThat(loginResponse.getResult().getAccessToken()).isNotNull();
         Assertions.assertThat(loginResponse.getResult().getRefreshToken()).isNotNull();
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }
