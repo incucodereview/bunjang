@@ -25,10 +25,10 @@ public class EmailJoinController {
         return RestResponse.of(HttpStatus.OK, null);
     }
 
-    @PostMapping(EmailJoinControllerPath.CONFIRMATION_EMAIL)
-    public RestResponse<Void> confirmEmail(
-            @Validated @RequestBody EmailConfirmRequest emailConfirmRequest
-    ) {
-        confirmationTokenService.sendConfirmEmailForJoin(emailConfirmRequest);
-    }
+//    @PostMapping(EmailJoinControllerPath.CONFIRMATION_EMAIL)
+//    public RestResponse<Void> confirmEmail(
+//            @Validated @RequestBody EmailConfirmRequest emailConfirmRequest
+//    ) {
+//        confirmationTokenService.sendConfirmEmailForJoin(emailConfirmRequest);
+//    }
 }
