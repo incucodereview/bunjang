@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotBlank;
+
 @RequiredArgsConstructor
 @RestController
 public class ConfirmationTokenController {
@@ -15,10 +17,9 @@ public class ConfirmationTokenController {
 
     @GetMapping(ConfirmationTokenControllerPath.CONFIRMED_MAIL)
     public RestResponse<Boolean> confirmedEmail(
-            @RequestParam String token
+            @NotBlank @RequestParam String token
     ) {
         confirmationTokenService.verifyConfirmEmailToken(token);
         return RestResponse.of(HttpStatus.OK, Boolean.FALSE);
     }
-
 }

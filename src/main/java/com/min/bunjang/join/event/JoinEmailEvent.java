@@ -5,12 +5,10 @@ import org.springframework.context.ApplicationEvent;
 
 @Getter
 public class JoinEmailEvent extends ApplicationEvent {
-    private Long memberId;
     private String email;
 
-    public JoinEmailEvent(Object source, Long memberId, String email) {
+    public JoinEmailEvent(Object source, String email) {
         super(source);
-        this.memberId = memberId;
         this.email = email;
     }
 }

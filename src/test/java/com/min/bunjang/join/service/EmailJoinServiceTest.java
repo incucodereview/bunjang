@@ -30,7 +30,7 @@ class EmailJoinServiceTest {
     @Test
     void join_joinTempMember_create() {
         //given
-        String email = "email";
+        String email = "urisegea@naver.com";
         String password = "password";
         String name = "name";
         String phone = "phone";
@@ -52,6 +52,8 @@ class EmailJoinServiceTest {
         Assertions.assertThat(bCryptPasswordEncoder.matches(password, joinTempMember.getPassword())).isTrue();
         Assertions.assertThat(joinTempMember.getName()).isEqualTo(name);
         Assertions.assertThat(joinTempMember.getPhone()).isEqualTo(phone);
-        Assertions.assertThat(joinTempMember.getJoinDate()).isEqualTo(birthDate);
+        Assertions.assertThat(joinTempMember.getBirthDate().getYear()).isEqualTo(birthDate.getYear());
+        Assertions.assertThat(joinTempMember.getBirthDate().getMonthValue()).isEqualTo(birthDate.getMonthValue());
+        Assertions.assertThat(joinTempMember.getBirthDate().getDayOfMonth()).isEqualTo(birthDate.getDayOfMonth());
     }
 }
