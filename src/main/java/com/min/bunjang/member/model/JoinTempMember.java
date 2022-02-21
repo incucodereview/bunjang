@@ -25,25 +25,23 @@ public class JoinTempMember {
     private LocalDateTime joinDate;
     private LocalDateTime updatedDate;
 
-    private JoinTempMember(String email, String password, String name, String phone, LocalDate birthDate, LocalDateTime joinDate, LocalDateTime updatedDate) {
+    private JoinTempMember(String email, String password, String name, String phone, LocalDate birthDate) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.birthDate = birthDate;
-        this.joinDate = joinDate;
-        this.updatedDate = updatedDate;
+        this.joinDate = LocalDateTime.now();
+        this.updatedDate = LocalDateTime.now();
     }
 
-    public static JoinTempMember of(String email, String password, String name, String phone, LocalDate birthDate, LocalDateTime joinDate, LocalDateTime updatedDate) {
+    public static JoinTempMember of(String email, String password, String name, String phone, LocalDate birthDate) {
         return new JoinTempMember(
                 email,
                 password,
                 name,
                 phone,
-                birthDate,
-                joinDate,
-                updatedDate
+                birthDate
         );
     }
 }
