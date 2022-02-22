@@ -1,6 +1,6 @@
 package com.min.bunjang.member.model;
 
-import com.min.bunjang.join.dto.TempMemberJoinRequest;
+import com.min.bunjang.join.dto.TempJoinRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,13 +37,13 @@ public class JoinTempMember {
         this.updatedDate = LocalDateTime.now();
     }
 
-    public static JoinTempMember createJoinTempMember(TempMemberJoinRequest tempMemberJoinRequest, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public static JoinTempMember createJoinTempMember(TempJoinRequest tempJoinRequest, BCryptPasswordEncoder bCryptPasswordEncoder) {
         return new JoinTempMember(
-                tempMemberJoinRequest.getEmail(),
-                bCryptPasswordEncoder.encode(tempMemberJoinRequest.getPassword()),
-                tempMemberJoinRequest.getName(),
-                tempMemberJoinRequest.getPhone(),
-                tempMemberJoinRequest.getBirthDate()
+                tempJoinRequest.getEmail(),
+                bCryptPasswordEncoder.encode(tempJoinRequest.getPassword()),
+                tempJoinRequest.getName(),
+                tempJoinRequest.getPhone(),
+                tempJoinRequest.getBirthDate()
         );
     }
 }

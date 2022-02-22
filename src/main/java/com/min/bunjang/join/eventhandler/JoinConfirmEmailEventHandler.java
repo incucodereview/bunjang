@@ -19,7 +19,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 public class JoinConfirmEmailEventHandler {
     private static final String CONFIRM_EMAIL_SUBJECT = "회원가입 이메일 인증";
     private static final String CONFIRM_EMAIL_CONTENT = "회원가입 인증 이메일 입니다. 아래 링크를 클릭해주세요";
-    private static final String CONFIRM_EMAIL_LINK = "http://localhost:8080/confirm-email?token=";
+    private static final String CONFIRM_EMAIL_LINK = "http://localhost:8080/join?token=";
 
     private final ConfirmationTokenRepository confirmationTokenRepository;
     private final JavaMailSender javaMailSender;

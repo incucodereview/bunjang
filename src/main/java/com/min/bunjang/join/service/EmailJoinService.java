@@ -4,7 +4,7 @@ import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
 import com.min.bunjang.join.event.JoinEmailEvent;
-import com.min.bunjang.join.dto.TempMemberJoinRequest;
+import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.exception.NotExistTempMemberException;
 import com.min.bunjang.member.model.JoinTempMember;
@@ -29,12 +29,13 @@ public class EmailJoinService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ApplicationEventPublisher eventPublisher;
 
-    public void joinTempMember(TempMemberJoinRequest tempMemberJoinRequest) {
-        JoinTempMember joinTempMember = JoinTempMember.createJoinTempMember(tempMemberJoinRequest, bCryptPasswordEncoder);
+    public void joinTempMember(TempJoinRequest tempJoinRequest) {
+        JoinTempMember joinTempMember = JoinTempMember.createJoinTempMember(tempJoinRequest, bCryptPasswordEncoder);
         JoinTempMember savedJoinTempMember = joinTempMemberRepository.save(joinTempMember);
 
         eventPublisher.publishEvent(new JoinEmailEvent(this, savedJoinTempMember.getEmail()));
     }
+
     @Transactional
     public void joinMember(String token) {
         String tempMemberEmail = verifyConfirmEmailToken(token);

@@ -4,7 +4,7 @@ import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
-import com.min.bunjang.join.dto.TempMemberJoinRequest;
+import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.member.model.JoinTempMember;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
@@ -63,7 +63,7 @@ class EmailJoinServiceTest {
         String phone = "phone";
         LocalDate birthDate = LocalDate.of(2000, 10, 10);
 
-        TempMemberJoinRequest tempMemberJoinRequest = new TempMemberJoinRequest(
+        TempJoinRequest tempJoinRequest = new TempJoinRequest(
                 email,
                 password,
                 name,
@@ -72,7 +72,7 @@ class EmailJoinServiceTest {
         );
 
         //when
-        emailJoinService.joinTempMember(tempMemberJoinRequest);
+        emailJoinService.joinTempMember(tempJoinRequest);
 
         //then
         JoinTempMember joinTempMember = joinTempMemberRepository.findById(email).get();
@@ -127,8 +127,8 @@ class EmailJoinServiceTest {
         String phone = "phone";
         LocalDate birthDate = LocalDate.of(2000, 12, 12);
 
-        TempMemberJoinRequest tempMemberJoinRequest = new TempMemberJoinRequest(email, password, name, phone, birthDate);
-        JoinTempMember savedTempMember = joinTempMemberRepository.save(JoinTempMember.createJoinTempMember(tempMemberJoinRequest, bCryptPasswordEncoder));
+        TempJoinRequest tempJoinRequest = new TempJoinRequest(email, password, name, phone, birthDate);
+        JoinTempMember savedTempMember = joinTempMemberRepository.save(JoinTempMember.createJoinTempMember(tempJoinRequest, bCryptPasswordEncoder));
         ConfirmationToken savedConfirmationToken = confirmationTokenRepository.save(ConfirmationToken.createEmailConfirmationToken(email));
 
         //when

@@ -59,7 +59,7 @@ class LoginServiceTest {
         Assertions.assertThat(loginResponse.getRefreshToken()).isEqualTo(refreshToken.getRefreshToken());
     }
 
-    @DisplayName("없는 이메일로 로그인 시도")
+    @DisplayName("[예외] 없는 이메일로 로그인 시도시 NotExistMemberException 예외가 발생한다.")
     @Test
     void login_NotExistMember() {
         //given
