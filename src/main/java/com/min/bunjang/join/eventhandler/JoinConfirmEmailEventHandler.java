@@ -13,8 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
-import javax.mail.internet.MimeMessage;
-
 @Slf4j
 @Component
 @RequiredArgsConstructor

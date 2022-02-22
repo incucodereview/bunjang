@@ -1,7 +1,10 @@
 package com.min.bunjang.join.service;
 
 import com.min.bunjang.common.database.DatabaseCleanup;
-import com.min.bunjang.member.dto.EmailJoinRequest;
+import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
+import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
+import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
+import com.min.bunjang.join.dto.EmailJoinRequest;
 import com.min.bunjang.member.model.JoinTempMember;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
 import org.assertj.core.api.Assertions;
@@ -28,6 +31,9 @@ import static org.mockito.Mockito.verify;
 class EmailJoinServiceTest {
     @Autowired
     private JoinTempMemberRepository joinTempMemberRepository;
+
+    @Autowired
+    private ConfirmationTokenRepository confirmationTokenRepository;
 
     @Autowired
     private EmailJoinService emailJoinService;
@@ -58,8 +64,10 @@ class EmailJoinServiceTest {
                 phone,
                 birthDate
         );
+
         //when
         emailJoinService.joinTempMember(emailJoinRequest);
+
         //then
         JoinTempMember joinTempMember = joinTempMemberRepository.findById(email).get();
 
@@ -73,6 +81,34 @@ class EmailJoinServiceTest {
 
         ArgumentCaptor<SimpleMailMessage> argumentCaptor = ArgumentCaptor.forClass(SimpleMailMessage.class);
         verify(javaMailSender, atLeastOnce()).send(argumentCaptor.capture());
+    }
+
+    @DisplayName("이메일 인증이 완료되면 ConfirmToken 의 expired 필드가 true 가 된다.")
+    @Test
+    void verifyConfirmToken_expired_True() {
+        //given
+        String email = "email";
+        ConfirmationToken confirmationToken = confirmationTokenRepository.save(ConfirmationToken.createEmailConfirmationToken(email));
+        String token = confirmationToken.getId();
+
+        //when
+        emailJoinService.verifyConfirmEmailToken(token);
+
+        //then
+        ConfirmationToken updatedConfirmationToken = confirmationTokenRepository.findById(token).get();
+        Assertions.assertThat(updatedConfirmationToken.isExpired()).isTrue();
+    }
+
+    @DisplayName("[예외] 잘못된 토큰값이 요청되면 WrongConfirmEmailToken 예외를 응답한")
+    @Test
+    void verifyConfirmToken_WrongTokenValue() {
+        //given
+        String email = "email";
+        String wrongToken = "token";
+        ConfirmationToken confirmationToken = confirmationTokenRepository.save(ConfirmationToken.createEmailConfirmationToken(email));
+
+        //when & then
+        Assertions.assertThatThrownBy(() -> emailJoinService.verifyConfirmEmailToken(wrongToken)).isInstanceOf(WrongConfirmEmailToken.class);
     }
 
     @AfterEach

@@ -1,20 +1,21 @@
 package com.min.bunjang.join.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.join.confirmtoken.service.ConfirmationTokenService;
+import com.min.bunjang.join.dto.EmailJoinRequest;
 import com.min.bunjang.join.service.EmailJoinService;
-import com.min.bunjang.member.dto.EmailJoinRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotBlank;
 
 @RestController
 @RequiredArgsConstructor
 public class EmailJoinController {
-    private final ConfirmationTokenService confirmationTokenService;
     private final EmailJoinService emailJoinService;
 
     @PostMapping(EmailJoinControllerPath.JOIN)
@@ -25,10 +26,11 @@ public class EmailJoinController {
         return RestResponse.of(HttpStatus.OK, null);
     }
 
-//    @PostMapping(EmailJoinControllerPath.CONFIRMATION_EMAIL)
-//    public RestResponse<Void> confirmEmail(
-//            @Validated @RequestBody EmailConfirmRequest emailConfirmRequest
-//    ) {
-//        confirmationTokenService.sendConfirmEmailForJoin(emailConfirmRequest);
-//    }
+    @PostMapping(EmailJoinControllerPath.CONFIRMED_MAIL)
+    public RestResponse<Boolean> confirmedEmail(
+            @NotBlank @RequestParam String token
+    ) {
+        emailJoinService.verifyConfirmEmailToken(token);
+        return RestResponse.of(HttpStatus.OK, Boolean.FALSE);
+    }
 }
