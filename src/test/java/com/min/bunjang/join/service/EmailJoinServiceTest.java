@@ -1,30 +1,45 @@
 package com.min.bunjang.join.service;
 
+import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.member.dto.EmailJoinRequest;
 import com.min.bunjang.member.model.JoinTempMember;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
+
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
 
 
 @SpringBootTest
 @ActiveProfiles("h2")
 class EmailJoinServiceTest {
     @Autowired
-    private EmailJoinService emailJoinService;
-
-    @Autowired
     private JoinTempMemberRepository joinTempMemberRepository;
 
     @Autowired
+    private EmailJoinService emailJoinService;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    private DatabaseCleanup databaseCleanup;
+
+    @MockBean
+    private JavaMailSender javaMailSender;
 
     @DisplayName("이메일 회원가입 - 이메일 인증전 임시회원이 생성된다")
     @Test
@@ -55,5 +70,13 @@ class EmailJoinServiceTest {
         Assertions.assertThat(joinTempMember.getBirthDate().getYear()).isEqualTo(birthDate.getYear());
         Assertions.assertThat(joinTempMember.getBirthDate().getMonthValue()).isEqualTo(birthDate.getMonthValue());
         Assertions.assertThat(joinTempMember.getBirthDate().getDayOfMonth()).isEqualTo(birthDate.getDayOfMonth());
+
+        ArgumentCaptor<SimpleMailMessage> argumentCaptor = ArgumentCaptor.forClass(SimpleMailMessage.class);
+        verify(javaMailSender, atLeastOnce()).send(argumentCaptor.capture());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

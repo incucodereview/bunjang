@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,7 @@ public class EmailJoinService {
     private final ApplicationEventPublisher eventPublisher;
 
     public void joinTempMember(EmailJoinRequest emailJoinRequest) {
-        JoinTempMember joinTempMember = JoinTempMember.of(
+        JoinTempMember joinTempMember = JoinTempMember.createJoinTempMember(
                 emailJoinRequest.getEmail(),
                 bCryptPasswordEncoder.encode(emailJoinRequest.getPassword()),
                 emailJoinRequest.getName(),

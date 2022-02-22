@@ -36,7 +36,6 @@ public class JoinConfirmEmailEventHandler {
         ConfirmationToken savedConfirmationToken = confirmationTokenRepository.save(emailConfirmationToken);
         log.info("이메일 확인 토큰 저장 완료");
 
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(joinEmailEvent.getEmail());
         mailMessage.setFrom("jminyeong96@gmail.com");

@@ -35,7 +35,7 @@ public class JoinTempMember {
         this.updatedDate = LocalDateTime.now();
     }
 
-    public static JoinTempMember of(String email, String password, String name, String phone, LocalDate birthDate) {
+    public static JoinTempMember createJoinTempMember(String email, String password, String name, String phone, LocalDate birthDate) {
         return new JoinTempMember(
                 email,
                 password,
