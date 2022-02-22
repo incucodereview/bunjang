@@ -4,9 +4,14 @@ import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
 import com.min.bunjang.join.event.JoinEmailEvent;
-import com.min.bunjang.join.dto.EmailJoinRequest;
+import com.min.bunjang.join.dto.TempMemberJoinRequest;
+import com.min.bunjang.member.dto.MemberDirectCreateDto;
+import com.min.bunjang.member.exception.NotExistTempMemberException;
 import com.min.bunjang.member.model.JoinTempMember;
+import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
+import com.min.bunjang.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,26 +25,32 @@ import java.time.LocalDateTime;
 public class EmailJoinService {
     private final JoinTempMemberRepository joinTempMemberRepository;
     private final ConfirmationTokenRepository confirmationTokenRepository;
+    private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ApplicationEventPublisher eventPublisher;
 
-    public void joinTempMember(EmailJoinRequest emailJoinRequest) {
-        JoinTempMember joinTempMember = JoinTempMember.createJoinTempMember(
-                emailJoinRequest.getEmail(),
-                bCryptPasswordEncoder.encode(emailJoinRequest.getPassword()),
-                emailJoinRequest.getName(),
-                emailJoinRequest.getPhone(),
-                emailJoinRequest.getBirthDate()
-        );
+    public void joinTempMember(TempMemberJoinRequest tempMemberJoinRequest) {
+        JoinTempMember joinTempMember = JoinTempMember.createJoinTempMember(tempMemberJoinRequest, bCryptPasswordEncoder);
         JoinTempMember savedJoinTempMember = joinTempMemberRepository.save(joinTempMember);
 
         eventPublisher.publishEvent(new JoinEmailEvent(this, savedJoinTempMember.getEmail()));
     }
+    @Transactional
+    public void joinMember(String token) {
+        String tempMemberEmail = verifyConfirmEmailToken(token);
+        MemberRole memberRole = MemberRole.ROLE_MEMBER;
+        JoinTempMember joinTempMember = joinTempMemberRepository.findById(tempMemberEmail).orElseThrow(NotExistTempMemberException::new);
+
+        Member member = Member.createMember(MemberDirectCreateDto.toMemberThroughTempMember(joinTempMember, memberRole));
+        memberRepository.save(member);
+    }
 
     @Transactional
-    public void verifyConfirmEmailToken(String token) {
+    public String verifyConfirmEmailToken(String token) {
         ConfirmationToken confirmationToken =
                 confirmationTokenRepository.findByIdAndExpirationDateAfterAndExpired(token, LocalDateTime.now(), false).orElseThrow(WrongConfirmEmailToken::new);
         confirmationToken.useToken();
+        return confirmationToken.getEmail();
     }
+
 }

@@ -69,17 +69,16 @@ public class Member implements UserDetails {
     }
 
     public static Member createMember(MemberDirectCreateDto memberDirectCreateDto) {
-        return new Member(
-                memberDirectCreateDto.getMemberNum(),
-                memberDirectCreateDto.getEmail(),
-                memberDirectCreateDto.getPassword(),
-                memberDirectCreateDto.getName(),
-                memberDirectCreateDto.getPhone(),
-                memberDirectCreateDto.getBirthDate(),
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                memberDirectCreateDto.getMemberRole()
-        );
+        return Member.builder()
+                .email(memberDirectCreateDto.getEmail())
+                .password(memberDirectCreateDto.getPassword())
+                .name(memberDirectCreateDto.getName())
+                .phone(memberDirectCreateDto.getPhone())
+                .birthDate(memberDirectCreateDto.getBirthDate())
+                .joinDate(LocalDateTime.now())
+                .updatedDate(LocalDateTime.now())
+                .memberRole(memberDirectCreateDto.getMemberRole())
+                .build();
     }
 
     public void verifyMatchPassword(String inputPassword, BCryptPasswordEncoder bCryptPasswordEncoder) {

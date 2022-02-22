@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class EmailJoinRequest {
+public class TempMemberJoinRequest {
     @NotBlank
     private String email;
     @NotBlank

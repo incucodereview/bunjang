@@ -4,9 +4,12 @@ import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
-import com.min.bunjang.join.dto.EmailJoinRequest;
+import com.min.bunjang.join.dto.TempMemberJoinRequest;
 import com.min.bunjang.member.model.JoinTempMember;
+import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
+import com.min.bunjang.member.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -36,6 +39,9 @@ class EmailJoinServiceTest {
     private ConfirmationTokenRepository confirmationTokenRepository;
 
     @Autowired
+    private MemberRepository memberRepository;
+
+    @Autowired
     private EmailJoinService emailJoinService;
 
     @Autowired
@@ -57,7 +63,7 @@ class EmailJoinServiceTest {
         String phone = "phone";
         LocalDate birthDate = LocalDate.of(2000, 10, 10);
 
-        EmailJoinRequest emailJoinRequest = new EmailJoinRequest(
+        TempMemberJoinRequest tempMemberJoinRequest = new TempMemberJoinRequest(
                 email,
                 password,
                 name,
@@ -66,7 +72,7 @@ class EmailJoinServiceTest {
         );
 
         //when
-        emailJoinService.joinTempMember(emailJoinRequest);
+        emailJoinService.joinTempMember(tempMemberJoinRequest);
 
         //then
         JoinTempMember joinTempMember = joinTempMemberRepository.findById(email).get();
@@ -109,6 +115,39 @@ class EmailJoinServiceTest {
 
         //when & then
         Assertions.assertThatThrownBy(() -> emailJoinService.verifyConfirmEmailToken(wrongToken)).isInstanceOf(WrongConfirmEmailToken.class);
+    }
+
+    @DisplayName("이메일 인증후 임시회원에서 일반회원으로 가입이 완료된다.")
+    @Test
+    void join_member() {
+        //given
+        String email = "email@email.com";
+        String password = bCryptPasswordEncoder.encode("password");
+        String name = "min";
+        String phone = "phone";
+        LocalDate birthDate = LocalDate.of(2000, 12, 12);
+
+        TempMemberJoinRequest tempMemberJoinRequest = new TempMemberJoinRequest(email, password, name, phone, birthDate);
+        JoinTempMember savedTempMember = joinTempMemberRepository.save(JoinTempMember.createJoinTempMember(tempMemberJoinRequest, bCryptPasswordEncoder));
+        ConfirmationToken savedConfirmationToken = confirmationTokenRepository.save(ConfirmationToken.createEmailConfirmationToken(email));
+
+        //when
+        emailJoinService.joinMember(savedConfirmationToken.getId());
+
+        //then
+        Member joinedMember = memberRepository.findByEmail(savedConfirmationToken.getEmail()).get();
+        Assertions.assertThat(joinedMember.getMemberNum()).isNotNull();
+        Assertions.assertThat(joinedMember.getEmail()).isEqualTo(savedTempMember.getEmail());
+        Assertions.assertThat(joinedMember.getPassword()).isEqualTo(savedTempMember.getPassword());
+        Assertions.assertThat(joinedMember.getName()).isEqualTo(savedTempMember.getName());
+        Assertions.assertThat(joinedMember.getPhone()).isEqualTo(savedTempMember.getPhone());
+        Assertions.assertThat(joinedMember.getBirthDate().getYear()).isEqualTo(savedTempMember.getBirthDate().getYear());
+        Assertions.assertThat(joinedMember.getBirthDate().getMonthValue()).isEqualTo(savedTempMember.getBirthDate().getMonthValue());
+        Assertions.assertThat(joinedMember.getBirthDate().getDayOfMonth()).isEqualTo(savedTempMember.getBirthDate().getDayOfMonth());
+        Assertions.assertThat(joinedMember.getMemberRole()).isEqualTo(MemberRole.ROLE_MEMBER);
+
+        ConfirmationToken findConfirmationToken = confirmationTokenRepository.findById(savedConfirmationToken.getId()).get();
+        Assertions.assertThat(findConfirmationToken.isExpired()).isTrue();
     }
 
     @AfterEach

@@ -1,4 +1,4 @@
-package com.min.bunjang.login.integrate;
+package com.min.bunjang.integrate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.min.bunjang.login.controller.LoginControllerPath;
@@ -58,7 +58,7 @@ public class LoginIntegrateTest {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String email = "email";
         String password = "password";
-        Member member = Member.createMember(new MemberDirectCreateDto(null,
+        Member member = Member.createMember(MemberDirectCreateDto.of(
                 email,
                 bCryptPasswordEncoder.encode(password),
                 "min",

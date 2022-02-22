@@ -38,7 +38,7 @@ class LoginServiceTest {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String email = "email";
         String password = "password";
-        Member member = Member.createMember(new MemberDirectCreateDto(null,
+        Member member = Member.createMember(MemberDirectCreateDto.of(
                 email,
                 bCryptPasswordEncoder.encode(password),
                 "min",

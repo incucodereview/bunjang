@@ -1,8 +1,10 @@
 package com.min.bunjang.member.model;
 
+import com.min.bunjang.join.dto.TempMemberJoinRequest;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -35,13 +37,13 @@ public class JoinTempMember {
         this.updatedDate = LocalDateTime.now();
     }
 
-    public static JoinTempMember createJoinTempMember(String email, String password, String name, String phone, LocalDate birthDate) {
+    public static JoinTempMember createJoinTempMember(TempMemberJoinRequest tempMemberJoinRequest, BCryptPasswordEncoder bCryptPasswordEncoder) {
         return new JoinTempMember(
-                email,
-                password,
-                name,
-                phone,
-                birthDate
+                tempMemberJoinRequest.getEmail(),
+                bCryptPasswordEncoder.encode(tempMemberJoinRequest.getPassword()),
+                tempMemberJoinRequest.getName(),
+                tempMemberJoinRequest.getPhone(),
+                tempMemberJoinRequest.getBirthDate()
         );
     }
 }

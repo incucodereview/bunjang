@@ -17,13 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
-@ActiveProfiles("h2")
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class LoginAcceptanceTest extends AcceptanceTestConfig {
 
     @Autowired
@@ -35,7 +33,7 @@ public class LoginAcceptanceTest extends AcceptanceTestConfig {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String email = "email";
         String password = "password";
-        Member member = Member.createMember(new MemberDirectCreateDto(null,
+        Member member = Member.createMember(MemberDirectCreateDto.of(
                 email,
                 bCryptPasswordEncoder.encode(password),
                 "min",
