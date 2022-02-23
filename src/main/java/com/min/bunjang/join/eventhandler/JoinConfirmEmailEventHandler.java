@@ -2,6 +2,7 @@ package com.min.bunjang.join.eventhandler;
 
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
+import com.min.bunjang.join.email.EmailGenerator;
 import com.min.bunjang.join.event.JoinEmailEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +22,6 @@ import java.util.Arrays;
 @Component
 @RequiredArgsConstructor
 public class JoinConfirmEmailEventHandler {
-    private static final String CONFIRM_EMAIL_SUBJECT = "회원가입 이메일 인증";
-    private static final String CONFIRM_EMAIL_CONTENT = "회원가입 인증 이메일 입니다. 아래 링크를 클릭해주세요";
-    private static final String CONFIRM_EMAIL_LINK = "http://localhost:8080/confirm-email?token=";
 
     private final ConfirmationTokenRepository confirmationTokenRepository;
     private final JavaMailSender javaMailSender;
@@ -39,12 +37,7 @@ public class JoinConfirmEmailEventHandler {
         ConfirmationToken savedConfirmationToken = confirmationTokenRepository.save(emailConfirmationToken);
         log.info("이메일 확인 토큰 저장 완료");
 
-        //Todo : 밑의 이메일 메세지 만드는 작업 따로 클래스로 빼서 사용해볼것.
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(joinEmailEvent.getEmail());
-        mailMessage.setFrom("jminyeong96@gmail.com");
-        mailMessage.setSubject(CONFIRM_EMAIL_SUBJECT);
-        mailMessage.setText(CONFIRM_EMAIL_CONTENT + "\n" + CONFIRM_EMAIL_LINK + savedConfirmationToken.getId());
+        SimpleMailMessage mailMessage = EmailGenerator.generateSimpleMailMessage(joinEmailEvent.getEmail(), savedConfirmationToken.getId());
         if (!Arrays.asList(environment.getActiveProfiles()).contains("h2")) {
             javaMailSender.send(mailMessage);
         }

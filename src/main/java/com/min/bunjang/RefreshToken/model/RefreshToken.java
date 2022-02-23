@@ -1,4 +1,4 @@
-package com.min.bunjang.token.model;
+package com.min.bunjang.RefreshToken.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,7 +19,7 @@ public class RefreshToken {
 
     private LocalDateTime createDate;
 
-    public RefreshToken(String email, String refreshToken, LocalDateTime createDate) {
+    private RefreshToken(String email, String refreshToken, LocalDateTime createDate) {
         this.email = email;
         this.refreshToken = refreshToken;
         this.createDate = createDate;

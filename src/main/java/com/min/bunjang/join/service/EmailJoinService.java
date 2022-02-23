@@ -38,12 +38,10 @@ public class EmailJoinService {
 
     @Transactional
     public void joinMember(String email) {
-        MemberRole memberRole = MemberRole.ROLE_MEMBER;
         JoinTempMember joinTempMember = joinTempMemberRepository.findById(email).orElseThrow(NotExistTempMemberException::new);
+        Member member = Member.createMember(MemberDirectCreateDto.toMemberThroughTempMember(joinTempMember, MemberRole.ROLE_MEMBER));
 
-        Member member = Member.createMember(MemberDirectCreateDto.toMemberThroughTempMember(joinTempMember, memberRole));
         memberRepository.save(member);
-
         joinTempMemberRepository.delete(joinTempMember);
     }
 
@@ -54,5 +52,4 @@ public class EmailJoinService {
         confirmationToken.useToken();
         return confirmationToken.getEmail();
     }
-
 }

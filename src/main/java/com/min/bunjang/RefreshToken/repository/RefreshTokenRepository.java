@@ -1,6 +1,6 @@
-package com.min.bunjang.token.repository;
+package com.min.bunjang.RefreshToken.repository;
 
-import com.min.bunjang.token.model.RefreshToken;
+import com.min.bunjang.RefreshToken.model.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

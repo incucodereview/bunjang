@@ -2,13 +2,12 @@ package com.min.bunjang.login.service;
 
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.login.dto.LoginResponse;
-import com.min.bunjang.login.exception.NotMacheEmailAndPasswordException;
 import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.repository.MemberRepository;
-import com.min.bunjang.token.model.RefreshToken;
-import com.min.bunjang.token.repository.RefreshTokenRepository;
+import com.min.bunjang.RefreshToken.model.RefreshToken;
+import com.min.bunjang.RefreshToken.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
