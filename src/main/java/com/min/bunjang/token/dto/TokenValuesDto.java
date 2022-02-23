@@ -1,22 +1,21 @@
-package com.min.bunjang.login.dto;
+package com.min.bunjang.token.dto;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class LoginResponse {
+public class TokenValuesDto {
     private String accessToken;
     private String refreshToken;
 
-    public LoginResponse(String accessToken, String refreshToken) {
+    public TokenValuesDto(String accessToken, String refreshToken) {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
     }
 
-    public static LoginResponse of(String accessToken, String refreshToken) {
-        return new LoginResponse(accessToken, refreshToken);
+    public static TokenValuesDto of(String accessToken, String refreshToken) {
+        return new TokenValuesDto(accessToken, refreshToken);
     }
 }

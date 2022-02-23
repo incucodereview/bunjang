@@ -3,6 +3,7 @@ package com.min.bunjang.login.jwt;
 import com.min.bunjang.login.jwt.properties.JwtTokenProperty;
 import com.min.bunjang.security.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +72,30 @@ public class TokenProvider {
             return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
         } catch (RuntimeException e) {
             return null;
+        }
+    }
+
+    private Claims decodeToken(String token, String secretKey) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
+    }
+
+    public String getEmailFromRefreshToken(String token) {
+        return decodeToken(token, refreshTokenSecretKey).get("email", String.class);
+    }
+
+    public boolean isExpiredAccessToken(String token, Date nowDate) {
+        try {
+            return decodeToken(token, accessTokenSecretKey).getExpiration().before(nowDate);
+        } catch (JwtException | IllegalArgumentException e) {
+            return true;
+        }
+    }
+
+    public boolean isExpiredRefreshToken(String token, Date nowDate) {
+        try {
+            return decodeToken(token, refreshTokenSecretKey).getExpiration().before(nowDate);
+        } catch (JwtException | IllegalArgumentException e) {
+            return true;
         }
     }
 }

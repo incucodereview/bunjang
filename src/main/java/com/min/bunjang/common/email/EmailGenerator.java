@@ -1,4 +1,4 @@
-package com.min.bunjang.join.email;
+package com.min.bunjang.common.email;
 
 import org.springframework.mail.SimpleMailMessage;
 

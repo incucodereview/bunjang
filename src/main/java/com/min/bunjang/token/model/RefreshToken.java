@@ -1,4 +1,4 @@
-package com.min.bunjang.RefreshToken.model;
+package com.min.bunjang.token.model;
 
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,14 +1,14 @@
 package com.min.bunjang.login.service;
 
 import com.min.bunjang.login.dto.LoginRequest;
-import com.min.bunjang.login.dto.LoginResponse;
+import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
-import com.min.bunjang.RefreshToken.model.RefreshToken;
-import com.min.bunjang.RefreshToken.repository.RefreshTokenRepository;
+import com.min.bunjang.token.model.RefreshToken;
+import com.min.bunjang.token.repository.RefreshTokenRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -50,13 +50,13 @@ class LoginServiceTest {
 
         LoginRequest loginRequest = new LoginRequest(email, password);
         //when
-        LoginResponse loginResponse = loginService.login(loginRequest);
+        TokenValuesDto tokenValuesDto = loginService.login(loginRequest);
         //then
-        Assertions.assertThat(loginResponse.getAccessToken()).isNotNull();
-        Assertions.assertThat(loginResponse.getRefreshToken()).isNotNull();
+        Assertions.assertThat(tokenValuesDto.getAccessToken()).isNotNull();
+        Assertions.assertThat(tokenValuesDto.getRefreshToken()).isNotNull();
 
         RefreshToken refreshToken = refreshTokenRepository.findById(email).orElseThrow(NotExistMemberException::new);
-        Assertions.assertThat(loginResponse.getRefreshToken()).isEqualTo(refreshToken.getRefreshToken());
+        Assertions.assertThat(tokenValuesDto.getRefreshToken()).isEqualTo(refreshToken.getRefreshToken());
     }
 
     @DisplayName("[예외] 없는 이메일로 로그인 시도시 NotExistMemberException 예외가 발생한다.")

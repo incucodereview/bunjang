@@ -2,7 +2,7 @@ package com.min.bunjang.login.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.login.dto.LoginRequest;
-import com.min.bunjang.login.dto.LoginResponse;
+import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.login.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,10 +17,10 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping(LoginControllerPath.LOGIN)
-    public RestResponse<LoginResponse> login(
+    public RestResponse<TokenValuesDto> login(
             @Validated @RequestBody LoginRequest loginRequest
     ) {
-        LoginResponse loginResponse = loginService.login(loginRequest);
-        return RestResponse.of(HttpStatus.OK, loginResponse);
+        TokenValuesDto tokenValuesDto = loginService.login(loginRequest);
+        return RestResponse.of(HttpStatus.OK, tokenValuesDto);
     }
 }

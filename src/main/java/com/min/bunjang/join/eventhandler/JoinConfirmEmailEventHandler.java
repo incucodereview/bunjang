@@ -2,11 +2,10 @@ package com.min.bunjang.join.eventhandler;
 
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
-import com.min.bunjang.join.email.EmailGenerator;
+import com.min.bunjang.common.email.EmailGenerator;
 import com.min.bunjang.join.event.JoinEmailEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.jta.atomikos.AtomikosDependsOnBeanFactoryPostProcessor;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
