@@ -53,7 +53,7 @@ class EmailJoinServiceTest {
     @MockBean
     private JavaMailSender javaMailSender;
 
-    @DisplayName("이메일 회원가입 - 이메일 인증전 임시회원이 생성된다")
+    @DisplayName("이메일 인증전 임시회원이 생성되고 이메일이 전송된다.")
     @Test
     void join_joinTempMember_create() {
         //given
@@ -89,7 +89,7 @@ class EmailJoinServiceTest {
         verify(javaMailSender, atLeastOnce()).send(argumentCaptor.capture());
     }
 
-    @DisplayName("이메일 인증이 완료되면 ConfirmToken 의 expired 필드가 true 가 된다.")
+    @DisplayName("이메일 인증이 완료되면 ConfirmToken의 expired필드가 true가 되고 회원등록이 되면 임시회원이 삭제된다..")
     @Test
     void verifyConfirmToken_expired_True() {
         //given

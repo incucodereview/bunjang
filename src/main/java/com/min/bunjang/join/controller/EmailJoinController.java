@@ -1,11 +1,14 @@
 package com.min.bunjang.join.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.join.dto.JoinRequest;
 import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.join.service.EmailJoinService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,15 +21,21 @@ import javax.validation.constraints.NotBlank;
 public class EmailJoinController {
     private final EmailJoinService emailJoinService;
 
-    @PostMapping(EmailJoinControllerPath.JOIN_TEMP_MEMBER)
+    @PostMapping(EmailJoinControllerPath.JOIN_TEMP_MEMBER_REQUEST)
     public RestResponse<Void> joinTempMember(@Validated @RequestBody TempJoinRequest tempJoinRequest) {
         emailJoinService.joinTempMember(tempJoinRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
-    @PostMapping(EmailJoinControllerPath.JOIN_MEMBER)
-    public RestResponse<Boolean> joinMember(@NotBlank @RequestParam String token) {
-        emailJoinService.joinMember(token);
-        return RestResponse.of(HttpStatus.OK, Boolean.FALSE);
+    @GetMapping(EmailJoinControllerPath.CONFIRM_EMAIL_REQUEST)
+    public RestResponse<String> confirmEmail(@NotBlank @RequestParam("token") String token) {
+        String email = emailJoinService.verifyConfirmEmailToken(token);
+        return RestResponse.of(HttpStatus.OK, email);
+    }
+
+    @PostMapping(EmailJoinControllerPath.JOIN_MEMBER_REQUEST)
+    public RestResponse<Void> joinMember(@RequestBody JoinRequest joinRequest) {
+        emailJoinService.joinMember(joinRequest.getEmail());
+        return RestResponse.of(HttpStatus.OK, null);
     }
 }

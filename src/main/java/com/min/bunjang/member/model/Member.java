@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,6 +47,7 @@ public class Member implements UserDetails {
     private LocalDateTime joinDate;
     private LocalDateTime updatedDate;
 
+    @Enumerated(EnumType.STRING)
     private MemberRole memberRole;
 
     @Builder(access = AccessLevel.PRIVATE)

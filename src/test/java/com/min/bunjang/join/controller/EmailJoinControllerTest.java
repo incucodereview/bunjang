@@ -51,7 +51,7 @@ class EmailJoinControllerTest {
         TempJoinRequest tempJoinRequest = new TempJoinRequest(email, password, name, phone, birthDate);
 
         //when & then
-        mockMvc.perform(post(EmailJoinControllerPath.JOIN_TEMP_MEMBER)
+        mockMvc.perform(post(EmailJoinControllerPath.JOIN_TEMP_MEMBER_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(tempJoinRequest)))
                 .andExpect(status().isOk());
@@ -69,7 +69,7 @@ class EmailJoinControllerTest {
         TempJoinRequest tempJoinRequest = new TempJoinRequest(email, password, name, phone, birthDate);
 
         //when & then
-        mockMvc.perform(post(EmailJoinControllerPath.JOIN_TEMP_MEMBER)
+        mockMvc.perform(post(EmailJoinControllerPath.JOIN_TEMP_MEMBER_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(tempJoinRequest)))
                 .andExpect(status().isBadRequest());
@@ -82,7 +82,7 @@ class EmailJoinControllerTest {
         String token = "token";
 
         //when & then
-        mockMvc.perform(post(EmailJoinControllerPath.JOIN_MEMBER)
+        mockMvc.perform(post(EmailJoinControllerPath.JOIN_MEMBER_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("token", token))
                 .andExpect(status().isOk());
