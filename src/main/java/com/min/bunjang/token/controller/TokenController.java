@@ -6,7 +6,9 @@ import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.token.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,9 +17,7 @@ public class TokenController {
     private final TokenService tokenService;
     
     @PostMapping(TokenControllerPath.VALIDATE_TOKEN_STATUS)
-    public RestResponse<TokenValidResponse> validateTokenStatus(TokenValuesDto tokenValuesDto) {
+    public RestResponse<TokenValidResponse> validateTokenStatus(@Validated @RequestBody TokenValuesDto tokenValuesDto) {
         return RestResponse.of(HttpStatus.OK, tokenService.handleTokenOnTokenStatus(tokenValuesDto));
     }
-
-
 }
