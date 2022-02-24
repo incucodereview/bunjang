@@ -89,7 +89,7 @@ class EmailJoinServiceTest {
         verify(javaMailSender, atLeastOnce()).send(argumentCaptor.capture());
     }
 
-    @DisplayName("이메일 인증이 완료되면 ConfirmToken의 expired필드가 true가 되고 회원등록이 되면 임시회원이 삭제된다..")
+    @DisplayName("이메일 인증이 완료되면 ConfirmToken의 expired필드가 true가 된다.")
     @Test
     void verifyConfirmToken_expired_True() {
         //given

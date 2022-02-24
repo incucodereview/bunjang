@@ -54,7 +54,7 @@ class EmailJoinControllerTest {
         mockMvc.perform(post(EmailJoinControllerPath.JOIN_TEMP_MEMBER_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(tempJoinRequest)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 
     @DisplayName("[예외] 임시 회원가입 요청 내용 모두 null 이거나 공백문자일때 404를 응답한다")
@@ -85,6 +85,6 @@ class EmailJoinControllerTest {
         mockMvc.perform(post(EmailJoinControllerPath.JOIN_MEMBER_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("token", token))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
 }

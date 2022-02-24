@@ -23,7 +23,7 @@ public class EmailJoinController {
     @PostMapping(EmailJoinControllerPath.JOIN_TEMP_MEMBER_REQUEST)
     public RestResponse<Void> joinTempMember(@Validated @RequestBody TempJoinRequest tempJoinRequest) {
         emailJoinService.joinTempMember(tempJoinRequest);
-        return RestResponse.of(HttpStatus.OK, null);
+        return RestResponse.of(HttpStatus.CREATED, null);
     }
 
     @GetMapping(EmailJoinControllerPath.CONFIRM_EMAIL_REQUEST)
@@ -33,8 +33,8 @@ public class EmailJoinController {
     }
 
     @PostMapping(EmailJoinControllerPath.JOIN_MEMBER_REQUEST)
-    public RestResponse<Void> joinMember(@RequestBody JoinRequest joinRequest) {
+    public RestResponse<Void> joinMember(@Validated @RequestBody JoinRequest joinRequest) {
         emailJoinService.joinMember(joinRequest.getEmail());
-        return RestResponse.of(HttpStatus.OK, null);
+        return RestResponse.of(HttpStatus.CREATED, null);
     }
 }
