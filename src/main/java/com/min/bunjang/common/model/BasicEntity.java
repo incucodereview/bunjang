@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)

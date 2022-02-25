@@ -22,6 +22,9 @@ class StoreServiceTest {
     @Autowired
     private StoreService storeService;
 
+    @Autowired
+    private MemberRepository memberRepository;
+
     @DisplayName("상점이 생성된다.")
     @Test
     void store_create() {
@@ -29,10 +32,11 @@ class StoreServiceTest {
         String email = "email@email";
         String password = "password";
         Member member = Member.createMember(MemberDirectCreateDto.of(email, password, "name", "phone", null, MemberRole.ROLE_MEMBER));
+        Member savedMember = memberRepository.save(member);
 
-        String storeName = "storename";
+        String storeName = "storeName";
         String introduceContent = "introduceContent";
-        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(member.getMemberNum(), storeName, introduceContent);
+        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(savedMember.getMemberNum(), storeName, introduceContent);
 
         //when
         StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateRequest);
