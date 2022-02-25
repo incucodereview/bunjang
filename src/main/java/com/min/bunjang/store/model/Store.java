@@ -17,15 +17,19 @@ public class Store extends BasicEntity {
 
     private String storeName;
 
+    private String introduceContent;
+
+
     @OneToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    private Store(String storeName, Member member) {
+    private Store(String storeName, String introduceContent, Member member) {
         this.storeName = storeName;
+        this.introduceContent = introduceContent;
         this.member = member;
     }
 
-    public static Store createStore(String storeName, Member member) {
-        return new Store(storeName, member);
+    public static Store createStore(String storeName, String introduceContent, Member member) {
+        return new Store(storeName, introduceContent, member);
     }
 }
