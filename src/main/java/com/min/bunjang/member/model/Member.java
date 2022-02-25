@@ -1,8 +1,8 @@
 package com.min.bunjang.member.model;
 
-import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.login.exception.NotMacheEmailAndPasswordException;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
+import com.min.bunjang.store.model.Store;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,12 +12,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
@@ -49,6 +52,9 @@ public class Member implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private MemberRole memberRole;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "member", orphanRemoval = true)
+    private Store store;
 
     @Builder(access = AccessLevel.PRIVATE)
     public Member(Long memberNum,
