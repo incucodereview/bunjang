@@ -23,7 +23,7 @@ public class MemberAcceptanceHelper {
                 bCryptPasswordEncoder.encode(password),
                 "name",
                 "phone",
-                LocalDate.of(1996, 01, 14),
+                LocalDate.of(1996, 10, 14),
                 MemberRole.ROLE_MEMBER
         );
         return memberRepository.save(Member.createMember(memberDirectCreateDto));

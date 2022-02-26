@@ -66,3 +66,32 @@ mins1031;
 이메일과 비밀번호를 통해 JWT 토큰 방식의 로그인을 진행한다
 
 operation::login[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+
+[[resources-login]]
+== 회원가입 - 임시
+
+개인정보 입력을 통해 임시회원 가입을 진행한다.
+
+operation::email-temp-join[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+
+[[resources-login]]
+== 이메일 인증
+
+이메일로 전송된 토큰으로 본인인증을 진행한다.
+
+operation::confirm-email[snippets='request-headers,request-parameters,response-headers,response-fields,response-body']
+
+[[resources-login]]
+== 회원가입
+
+이메일 인증후 정식회원으로 가입된다.
+
+operation::email-join[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+
+[[resources-login]]
+== 상점 생성
+
+회원가입후 상점을 생성한다.
+
+operation::store-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+

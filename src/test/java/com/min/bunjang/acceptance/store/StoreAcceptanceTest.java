@@ -31,10 +31,6 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
     Stream<DynamicTest> dynamicTestStream() {
         String email = "urisegea@naver.com";
         String password = "password";
-        String name = "name";
-        String phone = "phone";
-        LocalDate birthDate = LocalDate.of(2000, 10, 10);
-        String token = "";
 
         return Stream.of(
                 DynamicTest.dynamicTest("상점 생성.", () -> {

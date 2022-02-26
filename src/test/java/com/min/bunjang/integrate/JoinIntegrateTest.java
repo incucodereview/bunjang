@@ -2,6 +2,7 @@ package com.min.bunjang.integrate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.min.bunjang.common.database.DatabaseCleanup;
+import com.min.bunjang.integrate.config.IntegrateTestConfig;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
 import com.min.bunjang.join.controller.EmailJoinControllerPath;
@@ -41,13 +42,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("h2")
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
-public class JoinIntegrateTest {
+public class JoinIntegrateTest extends IntegrateTestConfig {
 
     @Autowired
     private JoinTempMemberRepository joinTempMemberRepository;
@@ -58,14 +53,6 @@ public class JoinIntegrateTest {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
-    private DatabaseCleanup databaseCleanup;
 
     @DisplayName("임시회원 가입 요청 통합테스트")
     @Test

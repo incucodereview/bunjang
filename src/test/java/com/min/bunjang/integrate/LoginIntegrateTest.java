@@ -1,6 +1,7 @@
 package com.min.bunjang.integrate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.min.bunjang.integrate.config.IntegrateTestConfig;
 import com.min.bunjang.login.controller.LoginControllerPath;
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
@@ -8,6 +9,7 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.testconfig.RestDocsConfiguration;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,21 +37,9 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("h2")
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-@AutoConfigureMockMvc
-@AutoConfigureRestDocs
-@Import(RestDocsConfiguration.class)
-public class LoginIntegrateTest {
+public class LoginIntegrateTest extends IntegrateTestConfig {
     @Autowired
     private MemberRepository memberRepository;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 
     @DisplayName("로그인 기능 통합테스트")
     @Test
@@ -93,5 +83,10 @@ public class LoginIntegrateTest {
                                 fieldWithPath("result.refreshToken").description("로그인 완료한 회원의 리프레시 토큰")
                         )
                 ));
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }
