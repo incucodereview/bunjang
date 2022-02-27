@@ -35,11 +35,6 @@ public class StoreService {
         store.updateIntroduceContent(storeIntroduceDto.getUpdateIntroduceContent());
     }
 
-    private Period calculateOpenDate(Long storeNum) {
-        Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
-        return store.calculateOpenTime();
-    }
-
     @Transactional
     public void plusVisitor(Long ownerNum , Long visitorNum) {
         Store owner = storeRepository.findById(ownerNum).orElseThrow(NotExistStoreException::new);
