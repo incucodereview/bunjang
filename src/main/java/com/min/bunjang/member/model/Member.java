@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -126,5 +127,19 @@ public class Member implements UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(memberNum, member.memberNum) && Objects.equals(email, member.email) && Objects.equals(password, member.password) && Objects.equals(name, member.name) && Objects.equals(phone, member.phone) && Objects.equals(birthDate, member.birthDate) && Objects.equals(joinDate, member.joinDate) && Objects.equals(updatedDate, member.updatedDate) && memberRole == member.memberRole && Objects.equals(store, member.store);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(memberNum, email, password, name, phone, birthDate, joinDate, updatedDate, memberRole, store);
     }
 }

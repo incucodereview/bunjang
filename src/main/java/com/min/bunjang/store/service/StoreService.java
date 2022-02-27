@@ -39,4 +39,10 @@ public class StoreService {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
         return store.calculateOpenTime();
     }
+
+    @Transactional
+    public void plusVisitor(Long ownerNum , Long visitorNum) {
+        Store owner = storeRepository.findById(ownerNum).orElseThrow(NotExistStoreException::new);
+        owner.plusVisitor(visitorNum);
+    }
 }
