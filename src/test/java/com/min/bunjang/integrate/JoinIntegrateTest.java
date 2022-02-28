@@ -104,8 +104,8 @@ public class JoinIntegrateTest extends IntegrateTestConfig {
         LocalDate birthDate = LocalDate.of(1996, 10, 14);
 
         TempJoinRequest tempJoinRequest = new TempJoinRequest(email, password, name, phone, birthDate);
-
         JoinTempMember joinTempMember = JoinTempMember.createJoinTempMember(tempJoinRequest, bCryptPasswordEncoder);
+
         JoinTempMember savedJoinTempMember = joinTempMemberRepository.save(joinTempMember);
         ConfirmationToken confirmationToken = confirmationTokenRepository.save(ConfirmationToken.createEmailConfirmationToken(savedJoinTempMember.getEmail()));
 

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class InquireCreateResponse {
-    private Long inquiryNum;
-    private String writerName;
-    private String inquiryContent;
+    private Long inquireNum;
+    private String visitorName;
+    private String inquireContent;
 }

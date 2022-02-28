@@ -7,7 +7,7 @@ import com.min.bunjang.store.storeinquire.dto.InquireCreateRequest;
 import com.min.bunjang.store.storeinquire.dto.InquireCreateResponse;
 import com.min.bunjang.store.storeinquire.exception.NotExistStoreInquireException;
 import com.min.bunjang.store.storeinquire.model.StoreInquire;
-import com.min.bunjang.store.storeinquire.repository.StoreInquiryRepository;
+import com.min.bunjang.store.storeinquire.repository.StoreInquireRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,14 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class StoreInquireService {
-    private final StoreInquiryRepository storeInquiryRepository;
+    private final StoreInquireRepository storeInquiryRepository;
     private final StoreRepository storeRepository;
 
     @Transactional
     public InquireCreateResponse createStoreInquiry(InquireCreateRequest inquireCreateRequest) {
         Store owner = storeRepository.findById(inquireCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
-        Store writer = storeRepository.findById(inquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
-        StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer.getNum(), null, inquireCreateRequest.getInquiryContent());
+        Store writer = storeRepository.findById(inquireCreateRequest.getVisitorNum()).orElseThrow(NotExistStoreException::new);
+        StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer.getNum(), null, inquireCreateRequest.getInquireContent());
 
         StoreInquire savedStoreInquire = storeInquiryRepository.save(storeInquire);
         return new InquireCreateResponse(savedStoreInquire.getNum(), writer.getStoreName(), savedStoreInquire.getContent());

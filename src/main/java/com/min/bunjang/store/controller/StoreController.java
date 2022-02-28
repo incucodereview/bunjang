@@ -4,6 +4,7 @@ import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.store.dto.StoreCreateRequest;
 import com.min.bunjang.store.dto.StoreCreateResponse;
 import com.min.bunjang.store.dto.StoreIntroduceDto;
+import com.min.bunjang.store.dto.VisitorPlusDto;
 import com.min.bunjang.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,4 +33,12 @@ public class StoreController {
         storeService.updateIntroduceContent(storeIntroduceDto);
         return RestResponse.of(HttpStatus.OK, null);
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
+    @PostMapping(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
+    public RestResponse<Void> plusVisitor(@Validated @RequestBody VisitorPlusDto visitorPlusDto) {
+        storeService.plusVisitor(visitorPlusDto);
+        return RestResponse.of(HttpStatus.OK, null);
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.min.bunjang.store.storeinquire.dto;
+package com.min.bunjang.store.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class InquireCreateRequest {
+public class VisitorPlusDto {
     private Long ownerNum;
     private Long visitorNum;
-    private String inquireContent;
 }

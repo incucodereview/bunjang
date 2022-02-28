@@ -6,6 +6,7 @@ import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.dto.StoreCreateRequest;
 import com.min.bunjang.store.dto.StoreCreateResponse;
 import com.min.bunjang.store.dto.StoreIntroduceDto;
+import com.min.bunjang.store.dto.VisitorPlusDto;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -36,8 +37,8 @@ public class StoreService {
     }
 
     @Transactional
-    public void plusVisitor(Long ownerNum , Long visitorNum) {
-        Store owner = storeRepository.findById(ownerNum).orElseThrow(NotExistStoreException::new);
-        owner.plusVisitor(visitorNum);
+    public void plusVisitor(VisitorPlusDto visitorPlusDto) {
+        Store owner = storeRepository.findById(visitorPlusDto.getOwnerNum()).orElseThrow(NotExistStoreException::new);
+        owner.plusVisitor(visitorPlusDto.getVisitorNum());
     }
 }

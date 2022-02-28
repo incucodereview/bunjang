@@ -15,17 +15,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class StoreInquiryRepositoryTest {
 
     @Autowired
-    private StoreInquiryRepository storeInquiryRepository;
+    private StoreInquireRepository storeInquireRepository;
 
     @DisplayName("상점문의 번호로 상점문의 존재여부를 확인할 수 있다.")
     @Test
     void name() {
         //given
-        storeInquiryRepository.save(StoreInquire.of(1L, 2L, null, "content"));
+        storeInquireRepository.save(StoreInquire.of(1L, 2L, null, "content"));
 
         //when
-        boolean tureResult = storeInquiryRepository.existsByNum(1L);
-        boolean falseResult = storeInquiryRepository.existsByNum(2L);
+        boolean tureResult = storeInquireRepository.existsByNum(1L);
+        boolean falseResult = storeInquireRepository.existsByNum(2L);
 
         //then
         Assertions.assertThat(tureResult).isTrue();

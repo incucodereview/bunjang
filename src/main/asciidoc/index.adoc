@@ -95,3 +95,19 @@ operation::email-join[snippets='request-headers,request-fields,request-body,resp
 
 operation::store-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
+// TODO 여기에 상점 소개글 변경 도 추가되야하는데 아직 못함... 통합테스트 만들고 꼭 추가할것.
+
+[[resources-login]]
+== 상점 문의 생성
+
+상점에 대한 문의를 생성한다.
+
+operation::storeInquiry-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+
+[[resources-login]]
+== 상점 문의 삭제
+
+회원가입후 상점을 생성한다.
+
+operation::storeInquiry-delete[snippets='request-headers,path-parameters,response-headers,response-fields,response-body']
+
