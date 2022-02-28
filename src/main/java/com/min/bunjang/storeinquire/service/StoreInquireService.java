@@ -1,13 +1,13 @@
-package com.min.bunjang.store.storeinquire.service;
+package com.min.bunjang.storeinquire.service;
 
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
-import com.min.bunjang.store.storeinquire.dto.InquireCreateRequest;
-import com.min.bunjang.store.storeinquire.dto.InquireCreateResponse;
-import com.min.bunjang.store.storeinquire.exception.NotExistStoreInquireException;
-import com.min.bunjang.store.storeinquire.model.StoreInquire;
-import com.min.bunjang.store.storeinquire.repository.StoreInquireRepository;
+import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
+import com.min.bunjang.storeinquire.dto.InquireCreateResponse;
+import com.min.bunjang.storeinquire.exception.NotExistStoreInquireException;
+import com.min.bunjang.storeinquire.model.StoreInquire;
+import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

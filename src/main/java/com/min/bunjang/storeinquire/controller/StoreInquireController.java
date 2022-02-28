@@ -1,14 +1,15 @@
-package com.min.bunjang.store.storeinquire.controller;
+package com.min.bunjang.storeinquire.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.store.storeinquire.dto.InquireCreateRequest;
-import com.min.bunjang.store.storeinquire.dto.InquireCreateResponse;
-import com.min.bunjang.store.storeinquire.service.StoreInquireService;
+import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
+import com.min.bunjang.storeinquire.dto.InquireCreateResponse;
+import com.min.bunjang.storeinquire.service.StoreInquireService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

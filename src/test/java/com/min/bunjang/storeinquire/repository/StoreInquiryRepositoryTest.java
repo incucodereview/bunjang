@@ -1,14 +1,12 @@
-package com.min.bunjang.store.storeinquire.repository;
+package com.min.bunjang.storeinquire.repository;
 
-import com.min.bunjang.store.storeinquire.model.StoreInquire;
+import com.min.bunjang.storeinquire.model.StoreInquire;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("h2")
 @DataJpaTest

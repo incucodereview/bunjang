@@ -14,6 +14,7 @@ import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     String storeName = "storeName";
                     String introduceContent = "introduceContent";
                     StoreCreateRequest storeCreateRequest = new StoreCreateRequest(member.getMemberNum(), storeName, introduceContent);
-                    //when
+                    //whenR
                     StoreCreateResponse storeCreateResponse = 상점생성_요청(loginResult, storeCreateRequest);
 
                     //then
@@ -65,7 +66,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     StoreNameUpdateDto storeNameUpdateDto= new StoreNameUpdateDto(store.getNum(), updateStoreName);
 
                     //when
-                    상점이름_변경_요청(loginResult, updateStoreName);
+                    상점이름_변경_요청(loginResult, storeNameUpdateDto);
 
                     //then
                     상점이름_변경_요청_검증(store, updateStoreName);
@@ -94,12 +95,17 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(updatedIntroduceContent).isEqualTo(introduceContent);
     }
 
-    private void 상점이름_변경_요청(TokenValuesDto loginResult, String updateStoreName) {
-        putApi(StoreControllerPath.STORE_NAME_UPDATE, updateStoreName, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    private void 상점이름_변경_요청(TokenValuesDto loginResult, StoreNameUpdateDto storeNameUpdateDto) {
+        putApi(StoreControllerPath.STORE_NAME_UPDATE, storeNameUpdateDto, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상점이름_변경_요청_검증(Store store, String updateStoreName) {
         Store updatedStore = storeRepository.findById(store.getNum()).get();
         Assertions.assertThat(updatedStore.getStoreName()).isEqualTo(updateStoreName);
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

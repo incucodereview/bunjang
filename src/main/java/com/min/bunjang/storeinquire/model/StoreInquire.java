@@ -1,4 +1,4 @@
-package com.min.bunjang.store.storeinquire.model;
+package com.min.bunjang.storeinquire.model;
 
 import com.min.bunjang.common.model.BasicEntity;
 import lombok.AccessLevel;
