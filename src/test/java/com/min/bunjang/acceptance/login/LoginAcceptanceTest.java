@@ -21,13 +21,9 @@ import java.time.LocalDate;
 
 public class LoginAcceptanceTest extends AcceptanceTestConfig {
 
-    @Autowired
-    private MemberRepository memberRepository;
-
     @Test
     void name() {
         //given
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         String email = "email";
         String password = "password";
         Member member = Member.createMember(MemberDirectCreateDto.of(

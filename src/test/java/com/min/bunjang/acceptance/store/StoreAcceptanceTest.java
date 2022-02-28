@@ -25,13 +25,7 @@ import java.util.stream.Stream;
 public class StoreAcceptanceTest extends AcceptanceTestConfig {
 
     @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
     private StoreRepository storeRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @TestFactory
     Stream<DynamicTest> dynamicTestStream() {

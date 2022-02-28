@@ -17,12 +17,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class TokenAcceptanceTest extends AcceptanceTestConfig {
 
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @DisplayName("토큰 인증 인수테스트 - 요청은 한경우 밖에 없기에 다이나믹 테스트 보단 일반 테스트로 진행한다.")
     @Test
     void name() {

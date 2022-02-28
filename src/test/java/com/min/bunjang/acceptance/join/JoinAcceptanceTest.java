@@ -31,12 +31,6 @@ public class JoinAcceptanceTest extends AcceptanceTestConfig {
     @Autowired
     private ConfirmationTokenRepository confirmationTokenRepository;
 
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @TestFactory
     Stream<DynamicTest> dynamicTestStream() {
         String email = "urisegea@naver.com";

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.login.jwt.TokenProvider;
+import com.min.bunjang.member.repository.MemberRepository;
 import com.sun.istack.Nullable;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
@@ -19,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -39,6 +41,13 @@ public class AcceptanceTestConfig {
 
     @Autowired
     protected DatabaseCleanup databaseCleanup;
+
+    @Autowired
+    protected MemberRepository memberRepository;
+
+    @Autowired
+    protected BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
     @BeforeEach
     public void setUp() {
