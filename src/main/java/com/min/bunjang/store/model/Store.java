@@ -52,6 +52,10 @@ public class Store extends BasicEntity {
         this.introduceContent = introduceContent;
     }
 
+    public void updateStoreName(String storeName) {
+        this.storeName = storeName;
+    }
+
     public Period calculateOpenTime() {
         LocalDate now = LocalDate.now();
         return Period.between(createdDate.toLocalDate(), now);

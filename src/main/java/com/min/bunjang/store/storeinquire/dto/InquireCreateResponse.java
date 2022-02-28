@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InquireCreateResponse {
     private Long inquireNum;
-    private String visitorName;
+    private String writerName;
     private String inquireContent;
 }

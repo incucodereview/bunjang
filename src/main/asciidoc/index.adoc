@@ -95,7 +95,27 @@ operation::email-join[snippets='request-headers,request-fields,request-body,resp
 
 operation::store-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
-// TODO 여기에 상점 소개글 변경 도 추가되야하는데 아직 못함... 통합테스트 만들고 꼭 추가할것.
+[[resources-login]]
+== 상점 소개글 변경
+
+상점의 소개글을 변경한다.
+
+operation::store-introduceContent-update[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+
+[[resources-login]]
+== 상점이름 변경
+
+상점의 이름을 변경한다.
+
+operation::store-name-update[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+
+[[resources-login]]
+== 상점 방문자 증가
+
+상점의 방문자 카운트룰 중가시킨다.
+
+operation::store-plusVisitor[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+
 
 [[resources-login]]
 == 상점 문의 생성

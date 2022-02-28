@@ -3,7 +3,8 @@ package com.min.bunjang.store.controller;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.store.dto.StoreCreateRequest;
 import com.min.bunjang.store.dto.StoreCreateResponse;
-import com.min.bunjang.store.dto.StoreIntroduceDto;
+import com.min.bunjang.store.dto.StoreIntroduceUpdateDto;
+import com.min.bunjang.store.dto.StoreNameUpdateDto;
 import com.min.bunjang.store.dto.VisitorPlusDto;
 import com.min.bunjang.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
@@ -29,13 +30,20 @@ public class StoreController {
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
     @PutMapping(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
-    public RestResponse<Void> updateIntroduceContent(@Validated @RequestBody StoreIntroduceDto storeIntroduceDto) {
-        storeService.updateIntroduceContent(storeIntroduceDto);
+    public RestResponse<Void> updateIntroduceContent(@Validated @RequestBody StoreIntroduceUpdateDto storeIntroduceUpdateDto) {
+        storeService.updateIntroduceContent(storeIntroduceUpdateDto);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
-    @PostMapping(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
+    @PutMapping(StoreControllerPath.STORE_NAME_UPDATE)
+    public RestResponse<Void> updateStoreName(@Validated @RequestBody StoreNameUpdateDto storeNameUpdateDto) {
+        storeService.updateStoreName(storeNameUpdateDto);
+        return RestResponse.of(HttpStatus.OK, null);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
+    @PostMapping(StoreControllerPath.STORE_PLUS_VISITOR)
     public RestResponse<Void> plusVisitor(@Validated @RequestBody VisitorPlusDto visitorPlusDto) {
         storeService.plusVisitor(visitorPlusDto);
         return RestResponse.of(HttpStatus.OK, null);

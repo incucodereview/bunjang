@@ -18,18 +18,18 @@ public class StoreInquire extends BasicEntity {
     private Long ownerNum;
 
     @NotNull
-    private Long visitorNum;
+    private Long writerNum;
 
-    private String visitorThumbnail;
+    private String writerThumbnail;
 
     @NotBlank
     private String content;
 
     // TODO: 섬네일은 s3 작업후 진행할 것. 일단 임시로 null처리
-    private StoreInquire(Long ownerNum, Long visitorNum, String visitorThumbnail, String content) {
+    private StoreInquire(Long ownerNum, Long writerNum, String writerThumbnail, String content) {
         this.ownerNum = ownerNum;
-        this.visitorNum = visitorNum;
-        this.visitorThumbnail = null;
+        this.writerNum = writerNum;
+        this.writerThumbnail = null;
         this.content = content;
     }
 

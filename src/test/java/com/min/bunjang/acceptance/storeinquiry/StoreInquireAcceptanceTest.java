@@ -36,25 +36,25 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
         String ownerPassword = "password";
         Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
 
-        String visitorEmail = "visitor@naver.com";
-        String visitorPassword = "password!visitor";
-        Member visitorMember = MemberAcceptanceHelper.회원가입(visitorEmail, visitorPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(visitorEmail, visitorPassword).getResult();
+        String writerEmail = "writer@naver.com";
+        String writerPassword = "password!writer";
+        Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(writerEmail, writerPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
+        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
 
         return Stream.of(
                 DynamicTest.dynamicTest("상점문의 생성.", () -> {
                     //given
                     String inquiryContent = "인수테스트 상점 문의 내용";
 
-                    InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), visitor.getNum(), inquiryContent);
+                    InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), writer.getNum(), inquiryContent);
                     //when
                     InquireCreateResponse inquireCreateResponse = 상점문의생성_요청(loginResult, inquireCreateRequest);
 
                     //then
-                    상점문의생성_요청_검증(visitor, inquiryContent, inquireCreateResponse);
+                    상점문의생성_요청_검증(writer, inquiryContent, inquireCreateResponse);
                 }),
 
                 DynamicTest.dynamicTest("상점문의 삭제.", () -> {
@@ -79,7 +79,7 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private void 상점문의생성_요청_검증(Store writer, String inquiryContent, InquireCreateResponse inquireCreateResponse) {
-        Assertions.assertThat(inquireCreateResponse.getVisitorName()).isEqualTo(writer.getStoreName());
+        Assertions.assertThat(inquireCreateResponse.getWriterName()).isEqualTo(writer.getStoreName());
         Assertions.assertThat(inquireCreateResponse.getInquireContent()).isEqualTo(inquiryContent);
     }
 

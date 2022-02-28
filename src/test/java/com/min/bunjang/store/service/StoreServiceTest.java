@@ -8,7 +8,7 @@ import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.dto.StoreCreateRequest;
 import com.min.bunjang.store.dto.StoreCreateResponse;
-import com.min.bunjang.store.dto.StoreIntroduceDto;
+import com.min.bunjang.store.dto.StoreIntroduceUpdateDto;
 import com.min.bunjang.store.dto.VisitorPlusDto;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 @ActiveProfiles("h2")
@@ -89,10 +88,10 @@ class StoreServiceTest {
         Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, savedMember));
 
         String updateIntroduceContent = "updateIntroduceContent";
-        StoreIntroduceDto storeIntroduceDto = new StoreIntroduceDto(savedStore.getNum(), updateIntroduceContent);
+        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(savedStore.getNum(), updateIntroduceContent);
 
         //when
-        storeService.updateIntroduceContent(storeIntroduceDto);
+        storeService.updateIntroduceContent(storeIntroduceUpdateDto);
 
         //then
         Store updatedStore = storeRepository.findById(savedStore.getNum()).get();
@@ -108,10 +107,10 @@ class StoreServiceTest {
         Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, savedMember));
 
         String updateIntroduceContent = "updateIntroduceContent";
-        StoreIntroduceDto storeIntroduceDto = new StoreIntroduceDto(savedStore.getNum() + 1L, updateIntroduceContent);
+        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(savedStore.getNum() + 1L, updateIntroduceContent);
 
         //when & then
-        Assertions.assertThatThrownBy(() -> storeService.updateIntroduceContent(storeIntroduceDto)).isInstanceOf(NotExistStoreException.class);
+        Assertions.assertThatThrownBy(() -> storeService.updateIntroduceContent(storeIntroduceUpdateDto)).isInstanceOf(NotExistStoreException.class);
     }
 
     @DisplayName("상점 방문자를 계산한다")

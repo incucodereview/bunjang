@@ -1,15 +1,12 @@
 package com.min.bunjang.integrate;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.integrate.config.IntegrateTestConfig;
 import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
-import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
-import com.min.bunjang.store.storeinquire.controller.StoreInquireController;
 import com.min.bunjang.store.storeinquire.controller.StoreInquireControllerPath;
 import com.min.bunjang.store.storeinquire.dto.InquireCreateRequest;
 import com.min.bunjang.store.storeinquire.model.StoreInquire;
@@ -22,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -33,7 +29,6 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -75,7 +70,7 @@ public class StoreInquireIntegrateController extends IntegrateTestConfig {
                         ),
                         requestFields(
                                 fieldWithPath("ownerNum").description("방문받은 상점 식별자 정보 필드."),
-                                fieldWithPath("visitorNum").description("방문한 상점 식별자 정보 필드."),
+                                fieldWithPath("writerNum").description("방문한 상점 식별자 정보 필드."),
                                 fieldWithPath("inquireContent").description("문의 내용 정보 필드")
                         ),
                         responseHeaders(
@@ -85,7 +80,7 @@ public class StoreInquireIntegrateController extends IntegrateTestConfig {
                                 fieldWithPath("statusCode").description("요청의 성공 여부입니다. 201이면 성공, 500번 대는 실패."),
                                 fieldWithPath("message").description("예외 발생시 메세지 정보 필드."),
                                 fieldWithPath("result.inquireNum").description("응답의 데이터 필드. 등록된 상점문의의 식별자 정보 필드"),
-                                fieldWithPath("result.visitorName").description("응답의 데이터 필드. 방문상점의 이름 정보 필드"),
+                                fieldWithPath("result.writerName").description("응답의 데이터 필드. 방문상점의 이름 정보 필드"),
                                 fieldWithPath("result.inquireContent").description("응답의 데이터 필드. 등록된 문의내용 정보 필드")
                         )
                 ));
@@ -102,7 +97,6 @@ public class StoreInquireIntegrateController extends IntegrateTestConfig {
         String visitorEmail = "visitor@naver.com";
         String visitorPassword = "password!visitor";
         Member visitorMember = MemberAcceptanceHelper.회원가입(visitorEmail, visitorPassword, memberRepository, bCryptPasswordEncoder);
-
         TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(visitorEmail, visitorPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);

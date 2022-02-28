@@ -5,7 +5,8 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.dto.StoreCreateRequest;
 import com.min.bunjang.store.dto.StoreCreateResponse;
-import com.min.bunjang.store.dto.StoreIntroduceDto;
+import com.min.bunjang.store.dto.StoreIntroduceUpdateDto;
+import com.min.bunjang.store.dto.StoreNameUpdateDto;
 import com.min.bunjang.store.dto.VisitorPlusDto;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
@@ -13,8 +14,6 @@ import com.min.bunjang.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Period;
 
 @Service
 @RequiredArgsConstructor
@@ -31,9 +30,15 @@ public class StoreService {
     }
 
     @Transactional
-    public void updateIntroduceContent(StoreIntroduceDto storeIntroduceDto) {
-        Store store = storeRepository.findById(storeIntroduceDto.getStoreNum()).orElseThrow(NotExistStoreException::new);
-        store.updateIntroduceContent(storeIntroduceDto.getUpdateIntroduceContent());
+    public void updateIntroduceContent(StoreIntroduceUpdateDto storeIntroduceUpdateDto) {
+        Store store = storeRepository.findById(storeIntroduceUpdateDto.getStoreNum()).orElseThrow(NotExistStoreException::new);
+        store.updateIntroduceContent(storeIntroduceUpdateDto.getUpdateIntroduceContent());
+    }
+
+    @Transactional
+    public void updateStoreName(StoreNameUpdateDto storeNameUpdateDto) {
+        Store store = storeRepository.findById(storeNameUpdateDto.getStoreNum()).orElseThrow(NotExistStoreException::new);
+        store.updateStoreName(storeNameUpdateDto.getUpdatedStoreName());
     }
 
     @Transactional
