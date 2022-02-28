@@ -11,17 +11,24 @@ import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.store.storeinquire.controller.StoreInquireControllerPath;
 import com.min.bunjang.store.storeinquire.dto.InquireCreateRequest;
 import com.min.bunjang.store.storeinquire.dto.InquireCreateResponse;
+import com.min.bunjang.store.storeinquire.model.StoreInquire;
+import com.min.bunjang.store.storeinquire.repository.StoreInquiryRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
     @Autowired
     private StoreRepository storeRepository;
+
+    @Autowired
+    private StoreInquiryRepository storeInquiryRepository;
 
     @TestFactory
     Stream<DynamicTest> dynamicTestStream() {
@@ -44,14 +51,45 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
 
                     InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), writer.getNum(), inquiryContent);
                     //when
-                    InquireCreateResponse inquireCreateResponse = postApi(StoreInquireControllerPath.CREATE_INQUIRY, inquireCreateRequest, new TypeReference<RestResponse<InquireCreateResponse>>() {
-                    }, loginResult.getAccessToken()).getResult();
+                    InquireCreateResponse inquireCreateResponse = 상점문의생성_요청(loginResult, inquireCreateRequest);
 
                     //then
-                    Assertions.assertThat(inquireCreateResponse.getWriterName()).isEqualTo(writer.getStoreName());
-                    Assertions.assertThat(inquireCreateResponse.getInquiryContent()).isEqualTo(inquiryContent);
+                    상점문의생성_요청_검증(writer, inquiryContent, inquireCreateResponse);
+                }),
 
+                DynamicTest.dynamicTest("상점문의 삭제.", () -> {
+                    //given
+                    List<StoreInquire> storeInquires = storeInquiryRepository.findAll();
+                    StoreInquire storeInquire = storeInquires.get(0);
+                    Long storeInquireNum = storeInquire.getNum();
+
+                    //when
+                    상점문의삭제_요청(loginResult, storeInquireNum);
+
+                    //then
+                    상점문의삭제_요청_검증(storeInquireNum);
                 })
         );
+    }
+
+    private InquireCreateResponse 상점문의생성_요청(TokenValuesDto loginResult, InquireCreateRequest inquireCreateRequest) {
+        InquireCreateResponse inquireCreateResponse = postApi(StoreInquireControllerPath.CREATE_INQUIRY, inquireCreateRequest, new TypeReference<RestResponse<InquireCreateResponse>>() {
+        }, loginResult.getAccessToken()).getResult();
+        return inquireCreateResponse;
+    }
+
+    private void 상점문의생성_요청_검증(Store writer, String inquiryContent, InquireCreateResponse inquireCreateResponse) {
+        Assertions.assertThat(inquireCreateResponse.getWriterName()).isEqualTo(writer.getStoreName());
+        Assertions.assertThat(inquireCreateResponse.getInquiryContent()).isEqualTo(inquiryContent);
+    }
+
+    private void 상점문의삭제_요청(TokenValuesDto loginResult, Long storeInquireNum) {
+        String path = StoreInquireControllerPath.DELETE_INQUIRY.replace("{inquireNum}", String.valueOf(storeInquireNum));
+        deleteApi(path, null, new TypeReference<RestResponse<RestResponse<Void>>>() {}, loginResult.getAccessToken());
+    }
+
+    private void 상점문의삭제_요청_검증(Long storeInquireNum) {
+        Optional<StoreInquire> findStoreInquire = storeInquiryRepository.findById(storeInquireNum);
+        Assertions.assertThat(findStoreInquire.isPresent()).isFalse();
     }
 }
