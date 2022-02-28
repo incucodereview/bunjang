@@ -6,13 +6,11 @@ import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
-import com.min.bunjang.store.dto.StoreCreateRequest;
-import com.min.bunjang.store.dto.StoreCreateResponse;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
-import com.min.bunjang.store.storeinquiry.controller.StoreInquiryControllerPath;
-import com.min.bunjang.store.storeinquiry.dto.InquiryCreateRequest;
-import com.min.bunjang.store.storeinquiry.dto.InquiryCreateResponse;
+import com.min.bunjang.store.storeinquire.controller.StoreInquireControllerPath;
+import com.min.bunjang.store.storeinquire.dto.InquireCreateRequest;
+import com.min.bunjang.store.storeinquire.dto.InquireCreateResponse;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
@@ -21,7 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.stream.Stream;
 
-public class StoreInquiryAcceptanceTest extends AcceptanceTestConfig {
+public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
     @Autowired
     private StoreRepository storeRepository;
 
@@ -44,14 +42,14 @@ public class StoreInquiryAcceptanceTest extends AcceptanceTestConfig {
                     //given
                     String inquiryContent = "인수테스트 상점 문의 내용";
 
-                    InquiryCreateRequest inquiryCreateRequest = new InquiryCreateRequest(owner.getNum(), writer.getNum(), inquiryContent);
+                    InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), writer.getNum(), inquiryContent);
                     //when
-                    InquiryCreateResponse inquiryCreateResponse = postApi(StoreInquiryControllerPath.CREATE_INQUIRY, inquiryCreateRequest, new TypeReference<RestResponse<InquiryCreateResponse>>() {
+                    InquireCreateResponse inquireCreateResponse = postApi(StoreInquireControllerPath.CREATE_INQUIRY, inquireCreateRequest, new TypeReference<RestResponse<InquireCreateResponse>>() {
                     }, loginResult.getAccessToken()).getResult();
 
                     //then
-                    Assertions.assertThat(inquiryCreateResponse.getWriterName()).isEqualTo(writer.getStoreName());
-                    Assertions.assertThat(inquiryCreateResponse.getInquiryContent()).isEqualTo(inquiryContent);
+                    Assertions.assertThat(inquireCreateResponse.getWriterName()).isEqualTo(writer.getStoreName());
+                    Assertions.assertThat(inquireCreateResponse.getInquiryContent()).isEqualTo(inquiryContent);
 
                 })
         );

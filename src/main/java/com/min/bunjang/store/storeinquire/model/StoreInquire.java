@@ -1,7 +1,6 @@
-package com.min.bunjang.store.storeinquiry.model;
+package com.min.bunjang.store.storeinquire.model;
 
 import com.min.bunjang.common.model.BasicEntity;
-import com.sun.xml.bind.v2.TODO;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class StoreInquiry extends BasicEntity {
+public class StoreInquire extends BasicEntity {
 
     @NotNull
     private Long ownerNum;
@@ -27,14 +26,14 @@ public class StoreInquiry extends BasicEntity {
     private String content;
 
     // TODO: 섬네일은 s3 작업후 진행할 것. 일단 임시로 null처리
-    private StoreInquiry(Long ownerNum, Long writerNum, String writerThumbnail, String content) {
+    private StoreInquire(Long ownerNum, Long writerNum, String writerThumbnail, String content) {
         this.ownerNum = ownerNum;
         this.writerNum = writerNum;
         this.writerThumbnail = null;
         this.content = content;
     }
 
-    public static StoreInquiry of(Long ownerNum, Long writerNum, String writerThumbnail, String content) {
-        return new StoreInquiry(ownerNum, writerNum, writerThumbnail, content);
+    public static StoreInquire of(Long ownerNum, Long writerNum, String writerThumbnail, String content) {
+        return new StoreInquire(ownerNum, writerNum, writerThumbnail, content);
     }
 }
