@@ -45,7 +45,7 @@ public class StoreReviewService {
     @Transactional
     public void updateStoreReview(StoreReviewUpdateRequest storeReviewUpdateRequest) {
         StoreReview storeReview = storeReviewRepository.findById(storeReviewUpdateRequest.getReviewNum()).orElseThrow(NotExistStoreReviewException::new);
-        storeReview.updateReviewContent(storeReviewUpdateRequest.getUpdatedReviewContent());
+        storeReview.updateReviewContent(storeReviewUpdateRequest.getUpdatedReviewContent(), storeReviewUpdateRequest.getUpdatedDealScore());
     }
 
     public void deleteStoreReview(Long reviewNum) {

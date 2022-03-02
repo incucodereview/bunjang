@@ -61,11 +61,16 @@ public class StoreReview extends BasicEntity {
         );
     }
 
-    public void updateReviewContent(String reviewContent) {
+    public void updateReviewContent(String reviewContent, double dealScore) {
         if (reviewContent == null) {
             throw new ImpossibleException("변경하려는 상점후기 내용이 없습니다.");
         }
 
+        if (dealScore < 0 || dealScore > 5) {
+            throw new ImpossibleException("변경하려는 후기점수가 부족하거나 초과합니다. 잘못된 접근입니다.");
+        }
+
+        this.dealScore = dealScore;
         this.reviewContent = reviewContent;
     }
 }

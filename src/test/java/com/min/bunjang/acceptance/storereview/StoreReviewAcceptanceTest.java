@@ -13,6 +13,8 @@ import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storereview.controller.StoreReviewControllerPath;
 import com.min.bunjang.storereview.dto.StoreReviewCreateRequest;
 import com.min.bunjang.storereview.dto.StoreReviewResponse;
+import com.min.bunjang.storereview.dto.StoreReviewUpdateRequest;
+import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.storereview.repository.StoreReviewRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
@@ -20,6 +22,7 @@ import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
@@ -68,7 +71,35 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
 
                     //then
                     상점후기_생성_응답_검증(writer, product, dealScore, reviewContent, storeReviewResponse);
+                }),
+
+                DynamicTest.dynamicTest("상점후기 변경.", () -> {
+                    //given
+                    StoreReview storeReview = storeReviewRepository.findAll().get(0);
+
+                    double dealScore = 4.5;
+                    String updatedReviewContent = "updatedReviewContent";
+
+                    StoreReviewUpdateRequest storeReviewUpdateRequest = new StoreReviewUpdateRequest(storeReview.getNum(), dealScore, updatedReviewContent);
+
+                    //when
+                    상점후기_변경_요청(loginResult, storeReviewUpdateRequest);
+
+                    //then
+                    상점후기_변경_응답_검증(storeReview.getNum(), dealScore, updatedReviewContent);
+                }),
+
+                DynamicTest.dynamicTest("상점후기 삭제.", () -> {
+                    //given
+                    StoreReview storeReview = storeReviewRepository.findAll().get(0);
+
+                    //when
+                    상점후기_삭제_요청(loginResult, storeReview);
+
+                    //then
+                    상점후기_삭제_응답_검증(storeReview);
                 })
+
         );
     }
 
@@ -85,4 +116,27 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(storeReviewResponse.getProductName()).isEqualTo(product.getProductName());
         Assertions.assertThat(storeReviewResponse.getReviewContent()).isEqualTo(reviewContent);
     }
+
+    private RestResponse<Void> 상점후기_변경_요청(TokenValuesDto loginResult, StoreReviewUpdateRequest storeReviewUpdateRequest) {
+        return putApi(StoreReviewControllerPath.REVIEW_UPDATE, storeReviewUpdateRequest, new TypeReference<RestResponse<Void>>() {
+        }, loginResult.getAccessToken());
+    }
+
+    private void 상점후기_변경_응답_검증(Long reviewNum, double dealScore, String updateStoreReview) {
+        StoreReview updatedStoreReview = storeReviewRepository.findById(reviewNum).get();
+        Assertions.assertThat(updatedStoreReview.getDealScore()).isEqualTo(dealScore);
+        Assertions.assertThat(updatedStoreReview.getReviewContent()).isEqualTo(updateStoreReview);
+    }
+
+    private void 상점후기_삭제_요청(TokenValuesDto loginResult, StoreReview storeReview) {
+        String path = StoreReviewControllerPath.REVIEW_DELETE.replace("{reviewNum}", String.valueOf(storeReview.getNum()));
+        deleteApi(path, null, new TypeReference<RestResponse<Void>>() {
+        }, loginResult.getAccessToken());
+    }
+
+    private void 상점후기_삭제_응답_검증(StoreReview storeReview) {
+        Optional<StoreReview> deletedStoreReview = storeReviewRepository.findById(storeReview.getNum());
+        Assertions.assertThat(deletedStoreReview.isPresent()).isFalse();
+    }
+
 }
