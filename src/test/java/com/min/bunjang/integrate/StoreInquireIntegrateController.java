@@ -8,6 +8,8 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storeinquire.controller.StoreInquireControllerPath;
+import com.min.bunjang.storeinquire.controller.StoreInquireViewController;
+import com.min.bunjang.storeinquire.controller.StoreInquireViewControllerPath;
 import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
 import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
@@ -20,6 +22,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
+import java.util.Arrays;
+
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
@@ -29,6 +33,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.requestF
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -82,6 +87,45 @@ public class StoreInquireIntegrateController extends IntegrateTestConfig {
                                 fieldWithPath("result.inquireNum").description("응답의 데이터 필드. 등록된 상점문의의 식별자 정보 필드"),
                                 fieldWithPath("result.writerName").description("응답의 데이터 필드. 방문상점의 이름 정보 필드"),
                                 fieldWithPath("result.inquireContent").description("응답의 데이터 필드. 등록된 문의내용 정보 필드")
+                        )
+                ));
+    }
+
+    @DisplayName("상점문의 목록조회 통합테스트")
+    @Test
+    void storeInquire_findByOwner() throws Exception {
+        //given
+        String ownerEmail = "urisegea@naver.com";
+        String ownerPassword = "password";
+        Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
+
+        String writerEmail = "writer@naver.com";
+        String writerPassword = "password!writer";
+        Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(writerEmail, writerPassword).getResult();
+
+        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+
+        storeInquireRepository.saveAll(Arrays.asList(
+                StoreInquire.of(owner.getNum(), writer, null, "content1"),
+                StoreInquire.of(owner.getNum(), writer, null, "content2")
+        ));
+
+        //when & then
+        mockMvc.perform(RestDocumentationRequestBuilders.get(StoreInquireViewControllerPath.GET_INQUIRIES_RELATED_STORE, owner.getNum())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andDo(document("storeInquiry-findByOwner",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        pathParameters(
+                                parameterWithName("storeNum").description("상점문의가 달린 상점의 식별자 정보 필드")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
                         )
                 ));
     }

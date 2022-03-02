@@ -9,11 +9,11 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class StoreInquireResponses {
+public class StoreInquireListResponses {
     private List<StoreInquireListResponse> storeInquireListResponse;
     private PageDto pageDto;
 
-    public StoreInquireResponses(List<StoreInquireListResponse> storeInquireListResponse, PageDto pageDto) {
+    public StoreInquireListResponses(List<StoreInquireListResponse> storeInquireListResponse, PageDto pageDto) {
         this.storeInquireListResponse = storeInquireListResponse;
         this.pageDto = pageDto;
     }

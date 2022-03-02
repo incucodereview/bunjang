@@ -9,8 +9,11 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storeinquire.controller.StoreInquireControllerPath;
+import com.min.bunjang.storeinquire.controller.StoreInquireViewControllerPath;
 import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
 import com.min.bunjang.storeinquire.dto.InquireCreateResponse;
+import com.min.bunjang.storeinquire.dto.StoreInquireListResponse;
+import com.min.bunjang.storeinquire.dto.StoreInquireListResponses;
 import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
@@ -18,6 +21,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,15 +50,27 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
 
         return Stream.of(
                 DynamicTest.dynamicTest("상점문의 생성.", () -> {
-                    //given
+                    //givenㄲㄲ
                     String inquiryContent = "인수테스트 상점 문의 내용";
 
                     InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), writer.getNum(), inquiryContent);
                     //when
                     InquireCreateResponse inquireCreateResponse = 상점문의생성_요청(loginResult, inquireCreateRequest);
 
+                    //thenR
+                    상점문의생성_응답_검증(writer, inquiryContent, inquireCreateResponse);
+                }),
+
+                DynamicTest.dynamicTest("상점문의 목록 조회.", () -> {
+                    //given
+                    Long storeNum = owner.getNum();
+                    PageRequest pageRequest = PageRequest.of(0, 10);
+
+                    //when
+                    StoreInquireListResponses storeInquireListResponses = 상점문의_목록조회_요청(loginResult, storeNum);
+
                     //then
-                    상점문의생성_요청_검증(writer, inquiryContent, inquireCreateResponse);
+                    상점문의_목록조회_응답_검증(storeInquireListResponses);
                 }),
 
                 DynamicTest.dynamicTest("상점문의 삭제.", () -> {
@@ -67,7 +83,7 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
                     상점문의삭제_요청(loginResult, storeInquireNum);
 
                     //then
-                    상점문의삭제_요청_검증(storeInquireNum);
+                    상점문의삭제_응답_검증(storeInquireNum);
                 })
         );
     }
@@ -78,7 +94,7 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
         return inquireCreateResponse;
     }
 
-    private void 상점문의생성_요청_검증(Store writer, String inquiryContent, InquireCreateResponse inquireCreateResponse) {
+    private void 상점문의생성_응답_검증(Store writer, String inquiryContent, InquireCreateResponse inquireCreateResponse) {
         Assertions.assertThat(inquireCreateResponse.getWriterName()).isEqualTo(writer.getStoreName());
         Assertions.assertThat(inquireCreateResponse.getInquireContent()).isEqualTo(inquiryContent);
     }
@@ -88,8 +104,21 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
         deleteApi(path, null, new TypeReference<RestResponse<RestResponse<Void>>>() {}, loginResult.getAccessToken());
     }
 
-    private void 상점문의삭제_요청_검증(Long storeInquireNum) {
+    private void 상점문의삭제_응답_검증(Long storeInquireNum) {
         Optional<StoreInquire> findStoreInquire = storeInquiryRepository.findById(storeInquireNum);
         Assertions.assertThat(findStoreInquire.isPresent()).isFalse();
+    }
+
+    private StoreInquireListResponses 상점문의_목록조회_요청(TokenValuesDto loginResult, Long storeNum) {
+        String path = StoreInquireViewControllerPath.GET_INQUIRIES_RELATED_STORE.replace("{storeNum}", String.valueOf(storeNum));
+        StoreInquireListResponses storeInquireListResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreInquireListResponses>>() {
+        }).getResult();
+        return storeInquireListResponses;
+    }
+
+    private void 상점문의_목록조회_응답_검증(StoreInquireListResponses storeInquireListResponses) {
+        List<StoreInquireListResponse> storeInquireListResponse = storeInquireListResponses.getStoreInquireListResponse();
+        Assertions.assertThat(storeInquireListResponse).hasSize(1);
+        Assertions.assertThat(storeInquireListResponse.get(0).getInquireContent()).isEqualTo("인수테스트 상점 문의 내용");
     }
 }

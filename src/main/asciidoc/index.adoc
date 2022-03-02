@@ -125,6 +125,13 @@ operation::store-plusVisitor[snippets='request-headers,request-fields,request-bo
 operation::storeInquiry-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
+== 상점 문의 목록 조회
+
+상점에 대한 상점문의 목록을 조회한다.
+
+operation::storeInquiry-findByOwner[snippets='request-headers,path-parameters,response-headers,response-body']
+
+[[resources-login]]
 == 상점 문의 삭제
 
 회원가입후 상점을 생성한다.
