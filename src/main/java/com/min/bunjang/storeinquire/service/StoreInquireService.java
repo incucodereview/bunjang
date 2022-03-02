@@ -22,7 +22,7 @@ public class StoreInquireService {
     public InquireCreateResponse createStoreInquiry(InquireCreateRequest inquireCreateRequest) {
         Store owner = storeRepository.findById(inquireCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
         Store writer = storeRepository.findById(inquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
-        StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer.getNum(), null, inquireCreateRequest.getInquireContent());
+        StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer, null, inquireCreateRequest.getInquireContent());
 
         StoreInquire savedStoreInquire = storeInquiryRepository.save(storeInquire);
         return new InquireCreateResponse(savedStoreInquire.getNum(), writer.getStoreName(), savedStoreInquire.getContent());

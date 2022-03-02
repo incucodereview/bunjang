@@ -102,7 +102,7 @@ public class StoreInquireIntegrateController extends IntegrateTestConfig {
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
 
-        StoreInquire storeInquire = StoreInquire.of(owner.getNum(), visitor.getNum(), null, "상점문의");
+        StoreInquire storeInquire = StoreInquire.of(owner.getNum(), visitor, null, "상점문의");
         StoreInquire savedStoreInquiry = storeInquireRepository.save(storeInquire);
 
         //when & then
