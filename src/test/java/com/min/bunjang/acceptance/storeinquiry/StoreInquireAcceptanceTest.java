@@ -50,7 +50,7 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
 
         return Stream.of(
                 DynamicTest.dynamicTest("상점문의 생성.", () -> {
-                    //givenㄲㄲ
+                    //given
                     String inquiryContent = "인수테스트 상점 문의 내용";
 
                     InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), writer.getNum(), inquiryContent);

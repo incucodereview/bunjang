@@ -12,7 +12,7 @@ import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.storereview.repository.StoreReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +21,7 @@ public class StoreReviewService {
     private final StoreRepository storeRepository;
     private final ProductRepository productRepository;
 
+    @Transactional
     public StoreReviewCreateResponse createStoreReview(StoreReviewCreateRequest storeReviewCreateRequest) {
         Store writer = storeRepository.findById(storeReviewCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(storeReviewCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
@@ -34,7 +35,7 @@ public class StoreReviewService {
                 product.getProductName(),
                 storeReviewCreateRequest.getReviewContent()
         );
-        StoreReview savedReview = storeReviewRepository.save(storeReview);
-        return StoreReviewCreateResponse.of(savedReview);
+
+        return StoreReviewCreateResponse.of(storeReviewRepository.save(storeReview));
     }
 }

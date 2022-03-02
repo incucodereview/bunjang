@@ -15,4 +15,8 @@ public class Product extends BasicEntity {
 
     @NotBlank
     private String productName;
+
+    public Product(String productName) {
+        this.productName = productName;
+    }
 }

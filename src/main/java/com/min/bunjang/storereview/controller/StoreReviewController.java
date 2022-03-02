@@ -23,4 +23,6 @@ public class StoreReviewController {
         StoreReviewCreateResponse storeReview = storeReviewService.createStoreReview(storeReviewCreateRequest);
         return RestResponse.of(HttpStatus.OK, storeReview);
     }
+
+
 }
