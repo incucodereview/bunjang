@@ -30,6 +30,8 @@ public class Store extends BasicEntity {
 
     private String introduceContent;
 
+    private String storeThumbnail;
+
     @OneToOne(fetch = FetchType.LAZY)
     private Member member;
 
@@ -38,14 +40,15 @@ public class Store extends BasicEntity {
             joinColumns = @JoinColumn(name = "store_id"))
     private Set<Long> visitors = new HashSet<>();
 
-    private Store(String storeName, String introduceContent, Member member) {
+    public Store(String storeName, String introduceContent, String storeThumbnail, Member member) {
         this.storeName = storeName;
         this.introduceContent = introduceContent;
+        this.storeThumbnail = storeThumbnail;
         this.member = member;
     }
 
-    public static Store createStore(String storeName, String introduceContent, Member member) {
-        return new Store(storeName, introduceContent, member);
+    public static Store createStore(String storeName, String introduceContent, String storeThumbnail, Member member) {
+        return new Store(storeName, introduceContent, storeThumbnail, member);
     }
 
     public void updateIntroduceContent(String introduceContent) {

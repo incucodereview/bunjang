@@ -24,7 +24,7 @@ public class StoreService {
     @Transactional
     public StoreCreateResponse createStore(StoreCreateRequest storeCreateRequest) {
         Member member = memberRepository.findById(storeCreateRequest.getMemberId()).orElseThrow(NotExistMemberException::new);
-        Store store = Store.createStore(storeCreateRequest.getStoreName(), storeCreateRequest.getIntroduceContent(), member);
+        Store store = Store.createStore(storeCreateRequest.getStoreName(), storeCreateRequest.getIntroduceContent(), null, member);
         Store savedStore = storeRepository.save(store);
         return StoreCreateResponse.of(savedStore);
     }

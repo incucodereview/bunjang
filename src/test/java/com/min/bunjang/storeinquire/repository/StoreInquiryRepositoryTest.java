@@ -39,7 +39,7 @@ class StoreInquiryRepositoryTest {
         //given
         Member member = Member.createMember(MemberDirectCreateDto.of("email", "password", null, null, null, MemberRole.ROLE_MEMBER));
         Member savedMember = memberRepository.save(member);
-        Store store = Store.createStore("storeName", "introduce", savedMember);
+        Store store = Store.createStore("storeName", "introduce", null, savedMember);
         Store savedStore = storeRepository.save(store);
         storeInquireRepository.save(StoreInquire.of(1L, savedStore, null, "content"));
 
@@ -64,9 +64,9 @@ class StoreInquiryRepositoryTest {
         Member writerMember1 = memberRepository.save(member2);
         Member writerMember2 = memberRepository.save(member3);
 
-        Store owner = storeRepository.save(Store.createStore("owner", "introduce", ownerMember));
-        Store writer = storeRepository.save(Store.createStore("writer1", "introduce", writerMember1));
-        Store writer2 = storeRepository.save(Store.createStore("writer2", "introduce", writerMember2));
+        Store owner = storeRepository.save(Store.createStore("owner", "introduce", null, ownerMember));
+        Store writer = storeRepository.save(Store.createStore("writer1", "introduce", null, writerMember1));
+        Store writer2 = storeRepository.save(Store.createStore("writer2", "introduce", null, writerMember2));
 
         List<StoreInquire> storeInquires = Arrays.asList(
                 StoreInquire.of(owner.getNum(), writer, null, "content1"),

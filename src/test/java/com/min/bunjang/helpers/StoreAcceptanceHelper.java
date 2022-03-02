@@ -9,6 +9,6 @@ public class StoreAcceptanceHelper {
     public static Store 상점생성(Member member, StoreRepository storeRepository) {
         String storeName = "storeName";
         String introduceContent = "introduceContent";
-        return storeRepository.save(Store.createStore(storeName, introduceContent, member));
+        return storeRepository.save(Store.createStore(storeName, introduceContent, null, member));
     }
 }

@@ -6,10 +6,57 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StoreReview extends BasicEntity {
 
+    @NotNull
+    private Long ownerNum;
+
+    @NotNull
+    private Long writerNum;
+
+    @NotBlank
+    private String writerName;
+
+    @NotNull
+    private double dealScore;
+
+    private String storeThumbnail;
+
+    @NotNull
+    private Long productNum;
+
+    private String productName;
+
+    @NotBlank
+    private String reviewContent;
+
+    public StoreReview(Long ownerNum, Long writerNum, String writerName, double dealScore, String storeThumbnail, Long productNum, String productName, String reviewContent) {
+        this.ownerNum = ownerNum;
+        this.writerNum = writerNum;
+        this.writerName = writerName;
+        this.dealScore = dealScore;
+        this.storeThumbnail = storeThumbnail;
+        this.productNum = productNum;
+        this.productName = productName;
+        this.reviewContent = reviewContent;
+    }
+
+    public static StoreReview createStoreReview(Long ownerNum, Long writerNum, String writerName, double dealScore, String storeThumbnail, Long productNum, String productName, String reviewContent) {
+        return new StoreReview(
+                ownerNum,
+                writerNum,
+                writerName,
+                dealScore,
+                storeThumbnail,
+                productNum,
+                productName,
+                reviewContent
+        );
+    }
 }

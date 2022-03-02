@@ -85,7 +85,7 @@ class StoreServiceTest {
         //given
         String storeName = "storeName";
         String introduceContent = "introduceContent";
-        Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, savedMember));
+        Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, null, savedMember));
 
         String updateIntroduceContent = "updateIntroduceContent";
         StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(savedStore.getNum(), updateIntroduceContent);
@@ -104,7 +104,7 @@ class StoreServiceTest {
         //given
         String storeName = "storeName";
         String introduceContent = "introduceContent";
-        Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, savedMember));
+        Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, null, savedMember));
 
         String updateIntroduceContent = "updateIntroduceContent";
         StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(savedStore.getNum() + 1L, updateIntroduceContent);
@@ -119,14 +119,14 @@ class StoreServiceTest {
         //given
         String storeName = "storeName";
         String introduceContent = "introduceContent";
-        Store owner = storeRepository.save(Store.createStore(storeName, introduceContent, savedMember));
+        Store owner = storeRepository.save(Store.createStore(storeName, introduceContent, null, savedMember));
 
         Member member = Member.createMember(MemberDirectCreateDto.of("email", "password", "name", "phone", null, MemberRole.ROLE_MEMBER));
         Member newMember = memberRepository.save(member);
 
         String storeName2 = "storeName";
         String introduceContent2 = "introduceContent";
-        Store visitor = storeRepository.save(Store.createStore(storeName2, introduceContent2, newMember));
+        Store visitor = storeRepository.save(Store.createStore(storeName2, introduceContent2, null, newMember));
 
         VisitorPlusDto visitorPlusDto = new VisitorPlusDto(owner.getNum(), visitor.getNum());
         //when
