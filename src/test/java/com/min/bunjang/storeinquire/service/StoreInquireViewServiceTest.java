@@ -62,6 +62,5 @@ class StoreInquireViewServiceTest {
 
         //then
         Assertions.assertThat(storeInquiriesRelatedStore);
-
     }
 }
