@@ -12,7 +12,7 @@ import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storereview.controller.StoreReviewControllerPath;
 import com.min.bunjang.storereview.dto.StoreReviewCreateRequest;
-import com.min.bunjang.storereview.dto.StoreReviewCreateResponse;
+import com.min.bunjang.storereview.dto.StoreReviewResponse;
 import com.min.bunjang.storereview.repository.StoreReviewRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
@@ -64,25 +64,25 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
                     );
 
                     //when
-                    StoreReviewCreateResponse storeReviewCreateResponse = 상점후기_생성_요청(loginResult, storeReviewCreateRequest);
+                    StoreReviewResponse storeReviewResponse = 상점후기_생성_요청(loginResult, storeReviewCreateRequest);
 
                     //then
-                    상점후기_생성_응답_검증(writer, product, dealScore, reviewContent, storeReviewCreateResponse);
+                    상점후기_생성_응답_검증(writer, product, dealScore, reviewContent, storeReviewResponse);
                 })
         );
     }
 
-    private StoreReviewCreateResponse 상점후기_생성_요청(TokenValuesDto loginResult, StoreReviewCreateRequest storeReviewCreateRequest) {
-        return postApi(StoreReviewControllerPath.REVIEW_CREATE, storeReviewCreateRequest, new TypeReference<RestResponse<StoreReviewCreateResponse>>() {
+    private StoreReviewResponse 상점후기_생성_요청(TokenValuesDto loginResult, StoreReviewCreateRequest storeReviewCreateRequest) {
+        return postApi(StoreReviewControllerPath.REVIEW_CREATE, storeReviewCreateRequest, new TypeReference<RestResponse<StoreReviewResponse>>() {
         }, loginResult.getAccessToken()).getResult();
     }
 
-    private void 상점후기_생성_응답_검증(Store writer, Product product, double dealScore, String reviewContent, StoreReviewCreateResponse storeReviewCreateResponse) {
-        Assertions.assertThat(storeReviewCreateResponse.getWriterNum()).isEqualTo(writer.getNum());
-        Assertions.assertThat(storeReviewCreateResponse.getWriterName()).isEqualTo(writer.getStoreName());
-        Assertions.assertThat(storeReviewCreateResponse.getDealScore()).isEqualTo(dealScore);
-        Assertions.assertThat(storeReviewCreateResponse.getProductNum()).isEqualTo(product.getNum());
-        Assertions.assertThat(storeReviewCreateResponse.getProductName()).isEqualTo(product.getProductName());
-        Assertions.assertThat(storeReviewCreateResponse.getReviewContent()).isEqualTo(reviewContent);
+    private void 상점후기_생성_응답_검증(Store writer, Product product, double dealScore, String reviewContent, StoreReviewResponse storeReviewResponse) {
+        Assertions.assertThat(storeReviewResponse.getWriterNum()).isEqualTo(writer.getNum());
+        Assertions.assertThat(storeReviewResponse.getWriterName()).isEqualTo(writer.getStoreName());
+        Assertions.assertThat(storeReviewResponse.getDealScore()).isEqualTo(dealScore);
+        Assertions.assertThat(storeReviewResponse.getProductNum()).isEqualTo(product.getNum());
+        Assertions.assertThat(storeReviewResponse.getProductName()).isEqualTo(product.getProductName());
+        Assertions.assertThat(storeReviewResponse.getReviewContent()).isEqualTo(reviewContent);
     }
 }

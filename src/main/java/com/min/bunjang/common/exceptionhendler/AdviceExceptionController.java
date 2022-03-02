@@ -1,6 +1,7 @@
-package com.min.bunjang.common.exception.handler;
+package com.min.bunjang.common.exceptionhendler;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.common.exception.ImpossibleException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,12 +30,12 @@ public class AdviceExceptionController {
         return RestResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "서버 에러 입니다. 원인 : " + Arrays.toString(e.getStackTrace()));
     }
 
-//    @ResponseStatus(HttpStatus.BAD_REQUEST)
-//    @ExceptionHandler({ImpossibleException.class})
-//    public RestResponse<Void> impossibleException(Exception e) {
-//        log.error(e.getClass() + ": " + e.getMessage());
-//        return RestResponse.error(e.getMessage());
-//    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({ImpossibleException.class})
+    public RestResponse<Void> impossibleException(Exception e) {
+        log.error(e.getClass() + ": " + e.getMessage());
+        return RestResponse.error(e.getMessage());
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)

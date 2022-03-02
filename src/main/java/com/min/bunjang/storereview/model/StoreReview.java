@@ -1,5 +1,6 @@
 package com.min.bunjang.storereview.model;
 
+import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.model.BasicEntity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -58,5 +59,13 @@ public class StoreReview extends BasicEntity {
                 productName,
                 reviewContent
         );
+    }
+
+    public void updateReviewContent(String reviewContent) {
+        if (reviewContent == null) {
+            throw new ImpossibleException("변경하려는 상점후기 내용이 없습니다.");
+        }
+
+        this.reviewContent = reviewContent;
     }
 }

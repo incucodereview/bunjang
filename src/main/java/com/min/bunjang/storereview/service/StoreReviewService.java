@@ -1,5 +1,6 @@
 package com.min.bunjang.storereview.service;
 
+import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -7,7 +8,9 @@ import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storereview.dto.StoreReviewCreateRequest;
-import com.min.bunjang.storereview.dto.StoreReviewCreateResponse;
+import com.min.bunjang.storereview.dto.StoreReviewResponse;
+import com.min.bunjang.storereview.dto.StoreReviewUpdateRequest;
+import com.min.bunjang.storereview.exception.NotExistStoreReviewException;
 import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.storereview.repository.StoreReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +25,7 @@ public class StoreReviewService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public StoreReviewCreateResponse createStoreReview(StoreReviewCreateRequest storeReviewCreateRequest) {
+    public StoreReviewResponse createStoreReview(StoreReviewCreateRequest storeReviewCreateRequest) {
         Store writer = storeRepository.findById(storeReviewCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(storeReviewCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
         StoreReview storeReview = StoreReview.createStoreReview(
@@ -36,6 +39,20 @@ public class StoreReviewService {
                 storeReviewCreateRequest.getReviewContent()
         );
 
-        return StoreReviewCreateResponse.of(storeReviewRepository.save(storeReview));
+        return StoreReviewResponse.of(storeReviewRepository.save(storeReview));
+    }
+
+    @Transactional
+    public void updateStoreReview(StoreReviewUpdateRequest storeReviewUpdateRequest) {
+        StoreReview storeReview = storeReviewRepository.findById(storeReviewUpdateRequest.getReviewNum()).orElseThrow(NotExistStoreReviewException::new);
+        storeReview.updateReviewContent(storeReviewUpdateRequest.getUpdatedReviewContent());
+    }
+
+    public void deleteStoreReview(Long reviewNum) {
+        if (reviewNum == null) {
+            throw new ImpossibleException("상점후기가 없습니다. 잘못된 요청입니다.");
+        }
+
+        storeReviewRepository.deleteById(reviewNum);
     }
 }

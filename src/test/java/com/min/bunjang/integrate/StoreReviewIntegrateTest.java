@@ -3,6 +3,7 @@ package com.min.bunjang.integrate;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.integrate.config.IntegrateTestConfig;
+import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -72,7 +73,8 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(post(StoreReviewControllerPath.REVIEW_CREATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .content(objectMapper.writeValueAsString(storeReviewCreateRequest)))
+                        .content(objectMapper.writeValueAsString(storeReviewCreateRequest))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("storeReview-create",
