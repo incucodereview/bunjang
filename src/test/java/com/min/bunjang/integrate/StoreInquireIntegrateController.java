@@ -8,7 +8,6 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storeinquire.controller.StoreInquireControllerPath;
-import com.min.bunjang.storeinquire.controller.StoreInquireViewController;
 import com.min.bunjang.storeinquire.controller.StoreInquireViewControllerPath;
 import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
 import com.min.bunjang.storeinquire.model.StoreInquire;
@@ -113,7 +112,7 @@ public class StoreInquireIntegrateController extends IntegrateTestConfig {
         ));
 
         //when & then
-        mockMvc.perform(RestDocumentationRequestBuilders.get(StoreInquireViewControllerPath.GET_INQUIRIES_RELATED_STORE, owner.getNum())
+        mockMvc.perform(RestDocumentationRequestBuilders.get(StoreInquireViewControllerPath.INQUIRIES_FIND_RELATED_STORE, owner.getNum())
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk())
                 .andDo(print())

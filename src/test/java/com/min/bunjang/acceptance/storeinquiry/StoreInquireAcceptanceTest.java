@@ -110,7 +110,7 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private StoreInquireListResponses 상점문의_목록조회_요청(TokenValuesDto loginResult, Long storeNum) {
-        String path = StoreInquireViewControllerPath.GET_INQUIRIES_RELATED_STORE.replace("{storeNum}", String.valueOf(storeNum));
+        String path = StoreInquireViewControllerPath.INQUIRIES_FIND_RELATED_STORE.replace("{storeNum}", String.valueOf(storeNum));
         StoreInquireListResponses storeInquireListResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreInquireListResponses>>() {
         }).getResult();
         return storeInquireListResponses;

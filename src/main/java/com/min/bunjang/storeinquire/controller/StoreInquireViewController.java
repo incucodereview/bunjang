@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreInquireViewController {
     private final StoreInquireViewService storeInquireViewService;
 
-    @GetMapping(StoreInquireViewControllerPath.GET_INQUIRIES_RELATED_STORE)
+    @GetMapping(StoreInquireViewControllerPath.INQUIRIES_FIND_RELATED_STORE)
     public RestResponse<StoreInquireListResponses> getStoreInquiriesRelatedStore(
             @PathVariable Long storeNum,
             @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 10) Pageable pageable
