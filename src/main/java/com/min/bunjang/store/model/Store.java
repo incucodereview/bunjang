@@ -2,6 +2,7 @@ package com.min.bunjang.store.model;
 
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,9 @@ public class Store extends BasicEntity {
     @CollectionTable(name = "visitor",
             joinColumns = @JoinColumn(name = "store_id"))
     private Set<Long> visitors = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "store", orphanRemoval = true)
+    private Set<WishProduct> wishProducts = new HashSet<>();
 
     public Store(String storeName, String introduceContent, String storeThumbnail, Member member) {
         this.storeName = storeName;
