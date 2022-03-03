@@ -141,21 +141,28 @@ operation::storeInquiry-delete[snippets='request-headers,path-parameters,respons
 [[resources-login]]
 == 상점 후기 생성
 
-회원가입후 상점을 생성한다.
+상점후기를 생성한다.
 
 operation::storeReview-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
+== 상점 후기 조회
+
+상점의 후기들을 조회한다.
+
+operation::storeReview-findByOwner[snippets='request-headers,path-parameters,response-headers,response-body']
+
+[[resources-login]]
 == 상점 후기 변경
 
-회원가입후 상점을 생성한다.
+상점후기를 변경한다.
 
 operation::storeReview-update[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점 후기 삭제
 
-회원가입후 상점을 생성한다.
+상점후기를 삭제한다.
 
 operation::storeReview-delete[snippets='request-headers,path-parameters,response-headers,response-fields,response-body']
 

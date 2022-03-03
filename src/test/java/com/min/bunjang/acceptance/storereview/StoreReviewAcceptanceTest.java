@@ -11,7 +11,9 @@ import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storereview.controller.StoreReviewControllerPath;
+import com.min.bunjang.storereview.controller.StoreReviewViewControllerPath;
 import com.min.bunjang.storereview.dto.StoreReviewCreateRequest;
+import com.min.bunjang.storereview.dto.StoreReviewListResponses;
 import com.min.bunjang.storereview.dto.StoreReviewResponse;
 import com.min.bunjang.storereview.dto.StoreReviewUpdateRequest;
 import com.min.bunjang.storereview.model.StoreReview;
@@ -71,6 +73,17 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
 
                     //then
                     상점후기_생성_응답_검증(writer, product, dealScore, reviewContent, storeReviewResponse);
+                }),
+
+                DynamicTest.dynamicTest("상점후기 조회.", () -> {
+                    //given
+                    Long storeNum = storeReviewRepository.findAll().get(0).getNum();
+
+                    //when
+                    StoreReviewListResponses storeReviewListResponses = 상점후기_조회_요청(loginResult, storeNum);
+
+                    //then
+                    상점후기_조회_응답_검증(storeReviewListResponses);
                 }),
 
                 DynamicTest.dynamicTest("상점후기 변경.", () -> {
@@ -139,4 +152,14 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(deletedStoreReview.isPresent()).isFalse();
     }
 
+    private StoreReviewListResponses 상점후기_조회_요청(TokenValuesDto loginResult, Long storeNum) {
+        String path = StoreReviewViewControllerPath.REVIEW_FIND_BY_STORE.replace("{storeNum}", String.valueOf(storeNum));
+        StoreReviewListResponses storeReviewListResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreReviewListResponses>>() {
+        }).getResult();
+        return storeReviewListResponses;
+    }
+
+    private void 상점후기_조회_응답_검증(StoreReviewListResponses storeReviewListResponses) {
+        Assertions.assertThat(storeReviewListResponses.getStoreReviewListResponses()).hasSize(1);
+    }
 }

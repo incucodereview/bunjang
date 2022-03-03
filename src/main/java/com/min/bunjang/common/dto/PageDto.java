@@ -14,11 +14,12 @@ public class PageDto {
     private boolean prev,next;
     private long total;
     private int realEndPage;
+    private int currentPage;
 
     //TODO 이거 로직 개선해야됨. 3/2
     public PageDto(int pageSize, int currentPage, long total){
         this.total = total;
-        this.endPage = (int)(Math.ceil(currentPage/10.0)) * 10;
+        this.endPage = (int) (Math.ceil(total/10.0)) * 10;
         this.startPage = endPage - 9;
         this.realEndPage = (int) total / pageSize;
 
@@ -28,5 +29,6 @@ public class PageDto {
 
         this.prev = this.startPage > 1;
         this.next = this.endPage < realEndPage;
+        this.currentPage = currentPage;
     }
 }
