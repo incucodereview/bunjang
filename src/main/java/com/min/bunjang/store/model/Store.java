@@ -15,11 +15,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderColumn;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity

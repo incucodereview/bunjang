@@ -166,3 +166,17 @@ operation::storeReview-update[snippets='request-headers,request-fields,request-b
 
 operation::storeReview-delete[snippets='request-headers,path-parameters,response-headers,response-fields,response-body']
 
+[[resources-login]]
+== 찜목록 상품 생성(추가)
+
+찜목록에 상품을 생성한다
+
+operation::wishProduct-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+
+[[resources-login]]
+== 찜목록 상품(들) 삭제
+
+찜목록에 상품(들)을 삭제한다.
+
+operation::wishProduct-delete[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+

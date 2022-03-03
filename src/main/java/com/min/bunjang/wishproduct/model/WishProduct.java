@@ -1,7 +1,6 @@
 package com.min.bunjang.wishproduct.model;
 
 import com.min.bunjang.common.model.BasicEntity;
-import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.store.model.Store;
 import lombok.AccessLevel;
