@@ -1,9 +1,7 @@
 package com.min.bunjang.storereview.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.storereview.dto.StoreReviewListResponse;
 import com.min.bunjang.storereview.dto.StoreReviewListResponses;
-import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.storereview.service.StoreReviewViewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
