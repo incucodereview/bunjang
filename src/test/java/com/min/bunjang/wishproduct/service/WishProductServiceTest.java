@@ -1,6 +1,7 @@
 package com.min.bunjang.wishproduct.service;
 
 import com.min.bunjang.common.database.DatabaseCleanup;
+import com.min.bunjang.config.ServiceTestConfig;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
@@ -25,12 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@SpringBootTest
-@ActiveProfiles("h2")
-class WishProductServiceTest {
-    @Autowired
-    private DatabaseCleanup databaseCleanup;
-
+class WishProductServiceTest extends ServiceTestConfig {
     @Autowired
     private WishProductService wishProductService;
 
@@ -43,8 +39,6 @@ class WishProductServiceTest {
     @Autowired
     private WishProductRepository wishProductRepository;
 
-    @Autowired
-    private MemberRepository memberRepository;
 
     @DisplayName("찜상품이 추가되면 관련 제품과 상점에 찜목록이 등록된다")
     @Test
@@ -84,11 +78,11 @@ class WishProductServiceTest {
                 new WishProduct(savedStore, savedProduct2),
                 new WishProduct(savedStore, savedProduct3)
         );
-        List<WishProduct> savedWishProducts = wishProductRepository.saveAll(wishProducts);
-        WishProduct savedWishProduct = wishProductRepository.save(new WishProduct(savedStore, savedProduct4));
+        List<WishProduct> toBeDeleteWishProducts = wishProductRepository.saveAll(wishProducts);
+        WishProduct toBeNotDeleteWishProduct = wishProductRepository.save(new WishProduct(savedStore, savedProduct4));
 
         WishProductsDeleteRequest wishProductsDeleteRequest = 
-                new WishProductsDeleteRequest(savedWishProducts.stream().map(wishProduct -> wishProduct.getNum()).collect(Collectors.toList()));
+                new WishProductsDeleteRequest(toBeDeleteWishProducts.stream().map(wishProduct -> wishProduct.getNum()).collect(Collectors.toList()));
         
         //when
         wishProductService.deleteWishProducts(wishProductsDeleteRequest);
@@ -96,7 +90,7 @@ class WishProductServiceTest {
         //then
         List<WishProduct> allWishProduct = wishProductRepository.findAll();
         Assertions.assertThat(allWishProduct).hasSize(1);
-        Assertions.assertThat(allWishProduct.get(0).getNum()).isEqualTo(savedWishProduct.getNum());
+        Assertions.assertThat(allWishProduct.get(0).getNum()).isEqualTo(toBeNotDeleteWishProduct.getNum());
     }
 
     @AfterEach

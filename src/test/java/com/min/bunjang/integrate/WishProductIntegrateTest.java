@@ -11,6 +11,7 @@ import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.wishproduct.controller.WishProductControllerPath;
+import com.min.bunjang.wishproduct.controller.WishProductViewControllerPath;
 import com.min.bunjang.wishproduct.dto.WishProductCreateRequest;
 import com.min.bunjang.wishproduct.dto.WishProductsDeleteRequest;
 import com.min.bunjang.wishproduct.model.WishProduct;
@@ -21,6 +22,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
 import java.util.Arrays;
 
@@ -31,7 +33,10 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,7 +53,7 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
 
     @DisplayName("찜상품 생성 통합테스트")
     @Test
-    public void storeReview_create() throws Exception {
+    public void wishProduct_create() throws Exception {
         //given
         String ownerEmail = "urisegea@naver.com";
         String ownerPassword = "password";
@@ -92,9 +97,48 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
                 ));
     }
 
+    @DisplayName("찜상품 생성 통합테스트")
+    @Test
+    public void wishProduct_findAll_byStore() throws Exception {
+        //given
+        String ownerEmail = "urisegea@naver.com";
+        String ownerPassword = "password";
+        Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
+
+        String writerEmail = "visitor@naver.com";
+        String writerPassword = "password!visitor";
+        Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(writerEmail, writerPassword).getResult();
+
+        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+        //TODO 임시 생성자로 생성해놓음.
+        Product product = productRepository.save(new Product("productName"));
+
+        WishProductCreateRequest wishProductCreateRequest = new WishProductCreateRequest(owner.getNum(), product.getNum());
+
+        //when & then
+        mockMvc.perform(RestDocumentationRequestBuilders.get(WishProductViewControllerPath.WISH_PRODUCT_FIND_BY_STORE, owner.getNum())
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("wishProduct-findAll-byStore",
+                        requestHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
+                        ),
+                        pathParameters(
+                                parameterWithName("storeNum").description("상품을 찜한 상점의 식별자 정보 필드")
+                        ),
+                        responseHeaders(
+                                headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
+                        )
+                ));
+    }
+
     @DisplayName("찜상품 삭제 통합테스트")
     @Test
-    public void storeReview_delete() throws Exception {
+    public void wishProduct_delete() throws Exception {
         //given
         String ownerEmail = "urisegea@naver.com";
         String ownerPassword = "password";

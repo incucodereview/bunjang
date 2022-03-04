@@ -12,7 +12,9 @@ import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.wishproduct.controller.WishProductControllerPath;
+import com.min.bunjang.wishproduct.controller.WishProductViewControllerPath;
 import com.min.bunjang.wishproduct.dto.WishProductCreateRequest;
+import com.min.bunjang.wishproduct.dto.WishProductResponses;
 import com.min.bunjang.wishproduct.dto.WishProductsDeleteRequest;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import com.min.bunjang.wishproduct.repository.WishProductRepository;
@@ -20,6 +22,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,6 +64,20 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
 
                     //then
                     찜상품_생성_응답_검증();
+                }),
+
+                DynamicTest.dynamicTest("상점의 찜목록 조회 ", () -> {
+                    //given
+                    Long storeNum = owner.getNum();
+                    PageRequest pageRequest = PageRequest.of(0, 10);
+
+                    //when
+                    String path = WishProductViewControllerPath.WISH_PRODUCT_FIND_BY_STORE.replace("{storeNum}", String.valueOf(storeNum));
+                    getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<WishProductResponses>>() {});
+
+                    //then
+                    List<WishProduct> wishProducts = wishProductRepository.findAll();
+                    Assertions.assertThat(wishProducts).hasSize(1);
                 }),
 
                 DynamicTest.dynamicTest("찜목록에서 찜상품들 삭제", () -> {
