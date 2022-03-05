@@ -35,7 +35,6 @@ public class ConfirmationToken {
     private String email;
 
     @CreatedDate
-    @Column(updatable = false)
     private LocalDateTime createDate;
 
     @LastModifiedDate

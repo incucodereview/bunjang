@@ -1,0 +1,10 @@
+GET http://localhost:8080/confirm-email?token=c830ed0c-9e7d-4f8e-813d-d59c9f19a24b
+Content-Type: application/json
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": "urisegea@naver.com"
+#}
+#Response code: 200; Time: 168ms; Content length: 64 bytes

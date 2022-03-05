@@ -5,6 +5,7 @@ import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
 import com.min.bunjang.join.event.JoinEmailEvent;
 import com.min.bunjang.join.dto.TempJoinRequest;
+import com.min.bunjang.join.exception.WrongCertificationJoinException;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.exception.NotExistTempMemberException;
 import com.min.bunjang.member.model.JoinTempMember;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.function.Supplier;
 
 @Service
 @RequiredArgsConstructor
