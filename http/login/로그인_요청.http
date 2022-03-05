@@ -2,7 +2,20 @@ POST http://localhost:8080/login
 Content-Type: application/json
 #Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTYzNDcyMjYyMCwiZXhwIjoxNjM0NzI0NDIwfQ.f0EKVq-0TRm--0nqxv87tguarUEFLXdGtS5KLSGx0nk
 
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjQ2MTA5NCwiZXhwIjoxNjQ2NDYyODk0fQ.5M0a46KKfNyNvZui5TywQEMEiRPUw2adz-5PAvA8MZk",
+#    "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjQ2MTA5NCwiZXhwIjoxNjQ3NjcwNjk0fQ.ao0yTdJS7o5H3fVvlr3_ZpvyvBT5fxnAJUy2HrSV8K8"
+#  }
+#}
+
+
+#req
 {
   "email": "urisegea@naver.com",
-  "password": "password"
+  "password": "alsdud6038"
 }
