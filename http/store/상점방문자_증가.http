@@ -1,0 +1,16 @@
+POST http://localhost:8080/store/visitor
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjQ2MTA5NCwiZXhwIjoxNjQ2NDYyODk0fQ.5M0a46KKfNyNvZui5TywQEMEiRPUw2adz-5PAvA8MZk
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+
+#req
+{
+  "ownerNum":  1,
+  "visitorNum": 2
+}
