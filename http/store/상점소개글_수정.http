@@ -1,6 +1,6 @@
 PUT http://localhost:8080/store/introduce
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjQ2MTA5NCwiZXhwIjoxNjQ2NDYyODk0fQ.5M0a46KKfNyNvZui5TywQEMEiRPUw2adz-5PAvA8MZk
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjU0MDAxOSwiZXhwIjoxNjQ2NTQxODE5fQ.Sku5dpLWpEZTyNhHvoXfEKQuK7qFvWp0OwCKfT9bFxg
 
 #res
 #{
@@ -12,6 +12,5 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 
 #req
 {
-  "storeNum":  1,
   "updateIntroduceContent":  "생성 테스트용 상점 소개글 수정"
 }

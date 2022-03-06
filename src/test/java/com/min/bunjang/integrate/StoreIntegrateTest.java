@@ -64,7 +64,6 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("memberId").description("상점을 생성하는 회원의 식별자"),
                                 fieldWithPath("storeName").description("상점명 요청 필드"),
                                 fieldWithPath("introduceContent").description("상점 소개글 요청 필드")
                         ),
@@ -107,7 +106,6 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("storeNum").description("소개글이 변경될 상점의 식별자 정보 필드"),
                                 fieldWithPath("updateIntroduceContent").description("변경될 소개글 정보 필드")
                         ),
                         responseHeaders(
@@ -147,7 +145,6 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("storeNum").description("이름이 변경될 상점의 식별자 정보 필드"),
                                 fieldWithPath("updatedStoreName").description("변경될 상점이름 정보 필드")
                         ),
                         responseHeaders(
@@ -191,8 +188,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("ownerNum").description("소개글이 변경될 상점의 식별자 정보 필드"),
-                                fieldWithPath("visitorNum").description("변경될 소개글 정보 필드")
+                                fieldWithPath("ownerNum").description("소개글이 변경될 상점의 식별자 정보 필드")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")

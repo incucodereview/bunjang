@@ -1,6 +1,6 @@
 POST http://localhost:8080/store-inquire
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjQ2MzA3OCwiZXhwIjoxNjQ2NDY0ODc4fQ.a5Y4e-NmdzQRk5Hc7T-R6eRtY4ghyAcwMGJsNc_R4QA
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjU0MDAxOSwiZXhwIjoxNjQ2NTQxODE5fQ.Sku5dpLWpEZTyNhHvoXfEKQuK7qFvWp0OwCKfT9bFxg
 
 #res
 #{
