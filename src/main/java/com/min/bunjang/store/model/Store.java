@@ -1,5 +1,6 @@
 package com.min.bunjang.store.model;
 
+import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.wishproduct.model.WishProduct;
@@ -71,5 +72,13 @@ public class Store extends BasicEntity {
             return;
         }
         this.getVisitors().add(visitorNum);
+    }
+
+    public boolean verifyMatchMember(String memberEmail) {
+        if (this.member == null) {
+            throw new ImpossibleException("상점 데이터에 회원 정보가 존재하지 않습니다. 심각한 예외입니다.");
+        }
+
+        return this.member.getEmail().equals(memberEmail);
     }
 }

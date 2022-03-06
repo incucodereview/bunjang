@@ -62,7 +62,7 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
         String writerEmail = "visitor@naver.com";
         String writerPassword = "password!visitor";
         Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(writerEmail, writerPassword).getResult();
+        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(ownerEmail, ownerPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
@@ -108,7 +108,7 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
         String writerEmail = "visitor@naver.com";
         String writerPassword = "password!visitor";
         Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(writerEmail, writerPassword).getResult();
+        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(ownerEmail, ownerPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
@@ -147,7 +147,7 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
         String writerEmail = "visitor@naver.com";
         String writerPassword = "password!visitor";
         Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(writerEmail, writerPassword).getResult();
+        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(ownerEmail, ownerPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
@@ -157,7 +157,7 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
 
         wishProductRepository.save(new WishProduct(owner, product));
 
-        WishProductsDeleteRequest wishProductsDeleteRequest = new WishProductsDeleteRequest(Arrays.asList(1L));
+        WishProductsDeleteRequest wishProductsDeleteRequest = new WishProductsDeleteRequest(Arrays.asList(1L), owner.getNum());
 
         //when & then
         mockMvc.perform(delete(WishProductControllerPath.WISH_PRODUCT_DELETE)
@@ -171,7 +171,8 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("wishProductNumsForDelete").description("찜목록 삭제 id 목록 정보 필드")
+                                fieldWithPath("wishProductNumsForDelete").description("찜목록 삭제 id 목록 정보 필드"),
+                                fieldWithPath("storeNum").description("상품을 찜한 상점의 식별자 정보 필드")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")

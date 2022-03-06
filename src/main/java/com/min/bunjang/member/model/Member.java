@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -46,7 +47,9 @@ public class Member {
     private Long memberNum;
 
     @NotBlank
+    @Column(name = "email", unique = true)
     private String email;
+
     @NotBlank
     private String password;
 
@@ -105,6 +108,10 @@ public class Member {
 
     public boolean verifyEmailMatch(String rowEmail) {
         return this.email.equals(rowEmail);
+    }
+
+    public boolean existStore() {
+        return this.store != null;
     }
 
     @Override

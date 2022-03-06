@@ -47,7 +47,7 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
         String writerEmail = "writer@naver.com";
         String writerPassword = "password!writer";
         Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(writerEmail, writerPassword).getResult();
+        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(ownerEmail, ownerPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
@@ -72,18 +72,16 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
                     PageRequest pageRequest = PageRequest.of(0, 10);
 
                     //when
-                    String path = WishProductViewControllerPath.WISH_PRODUCT_FIND_BY_STORE.replace("{storeNum}", String.valueOf(storeNum));
-                    getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<WishProductResponses>>() {});
+                    찜목록_조회_요청(loginResult, storeNum);
 
                     //then
-                    List<WishProduct> wishProducts = wishProductRepository.findAll();
-                    Assertions.assertThat(wishProducts).hasSize(1);
+                    찜목록_조회_응답_검증();
                 }),
 
                 DynamicTest.dynamicTest("찜목록에서 찜상품들 삭제", () -> {
                     //given
                     WishProduct wishProduct = wishProductRepository.findAll().get(0);
-                    WishProductsDeleteRequest wishProductsDeleteRequest = new WishProductsDeleteRequest(Arrays.asList(wishProduct.getNum()));
+                    WishProductsDeleteRequest wishProductsDeleteRequest = new WishProductsDeleteRequest(Arrays.asList(wishProduct.getNum()), owner.getNum());
 
                     //when
                     찜상품_삭제_요청(loginResult, wishProductsDeleteRequest);
@@ -92,6 +90,16 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
                     찜상풍_삭제_응답_검증();
                 })
         );
+    }
+
+    private void 찜목록_조회_응답_검증() {
+        List<WishProduct> wishProducts = wishProductRepository.findAll();
+        Assertions.assertThat(wishProducts).hasSize(1);
+    }
+
+    private void 찜목록_조회_요청(TokenValuesDto loginResult, Long storeNum) {
+        String path = WishProductViewControllerPath.WISH_PRODUCT_FIND_BY_STORE.replace("{storeNum}", String.valueOf(storeNum));
+        getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<WishProductResponses>>() {});
     }
 
     private void 찜상품_생성_요청(TokenValuesDto loginResult, WishProductCreateRequest wishProductCreateRequest) {

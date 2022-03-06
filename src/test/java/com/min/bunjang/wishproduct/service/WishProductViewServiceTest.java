@@ -41,7 +41,7 @@ class WishProductViewServiceTest extends ServiceTestConfig {
         Member member1 = Member.createMember(MemberDirectCreateDto.of("email", "pwd", "name", null, null, MemberRole.ROLE_MEMBER));
         memberRepository.save(member1);
         Store savedStore1 = storeRepository.save(Store.createStore("storeName1", "introduce", null, member1));
-        Member member2 = Member.createMember(MemberDirectCreateDto.of("email", "pwd", "name", null, null, MemberRole.ROLE_MEMBER));
+        Member member2 = Member.createMember(MemberDirectCreateDto.of("email2", "pwd", "name", null, null, MemberRole.ROLE_MEMBER));
         memberRepository.save(member2);
         Store savedStore2 = storeRepository.save(Store.createStore("storeName2", "introduce", null, member2));
         Product savedProduct = productRepository.save(new Product("productName"));
@@ -58,7 +58,7 @@ class WishProductViewServiceTest extends ServiceTestConfig {
         WishProduct savedWishProduct = wishProductRepository.save(new WishProduct(savedStore2, savedProduct4));
 
         //when
-        WishProductResponses wishProductsByStore = wishProductViewService.findWishProductsByStore(savedStore1.getNum(), PageRequest.of(0, 10));
+        WishProductResponses wishProductsByStore = wishProductViewService.findWishProductsByStore(member1.getEmail(), savedStore1.getNum(), PageRequest.of(0, 10));
 
         //then
         List<WishProductResponse> wishProductResponses = wishProductsByStore.getWishProductResponses();

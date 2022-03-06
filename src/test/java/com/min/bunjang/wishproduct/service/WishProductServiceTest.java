@@ -1,11 +1,9 @@
 package com.min.bunjang.wishproduct.service;
 
-import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.config.ServiceTestConfig;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
-import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.model.Store;
@@ -19,8 +17,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Arrays;
 import java.util.List;
@@ -52,7 +48,7 @@ class WishProductServiceTest extends ServiceTestConfig {
         WishProductCreateRequest wishProductCreateRequest = new WishProductCreateRequest(savedStore.getNum(), savedProduct.getNum());
 
         //when
-        wishProductService.createWishProduct(wishProductCreateRequest);
+        wishProductService.createWishProduct(member.getEmail(), wishProductCreateRequest);
 
         //then
         WishProduct wishProduct = wishProductRepository.findAll().get(0);
@@ -81,11 +77,11 @@ class WishProductServiceTest extends ServiceTestConfig {
         List<WishProduct> toBeDeleteWishProducts = wishProductRepository.saveAll(wishProducts);
         WishProduct toBeNotDeleteWishProduct = wishProductRepository.save(new WishProduct(savedStore, savedProduct4));
 
-        WishProductsDeleteRequest wishProductsDeleteRequest = 
-                new WishProductsDeleteRequest(toBeDeleteWishProducts.stream().map(wishProduct -> wishProduct.getNum()).collect(Collectors.toList()));
+        WishProductsDeleteRequest wishProductsDeleteRequest = new WishProductsDeleteRequest(
+                toBeDeleteWishProducts.stream().map(wishProduct -> wishProduct.getNum()).collect(Collectors.toList()), savedStore.getNum());
         
         //when
-        wishProductService.deleteWishProducts(wishProductsDeleteRequest);
+        wishProductService.deleteWishProducts(member.getEmail(), wishProductsDeleteRequest);
         
         //then
         List<WishProduct> allWishProduct = wishProductRepository.findAll();
