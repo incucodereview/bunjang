@@ -1,0 +1,25 @@
+POST http://localhost:8080/store-review
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjU3NTU4OCwiZXhwIjoxNjQ2NTc3Mzg4fQ.RDIMmJ3P87F8L_jL-wTJq2zKoSGX0BzKlFdiZ9dfpzU
+
+
+#res
+#{
+#  "statusCode": "CREATED",
+#  "message": null,
+#  "result": {
+#    "inquireNum": 1,
+#    "writerName": "testStore",
+#    "inquireContent": "테스트용 상점문의 입니다."
+#  }
+#}
+
+## 상품관련 로직 구현후 다시 할것.
+
+#req
+{
+  "ownerNum": 1,
+  "dealScore": 3.0,
+  "productNum": 1,
+  "reviewContent": "테스트용 상점후기 입니다."
+}

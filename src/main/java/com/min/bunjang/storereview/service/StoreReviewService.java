@@ -1,6 +1,9 @@
 package com.min.bunjang.storereview.service;
 
 import com.min.bunjang.common.exception.ImpossibleException;
+import com.min.bunjang.member.exception.NotExistMemberException;
+import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -21,12 +24,16 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class StoreReviewService {
     private final StoreReviewRepository storeReviewRepository;
-    private final StoreRepository storeRepository;
     private final ProductRepository productRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
-    public StoreReviewResponse createStoreReview(StoreReviewCreateRequest storeReviewCreateRequest) {
-        Store writer = storeRepository.findById(storeReviewCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
+    public StoreReviewResponse createStoreReview(String memberEmail, StoreReviewCreateRequest storeReviewCreateRequest) {
+        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
+        if (member.getStore() == null) {
+            throw new NotExistStoreException();
+        }
+        Store writer = member.getStore();
         Product product = productRepository.findById(storeReviewCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
         StoreReview storeReview = StoreReview.createStoreReview(
                 storeReviewCreateRequest.getOwnerNum(),
@@ -43,16 +50,30 @@ public class StoreReviewService {
     }
 
     @Transactional
-    public void updateStoreReview(StoreReviewUpdateRequest storeReviewUpdateRequest) {
+    public void updateStoreReview(String memberEmail, StoreReviewUpdateRequest storeReviewUpdateRequest) {
+        Member writer = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
         StoreReview storeReview = storeReviewRepository.findById(storeReviewUpdateRequest.getReviewNum()).orElseThrow(NotExistStoreReviewException::new);
+        verifyMatchReviewerAndRequester(storeReview, writer);
+
         storeReview.updateReviewContent(storeReviewUpdateRequest.getUpdatedReviewContent(), storeReviewUpdateRequest.getUpdatedDealScore());
     }
 
-    public void deleteStoreReview(Long reviewNum) {
+    @Transactional
+    public void deleteStoreReview(String memberEmail, Long reviewNum) {
         if (reviewNum == null) {
-            throw new ImpossibleException("상점후기가 없습니다. 잘못된 요청입니다.");
+            throw new ImpossibleException("삭제요청한 리뷰의 식별자가 null입니다. 잘못된 요청입니다.");
         }
 
+        Member writer = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
+        StoreReview storeReview = storeReviewRepository.findById(reviewNum).orElseThrow(NotExistStoreReviewException::new);
+        verifyMatchReviewerAndRequester(storeReview, writer);
+
         storeReviewRepository.deleteById(reviewNum);
+    }
+
+    private void verifyMatchReviewerAndRequester(StoreReview storeReview, Member writer) {
+        if (!storeReview.verifyWriter(writer.getMemberNum())) {
+            throw new ImpossibleException("수정하려는 사용자가 후기를 입력한 사용자가 아닙니다. 잘못된 접근입니다.");
+        }
     }
 }

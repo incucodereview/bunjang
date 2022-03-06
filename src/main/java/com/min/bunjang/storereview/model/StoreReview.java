@@ -73,4 +73,8 @@ public class StoreReview extends BasicEntity {
         this.dealScore = dealScore;
         this.reviewContent = reviewContent;
     }
+
+    public boolean verifyWriter(Long rowWriterNum) {
+        return this.writerNum.equals(writerNum);
+    }
 }

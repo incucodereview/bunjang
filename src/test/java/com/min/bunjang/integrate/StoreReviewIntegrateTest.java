@@ -70,10 +70,8 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
 
         StoreReviewCreateRequest storeReviewCreateRequest = new StoreReviewCreateRequest(
                 owner.getNum(),
-                writer.getNum(),
                 dealScore,
                 product.getNum(),
-                product.getProductName(),
                 reviewContent
         );
 
@@ -90,10 +88,8 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
                         ),
                         requestFields(
                                 fieldWithPath("ownerNum").description("후기 받은 상점 식별자 정보 필드."),
-                                fieldWithPath("writerNum").description("후기 쓴 상점 식별자 정보 필드."),
                                 fieldWithPath("dealScore").description("후기평점 정보 필드"),
                                 fieldWithPath("productNum").description("거래한 제품의 식별자 정보 필드"),
-                                fieldWithPath("productName").description("거래한 제품의 이름 정보 필드"),
                                 fieldWithPath("reviewContent").description("후기 내용 정보 필드")
                         ),
                         responseHeaders(
