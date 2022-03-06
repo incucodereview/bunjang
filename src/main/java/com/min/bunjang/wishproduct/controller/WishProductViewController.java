@@ -21,6 +21,7 @@ public class WishProductViewController {
     @GetMapping(WishProductViewControllerPath.WISH_PRODUCT_FIND_BY_STORE)
     public RestResponse<Void> findWishProductsByStore(
             @NotNull @PathVariable Long storeNum,
+
             @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 10) Pageable pageable
     ) {
         wishProductViewService.findWishProductsByStore(storeNum, pageable);
