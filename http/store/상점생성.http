@@ -1,6 +1,6 @@
 POST http://localhost:8080/store
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjQ2MTA5NCwiZXhwIjoxNjQ2NDYyODk0fQ.5M0a46KKfNyNvZui5TywQEMEiRPUw2adz-5PAvA8MZk
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjUzMjQ3NywiZXhwIjoxNjQ2NTM0Mjc3fQ.yTmtlyJ2NVVIsoS7Qx6ool38B31FT_3N9VxumylU99s
 
 
 #res
@@ -19,6 +19,6 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #req
 {
   "memberId":  4,
-  "storeName":  "uriStore",
+  "storeName":  "pppa",
   "introduceContent":  "생성 테스트용 상점"
 }

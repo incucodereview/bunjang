@@ -1,7 +1,7 @@
 package com.min.bunjang.login.jwt;
 
 import com.min.bunjang.login.jwt.properties.JwtTokenProperty;
-import com.min.bunjang.security.CustomUserDetailsService;
+import com.min.bunjang.security.CustomPrincipalDetailsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -27,7 +27,7 @@ public class TokenProvider {
     private final Long refreshExpired;
 
     @Autowired
-    private CustomUserDetailsService customUserDetailsService;
+    private CustomPrincipalDetailsService customPrincipalDetailsService;
 
     public TokenProvider(JwtTokenProperty jwtTokenProperty) {
         this.accessTokenSecretKey = Base64.getEncoder().encodeToString(jwtTokenProperty.getAccessKey().getBytes());
@@ -68,7 +68,7 @@ public class TokenProvider {
         try {
             String token = request.getHeader(ACCESS_TOKEN_KEY_OF_HEADER);
             String emailFromAccessToken = getEmailFromAccessToken(token);
-            UserDetails userDetails = customUserDetailsService.loadUserByUsername(emailFromAccessToken);
+            UserDetails userDetails = customPrincipalDetailsService.loadUserByUsername(emailFromAccessToken);
             return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
         } catch (RuntimeException e) {
             return null;
