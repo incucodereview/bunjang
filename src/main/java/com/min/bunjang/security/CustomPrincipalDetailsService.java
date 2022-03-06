@@ -18,6 +18,6 @@ public class CustomPrincipalDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Member member = memberRepository.findByEmail(email).orElseThrow(NotExistMemberException::new);
-        return new PrincipalDetails(member);
+        return new MemberAccount(member);
     }
 }

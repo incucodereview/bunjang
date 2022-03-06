@@ -2,6 +2,7 @@ package com.min.bunjang.store.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.dto.StoreCreateRequest;
 import com.min.bunjang.store.dto.StoreCreateResponse;
 import com.min.bunjang.store.dto.StoreIntroduceUpdateDto;
@@ -27,30 +28,38 @@ public class StoreController {
     @PostMapping(StoreControllerPath.STORE_CREATE)
     public RestResponse<StoreCreateResponse> createStore(
             @Validated @RequestBody StoreCreateRequest storeCreateRequest,
-            @AuthenticationPrincipal Member member) {
-        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateRequest);
-        System.out.println(member);
+            @AuthenticationPrincipal MemberAccount memberAccount) {
+        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateRequest, memberAccount.getEmail());
         return RestResponse.of(HttpStatus.OK, storeCreateResponse);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
     @PutMapping(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
-    public RestResponse<Void> updateIntroduceContent(@Validated @RequestBody StoreIntroduceUpdateDto storeIntroduceUpdateDto) {
-        storeService.updateIntroduceContent(storeIntroduceUpdateDto);
+    public RestResponse<Void> updateIntroduceContent(
+            @Validated @RequestBody StoreIntroduceUpdateDto storeIntroduceUpdateDto,
+            @AuthenticationPrincipal MemberAccount memberAccount
+    ) {
+        storeService.updateIntroduceContent(memberAccount.getEmail(), storeIntroduceUpdateDto);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
     @PutMapping(StoreControllerPath.STORE_NAME_UPDATE)
-    public RestResponse<Void> updateStoreName(@Validated @RequestBody StoreNameUpdateDto storeNameUpdateDto) {
-        storeService.updateStoreName(storeNameUpdateDto);
+    public RestResponse<Void> updateStoreName(
+            @Validated @RequestBody StoreNameUpdateDto storeNameUpdateDto,
+            @AuthenticationPrincipal MemberAccount memberAccount
+    ) {
+        storeService.updateStoreName(storeNameUpdateDto, memberAccount.getEmail());
         return RestResponse.of(HttpStatus.OK, null);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
     @PostMapping(StoreControllerPath.STORE_PLUS_VISITOR)
-    public RestResponse<Void> plusVisitor(@Validated @RequestBody VisitorPlusDto visitorPlusDto) {
-        storeService.plusVisitor(visitorPlusDto);
+    public RestResponse<Void> plusVisitor(
+            @Validated @RequestBody VisitorPlusDto visitorPlusDto,
+            @AuthenticationPrincipal MemberAccount memberAccount
+    ) {
+        storeService.plusVisitor(visitorPlusDto, memberAccount.getEmail());
         return RestResponse.of(HttpStatus.OK, null);
     }
 

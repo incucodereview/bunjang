@@ -53,10 +53,10 @@ class StoreServiceTest {
         //given
         String storeName = "storeName";
         String introduceContent = "introduceContent";
-        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(savedMember.getMemberNum(), storeName, introduceContent);
+        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(storeName, introduceContent);
 
         //when
-        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateRequest);
+        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateRequest, savedMember.getEmail());
 
         //then
         Assertions.assertThat(storeCreateResponse.getStoreId()).isNotNull();
@@ -69,13 +69,12 @@ class StoreServiceTest {
     @Test
     void store_NotExistMemberException() {
         //given
-        Long memberId = savedMember.getMemberNum() + 1L;
         String storeName = "storeName";
         String introduceContent = "introduceContent";
 
-        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(memberId, storeName, introduceContent);
+        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(storeName, introduceContent);
         //when & then
-        Assertions.assertThatThrownBy(() -> storeService.createStore(storeCreateRequest)).isInstanceOf(NotExistMemberException.class);
+        Assertions.assertThatThrownBy(() -> storeService.createStore(storeCreateRequest, "notExistEmail")).isInstanceOf(NotExistMemberException.class);
 
     }
 
@@ -88,10 +87,10 @@ class StoreServiceTest {
         Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, null, savedMember));
 
         String updateIntroduceContent = "updateIntroduceContent";
-        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(savedStore.getNum(), updateIntroduceContent);
+        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(updateIntroduceContent);
 
         //when
-        storeService.updateIntroduceContent(storeIntroduceUpdateDto);
+        storeService.updateIntroduceContent(savedMember.getEmail(), storeIntroduceUpdateDto);
 
         //then
         Store updatedStore = storeRepository.findById(savedStore.getNum()).get();
@@ -102,15 +101,11 @@ class StoreServiceTest {
     @Test
     void store_NotExistStoreException() {
         //given
-        String storeName = "storeName";
-        String introduceContent = "introduceContent";
-        Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, null, savedMember));
-
         String updateIntroduceContent = "updateIntroduceContent";
-        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(savedStore.getNum() + 1L, updateIntroduceContent);
+        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(updateIntroduceContent);
 
         //when & then
-        Assertions.assertThatThrownBy(() -> storeService.updateIntroduceContent(storeIntroduceUpdateDto)).isInstanceOf(NotExistStoreException.class);
+        Assertions.assertThatThrownBy(() -> storeService.updateIntroduceContent(savedMember.getEmail(), storeIntroduceUpdateDto)).isInstanceOf(NotExistStoreException.class);
     }
 
     @DisplayName("상점 방문자를 계산한다")
@@ -128,10 +123,10 @@ class StoreServiceTest {
         String introduceContent2 = "introduceContent";
         Store visitor = storeRepository.save(Store.createStore(storeName2, introduceContent2, null, newMember));
 
-        VisitorPlusDto visitorPlusDto = new VisitorPlusDto(owner.getNum(), visitor.getNum());
+        VisitorPlusDto visitorPlusDto = new VisitorPlusDto(owner.getNum());
         //when
-        storeService.plusVisitor(visitorPlusDto);
-        storeService.plusVisitor(visitorPlusDto);
+        storeService.plusVisitor(visitorPlusDto, newMember.getEmail());
+        storeService.plusVisitor(visitorPlusDto, newMember.getEmail());
 
         //then
         Store store = storeRepository.findById(owner.getNum()).get();

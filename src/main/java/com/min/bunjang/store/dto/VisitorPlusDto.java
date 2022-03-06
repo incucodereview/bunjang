@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VisitorPlusDto {
     private Long ownerNum;
-    private Long visitorNum;
 }

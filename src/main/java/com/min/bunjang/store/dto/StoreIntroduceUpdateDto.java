@@ -12,8 +12,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class StoreIntroduceUpdateDto {
-    @NotNull
-    private Long storeNum;
     @NotBlank
     private String updateIntroduceContent;
 }

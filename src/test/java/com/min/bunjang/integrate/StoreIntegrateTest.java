@@ -50,7 +50,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         String storeName = "storeName";
         String introduceContent = "introduceContent";
 
-        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(member.getMemberNum(), storeName, introduceContent);
+        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(storeName, introduceContent);
 
         //when & then
         mockMvc.perform(post(StoreControllerPath.STORE_CREATE)
@@ -93,7 +93,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         String updateIntroduceContent = "updateIntroduceContent";
 
-        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(store.getNum(), updateIntroduceContent);
+        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(updateIntroduceContent);
 
         //when & then
         mockMvc.perform(put(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
@@ -133,7 +133,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         String updateStoreName = "updateStoreName";
 
-        StoreNameUpdateDto storeNameUpdateDto  = new StoreNameUpdateDto(store.getNum(), updateStoreName);
+        StoreNameUpdateDto storeNameUpdateDto  = new StoreNameUpdateDto(updateStoreName);
 
         //when & then
         mockMvc.perform(put(StoreControllerPath.STORE_NAME_UPDATE)
@@ -177,7 +177,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
 
-        VisitorPlusDto visitorPlusDto = new VisitorPlusDto(owner.getNum(), visitor.getNum());
+        VisitorPlusDto visitorPlusDto = new VisitorPlusDto(owner.getNum());
 
         //when & then
         mockMvc.perform(post(StoreControllerPath.STORE_PLUS_VISITOR)

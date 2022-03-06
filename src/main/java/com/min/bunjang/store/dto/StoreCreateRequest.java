@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class StoreCreateRequest {
-    private Long memberId;
     private String storeName;
     private String introduceContent;
 }

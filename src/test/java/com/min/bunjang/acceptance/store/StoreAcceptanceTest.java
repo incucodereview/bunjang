@@ -38,7 +38,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     //given
                     String storeName = "storeName";
                     String introduceContent = "introduceContent";
-                    StoreCreateRequest storeCreateRequest = new StoreCreateRequest(member.getMemberNum(), storeName, introduceContent);
+                    StoreCreateRequest storeCreateRequest = new StoreCreateRequest(storeName, introduceContent);
                     //whenR
                     StoreCreateResponse storeCreateResponse = 상점생성_요청(loginResult, storeCreateRequest);
 
@@ -51,7 +51,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     Store store = storeRepository.findAll().get(0);
                     String introduceContent = "updateIntroduceContent";
 
-                    StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(store.getNum(), introduceContent);
+                    StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(introduceContent);
                     //when
                     상점소개글_변경_요청(loginResult, storeIntroduceUpdateDto);
 
@@ -63,7 +63,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     //given
                     Store store = storeRepository.findAll().get(0);
                     String updateStoreName = "updateStoreName";
-                    StoreNameUpdateDto storeNameUpdateDto= new StoreNameUpdateDto(store.getNum(), updateStoreName);
+                    StoreNameUpdateDto storeNameUpdateDto= new StoreNameUpdateDto(updateStoreName);
 
                     //when
                     상점이름_변경_요청(loginResult, storeNameUpdateDto);

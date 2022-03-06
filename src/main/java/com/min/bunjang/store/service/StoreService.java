@@ -12,6 +12,7 @@ import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.mapping.ValueVisitor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,28 +23,44 @@ public class StoreService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public StoreCreateResponse createStore(StoreCreateRequest storeCreateRequest) {
-        Member member = memberRepository.findById(storeCreateRequest.getMemberId()).orElseThrow(NotExistMemberException::new);
+    public StoreCreateResponse createStore(StoreCreateRequest storeCreateRequest, String memberEmail) {
+        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
         Store store = Store.createStore(storeCreateRequest.getStoreName(), storeCreateRequest.getIntroduceContent(), null, member);
         Store savedStore = storeRepository.save(store);
         return StoreCreateResponse.of(savedStore);
     }
 
     @Transactional
-    public void updateIntroduceContent(StoreIntroduceUpdateDto storeIntroduceUpdateDto) {
-        Store store = storeRepository.findById(storeIntroduceUpdateDto.getStoreNum()).orElseThrow(NotExistStoreException::new);
+    public void updateIntroduceContent(String memberEmail, StoreIntroduceUpdateDto storeIntroduceUpdateDto) {
+        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
+        if (member.getStore() == null) {
+            throw new NotExistStoreException();
+        }
+
+        Store store = storeRepository.findById(member.getStore().getNum()).orElseThrow(NotExistStoreException::new);
         store.updateIntroduceContent(storeIntroduceUpdateDto.getUpdateIntroduceContent());
     }
 
     @Transactional
-    public void updateStoreName(StoreNameUpdateDto storeNameUpdateDto) {
-        Store store = storeRepository.findById(storeNameUpdateDto.getStoreNum()).orElseThrow(NotExistStoreException::new);
+    public void updateStoreName(StoreNameUpdateDto storeNameUpdateDto, String memberEmail) {
+        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
+        if (member.getStore() == null) {
+            throw new NotExistStoreException();
+        }
+
+        Store store = storeRepository.findById(member.getStore().getNum()).orElseThrow(NotExistStoreException::new);
         store.updateStoreName(storeNameUpdateDto.getUpdatedStoreName());
     }
 
     @Transactional
-    public void plusVisitor(VisitorPlusDto visitorPlusDto) {
+    public void plusVisitor(VisitorPlusDto visitorPlusDto, String memberEmail) {
+        Member visitorMember = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
+        if (visitorMember.getStore() == null) {
+            throw new NotExistStoreException();
+        }
+
         Store owner = storeRepository.findById(visitorPlusDto.getOwnerNum()).orElseThrow(NotExistStoreException::new);
-        owner.plusVisitor(visitorPlusDto.getVisitorNum());
+        Store visitor = storeRepository.findByMember(visitorMember).orElseThrow(NotExistStoreException::new);
+        owner.plusVisitor(visitor.getNum());
     }
 }
