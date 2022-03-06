@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class StoreInquireIntegrateController extends IntegrateTestConfig {
+public class StoreInquireIntegrateTest extends IntegrateTestConfig {
     @Autowired
     private StoreRepository storeRepository;
 
@@ -60,7 +60,7 @@ public class StoreInquireIntegrateController extends IntegrateTestConfig {
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
 
-        InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), visitor.getNum(), "상점문의");
+        InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), "상점문의");
         //when & then
         mockMvc.perform(post(StoreInquireControllerPath.CREATE_INQUIRY)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -74,7 +74,6 @@ public class StoreInquireIntegrateController extends IntegrateTestConfig {
                         ),
                         requestFields(
                                 fieldWithPath("ownerNum").description("방문받은 상점 식별자 정보 필드."),
-                                fieldWithPath("writerNum").description("방문한 상점 식별자 정보 필드."),
                                 fieldWithPath("inquireContent").description("문의 내용 정보 필드")
                         ),
                         responseHeaders(

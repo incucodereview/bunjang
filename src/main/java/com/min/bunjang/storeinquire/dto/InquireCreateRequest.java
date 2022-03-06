@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InquireCreateRequest {
     private Long ownerNum;
-    private Long writerNum;
     private String inquireContent;
 }

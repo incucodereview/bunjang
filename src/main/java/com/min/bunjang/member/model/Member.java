@@ -103,6 +103,10 @@ public class Member {
         }
     }
 
+    public boolean verifyEmailMatch(String rowEmail) {
+        return this.email.equals(rowEmail);
+    }
+
     @Override
     public boolean equals(Object o) {
 

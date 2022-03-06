@@ -1,12 +1,14 @@
 package com.min.bunjang.storeinquire.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
 import com.min.bunjang.storeinquire.dto.InquireCreateResponse;
 import com.min.bunjang.storeinquire.service.StoreInquireService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,17 +26,19 @@ public class StoreInquireController {
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
     @PostMapping(StoreInquireControllerPath.CREATE_INQUIRY)
     public RestResponse<InquireCreateResponse> createStoreInquiry(
-            @Validated @RequestBody InquireCreateRequest inquireCreateRequest
+            @Validated @RequestBody InquireCreateRequest inquireCreateRequest,
+            @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-       return RestResponse.of(HttpStatus.CREATED, storeInquireService.createStoreInquiry(inquireCreateRequest));
+        return RestResponse.of(HttpStatus.CREATED, storeInquireService.createStoreInquiry(memberAccount.getEmail(), inquireCreateRequest));
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
     @DeleteMapping(StoreInquireControllerPath.DELETE_INQUIRY)
     public RestResponse<Void> deleteStoreInquire(
-            @NotNull @PathVariable Long inquireNum
+            @NotNull @PathVariable Long inquireNum,
+            @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        storeInquireService.deleteStoreInquire(inquireNum);
+        storeInquireService.deleteStoreInquire(memberAccount.getEmail(), inquireNum);
         return RestResponse.of(HttpStatus.OK, null);
     }
 }
