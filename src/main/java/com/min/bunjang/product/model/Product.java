@@ -1,6 +1,5 @@
 package com.min.bunjang.product.model;
 
-import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
@@ -12,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +23,27 @@ public class Product extends BasicEntity {
 
     @NotBlank
     private String productName;
+
+    //사진 관련 기능 s3하고 추가할것.
+
+    //카테고리 구현
+
+    private String exchangeLocation;
+
+    //이넘 컨버터를 왜 사용해야 하는지 알게되었다면 여기에 사용해도 되는 것인지 판단후 사용할 것. 당장은 @Enumerated(EnumType.STRING)로 사용
+    @Enumerated(EnumType.STRING)
+    private ProductState productState;
+
+    @Enumerated(EnumType.STRING)
+    private ExchangeState exchangeState;
+
+    @NotNull
+    private int productPrice;
+
+    private String productExplanation;
+
+    @NotNull
+    private int productAmount;
 
 //    @NotNull
     private Long firstProductCategoryNum;
