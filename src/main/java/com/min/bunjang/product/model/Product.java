@@ -1,5 +1,6 @@
 package com.min.bunjang.product.model;
 
+import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
@@ -11,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +25,11 @@ public class Product extends BasicEntity {
 
     @NotBlank
     private String productName;
+
+    @NotNull
+    private Long firstProductCategoryNum;
+    private Long secondProductCategoryNum;
+    private Long thirdProductCategoryNum;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
     private Set<WishProduct> wishProducts = new HashSet<>();
