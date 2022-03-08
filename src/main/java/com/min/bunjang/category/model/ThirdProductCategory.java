@@ -20,7 +20,6 @@ public class ThirdProductCategory extends BasicEntity {
     private String categoryName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "num")
     private SecondProductCategory secondProductCategory;
 
     private ThirdProductCategory(String categoryName, SecondProductCategory secondProductCategory) {

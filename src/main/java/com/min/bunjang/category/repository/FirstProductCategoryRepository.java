@@ -1,6 +1,7 @@
 package com.min.bunjang.category.repository;
 
 import com.min.bunjang.category.model.FirstProductCategory;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

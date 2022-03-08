@@ -8,9 +8,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,13 +24,13 @@ public class FirstProductCategory extends BasicEntity {
     private String categoryName;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "firstProductCategory", orphanRemoval = true)
-    private List<SecondProductCategory> secondProductCategories;
+    private Set<SecondProductCategory> secondProductCategories = new HashSet<>();
 
     private FirstProductCategory(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    public static FirstProductCategory of(String categoryName) {
+    public static FirstProductCategory createFirstProductCategory(String categoryName) {
         return new FirstProductCategory(categoryName);
     }
 }

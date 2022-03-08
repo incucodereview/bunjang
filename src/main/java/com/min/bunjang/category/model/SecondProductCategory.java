@@ -12,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,11 +25,10 @@ public class SecondProductCategory extends BasicEntity {
     private String categoryName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "num")
     private FirstProductCategory firstProductCategory;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "secondProductCategory", orphanRemoval = true)
-    private List<ThirdProductCategory> thirdProductCategories;
+    private Set<ThirdProductCategory> thirdProductCategories = new HashSet<>();
 
     private SecondProductCategory(String categoryName, FirstProductCategory firstProductCategory) {
         this.categoryName = categoryName;
