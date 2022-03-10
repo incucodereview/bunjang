@@ -51,7 +51,7 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
-        //TODO 임시 생성자로 생성해놓음.
+
         Product product = productRepository.save(new Product("productName"));
 
         return Stream.of(
