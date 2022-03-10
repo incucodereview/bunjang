@@ -1,0 +1,3038 @@
+GET http://localhost:8080/categories
+Content-Type: application/json
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "firstProductCategoryResponseList": [
+#      {
+#        "categoryNum": 1,
+#        "categoryName": "여성의류",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 1,
+#            "categoryName": "패딩/점퍼",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 1,
+#                "categoryName": "롱패딩"
+#              },
+#              {
+#                "categoryNum": 2,
+#                "categoryName": "숏패딩"
+#              },
+#              {
+#                "categoryNum": 3,
+#                "categoryName": "블루종/항공점퍼"
+#              },
+#              {
+#                "categoryNum": 4,
+#                "categoryName": "기타(패딩/점퍼)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 2,
+#            "categoryName": "코트",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 5,
+#                "categoryName": "겨울 코트"
+#              },
+#              {
+#                "categoryNum": 6,
+#                "categoryName": "봄/가을 코트"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 3,
+#            "categoryName": "맨투맨",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 4,
+#            "categoryName": "후드티/후드집업",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 5,
+#            "categoryName": "티셔츠",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 7,
+#                "categoryName": "긴팔 티셔츠"
+#              },
+#              {
+#                "categoryNum": 8,
+#                "categoryName": "반팔 티셔츠"
+#              },
+#              {
+#                "categoryNum": 9,
+#                "categoryName": "민소매"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 6,
+#            "categoryName": "블라우스",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 10,
+#                "categoryName": "긴팔"
+#              },
+#              {
+#                "categoryNum": 11,
+#                "categoryName": "반팔"
+#              },
+#              {
+#                "categoryNum": 12,
+#                "categoryName": "민소매/오프숄더"
+#              },
+#              {
+#                "categoryNum": 13,
+#                "categoryName": "기타(블라우스)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 7,
+#            "categoryName": "셔츠",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 14,
+#                "categoryName": "솔리드 셔츠"
+#              },
+#              {
+#                "categoryNum": 15,
+#                "categoryName": "스트라이프 셔츠"
+#              },
+#              {
+#                "categoryNum": 16,
+#                "categoryName": "체크 셔츠"
+#              },
+#              {
+#                "categoryNum": 17,
+#                "categoryName": "청/데님 셔츠"
+#              },
+#              {
+#                "categoryNum": 18,
+#                "categoryName": "기타(셔츠)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 8,
+#            "categoryName": "바지",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 19,
+#                "categoryName": "면바지"
+#              },
+#              {
+#                "categoryNum": 20,
+#                "categoryName": "슬렉스"
+#              },
+#              {
+#                "categoryNum": 21,
+#                "categoryName": "조거팬츠"
+#              },
+#              {
+#                "categoryNum": 22,
+#                "categoryName": "레깅스"
+#              },
+#              {
+#                "categoryNum": 23,
+#                "categoryName": "기타(바지)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 9,
+#            "categoryName": "청바지",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 10,
+#            "categoryName": "반바지",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 11,
+#            "categoryName": "치마",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 24,
+#                "categoryName": "롱 스커트"
+#              },
+#              {
+#                "categoryNum": 25,
+#                "categoryName": "미디 스커트"
+#              },
+#              {
+#                "categoryNum": 26,
+#                "categoryName": "미니 스커트"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 12,
+#            "categoryName": "원피스",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 27,
+#                "categoryName": "롱 원피스"
+#              },
+#              {
+#                "categoryNum": 28,
+#                "categoryName": "미디 원피스"
+#              },
+#              {
+#                "categoryNum": 29,
+#                "categoryName": "미니 원피스"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 13,
+#            "categoryName": "가디건",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 14,
+#            "categoryName": "니트/스웨터",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 15,
+#            "categoryName": "자켓",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 30,
+#                "categoryName": "가죽"
+#              },
+#              {
+#                "categoryNum": 31,
+#                "categoryName": "트위드"
+#              },
+#              {
+#                "categoryNum": 32,
+#                "categoryName": "데님"
+#              },
+#              {
+#                "categoryNum": 33,
+#                "categoryName": "야상"
+#              },
+#              {
+#                "categoryNum": 34,
+#                "categoryName": "바람막이"
+#              },
+#              {
+#                "categoryNum": 35,
+#                "categoryName": "기타(자켓)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 16,
+#            "categoryName": "정장",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 36,
+#                "categoryName": "자켓"
+#              },
+#              {
+#                "categoryNum": 37,
+#                "categoryName": "치마"
+#              },
+#              {
+#                "categoryNum": 38,
+#                "categoryName": "세트"
+#              },
+#              {
+#                "categoryNum": 39,
+#                "categoryName": "기타(정장)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 17,
+#            "categoryName": "점프수트",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 18,
+#            "categoryName": "조끼/베스트",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 40,
+#                "categoryName": "니트 조끼"
+#              },
+#              {
+#                "categoryNum": 41,
+#                "categoryName": "브이넥 조끼"
+#              },
+#              {
+#                "categoryNum": 42,
+#                "categoryName": "청/데님 조끼"
+#              },
+#              {
+#                "categoryNum": 43,
+#                "categoryName": "패딩 조끼"
+#              },
+#              {
+#                "categoryNum": 44,
+#                "categoryName": "퍼 조끼"
+#              },
+#              {
+#                "categoryNum": 45,
+#                "categoryName": "기타(조끼)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 19,
+#            "categoryName": "트레이닝",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 46,
+#                "categoryName": "상의"
+#              },
+#              {
+#                "categoryNum": 47,
+#                "categoryName": "하의"
+#              },
+#              {
+#                "categoryNum": 48,
+#                "categoryName": "세트"
+#              },
+#              {
+#                "categoryNum": 49,
+#                "categoryName": "기타(트레이닝)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 20,
+#            "categoryName": "언더웨어/홈웨어",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 21,
+#            "categoryName": "테마/이벤트",
+#            "thirdProductCategoryResponses": []
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 2,
+#        "categoryName": "남성의류",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 22,
+#            "categoryName": "패딩/점퍼",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 50,
+#                "categoryName": "롱패딩"
+#              },
+#              {
+#                "categoryNum": 51,
+#                "categoryName": "숏패딩"
+#              },
+#              {
+#                "categoryNum": 52,
+#                "categoryName": "블루종/항공점퍼"
+#              },
+#              {
+#                "categoryNum": 53,
+#                "categoryName": "기타(패딩/점퍼)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 23,
+#            "categoryName": "코트",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 54,
+#                "categoryName": "겨울 코트"
+#              },
+#              {
+#                "categoryNum": 55,
+#                "categoryName": "봄/가을 코트"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 24,
+#            "categoryName": "맨투맨",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 25,
+#            "categoryName": "후드티/후드집업",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 26,
+#            "categoryName": "티셔츠",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 56,
+#                "categoryName": "긴팔 티셔츠"
+#              },
+#              {
+#                "categoryNum": 57,
+#                "categoryName": "반팔 티셔츠"
+#              },
+#              {
+#                "categoryNum": 58,
+#                "categoryName": "민소매"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 27,
+#            "categoryName": "셔츠",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 59,
+#                "categoryName": "솔리드 셔츠"
+#              },
+#              {
+#                "categoryNum": 60,
+#                "categoryName": "스트라이프 셔츠"
+#              },
+#              {
+#                "categoryNum": 61,
+#                "categoryName": "체크 셔츠"
+#              },
+#              {
+#                "categoryNum": 62,
+#                "categoryName": "청/데님 셔츠"
+#              },
+#              {
+#                "categoryNum": 63,
+#                "categoryName": "기타(셔츠)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 28,
+#            "categoryName": "가디건",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 29,
+#            "categoryName": "니트/스웨터",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 30,
+#            "categoryName": "바지",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 64,
+#                "categoryName": "면바지"
+#              },
+#              {
+#                "categoryNum": 65,
+#                "categoryName": "슬렉스"
+#              },
+#              {
+#                "categoryNum": 66,
+#                "categoryName": "조거팬츠"
+#              },
+#              {
+#                "categoryNum": 67,
+#                "categoryName": "기타(바지)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 31,
+#            "categoryName": "청바지",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 32,
+#            "categoryName": "반바지",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 33,
+#            "categoryName": "자켓",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 68,
+#                "categoryName": "가죽"
+#              },
+#              {
+#                "categoryNum": 69,
+#                "categoryName": "트위드"
+#              },
+#              {
+#                "categoryNum": 70,
+#                "categoryName": "데님"
+#              },
+#              {
+#                "categoryNum": 71,
+#                "categoryName": "야상"
+#              },
+#              {
+#                "categoryNum": 72,
+#                "categoryName": "바람막이"
+#              },
+#              {
+#                "categoryNum": 73,
+#                "categoryName": "기타(자켓)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 34,
+#            "categoryName": "정장",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 74,
+#                "categoryName": "자켓"
+#              },
+#              {
+#                "categoryNum": 75,
+#                "categoryName": "베스트"
+#              },
+#              {
+#                "categoryNum": 76,
+#                "categoryName": "세트"
+#              },
+#              {
+#                "categoryNum": 77,
+#                "categoryName": "바지"
+#              },
+#              {
+#                "categoryNum": 78,
+#                "categoryName": "기타(정장)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 35,
+#            "categoryName": "조끼/베스트",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 79,
+#                "categoryName": "니트 조끼"
+#              },
+#              {
+#                "categoryNum": 80,
+#                "categoryName": "브이넥 조끼"
+#              },
+#              {
+#                "categoryNum": 81,
+#                "categoryName": "청/데님 조끼"
+#              },
+#              {
+#                "categoryNum": 82,
+#                "categoryName": "패딩 조끼"
+#              },
+#              {
+#                "categoryNum": 83,
+#                "categoryName": "기타(조끼)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 36,
+#            "categoryName": "트레이닝",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 84,
+#                "categoryName": "상의"
+#              },
+#              {
+#                "categoryNum": 85,
+#                "categoryName": "하의"
+#              },
+#              {
+#                "categoryNum": 86,
+#                "categoryName": "세트"
+#              },
+#              {
+#                "categoryNum": 87,
+#                "categoryName": "기타(트레이닝)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 37,
+#            "categoryName": "언더웨어/홈웨어",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 38,
+#            "categoryName": "테마/이벤트",
+#            "thirdProductCategoryResponses": []
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 3,
+#        "categoryName": "신발",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 39,
+#            "categoryName": "스니커즈",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 40,
+#            "categoryName": "남성화",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 88,
+#                "categoryName": "샌들/슬리퍼"
+#              },
+#              {
+#                "categoryNum": 89,
+#                "categoryName": "구두/로퍼"
+#              },
+#              {
+#                "categoryNum": 90,
+#                "categoryName": "워커/부츠"
+#              },
+#              {
+#                "categoryNum": 91,
+#                "categoryName": "기타(남성화)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 41,
+#            "categoryName": "여성화",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 92,
+#                "categoryName": "샌들/슬리퍼"
+#              },
+#              {
+#                "categoryNum": 93,
+#                "categoryName": "구두"
+#              },
+#              {
+#                "categoryNum": 94,
+#                "categoryName": "단화/플랫슈즈"
+#              },
+#              {
+#                "categoryNum": 95,
+#                "categoryName": "워커/부츠"
+#              },
+#              {
+#                "categoryNum": 96,
+#                "categoryName": "기타(여성화)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 4,
+#        "categoryName": "가방",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 42,
+#            "categoryName": "여성가방",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 97,
+#                "categoryName": "클러치백"
+#              },
+#              {
+#                "categoryNum": 98,
+#                "categoryName": "숄더백"
+#              },
+#              {
+#                "categoryNum": 99,
+#                "categoryName": "크로스백"
+#              },
+#              {
+#                "categoryNum": 100,
+#                "categoryName": "토트백"
+#              },
+#              {
+#                "categoryNum": 101,
+#                "categoryName": "백백"
+#              },
+#              {
+#                "categoryNum": 102,
+#                "categoryName": "기타(가방)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 43,
+#            "categoryName": "남성가방",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 103,
+#                "categoryName": "클러치"
+#              },
+#              {
+#                "categoryNum": 104,
+#                "categoryName": "숄더백"
+#              },
+#              {
+#                "categoryNum": 105,
+#                "categoryName": "크로스백"
+#              },
+#              {
+#                "categoryNum": 106,
+#                "categoryName": "브러프케이스"
+#              },
+#              {
+#                "categoryNum": 107,
+#                "categoryName": "백백"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 44,
+#            "categoryName": "여행용",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 108,
+#                "categoryName": "남성시계"
+#              },
+#              {
+#                "categoryNum": 109,
+#                "categoryName": "여성시계"
+#              },
+#              {
+#                "categoryNum": 110,
+#                "categoryName": "기타(시계)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 5,
+#        "categoryName": "시계/주얼리",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 45,
+#            "categoryName": "시계",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 111,
+#                "categoryName": "귀걸이/피어싱"
+#              },
+#              {
+#                "categoryNum": 112,
+#                "categoryName": "목걸이/팬던트"
+#              },
+#              {
+#                "categoryNum": 113,
+#                "categoryName": "팔찌/발찌"
+#              },
+#              {
+#                "categoryNum": 114,
+#                "categoryName": "반지"
+#              },
+#              {
+#                "categoryNum": 115,
+#                "categoryName": "기타(주얼리)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 46,
+#            "categoryName": "주얼리",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 116,
+#                "categoryName": "남성지갑"
+#              },
+#              {
+#                "categoryNum": 117,
+#                "categoryName": "여성지갑"
+#              },
+#              {
+#                "categoryNum": 118,
+#                "categoryName": "기타(지갑)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 6,
+#        "categoryName": "패션 액세서리",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 47,
+#            "categoryName": "지갑",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 48,
+#            "categoryName": "벨트",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 119,
+#                "categoryName": "볼캡"
+#              },
+#              {
+#                "categoryNum": 120,
+#                "categoryName": "버킷"
+#              },
+#              {
+#                "categoryNum": 121,
+#                "categoryName": "스냅백"
+#              },
+#              {
+#                "categoryNum": 122,
+#                "categoryName": "비니"
+#              },
+#              {
+#                "categoryNum": 123,
+#                "categoryName": "기타(모자)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 49,
+#            "categoryName": "모자",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 124,
+#                "categoryName": "목도리"
+#              },
+#              {
+#                "categoryNum": 125,
+#                "categoryName": "장갑"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 50,
+#            "categoryName": "목도리/장갑",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 126,
+#                "categoryName": "스카프"
+#              },
+#              {
+#                "categoryNum": 127,
+#                "categoryName": "넥타이"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 51,
+#            "categoryName": "스카프/넥타이",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 128,
+#                "categoryName": "선글라스"
+#              },
+#              {
+#                "categoryNum": 129,
+#                "categoryName": "안경"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 52,
+#            "categoryName": "안경/선글라스",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 130,
+#                "categoryName": "양말"
+#              },
+#              {
+#                "categoryNum": 131,
+#                "categoryName": "스타킹"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 53,
+#            "categoryName": "양말/스타킹",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 54,
+#            "categoryName": "우산/양산",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 55,
+#            "categoryName": "기타 엑세서리",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 132,
+#                "categoryName": "스마트폰"
+#              },
+#              {
+#                "categoryNum": 133,
+#                "categoryName": "태블릿"
+#              },
+#              {
+#                "categoryNum": 134,
+#                "categoryName": "웨어러블(워치)"
+#              },
+#              {
+#                "categoryNum": 135,
+#                "categoryName": "일반폰(피처폰)"
+#              },
+#              {
+#                "categoryNum": 136,
+#                "categoryName": "케이스/보호필름/엑세서리"
+#              },
+#              {
+#                "categoryNum": 137,
+#                "categoryName": "케이블/충전기/주변기기"
+#              },
+#              {
+#                "categoryNum": 138,
+#                "categoryName": "기타(모바일)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 7,
+#        "categoryName": "디지털/가전",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 56,
+#            "categoryName": "모바일",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 139,
+#                "categoryName": "생활가전"
+#              },
+#              {
+#                "categoryNum": 140,
+#                "categoryName": "대형가전"
+#              },
+#              {
+#                "categoryNum": 141,
+#                "categoryName": "TV"
+#              },
+#              {
+#                "categoryNum": 142,
+#                "categoryName": "미용가전"
+#              },
+#              {
+#                "categoryNum": 143,
+#                "categoryName": "사무기기(복사기/팩스 등)"
+#              },
+#              {
+#                "categoryNum": 144,
+#                "categoryName": "기타(가전제품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 57,
+#            "categoryName": "가전제품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 145,
+#                "categoryName": "이어폰/헤드폰"
+#              },
+#              {
+#                "categoryNum": 146,
+#                "categoryName": "스피커/엠프"
+#              },
+#              {
+#                "categoryNum": 147,
+#                "categoryName": "아이팟/MP3/PMP"
+#              },
+#              {
+#                "categoryNum": 148,
+#                "categoryName": "비디오/프로젝터"
+#              },
+#              {
+#                "categoryNum": 149,
+#                "categoryName": "오디오/홈시어터"
+#              },
+#              {
+#                "categoryNum": 150,
+#                "categoryName": "기타(오디오/영상/관련기기)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 58,
+#            "categoryName": "오디오/영상/관련기기",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 151,
+#                "categoryName": "데스크탑"
+#              },
+#              {
+#                "categoryNum": 152,
+#                "categoryName": "노트북/넷북"
+#              },
+#              {
+#                "categoryNum": 153,
+#                "categoryName": "모니터"
+#              },
+#              {
+#                "categoryNum": 154,
+#                "categoryName": "PC주변기기(키보드/마우스)"
+#              },
+#              {
+#                "categoryNum": 155,
+#                "categoryName": "노트북 가방/엑세서리"
+#              },
+#              {
+#                "categoryNum": 156,
+#                "categoryName": "기타(PC/노트북)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 59,
+#            "categoryName": "PC/노트북",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 157,
+#                "categoryName": "닌텐도/NDS/Wii"
+#              },
+#              {
+#                "categoryNum": 158,
+#                "categoryName": "소니/플레이스테이션"
+#              },
+#              {
+#                "categoryNum": 159,
+#                "categoryName": "XBOX"
+#              },
+#              {
+#                "categoryNum": 160,
+#                "categoryName": "PC게임"
+#              },
+#              {
+#                "categoryNum": 161,
+#                "categoryName": "기타(게임/타이틀)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 60,
+#            "categoryName": "게임/타이틀",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 162,
+#                "categoryName": "필름카메라/중형카메라"
+#              },
+#              {
+#                "categoryNum": 163,
+#                "categoryName": "DSLR/미러리스"
+#              },
+#              {
+#                "categoryNum": 164,
+#                "categoryName": "랜즈/필터/컨버터"
+#              },
+#              {
+#                "categoryNum": 165,
+#                "categoryName": "일반디카/토이카메라"
+#              },
+#              {
+#                "categoryNum": 166,
+#                "categoryName": "삼각대/플래시/조명"
+#              },
+#              {
+#                "categoryNum": 167,
+#                "categoryName": "디지털 캠코더"
+#              },
+#              {
+#                "categoryNum": 168,
+#                "categoryName": "메모리/배터리/가방"
+#              },
+#              {
+#                "categoryNum": 169,
+#                "categoryName": "기타(카메라)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 61,
+#            "categoryName": "카메라/DSLR",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 170,
+#                "categoryName": "메모리/VGA"
+#              },
+#              {
+#                "categoryNum": 171,
+#                "categoryName": "CPU/메인보드"
+#              },
+#              {
+#                "categoryNum": 172,
+#                "categoryName": "HDD/ODD/SSD"
+#              },
+#              {
+#                "categoryNum": 173,
+#                "categoryName": "USB/케이블/스피커"
+#              },
+#              {
+#                "categoryNum": 174,
+#                "categoryName": "복합기/프린터"
+#              },
+#              {
+#                "categoryNum": 175,
+#                "categoryName": "네트워크장비"
+#              },
+#              {
+#                "categoryNum": 176,
+#                "categoryName": "쿨러/파워서플라이"
+#              },
+#              {
+#                "categoryNum": 177,
+#                "categoryName": "소모품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 62,
+#            "categoryName": "PC부품/저장장치",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 178,
+#                "categoryName": "골프 채"
+#              },
+#              {
+#                "categoryNum": 179,
+#                "categoryName": "골프 남성 의류"
+#              },
+#              {
+#                "categoryNum": 180,
+#                "categoryName": "골프 여성 의류"
+#              },
+#              {
+#                "categoryNum": 181,
+#                "categoryName": "기타 골프 의류"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 8,
+#        "categoryName": "스포츠/레저",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 63,
+#            "categoryName": "골프",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 182,
+#                "categoryName": "텐트/그늘막"
+#              },
+#              {
+#                "categoryNum": 183,
+#                "categoryName": "캠핑용품"
+#              },
+#              {
+#                "categoryNum": 184,
+#                "categoryName": "캠핑 취사용품"
+#              },
+#              {
+#                "categoryNum": 185,
+#                "categoryName": "기타 캠핑 용품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 64,
+#            "categoryName": "캠핑",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 186,
+#                "categoryName": "공통 낚시 장비"
+#              },
+#              {
+#                "categoryNum": 187,
+#                "categoryName": "바다 낚시"
+#              },
+#              {
+#                "categoryNum": 188,
+#                "categoryName": "민물 낚시"
+#              },
+#              {
+#                "categoryNum": 189,
+#                "categoryName": "루어/플라이 낚시"
+#              },
+#              {
+#                "categoryNum": 190,
+#                "categoryName": "낚시 의류 및 기타 용품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 65,
+#            "categoryName": "낚시",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 191,
+#                "categoryName": "축구 의류/잡화"
+#              },
+#              {
+#                "categoryNum": 192,
+#                "categoryName": "축구 용품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 66,
+#            "categoryName": "축구",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 193,
+#                "categoryName": "자전거 의류 및 엑세서리"
+#              },
+#              {
+#                "categoryNum": 194,
+#                "categoryName": "클래식/픽시"
+#              },
+#              {
+#                "categoryNum": 195,
+#                "categoryName": "로드/BMX"
+#              },
+#              {
+#                "categoryNum": 196,
+#                "categoryName": "MTB/산악"
+#              },
+#              {
+#                "categoryNum": 197,
+#                "categoryName": "미니벨로/접이식"
+#              },
+#              {
+#                "categoryNum": 198,
+#                "categoryName": "전동/하이브리드"
+#              },
+#              {
+#                "categoryNum": 199,
+#                "categoryName": "기타 자전거"
+#              },
+#              {
+#                "categoryNum": 200,
+#                "categoryName": "자전거 부품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 67,
+#            "categoryName": "자전거",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 68,
+#            "categoryName": "인라인/스케이트보드",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 69,
+#            "categoryName": "전동킥보드/전동힐",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 70,
+#            "categoryName": "테니스",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 201,
+#                "categoryName": "남성 등산복"
+#              },
+#              {
+#                "categoryNum": 202,
+#                "categoryName": "여성 등산복"
+#              },
+#              {
+#                "categoryNum": 203,
+#                "categoryName": "등산화/트레킹화"
+#              },
+#              {
+#                "categoryNum": 204,
+#                "categoryName": "등산 가방"
+#              },
+#              {
+#                "categoryNum": 205,
+#                "categoryName": "암벽/클라이밍"
+#              },
+#              {
+#                "categoryNum": 206,
+#                "categoryName": "기타 등상 용품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 71,
+#            "categoryName": "등산/클라이밍",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 207,
+#                "categoryName": "헬스/요가/필라테스 장비"
+#              },
+#              {
+#                "categoryNum": 208,
+#                "categoryName": "헬스/요가/필라테스 의류"
+#              },
+#              {
+#                "categoryNum": 209,
+#                "categoryName": "기타 용품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 72,
+#            "categoryName": "헬스/요가/필라테스",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 210,
+#                "categoryName": "야구 의류/잡화"
+#              },
+#              {
+#                "categoryNum": 211,
+#                "categoryName": "야구 용품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 73,
+#            "categoryName": "야구",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 74,
+#            "categoryName": "볼링",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 75,
+#            "categoryName": "배드민턴",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 76,
+#            "categoryName": "탁구",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 212,
+#                "categoryName": "농구 의류/잡화"
+#              },
+#              {
+#                "categoryNum": 213,
+#                "categoryName": "농구 용품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 77,
+#            "categoryName": "농구",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 78,
+#            "categoryName": "당구",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 214,
+#                "categoryName": "스키/보드 의류 및 잡화"
+#              },
+#              {
+#                "categoryNum": 215,
+#                "categoryName": "스노우보드 장비"
+#              },
+#              {
+#                "categoryNum": 216,
+#                "categoryName": "스키 장비"
+#              },
+#              {
+#                "categoryNum": 217,
+#                "categoryName": "기타 겨울 스포츠"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 79,
+#            "categoryName": "겨울 스포츠",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 218,
+#                "categoryName": "수영/물놀이 용품"
+#              },
+#              {
+#                "categoryNum": 219,
+#                "categoryName": "남성 수영복/래쉬가드"
+#              },
+#              {
+#                "categoryNum": 220,
+#                "categoryName": "여성 수영복/래쉬가드"
+#              },
+#              {
+#                "categoryNum": 221,
+#                "categoryName": "기타(수영복)"
+#              },
+#              {
+#                "categoryNum": 222,
+#                "categoryName": "서핑"
+#              },
+#              {
+#                "categoryNum": 223,
+#                "categoryName": "요트"
+#              },
+#              {
+#                "categoryNum": 224,
+#                "categoryName": "기타 수상 스포츠"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 80,
+#            "categoryName": "수상 스포츠",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 81,
+#            "categoryName": "기타 구기 스포츠",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 225,
+#                "categoryName": "경차/소형차"
+#              },
+#              {
+#                "categoryNum": 226,
+#                "categoryName": "준/중형차"
+#              },
+#              {
+#                "categoryNum": 227,
+#                "categoryName": "준/대형차"
+#              },
+#              {
+#                "categoryNum": 228,
+#                "categoryName": "SUV/RV"
+#              },
+#              {
+#                "categoryNum": 229,
+#                "categoryName": "벤/승합차"
+#              },
+#              {
+#                "categoryNum": 230,
+#                "categoryName": "버스/화물차"
+#              },
+#              {
+#                "categoryNum": 231,
+#                "categoryName": "스포츠카"
+#              },
+#              {
+#                "categoryNum": 232,
+#                "categoryName": "기타(국산차)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 9,
+#        "categoryName": "차량/오토바이",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 82,
+#            "categoryName": "국산차",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 233,
+#                "categoryName": "경차/소형차"
+#              },
+#              {
+#                "categoryNum": 234,
+#                "categoryName": "준/중형차"
+#              },
+#              {
+#                "categoryNum": 235,
+#                "categoryName": "준/대형차"
+#              },
+#              {
+#                "categoryNum": 236,
+#                "categoryName": "SUV/RV"
+#              },
+#              {
+#                "categoryNum": 237,
+#                "categoryName": "벤/승합차"
+#              },
+#              {
+#                "categoryNum": 238,
+#                "categoryName": "버스/화물차"
+#              },
+#              {
+#                "categoryNum": 239,
+#                "categoryName": "스포츠카"
+#              },
+#              {
+#                "categoryNum": 240,
+#                "categoryName": "기타(수입차)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 83,
+#            "categoryName": "수입차",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 241,
+#                "categoryName": "타이어/휠"
+#              },
+#              {
+#                "categoryNum": 242,
+#                "categoryName": "차량 부품"
+#              },
+#              {
+#                "categoryNum": 243,
+#                "categoryName": "차량/튜닝 용품"
+#              },
+#              {
+#                "categoryNum": 244,
+#                "categoryName": "네비게이션/블랙박스"
+#              },
+#              {
+#                "categoryNum": 245,
+#                "categoryName": "카오디오/영상"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 84,
+#            "categoryName": "차량 용품/부품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 246,
+#                "categoryName": "오토바이(125cc 이하)"
+#              },
+#              {
+#                "categoryNum": 247,
+#                "categoryName": "오토바이(125cc 초과)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 85,
+#            "categoryName": "오토바이/스쿠터",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 248,
+#                "categoryName": "라이더 용품"
+#              },
+#              {
+#                "categoryNum": 249,
+#                "categoryName": "오토바이 용품"
+#              },
+#              {
+#                "categoryNum": 250,
+#                "categoryName": "오토바이/튜닝 용품"
+#              },
+#              {
+#                "categoryNum": 251,
+#                "categoryName": "기타(오토바이 용품/부품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 86,
+#            "categoryName": "오토바이 용품/부품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 252,
+#                "categoryName": "굴삭기/지게차"
+#              },
+#              {
+#                "categoryNum": 253,
+#                "categoryName": "농기계/경운기"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 87,
+#            "categoryName": "산업용 차량/장비",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 254,
+#                "categoryName": "음반/영상물"
+#              },
+#              {
+#                "categoryNum": 255,
+#                "categoryName": "팬시/포트카드"
+#              },
+#              {
+#                "categoryNum": 256,
+#                "categoryName": "포스터/화보"
+#              },
+#              {
+#                "categoryNum": 257,
+#                "categoryName": "인형/피규어"
+#              },
+#              {
+#                "categoryNum": 258,
+#                "categoryName": "응원도구"
+#              },
+#              {
+#                "categoryNum": 259,
+#                "categoryName": "의류/패션잡화"
+#              },
+#              {
+#                "categoryNum": 260,
+#                "categoryName": "기타(보이그룹)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 10,
+#        "categoryName": "스타굿즈",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 88,
+#            "categoryName": "보이그룹",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 261,
+#                "categoryName": "음반/영상물"
+#              },
+#              {
+#                "categoryNum": 262,
+#                "categoryName": "팬시/포트카드"
+#              },
+#              {
+#                "categoryNum": 263,
+#                "categoryName": "포스터/화보"
+#              },
+#              {
+#                "categoryNum": 264,
+#                "categoryName": "인형/피규어"
+#              },
+#              {
+#                "categoryNum": 265,
+#                "categoryName": "응원도구"
+#              },
+#              {
+#                "categoryNum": 266,
+#                "categoryName": "의류/패션잡화"
+#              },
+#              {
+#                "categoryNum": 267,
+#                "categoryName": "기타(걸그룹)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 89,
+#            "categoryName": "걸그룹",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 268,
+#                "categoryName": "음반/영상물"
+#              },
+#              {
+#                "categoryNum": 269,
+#                "categoryName": "팬시/포트카드"
+#              },
+#              {
+#                "categoryNum": 270,
+#                "categoryName": "포스터/화보"
+#              },
+#              {
+#                "categoryNum": 271,
+#                "categoryName": "인형/피규어"
+#              },
+#              {
+#                "categoryNum": 272,
+#                "categoryName": "응원도구"
+#              },
+#              {
+#                "categoryNum": 273,
+#                "categoryName": "의류/패션잡화"
+#              },
+#              {
+#                "categoryNum": 274,
+#                "categoryName": "기타(솔로-남)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 90,
+#            "categoryName": "솔로(남)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 275,
+#                "categoryName": "음반/영상물"
+#              },
+#              {
+#                "categoryNum": 276,
+#                "categoryName": "팬시/포트카드"
+#              },
+#              {
+#                "categoryNum": 277,
+#                "categoryName": "포스터/화보"
+#              },
+#              {
+#                "categoryNum": 278,
+#                "categoryName": "인형/피규어"
+#              },
+#              {
+#                "categoryNum": 279,
+#                "categoryName": "응원도구"
+#              },
+#              {
+#                "categoryNum": 280,
+#                "categoryName": "의류/패션잡화"
+#              },
+#              {
+#                "categoryNum": 281,
+#                "categoryName": "기타(솔로-여)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 91,
+#            "categoryName": "솔로(여)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 282,
+#                "categoryName": "음반/영상물"
+#              },
+#              {
+#                "categoryNum": 283,
+#                "categoryName": "팬시/포트카드"
+#              },
+#              {
+#                "categoryNum": 284,
+#                "categoryName": "포스터/화보"
+#              },
+#              {
+#                "categoryNum": 285,
+#                "categoryName": "인형/피규어"
+#              },
+#              {
+#                "categoryNum": 286,
+#                "categoryName": "응원도구"
+#              },
+#              {
+#                "categoryNum": 287,
+#                "categoryName": "의류/패션잡화"
+#              },
+#              {
+#                "categoryNum": 288,
+#                "categoryName": "기타(배우-남)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 92,
+#            "categoryName": "배우(남)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 289,
+#                "categoryName": "음반/영상물"
+#              },
+#              {
+#                "categoryNum": 290,
+#                "categoryName": "팬시/포트카드"
+#              },
+#              {
+#                "categoryNum": 291,
+#                "categoryName": "포스터/화보"
+#              },
+#              {
+#                "categoryNum": 292,
+#                "categoryName": "인형/피규어"
+#              },
+#              {
+#                "categoryNum": 293,
+#                "categoryName": "응원도구"
+#              },
+#              {
+#                "categoryNum": 294,
+#                "categoryName": "의류/패션잡화"
+#              },
+#              {
+#                "categoryNum": 295,
+#                "categoryName": "기타(배우-여)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 93,
+#            "categoryName": "배우(여)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 296,
+#                "categoryName": "음반/영상물"
+#              },
+#              {
+#                "categoryNum": 297,
+#                "categoryName": "팬시/포트카드"
+#              },
+#              {
+#                "categoryNum": 298,
+#                "categoryName": "포스터/화보"
+#              },
+#              {
+#                "categoryNum": 299,
+#                "categoryName": "인형/피규어"
+#              },
+#              {
+#                "categoryNum": 300,
+#                "categoryName": "응원도구"
+#              },
+#              {
+#                "categoryNum": 301,
+#                "categoryName": "의류/패션잡화"
+#              },
+#              {
+#                "categoryNum": 302,
+#                "categoryName": "기타(방송인)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 94,
+#            "categoryName": "방송/예능/캐릭터",
+#            "thirdProductCategoryResponses": []
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 11,
+#        "categoryName": "키덜트",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 95,
+#            "categoryName": "피규어/인형",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 96,
+#            "categoryName": "레고/블럭",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 97,
+#            "categoryName": "프라모델",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 98,
+#            "categoryName": "RC/드론",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 99,
+#            "categoryName": "보드게임",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 100,
+#            "categoryName": "서바이벌건",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 101,
+#            "categoryName": "기타(키덜트)",
+#            "thirdProductCategoryResponses": []
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 12,
+#        "categoryName": "예술/희귀/수집품",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 102,
+#            "categoryName": "희귀/수집품",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 103,
+#            "categoryName": "골동품",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 104,
+#            "categoryName": "예술작품",
+#            "thirdProductCategoryResponses": []
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 13,
+#        "categoryName": "음반/악기",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 105,
+#            "categoryName": "CD/DVD/LP",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 303,
+#                "categoryName": "관악기"
+#              },
+#              {
+#                "categoryNum": 304,
+#                "categoryName": "현악기"
+#              },
+#              {
+#                "categoryNum": 305,
+#                "categoryName": "타악기"
+#              },
+#              {
+#                "categoryNum": 306,
+#                "categoryName": "건반악기"
+#              },
+#              {
+#                "categoryNum": 307,
+#                "categoryName": "전자악기"
+#              },
+#              {
+#                "categoryNum": 308,
+#                "categoryName": "악기용품"
+#              },
+#              {
+#                "categoryNum": 309,
+#                "categoryName": "기타(음반/악기)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 106,
+#            "categoryName": "악기",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 310,
+#                "categoryName": "시/소설"
+#              },
+#              {
+#                "categoryNum": 311,
+#                "categoryName": "자기계발"
+#              },
+#              {
+#                "categoryNum": 312,
+#                "categoryName": "교양/인문"
+#              },
+#              {
+#                "categoryNum": 313,
+#                "categoryName": "경제/경영"
+#              },
+#              {
+#                "categoryNum": 314,
+#                "categoryName": "학습/사전/참고서"
+#              },
+#              {
+#                "categoryNum": 315,
+#                "categoryName": "아동/어린이"
+#              },
+#              {
+#                "categoryNum": 316,
+#                "categoryName": "만화"
+#              },
+#              {
+#                "categoryNum": 317,
+#                "categoryName": "예술/디자인"
+#              },
+#              {
+#                "categoryNum": 318,
+#                "categoryName": "여행/취미/레저/건강"
+#              },
+#              {
+#                "categoryNum": 319,
+#                "categoryName": "사회/정치/법"
+#              },
+#              {
+#                "categoryNum": 320,
+#                "categoryName": "과학/IT"
+#              },
+#              {
+#                "categoryNum": 321,
+#                "categoryName": "간행물"
+#              },
+#              {
+#                "categoryNum": 322,
+#                "categoryName": "기타(도서)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 14,
+#        "categoryName": "도서/티켓/문구",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 107,
+#            "categoryName": "도서",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 323,
+#                "categoryName": "학습도구/문구/필기류"
+#              },
+#              {
+#                "categoryNum": 324,
+#                "categoryName": "미술/화방용품"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 108,
+#            "categoryName": "문구",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 325,
+#                "categoryName": "치킨/피자/햄버거"
+#              },
+#              {
+#                "categoryNum": 326,
+#                "categoryName": "베이커리/도넛/아이스크림"
+#              },
+#              {
+#                "categoryNum": 327,
+#                "categoryName": "커피(음료)"
+#              },
+#              {
+#                "categoryNum": 328,
+#                "categoryName": "편의점"
+#              },
+#              {
+#                "categoryNum": 329,
+#                "categoryName": "기타(기프티콘/쿠폰)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 109,
+#            "categoryName": "기프티콘/쿠폰",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 330,
+#                "categoryName": "문화/도서"
+#              },
+#              {
+#                "categoryNum": 331,
+#                "categoryName": "백화점"
+#              },
+#              {
+#                "categoryNum": 332,
+#                "categoryName": "외식"
+#              },
+#              {
+#                "categoryNum": 333,
+#                "categoryName": "기타(상품권)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 110,
+#            "categoryName": "상품권",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 334,
+#                "categoryName": "뮤지컬/연극"
+#              },
+#              {
+#                "categoryNum": 335,
+#                "categoryName": "콘서트"
+#              },
+#              {
+#                "categoryNum": 336,
+#                "categoryName": "영화(예매/관람권)"
+#              },
+#              {
+#                "categoryNum": 337,
+#                "categoryName": "여행/숙박/렌트"
+#              },
+#              {
+#                "categoryNum": 338,
+#                "categoryName": "테마파크"
+#              },
+#              {
+#                "categoryNum": 339,
+#                "categoryName": "스포츠/레저"
+#              },
+#              {
+#                "categoryNum": 340,
+#                "categoryName": "공연/전시/행사"
+#              },
+#              {
+#                "categoryNum": 341,
+#                "categoryName": "기타(티켓)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 111,
+#            "categoryName": "티켓",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 342,
+#                "categoryName": "클랜징/스크럼"
+#              },
+#              {
+#                "categoryNum": 343,
+#                "categoryName": "스킨/토너/미스트"
+#              },
+#              {
+#                "categoryNum": 344,
+#                "categoryName": "로션/에멀젼"
+#              },
+#              {
+#                "categoryNum": 345,
+#                "categoryName": "에센스/크림"
+#              },
+#              {
+#                "categoryNum": 346,
+#                "categoryName": "팩/마스크"
+#              },
+#              {
+#                "categoryNum": 347,
+#                "categoryName": "씬케어"
+#              },
+#              {
+#                "categoryNum": 348,
+#                "categoryName": "기타(스킨케어)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 15,
+#        "categoryName": "뷰티/미용",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 112,
+#            "categoryName": "스킨케어",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 349,
+#                "categoryName": "아이라이너/브로우"
+#              },
+#              {
+#                "categoryNum": 350,
+#                "categoryName": "마이섀도우"
+#              },
+#              {
+#                "categoryNum": 351,
+#                "categoryName": "마스카라"
+#              },
+#              {
+#                "categoryNum": 352,
+#                "categoryName": "립틴트"
+#              },
+#              {
+#                "categoryNum": 353,
+#                "categoryName": "립밤/립글로즈"
+#              },
+#              {
+#                "categoryNum": 354,
+#                "categoryName": "립스틱"
+#              },
+#              {
+#                "categoryNum": 355,
+#                "categoryName": "치크/블러셔"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 113,
+#            "categoryName": "색조메이크업",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 356,
+#                "categoryName": "메이크업베이스"
+#              },
+#              {
+#                "categoryNum": 357,
+#                "categoryName": "BB/CC크림"
+#              },
+#              {
+#                "categoryNum": 358,
+#                "categoryName": "쿠션팩트"
+#              },
+#              {
+#                "categoryNum": 359,
+#                "categoryName": "파운데이션"
+#              },
+#              {
+#                "categoryNum": 360,
+#                "categoryName": "파우더/팩트"
+#              },
+#              {
+#                "categoryNum": 361,
+#                "categoryName": "프라이머/컨실러"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 114,
+#            "categoryName": "베이스메이크업",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 362,
+#                "categoryName": "샴푸/린스"
+#              },
+#              {
+#                "categoryNum": 363,
+#                "categoryName": "헤어에센스/트리트먼트"
+#              },
+#              {
+#                "categoryNum": 364,
+#                "categoryName": "헤어스타일링"
+#              },
+#              {
+#                "categoryNum": 365,
+#                "categoryName": "헤어컬러(염색)"
+#              },
+#              {
+#                "categoryNum": 366,
+#                "categoryName": "발모제/탈모관련"
+#              },
+#              {
+#                "categoryNum": 367,
+#                "categoryName": "바디클랜저/로션"
+#              },
+#              {
+#                "categoryNum": 368,
+#                "categoryName": "핸드/풋 케어"
+#              },
+#              {
+#                "categoryNum": 369,
+#                "categoryName": "기타(헤어/바디)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 115,
+#            "categoryName": "바디/헤어케어",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 370,
+#                "categoryName": "여성 향수"
+#              },
+#              {
+#                "categoryNum": 371,
+#                "categoryName": "남성 향수"
+#              },
+#              {
+#                "categoryNum": 372,
+#                "categoryName": "남여공용 향수"
+#              },
+#              {
+#                "categoryNum": 373,
+#                "categoryName": "기타(향수/아로마)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 116,
+#            "categoryName": "향수/아로마",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 374,
+#                "categoryName": "네일아트/스티커"
+#              },
+#              {
+#                "categoryNum": 375,
+#                "categoryName": "매니큐어/페디큐어"
+#              },
+#              {
+#                "categoryNum": 376,
+#                "categoryName": "네일케어도구"
+#              },
+#              {
+#                "categoryNum": 377,
+#                "categoryName": "네일리무버"
+#              },
+#              {
+#                "categoryNum": 378,
+#                "categoryName": "기타(네일아트/케어)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 117,
+#            "categoryName": "네일아트/케어",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 379,
+#                "categoryName": "미용가전(고데기)"
+#              },
+#              {
+#                "categoryNum": 380,
+#                "categoryName": "피부케어기기"
+#              },
+#              {
+#                "categoryNum": 381,
+#                "categoryName": "뷰티소품(퍼프/거울)"
+#              },
+#              {
+#                "categoryNum": 382,
+#                "categoryName": "메이크업 브러쉬"
+#              },
+#              {
+#                "categoryNum": 383,
+#                "categoryName": "화장품 파우치/정리함"
+#              },
+#              {
+#                "categoryNum": 384,
+#                "categoryName": "기타(이미용품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 118,
+#            "categoryName": "미용소품/기기",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 119,
+#            "categoryName": "다이어트/이너뷰티",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 385,
+#                "categoryName": "스킨/로션"
+#              },
+#              {
+#                "categoryNum": 386,
+#                "categoryName": "클랜징/마스크"
+#              },
+#              {
+#                "categoryNum": 387,
+#                "categoryName": "에센스/크림"
+#              },
+#              {
+#                "categoryNum": 388,
+#                "categoryName": "BB크림"
+#              },
+#              {
+#                "categoryNum": 389,
+#                "categoryName": "선케어"
+#              },
+#              {
+#                "categoryNum": 390,
+#                "categoryName": "왁스"
+#              },
+#              {
+#                "categoryNum": 391,
+#                "categoryName": "올인원"
+#              },
+#              {
+#                "categoryNum": 392,
+#                "categoryName": "세트"
+#              },
+#              {
+#                "categoryNum": 393,
+#                "categoryName": "기타(남성화장품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 120,
+#            "categoryName": "남성 화장품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 394,
+#                "categoryName": "소품"
+#              },
+#              {
+#                "categoryNum": 395,
+#                "categoryName": "꽃/원예"
+#              },
+#              {
+#                "categoryNum": 396,
+#                "categoryName": "수공예품"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 16,
+#        "categoryName": "가구/인테리어",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 121,
+#            "categoryName": "가구",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 397,
+#                "categoryName": "침실가구"
+#              },
+#              {
+#                "categoryNum": 398,
+#                "categoryName": "거실가구"
+#              },
+#              {
+#                "categoryNum": 399,
+#                "categoryName": "침구"
+#              },
+#              {
+#                "categoryNum": 400,
+#                "categoryName": "사무용가구"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 122,
+#            "categoryName": "인테리어",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 401,
+#                "categoryName": "냄비/프라이팬"
+#              },
+#              {
+#                "categoryNum": 402,
+#                "categoryName": "주전자/티포트"
+#              },
+#              {
+#                "categoryNum": 403,
+#                "categoryName": "칼/도마"
+#              },
+#              {
+#                "categoryNum": 404,
+#                "categoryName": "그릇/홈세트"
+#              },
+#              {
+#                "categoryNum": 405,
+#                "categoryName": "수저/커트러리"
+#              },
+#              {
+#                "categoryNum": 406,
+#                "categoryName": "머그잔/컵"
+#              },
+#              {
+#                "categoryNum": 407,
+#                "categoryName": "조리도구"
+#              },
+#              {
+#                "categoryNum": 408,
+#                "categoryName": "제과/제빵"
+#              },
+#              {
+#                "categoryNum": 409,
+#                "categoryName": "커피용품"
+#              },
+#              {
+#                "categoryNum": 410,
+#                "categoryName": "텀블러/물병"
+#              },
+#              {
+#                "categoryNum": 411,
+#                "categoryName": "보관/밀폐용기"
+#              },
+#              {
+#                "categoryNum": 412,
+#                "categoryName": "주방수납"
+#              },
+#              {
+#                "categoryNum": 413,
+#                "categoryName": "업소용품/기기"
+#              },
+#              {
+#                "categoryNum": 414,
+#                "categoryName": "기타(주방용품)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 17,
+#        "categoryName": "생활/가공식품",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 123,
+#            "categoryName": "주방용품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 415,
+#                "categoryName": "DIY/리폼용품/공구"
+#              },
+#              {
+#                "categoryNum": 416,
+#                "categoryName": "욕실 용품"
+#              },
+#              {
+#                "categoryNum": 417,
+#                "categoryName": "기타(생활용품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 124,
+#            "categoryName": "생활용품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 418,
+#                "categoryName": "건강식품"
+#              },
+#              {
+#                "categoryNum": 419,
+#                "categoryName": "가공식품"
+#              },
+#              {
+#                "categoryNum": 420,
+#                "categoryName": "농수축산물"
+#              },
+#              {
+#                "categoryNum": 421,
+#                "categoryName": "기타(식품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 125,
+#            "categoryName": "식품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 422,
+#                "categoryName": "드릴/전동공구"
+#              },
+#              {
+#                "categoryNum": 423,
+#                "categoryName": "공구/공구함"
+#              },
+#              {
+#                "categoryNum": 424,
+#                "categoryName": "산업용품/자재"
+#              },
+#              {
+#                "categoryNum": 425,
+#                "categoryName": "에어/유압공구"
+#              },
+#              {
+#                "categoryNum": 426,
+#                "categoryName": "공장기계/용접/가스"
+#              },
+#              {
+#                "categoryNum": 427,
+#                "categoryName": "측정/계측/레벨"
+#              },
+#              {
+#                "categoryNum": 428,
+#                "categoryName": "기타(산업용품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 126,
+#            "categoryName": "산업용품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 429,
+#                "categoryName": "원피스"
+#              },
+#              {
+#                "categoryNum": 430,
+#                "categoryName": "우주복/슈트"
+#              },
+#              {
+#                "categoryNum": 431,
+#                "categoryName": "유아상의"
+#              },
+#              {
+#                "categoryNum": 432,
+#                "categoryName": "자켓/점퍼"
+#              },
+#              {
+#                "categoryNum": 433,
+#                "categoryName": "유아하의"
+#              },
+#              {
+#                "categoryNum": 434,
+#                "categoryName": "정장/드레스"
+#              },
+#              {
+#                "categoryNum": 435,
+#                "categoryName": "베이비수영복"
+#              },
+#              {
+#                "categoryNum": 436,
+#                "categoryName": "유아내의/속옷"
+#              },
+#              {
+#                "categoryNum": 437,
+#                "categoryName": "기타(베이비의류)"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 18,
+#        "categoryName": "유아동/출산",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 127,
+#            "categoryName": "베이비의류(0~2세)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 438,
+#                "categoryName": "티셔츠"
+#              },
+#              {
+#                "categoryNum": 439,
+#                "categoryName": "블라우스/남방"
+#              },
+#              {
+#                "categoryNum": 440,
+#                "categoryName": "가디건/조끼"
+#              },
+#              {
+#                "categoryNum": 441,
+#                "categoryName": "니트/스웨터"
+#              },
+#              {
+#                "categoryNum": 442,
+#                "categoryName": "자켓/점퍼"
+#              },
+#              {
+#                "categoryNum": 443,
+#                "categoryName": "코트/정장"
+#              },
+#              {
+#                "categoryNum": 444,
+#                "categoryName": "원피스"
+#              },
+#              {
+#                "categoryNum": 445,
+#                "categoryName": "상하복세트"
+#              },
+#              {
+#                "categoryNum": 446,
+#                "categoryName": "팬츠"
+#              },
+#              {
+#                "categoryNum": 447,
+#                "categoryName": "스커트/치마"
+#              },
+#              {
+#                "categoryNum": 448,
+#                "categoryName": "수영복"
+#              },
+#              {
+#                "categoryNum": 449,
+#                "categoryName": "속옷/잠옷"
+#              },
+#              {
+#                "categoryNum": 450,
+#                "categoryName": "기타(여아의류)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 128,
+#            "categoryName": "여의류(3~6세)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 451,
+#                "categoryName": "티셔츠"
+#              },
+#              {
+#                "categoryNum": 452,
+#                "categoryName": "블라우스/남방"
+#              },
+#              {
+#                "categoryNum": 453,
+#                "categoryName": "가디건/조끼"
+#              },
+#              {
+#                "categoryNum": 454,
+#                "categoryName": "니트/스웨터"
+#              },
+#              {
+#                "categoryNum": 455,
+#                "categoryName": "자켓/점퍼"
+#              },
+#              {
+#                "categoryNum": 456,
+#                "categoryName": "코트/정장"
+#              },
+#              {
+#                "categoryNum": 457,
+#                "categoryName": "원피스"
+#              },
+#              {
+#                "categoryNum": 458,
+#                "categoryName": "상하복세트"
+#              },
+#              {
+#                "categoryNum": 459,
+#                "categoryName": "팬츠"
+#              },
+#              {
+#                "categoryNum": 460,
+#                "categoryName": "스커트/치마"
+#              },
+#              {
+#                "categoryNum": 461,
+#                "categoryName": "수영복"
+#              },
+#              {
+#                "categoryNum": 462,
+#                "categoryName": "속옷/잠옷"
+#              },
+#              {
+#                "categoryNum": 463,
+#                "categoryName": "기타(여주니어의류)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 129,
+#            "categoryName": "여주니어의류(7~세)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 464,
+#                "categoryName": "티셔츠"
+#              },
+#              {
+#                "categoryNum": 465,
+#                "categoryName": "셔츠/남방"
+#              },
+#              {
+#                "categoryNum": 466,
+#                "categoryName": "가디건/조끼"
+#              },
+#              {
+#                "categoryNum": 467,
+#                "categoryName": "니트/스웨터"
+#              },
+#              {
+#                "categoryNum": 468,
+#                "categoryName": "자켓/점퍼"
+#              },
+#              {
+#                "categoryNum": 469,
+#                "categoryName": "코트/정장"
+#              },
+#              {
+#                "categoryNum": 470,
+#                "categoryName": "상하복세트"
+#              },
+#              {
+#                "categoryNum": 471,
+#                "categoryName": "팬츠"
+#              },
+#              {
+#                "categoryNum": 472,
+#                "categoryName": "수영복"
+#              },
+#              {
+#                "categoryNum": 473,
+#                "categoryName": "속옷/잠옷"
+#              },
+#              {
+#                "categoryNum": 474,
+#                "categoryName": "기타(남아의류)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 130,
+#            "categoryName": "남의류(3~6세)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 475,
+#                "categoryName": "티셔츠"
+#              },
+#              {
+#                "categoryNum": 476,
+#                "categoryName": "셔츠/남방"
+#              },
+#              {
+#                "categoryNum": 477,
+#                "categoryName": "가디건/조끼"
+#              },
+#              {
+#                "categoryNum": 478,
+#                "categoryName": "니트/스웨터"
+#              },
+#              {
+#                "categoryNum": 479,
+#                "categoryName": "자켓/점퍼"
+#              },
+#              {
+#                "categoryNum": 480,
+#                "categoryName": "코트/정장"
+#              },
+#              {
+#                "categoryNum": 481,
+#                "categoryName": "상하복세트"
+#              },
+#              {
+#                "categoryNum": 482,
+#                "categoryName": "팬츠"
+#              },
+#              {
+#                "categoryNum": 483,
+#                "categoryName": "수영복"
+#              },
+#              {
+#                "categoryNum": 484,
+#                "categoryName": "속옷/잠옷"
+#              },
+#              {
+#                "categoryNum": 485,
+#                "categoryName": "기타(남아의류)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 131,
+#            "categoryName": "남주니어의류(7~세)",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 486,
+#                "categoryName": "신발"
+#              },
+#              {
+#                "categoryNum": 487,
+#                "categoryName": "가방"
+#              },
+#              {
+#                "categoryNum": 488,
+#                "categoryName": "모자"
+#              },
+#              {
+#                "categoryNum": 489,
+#                "categoryName": "시계/액세서리"
+#              },
+#              {
+#                "categoryNum": 490,
+#                "categoryName": "양말"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 132,
+#            "categoryName": "유아용품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 491,
+#                "categoryName": "인형(유아용)"
+#              },
+#              {
+#                "categoryNum": 492,
+#                "categoryName": "교육완구"
+#              },
+#              {
+#                "categoryNum": 493,
+#                "categoryName": "도서/CD/DVD"
+#              },
+#              {
+#                "categoryNum": 494,
+#                "categoryName": "퍼즐/블록"
+#              },
+#              {
+#                "categoryNum": 495,
+#                "categoryName": "자전거/승용완구"
+#              },
+#              {
+#                "categoryNum": 496,
+#                "categoryName": "스포츠완구"
+#              },
+#              {
+#                "categoryNum": 497,
+#                "categoryName": "물놀이용품"
+#              },
+#              {
+#                "categoryNum": 498,
+#                "categoryName": "볼텐트/놀이터"
+#              },
+#              {
+#                "categoryNum": 499,
+#                "categoryName": "신생아완구"
+#              },
+#              {
+#                "categoryNum": 500,
+#                "categoryName": "기타"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 133,
+#            "categoryName": "출산/임부용품",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 501,
+#                "categoryName": "유모차"
+#              },
+#              {
+#                "categoryNum": 502,
+#                "categoryName": "아기띠"
+#              },
+#              {
+#                "categoryNum": 503,
+#                "categoryName": "카시트"
+#              },
+#              {
+#                "categoryNum": 504,
+#                "categoryName": "보행기/쏘서"
+#              },
+#              {
+#                "categoryNum": 505,
+#                "categoryName": "가구/침대/매트"
+#              },
+#              {
+#                "categoryNum": 506,
+#                "categoryName": "목욕/구강용품"
+#              },
+#              {
+#                "categoryNum": 507,
+#                "categoryName": "기저귀"
+#              },
+#              {
+#                "categoryNum": 508,
+#                "categoryName": "스킨케어"
+#              },
+#              {
+#                "categoryNum": 509,
+#                "categoryName": "세탁/위생용품"
+#              },
+#              {
+#                "categoryNum": 510,
+#                "categoryName": "물티슈"
+#              },
+#              {
+#                "categoryNum": 511,
+#                "categoryName": "기타(유아동용품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 134,
+#            "categoryName": "교육/완구/인형",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 512,
+#                "categoryName": "임부의류/속옷"
+#              },
+#              {
+#                "categoryNum": 513,
+#                "categoryName": "이불/침구"
+#              },
+#              {
+#                "categoryNum": 514,
+#                "categoryName": "겉싸개/속싸개"
+#              },
+#              {
+#                "categoryNum": 515,
+#                "categoryName": "손발싸개"
+#              },
+#              {
+#                "categoryNum": 516,
+#                "categoryName": "배냇저고리"
+#              },
+#              {
+#                "categoryNum": 517,
+#                "categoryName": "딸랑이/모빌"
+#              },
+#              {
+#                "categoryNum": 518,
+#                "categoryName": "임부스킨케어"
+#              },
+#              {
+#                "categoryNum": 519,
+#                "categoryName": "기타(출산/임부용품)"
+#              }
+#            ]
+#          },
+#          {
+#            "categoryNum": 135,
+#            "categoryName": "이유용품/유아식기",
+#            "thirdProductCategoryResponses": [
+#              {
+#                "categoryNum": 520,
+#                "categoryName": "분유수유용품"
+#              },
+#              {
+#                "categoryNum": 521,
+#                "categoryName": "모유수유용품"
+#              },
+#              {
+#                "categoryNum": 522,
+#                "categoryName": "젖병세정용품"
+#              },
+#              {
+#                "categoryNum": 523,
+#                "categoryName": "이유식용품"
+#              },
+#              {
+#                "categoryNum": 524,
+#                "categoryName": "기타"
+#              }
+#            ]
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 19,
+#        "categoryName": "반려동물용품",
+#        "secondProductCategoryResponseList": [
+#          {
+#            "categoryNum": 136,
+#            "categoryName": "강아지 용품",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 137,
+#            "categoryName": "강아지 식품/사료",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 138,
+#            "categoryName": "기타(강아지)",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 139,
+#            "categoryName": "고양이 용품",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 140,
+#            "categoryName": "고양이 식품/사료",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 141,
+#            "categoryName": "기타(고양이)",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 142,
+#            "categoryName": "기타(반려동물 용품)",
+#            "thirdProductCategoryResponses": []
+#          },
+#          {
+#            "categoryNum": 143,
+#            "categoryName": "기타(반려동물 식품/사료)",
+#            "thirdProductCategoryResponses": []
+#          }
+#        ]
+#      },
+#      {
+#        "categoryNum": 20,
+#        "categoryName": "기타",
+#        "secondProductCategoryResponseList": []
+#      }
+#    ]
+#  }
+#}
+#
+#Response code: 200; Time: 336ms; Content length: 35531 bytes

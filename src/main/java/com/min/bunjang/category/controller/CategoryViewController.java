@@ -1,6 +1,6 @@
 package com.min.bunjang.category.controller;
 
-import com.min.bunjang.category.dto.AllCategoryListResponses;
+import com.min.bunjang.category.dto.AllCategoryListResponse;
 import com.min.bunjang.category.service.CategoryViewService;
 import com.min.bunjang.common.dto.RestResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +14,8 @@ public class CategoryViewController {
     private final CategoryViewService categoryViewService;
 
     @GetMapping(CategoryViewControllerPath.CATEGORY_FIND_ALL)
-    public RestResponse<AllCategoryListResponses> findAllCategories() {
-        AllCategoryListResponses allCategoryListResponses = categoryViewService.findAllCategories();
+    public RestResponse<AllCategoryListResponse> findAllCategories() {
+        AllCategoryListResponse allCategoryListResponses = categoryViewService.findAllCategories();
         return RestResponse.of(HttpStatus.OK, allCategoryListResponses);
     }
 }
