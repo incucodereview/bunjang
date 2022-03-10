@@ -84,7 +84,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
     @Test
     void store_introduceContent_update() throws Exception {
         //given
-        String email = "email";
+        String email = "email1";
         String password = "password";
         Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(email, password).getResult();

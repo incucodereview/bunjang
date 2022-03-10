@@ -26,7 +26,7 @@ public class Product extends BasicEntity {
     @NotBlank
     private String productName;
 
-    @NotNull
+//    @NotNull
     private Long firstProductCategoryNum;
     private Long secondProductCategoryNum;
     private Long thirdProductCategoryNum;

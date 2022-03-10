@@ -10,6 +10,7 @@ import com.min.bunjang.token.controller.TokenControllerPath;
 import com.min.bunjang.token.dto.TokenValidResponse;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class TokenAcceptanceTest extends AcceptanceTestConfig {
     private void 토큰인증_요청_검증(TokenValuesDto tokenValuesDto, RestResponse<TokenValidResponse> response) {
         Assertions.assertThat(response.getResult().getAccessToken()).isEqualTo(tokenValuesDto.getAccessToken());
         Assertions.assertThat(response.getResult().isReissuedAccessToken()).isFalse();
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

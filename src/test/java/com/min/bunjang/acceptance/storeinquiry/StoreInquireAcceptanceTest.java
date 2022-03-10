@@ -18,6 +18,7 @@ import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,5 +121,10 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
         List<StoreInquireListResponse> storeInquireListResponse = storeInquireListResponses.getStoreInquireListResponse();
         Assertions.assertThat(storeInquireListResponse).hasSize(1);
         Assertions.assertThat(storeInquireListResponse.get(0).getInquireContent()).isEqualTo("인수테스트 상점 문의 내용");
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

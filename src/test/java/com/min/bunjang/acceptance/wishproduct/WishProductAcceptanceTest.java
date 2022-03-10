@@ -19,6 +19,7 @@ import com.min.bunjang.wishproduct.dto.WishProductsDeleteRequest;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import com.min.bunjang.wishproduct.repository.WishProductRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
     @Autowired
     private WishProductRepository wishProductRepository;
 
+    // ERROR
     @TestFactory
     Stream<DynamicTest> dynamicTestStream() {
         String ownerEmail = "urisegea@naver.com";
@@ -118,5 +120,10 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
     private void 찜상풍_삭제_응답_검증() {
         List<WishProduct> wishProducts = wishProductRepository.findAll();
         Assertions.assertThat(wishProducts).isEmpty();
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

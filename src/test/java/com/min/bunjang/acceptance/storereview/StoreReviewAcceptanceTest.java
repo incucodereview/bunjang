@@ -20,6 +20,7 @@ import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.storereview.repository.StoreReviewRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -159,5 +160,10 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
 
     private void 상점후기_조회_응답_검증(StoreReviewListResponses storeReviewListResponses) {
         Assertions.assertThat(storeReviewListResponses.getStoreReviewListResponses()).hasSize(1);
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

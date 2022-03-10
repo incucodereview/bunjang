@@ -1,5 +1,7 @@
 package com.min.bunjang.login.service;
 
+import com.min.bunjang.common.database.DatabaseCleanup;
+import com.min.bunjang.config.ServiceTestConfig;
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
@@ -10,6 +12,7 @@ import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.token.model.RefreshToken;
 import com.min.bunjang.token.repository.RefreshTokenRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +22,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
-@ActiveProfiles("h2")
-@SpringBootTest
-class LoginServiceTest {
-    @Autowired
-    private MemberRepository memberRepository;
-
+class LoginServiceTest extends ServiceTestConfig {
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 
@@ -70,5 +68,10 @@ class LoginServiceTest {
         //when & then
         Assertions.assertThatThrownBy(() -> loginService.login(loginRequest)).isInstanceOf(NotExistMemberException.class);
 
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

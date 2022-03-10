@@ -35,7 +35,6 @@ class WishProductServiceTest extends ServiceTestConfig {
     @Autowired
     private WishProductRepository wishProductRepository;
 
-
     @DisplayName("찜상품이 추가되면 관련 제품과 상점에 찜목록이 등록된다")
     @Test
     public void wishProduct_create() {
