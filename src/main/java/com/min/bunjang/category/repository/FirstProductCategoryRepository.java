@@ -4,7 +4,7 @@ import com.min.bunjang.category.model.FirstProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.List;
+import java.util.List; 
 
 public interface FirstProductCategoryRepository extends JpaRepository<FirstProductCategory, Long> {
 
