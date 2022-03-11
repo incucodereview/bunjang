@@ -5,10 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -19,4 +16,12 @@ public class ProductTag extends BasicEntity {
 
     private Long productNum;
 
+    public ProductTag(String tag, Long productNum) {
+        this.tag = tag;
+        this.productNum = productNum;
+    }
+
+    public static ProductTag createProductTag(String tag, Long productNum) {
+        return new ProductTag(tag, productNum);
+    }
 }

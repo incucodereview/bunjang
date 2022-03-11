@@ -1,6 +1,10 @@
 package com.min.bunjang.product.model;
 
+import com.min.bunjang.category.model.FirstProductCategory;
+import com.min.bunjang.category.model.SecondProductCategory;
+import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.common.model.BasicEntity;
+import com.min.bunjang.store.model.Store;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -11,9 +15,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.lang.invoke.LambdaConversionException;
+import java.lang.invoke.LambdaMetafactory;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,11 +35,18 @@ public class Product extends BasicEntity {
     @NotBlank
     private String productName;
 
-    //카테고리 구현
 //    @NotNull
-    private Long firstProductCategoryNum;
-    private Long secondProductCategoryNum;
-    private Long thirdProductCategoryNum;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "first_product_category_num")
+    private FirstProductCategory firstProductCategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "second_product_category_num")
+    private SecondProductCategory secondProductCategory;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "third_product_category_num")
+    private ThirdProductCategory thirdProductCategory;
 
     //사진 관련 기능 s3하고 추가할것.
     private String productPhotos;
@@ -48,12 +63,19 @@ public class Product extends BasicEntity {
     @NotNull
     private int productPrice;
 
+    @Enumerated(EnumType.STRING)
+    private DeliveryChargeInPrice deliveryChargeInPrice;
+
     private String productExplanation;
 
     @NotNull
     private int productAmount;
 
     private int hits;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_num")
+    private Store store;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
     private Set<WishProduct> wishProducts = new HashSet<>();
@@ -64,21 +86,22 @@ public class Product extends BasicEntity {
 
     public Product(
             String productName,
-            Long firstProductCategoryNum,
-            Long secondProductCategoryNum,
-            Long thirdProductCategoryNum,
+            FirstProductCategory firstProductCategory,
+            SecondProductCategory secondProductCategory,
+            ThirdProductCategory thirdProductCategory,
             String productPhotos,
             String exchangeLocation,
             ProductState productState,
             ExchangeState exchangeState,
             int productPrice,
             String productExplanation,
-            int productAmount
+            int productAmount,
+            Store store
     ) {
         this.productName = productName;
-        this.firstProductCategoryNum = firstProductCategoryNum;
-        this.secondProductCategoryNum = secondProductCategoryNum;
-        this.thirdProductCategoryNum = thirdProductCategoryNum;
+        this.firstProductCategory = firstProductCategory;
+        this.secondProductCategory = secondProductCategory;
+        this.thirdProductCategory = thirdProductCategory;
         this.productPhotos = productPhotos;
         this.exchangeLocation = exchangeLocation;
         this.productState = productState;
@@ -86,40 +109,38 @@ public class Product extends BasicEntity {
         this.productPrice = productPrice;
         this.productExplanation = productExplanation;
         this.productAmount = productAmount;
+        this.store = store;
     }
 
     public static Product createProduct(
             String productName,
-            Long firstProductCategoryNum,
-            Long secondProductCategoryNum,
-            Long thirdProductCategoryNum,
+            FirstProductCategory firstProductCategory,
+            SecondProductCategory secondProductCategory,
+            ThirdProductCategory thirdProductCategory,
             String productPhotos,
             String exchangeLocation,
             ProductState productState,
             ExchangeState exchangeState,
             int productPrice,
             String productExplanation,
-            int productAmount
+            int productAmount,
+            Store store
     ) {
         return new Product(
                 productName,
-                firstProductCategoryNum,
-                secondProductCategoryNum,
-                thirdProductCategoryNum,
+                firstProductCategory,
+                secondProductCategory,
+                thirdProductCategory,
                 productPhotos,
                 exchangeLocation,
                 productState,
                 exchangeState,
                 productPrice,
                 productExplanation,
-                productAmount
+                productAmount,
+                store
         );
     }
 
 
-    //TODO 사용여부가 있을지 구현 단계에선 파악이 힘들다. 사용하며 더 자주 사용되는 쪽으로 옮겨도 되고 삭제해도 무방.
-    public void addWishProduct(WishProduct wishProduct) {
-        this.wishProducts.add(wishProduct);
-        wishProduct.setProduct(this);
-    }
 }
