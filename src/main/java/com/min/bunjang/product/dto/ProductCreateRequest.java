@@ -1,6 +1,7 @@
 package com.min.bunjang.product.dto;
 
 import com.min.bunjang.product.model.ExchangeState;
+import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductState;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

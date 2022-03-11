@@ -4,6 +4,7 @@ import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.common.model.BasicEntity;
+import com.min.bunjang.product.dto.ProductCreateRequest;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
@@ -113,31 +114,24 @@ public class Product extends BasicEntity {
     }
 
     public static Product createProduct(
-            String productName,
+            ProductCreateRequest productCreateRequest,
             FirstProductCategory firstProductCategory,
             SecondProductCategory secondProductCategory,
             ThirdProductCategory thirdProductCategory,
-            String productPhotos,
-            String exchangeLocation,
-            ProductState productState,
-            ExchangeState exchangeState,
-            int productPrice,
-            String productExplanation,
-            int productAmount,
             Store store
     ) {
         return new Product(
-                productName,
+                productCreateRequest.getProductName(),
                 firstProductCategory,
                 secondProductCategory,
                 thirdProductCategory,
-                productPhotos,
-                exchangeLocation,
-                productState,
-                exchangeState,
-                productPrice,
-                productExplanation,
-                productAmount,
+                null,
+                productCreateRequest.getExchangeLocation(),
+                productCreateRequest.getProductState(),
+                productCreateRequest.getExchangeState(),
+                productCreateRequest.getProductPrice(),
+                productCreateRequest.getProductExplanation(),
+                productCreateRequest.getProductAmount(),
                 store
         );
     }
