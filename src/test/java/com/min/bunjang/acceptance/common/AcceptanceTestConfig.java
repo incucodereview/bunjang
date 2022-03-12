@@ -11,6 +11,7 @@ import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.member.repository.MemberRepository;
+import com.min.bunjang.store.repository.StoreRepository;
 import com.sun.istack.Nullable;
 import io.restassured.RestAssured;
 import io.restassured.specification.RequestSpecification;
@@ -48,6 +49,8 @@ public class AcceptanceTestConfig {
     @Autowired
     protected BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    protected StoreRepository storeRepository;
 
     @BeforeEach
     public void setUp() {
