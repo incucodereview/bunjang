@@ -1,7 +1,7 @@
 package com.min.bunjang.product.dto;
 
+import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
-import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductState;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ProductCreateRequest {
+public class ProductCreateOrUpdateRequest {
     @NotNull
     private Long storeNum;
     private List<String> productPhotos;
@@ -35,8 +35,10 @@ public class ProductCreateRequest {
     @NotNull
     private int productPrice;
     @NotNull
+    private DeliveryChargeInPrice deliveryChargeInPrice;
+    @NotNull
     private String productExplanation;
-
     private List<String> tags;
     private int productAmount;
+
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Getter
@@ -14,14 +16,20 @@ public class ProductTag extends BasicEntity {
 
     private String tag;
 
-    private Long productNum;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Product product;
 
-    public ProductTag(String tag, Long productNum) {
+    public ProductTag(String tag, Product product) {
         this.tag = tag;
-        this.productNum = productNum;
+        this.product = product;
     }
 
-    public static ProductTag createProductTag(String tag, Long productNum) {
-        return new ProductTag(tag, productNum);
+    public static ProductTag createProductTag(String tag, Product product) {
+        return new ProductTag(tag, product);
+    }
+
+    public void defineRelationToProduct(Product product) {
+        this.product = product;
+        product.addTag(this);
     }
 }

@@ -4,4 +4,5 @@ import com.min.bunjang.product.model.ProductTag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProductTagRepository extends JpaRepository<ProductTag, Long> {
+    void deleteByProductNum(Long productNum);
 }

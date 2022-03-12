@@ -4,7 +4,7 @@ import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.common.model.BasicEntity;
-import com.min.bunjang.product.dto.ProductCreateRequest;
+import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
@@ -21,8 +21,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.lang.invoke.LambdaConversionException;
-import java.lang.invoke.LambdaMetafactory;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +34,7 @@ public class Product extends BasicEntity {
     @NotBlank
     private String productName;
 
-//    @NotNull
+    //    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "first_product_category_num")
     private FirstProductCategory firstProductCategory;
@@ -81,6 +79,9 @@ public class Product extends BasicEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
     private Set<WishProduct> wishProducts = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
+    private List<ProductTag> productTags = new ArrayList<>();
+
     public Product(String productName) {
         this.productName = productName;
     }
@@ -95,6 +96,7 @@ public class Product extends BasicEntity {
             ProductState productState,
             ExchangeState exchangeState,
             int productPrice,
+            DeliveryChargeInPrice deliveryChargeInPrice,
             String productExplanation,
             int productAmount,
             Store store
@@ -108,33 +110,63 @@ public class Product extends BasicEntity {
         this.productState = productState;
         this.exchangeState = exchangeState;
         this.productPrice = productPrice;
+        this.deliveryChargeInPrice = deliveryChargeInPrice;
         this.productExplanation = productExplanation;
         this.productAmount = productAmount;
         this.store = store;
     }
 
     public static Product createProduct(
-            ProductCreateRequest productCreateRequest,
+            ProductCreateOrUpdateRequest productCreateOrUpdateRequest,
             FirstProductCategory firstProductCategory,
             SecondProductCategory secondProductCategory,
             ThirdProductCategory thirdProductCategory,
             Store store
     ) {
         return new Product(
-                productCreateRequest.getProductName(),
+                productCreateOrUpdateRequest.getProductName(),
                 firstProductCategory,
                 secondProductCategory,
                 thirdProductCategory,
                 null,
-                productCreateRequest.getExchangeLocation(),
-                productCreateRequest.getProductState(),
-                productCreateRequest.getExchangeState(),
-                productCreateRequest.getProductPrice(),
-                productCreateRequest.getProductExplanation(),
-                productCreateRequest.getProductAmount(),
+                productCreateOrUpdateRequest.getExchangeLocation(),
+                productCreateOrUpdateRequest.getProductState(),
+                productCreateOrUpdateRequest.getExchangeState(),
+                productCreateOrUpdateRequest.getProductPrice(),
+                productCreateOrUpdateRequest.getDeliveryChargeInPrice(),
+                productCreateOrUpdateRequest.getProductExplanation(),
+                productCreateOrUpdateRequest.getProductAmount(),
                 store
         );
     }
 
+    public void productUpdate(
+            ProductCreateOrUpdateRequest productCreateOrUpdateRequest,
+            FirstProductCategory firstProductCategory,
+            SecondProductCategory secondProductCategory,
+            ThirdProductCategory thirdProductCategory
+    ) {
+        this.productName = productCreateOrUpdateRequest.getProductName();
+        this.productPhotos = null;
+        this.firstProductCategory = firstProductCategory;
+        this.secondProductCategory = secondProductCategory;
+        this.thirdProductCategory = thirdProductCategory;
+        this.exchangeLocation = productCreateOrUpdateRequest.getExchangeLocation();
+        this.productState = productCreateOrUpdateRequest.getProductState();
+        this.exchangeState = productCreateOrUpdateRequest.getExchangeState();
+        this.productPrice = productCreateOrUpdateRequest.getProductPrice();
+        this.deliveryChargeInPrice = productCreateOrUpdateRequest.getDeliveryChargeInPrice();
+        this.productExplanation = productCreateOrUpdateRequest.getProductExplanation();
+        this.productAmount = productCreateOrUpdateRequest.getProductAmount();
+
+    }
+
+    public void updateProductTag(List<ProductTag> productTags) {
+        productTags.clear();
+        for (ProductTag productTag : productTags) {
+            productTag.defineRelationToProduct(this);
+        }
+        this.productTags.addAll(productTags);
+    }
 
 }
