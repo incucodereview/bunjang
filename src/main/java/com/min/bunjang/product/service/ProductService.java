@@ -45,11 +45,7 @@ public class ProductService {
         MemberAndStoreMatchValidator.verifyMemberAndStoreByEmail(email, store);
 
         Product savedProduct = productRepository.save(Product.createProduct(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory, store));
-
-        List<ProductTag> productTags = productCreateOrUpdateRequest.getTags().stream()
-                .map(tag -> ProductTag.createProductTag(tag, savedProduct))
-                .collect(Collectors.toList());
-        productTagRepository.saveAll(productTags);
+        productTagRepository.saveAll(productCreateOrUpdateRequest.makeProductTags(savedProduct));
     }
 
     @Transactional
@@ -60,13 +56,11 @@ public class ProductService {
         SecondProductCategory secondProductCategory = secondProductCategoryRepository.findById(productCreateOrUpdateRequest.getSecondCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         ThirdProductCategory thirdProductCategory = thirdProductCategoryRepository.findById(productCreateOrUpdateRequest.getThirdCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         MemberAndStoreMatchValidator.verifyMemberAndStoreByEmail(email, store);
+
         product.productUpdate(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory);
 
-        List<ProductTag> productTags = productCreateOrUpdateRequest.getTags().stream()
-                .map(tag -> ProductTag.createProductTag(tag, product))
-                .collect(Collectors.toList());
-        productTagRepository.saveAll(productTags);
-        product.updateProductTag(productTags);
+        productTagRepository.deleteByProductNum(productNum);
+        productTagRepository.saveAll(productCreateOrUpdateRequest.makeProductTags(product));
     }
 
     @Transactional

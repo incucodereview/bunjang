@@ -36,4 +36,5 @@ public class SecondProductCategory extends BasicEntity {
     public static SecondProductCategory createSecondCategory(String categoryName, FirstProductCategory firstProductCategory) {
         return new SecondProductCategory(categoryName, firstProductCategory);
     }
+
 }

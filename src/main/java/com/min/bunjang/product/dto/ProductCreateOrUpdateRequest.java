@@ -2,7 +2,9 @@ package com.min.bunjang.product.dto;
 
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
+import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductState;
+import com.min.bunjang.product.model.ProductTag;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -41,4 +44,10 @@ public class ProductCreateOrUpdateRequest {
     private List<String> tags;
     private int productAmount;
 
+
+    public List<ProductTag> makeProductTags(Product product) {
+        return this.tags.stream()
+                .map(tag -> ProductTag.createProductTag(tag, product))
+                .collect(Collectors.toList());
+    }
 }

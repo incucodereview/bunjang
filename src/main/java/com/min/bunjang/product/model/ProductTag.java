@@ -30,6 +30,5 @@ public class ProductTag extends BasicEntity {
 
     public void defineRelationToProduct(Product product) {
         this.product = product;
-        product.addTag(this);
     }
 }

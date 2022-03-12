@@ -1,5 +1,6 @@
 package com.min.bunjang.helpers;
 
+import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductState;
@@ -21,6 +22,7 @@ public class ProductHelper {
                 ProductState.NEW_PRODUCT,
                 ExchangeState.IMPOSSIBILITY,
                 10000,
+                DeliveryChargeInPrice.EXCLUDED,
                 "productExplain",
                 1,
                 store
