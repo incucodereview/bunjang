@@ -1,4 +1,4 @@
-POST http://localhost:8080/product
+PUT http://localhost:8080/product/1
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzA5NTQzMCwiZXhwIjoxNjQ3MDk3MjMwfQ.LZpdVjKuhViOYTYT2ory5k4l4ClP43ihhP3TxIzQQ4c
 
@@ -8,24 +8,25 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #  "message": null,
 #  "result": null
 #}
-#Response code: 200; Time: 139ms; Content length: 48 bytes
+#Response code: 200; Time: 137ms; Content length: 48 bytes
 
+#req
 {
   "storeNum": 1,
   "productPhotos": null,
-  "productName": "productTempName",
+  "productName": "updatedProductTempName",
   "firstCategoryNum": 1,
   "secondCategoryNum": 1,
   "thirdCategoryNum": 1,
-  "exchangeLocation": "exchangeLocation",
+  "exchangeLocation": "updatedExchangeLocation",
   "productState": "NEW_PRODUCT",
   "exchangeState": "POSSIBILITY",
-  "productPrice": 100009,
+  "productPrice": 897762,
   "deliveryChargeInPrice": "INCLUDED",
-  "productExplanation": "상품설명필드 입니다.",
+  "productExplanation": "업데이트 된 상품설명필드 입니다.",
   "tags": [
-    "tag1",
-    "tag2"
+    "tag3",
+    "tag4"
   ],
-  "productAmount": 2
+  "productAmount": 1
 }

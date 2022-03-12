@@ -1,0 +1,17 @@
+DELETE http://localhost:8080/product
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzA5NTQzMCwiZXhwIjoxNjQ3MDk3MjMwfQ.LZpdVjKuhViOYTYT2ory5k4l4ClP43ihhP3TxIzQQ4c
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#Response code: 200; Time: 137ms; Content length: 48 bytes
+
+#req
+{
+  "productNum": 1,
+  "storeNum": 1
+}
