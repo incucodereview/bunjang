@@ -10,6 +10,7 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #}
 #Response code: 200; Time: 139ms; Content length: 48 bytes
 
+
 {
   "storeNum": 1,
   "productPhotos": null,
