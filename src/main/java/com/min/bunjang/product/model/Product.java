@@ -169,4 +169,12 @@ public class Product extends BasicEntity {
         this.productTags.addAll(productTags);
     }
 
+    public void addHitsCount(String email) {
+        if (email == null) {
+            return;
+        }
+
+        this.hits += 1;
+    }
+
 }
