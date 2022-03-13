@@ -86,7 +86,7 @@ public class Product extends BasicEntity {
         this.productName = productName;
     }
 
-    public Product(
+    private Product(
             String productName,
             FirstProductCategory firstProductCategory,
             SecondProductCategory secondProductCategory,

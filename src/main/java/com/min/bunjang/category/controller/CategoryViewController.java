@@ -29,7 +29,7 @@ public class CategoryViewController {
     @GetMapping(CategoryViewControllerPath.CATEGORY_FIND_BY_FIRST)
     public RestResponse<ProductSimpleResponses> findProductsByFirstCategory(
             @NotNull @PathVariable Long firstCategoryNum,
-            @PageableDefault(sort = "updateDate", direction = Sort.Direction.DESC, size = 10) Pageable pageable
+            @PageableDefault(sort = "updatedDate", direction = Sort.Direction.DESC, size = 10) Pageable pageable
     ) {
         ProductSimpleResponses productsByFirstCategory = categoryViewService.findProductsByFirstCategory(firstCategoryNum, pageable);
         return RestResponse.of(HttpStatus.OK, productsByFirstCategory);
