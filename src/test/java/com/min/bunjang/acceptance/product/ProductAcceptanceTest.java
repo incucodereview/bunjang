@@ -13,8 +13,11 @@ import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.controller.ProductControllerPath;
+import com.min.bunjang.product.controller.ProductViewControllerPath;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.dto.ProductDeleteRequest;
+import com.min.bunjang.product.dto.ProductSimpleResponse;
+import com.min.bunjang.product.dto.ProductSimpleResponses;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
@@ -90,6 +93,14 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                     상품_생성_응답_검증(productCreateOrUpdateRequest);
                 }),
 
+                DynamicTest.dynamicTest("상점별 상품목록 조회.", () -> {
+                    //when
+                    ProductSimpleResponses productSimpleResponses = 상점별_상품목록_조회_요청(loginResult, store);
+
+                    //then
+                    상점별_상품목록_조회_응답_검증(productSimpleResponses);
+                }),
+
                 DynamicTest.dynamicTest("상품 수정.", () -> {
                     //given
                     Product product = productRepository.findAll().get(0);
@@ -154,6 +165,18 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(productTags).hasSize(2);
         Assertions.assertThat(productTags.get(0).getTag()).isEqualTo(productCreateOrUpdateRequest.getTags().get(0));
         Assertions.assertThat(productTags.get(1).getTag()).isEqualTo(productCreateOrUpdateRequest.getTags().get(1));
+    }
+
+    private ProductSimpleResponses 상점별_상품목록_조회_요청(TokenValuesDto loginResult, Store store) {
+        String path = ProductViewControllerPath.PRODUCTS_FIND_BY_STORE.replace("{storeNum}", String.valueOf(store.getNum()));
+        return getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<ProductSimpleResponses>>() {
+        }).getResult();
+    }
+
+    private void 상점별_상품목록_조회_응답_검증(ProductSimpleResponses productSimpleResponses) {
+        List<ProductSimpleResponse> productSimpleResponseList = productSimpleResponses.getProductSimpleResponses();
+        Assertions.assertThat(productSimpleResponseList).hasSize(1);
+        Assertions.assertThat(productSimpleResponseList.get(0).getProductName()).isEqualTo("productName");
     }
 
     private void 상품_수정_요청(TokenValuesDto loginResult, Product product, ProductCreateOrUpdateRequest productCreateOrUpdateRequest) {

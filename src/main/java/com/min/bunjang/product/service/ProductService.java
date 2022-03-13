@@ -7,12 +7,11 @@ import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
-import com.min.bunjang.common.validator.MemberAndStoreMatchValidator;
+import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.dto.ProductDeleteRequest;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
-import com.min.bunjang.product.model.ProductTag;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
 import com.min.bunjang.store.exception.NotExistStoreException;
@@ -21,9 +20,6 @@ import com.min.bunjang.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -42,7 +38,7 @@ public class ProductService {
         FirstProductCategory firstProductCategory = firstProductCategoryRepository.findById(productCreateOrUpdateRequest.getFirstCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         SecondProductCategory secondProductCategory = secondProductCategoryRepository.findById(productCreateOrUpdateRequest.getSecondCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         ThirdProductCategory thirdProductCategory = thirdProductCategoryRepository.findById(productCreateOrUpdateRequest.getThirdCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
-        MemberAndStoreMatchValidator.verifyMemberAndStoreByEmail(email, store);
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
 
         Product savedProduct = productRepository.save(Product.createProduct(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory, store));
         productTagRepository.saveAll(productCreateOrUpdateRequest.makeProductTags(savedProduct));
@@ -55,7 +51,7 @@ public class ProductService {
         FirstProductCategory firstProductCategory = firstProductCategoryRepository.findById(productCreateOrUpdateRequest.getFirstCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         SecondProductCategory secondProductCategory = secondProductCategoryRepository.findById(productCreateOrUpdateRequest.getSecondCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         ThirdProductCategory thirdProductCategory = thirdProductCategoryRepository.findById(productCreateOrUpdateRequest.getThirdCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
-        MemberAndStoreMatchValidator.verifyMemberAndStoreByEmail(email, store);
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
 
         product.productUpdate(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory);
 
@@ -67,7 +63,7 @@ public class ProductService {
     public void deleteProduct(String email, ProductDeleteRequest productDeleteRequest) {
         Store store = storeRepository.findById(productDeleteRequest.getStoreNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(productDeleteRequest.getProductNum()).orElseThrow(NotExistProductException::new);
-        MemberAndStoreMatchValidator.verifyMemberAndStoreByEmail(email, store);
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
 
         productTagRepository.deleteByProductNum(product.getNum());
         productRepository.deleteById(productDeleteRequest.getProductNum());

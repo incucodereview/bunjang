@@ -1,0 +1,42 @@
+GET http://localhost:8080/store/1/products
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzE3OTE4MywiZXhwIjoxNjQ3MTgwOTgzfQ.3Y2nD65MStLNrANp_STchvKDwtNXpB5zC_sYjSGT1zU
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "productSimpleResponses": [
+#      {
+#        "productNum": 3,
+#        "productThumbnail": null,
+#        "productName": "productTempName2",
+#        "productPrice": 100009,
+#        "updateDateTime": "2022-03-13T22:46:40",
+#        "exchangeLocation": "exchangeLocation"
+#      },
+#      {
+#        "productNum": 2,
+#        "productThumbnail": null,
+#        "productName": "productTempName",
+#        "productPrice": 100009,
+#        "updateDateTime": "2022-03-12T23:32:48",
+#        "exchangeLocation": "exchangeLocation"
+#      }
+#    ],
+#    "pageDto": {
+#      "startPage": 1,
+#      "endPage": 0,
+#      "prev": false,
+#      "next": false,
+#      "total": 2,
+#      "realEndPage": 0,
+#      "currentPage": 0
+#    }
+#  }
+#}
+#
+#Response code: 200; Time: 140ms; Content length: 523 bytes
+
+#req

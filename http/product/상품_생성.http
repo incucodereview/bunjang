@@ -1,6 +1,6 @@
 POST http://localhost:8080/product
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzA5NTQzMCwiZXhwIjoxNjQ3MDk3MjMwfQ.LZpdVjKuhViOYTYT2ory5k4l4ClP43ihhP3TxIzQQ4c
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzE3OTE4MywiZXhwIjoxNjQ3MTgwOTgzfQ.3Y2nD65MStLNrANp_STchvKDwtNXpB5zC_sYjSGT1zU
 
 #res
 #{
@@ -14,13 +14,13 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 {
   "storeNum": 1,
   "productPhotos": null,
-  "productName": "productTempName",
+  "productName": "productTempName2",
   "firstCategoryNum": 1,
   "secondCategoryNum": 1,
   "thirdCategoryNum": 1,
   "exchangeLocation": "exchangeLocation",
-  "productQualityState": "SOLD_ING",
-  "productState": "NEW_PRODUCT",
+  "productTradeState": "SOLD_ING",
+  "productQualityState": "NEW_PRODUCT",
   "exchangeState": "POSSIBILITY",
   "productPrice": 100009,
   "deliveryChargeInPrice": "INCLUDED",
