@@ -37,4 +37,22 @@ public class CategoryViewService {
                 new PageDto(pageable.getPageSize(), pageable.getPageNumber(), firstProductCategories.getTotalElements())
         );
     }
+
+    public ProductSimpleResponses findProductsBySecondCategory(Long secondCategoryNum, Pageable pageable) {
+        Page<Product> secondProductCategories = productRepository.findBySecondProductCategoryNum(secondCategoryNum, pageable);
+        List<ProductSimpleResponse> productSimpleResponseList = ProductSimpleResponse.listOf(secondProductCategories.getContent());
+        return new ProductSimpleResponses(
+                productSimpleResponseList,
+                new PageDto(pageable.getPageSize(), pageable.getPageNumber(), secondProductCategories.getTotalElements())
+        );
+    }
+
+    public ProductSimpleResponses findProductsByThirdCategory(Long thirdCategoryNum, Pageable pageable) {
+        Page<Product> thirdProductCategories = productRepository.findByThirdProductCategoryNum(thirdCategoryNum, pageable);
+        List<ProductSimpleResponse> productSimpleResponseList = ProductSimpleResponse.listOf(thirdProductCategories.getContent());
+        return new ProductSimpleResponses(
+                productSimpleResponseList,
+                new PageDto(pageable.getPageSize(), pageable.getPageNumber(), thirdProductCategories.getTotalElements())
+        );
+    }
 }

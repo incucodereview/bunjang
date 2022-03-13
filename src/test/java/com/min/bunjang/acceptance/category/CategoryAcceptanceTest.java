@@ -67,6 +67,8 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
         Product product3 = ProductHelper.상품생성(store, firstCategory2, secondCategory3, thirdCategory4, productRepository);
         Thread.sleep(2000);
         Product product4 = ProductHelper.상품생성(store2, firstCategory, secondCategory, thirdCategory, productRepository);
+        Thread.sleep(2000);
+        Product product5 = ProductHelper.상품생성(store2, firstCategory2, secondCategory3, thirdCategory4, productRepository);
 
         return Stream.of(
                 DynamicTest.dynamicTest("모든 카테고리 조회.", () -> {
@@ -83,8 +85,23 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
 
                     //then
                     루트_카테고리_상품_조회_응답_검증(product1, product2, product4, productSimpleResponses);
-                })
+                }),
 
+                DynamicTest.dynamicTest("Second 카테고리로 상품 조회.", () -> {
+                    //when
+                    ProductSimpleResponses productSimpleResponses = Second_카테고리_상품_조회_요청(secondCategory3);
+
+                    //then
+                    Second_카테고리_상품_조회_응답_검증(product3, product5, productSimpleResponses);
+                }),
+
+                DynamicTest.dynamicTest("Third 카테고리로 상품 조회.", () -> {
+                    //when
+                    ProductSimpleResponses productSimpleResponses = Third_카테고리_상품_조회_요청(thirdCategory);
+
+                    //then
+                    Third_카테고리_상품_조회_응답_검증(product1, product2, product4, productSimpleResponses);
+                })
         );
     }
 
@@ -129,6 +146,33 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private void 루트_카테고리_상품_조회_응답_검증(Product product1, Product product2, Product product4, ProductSimpleResponses productSimpleResponses) {
+        List<ProductSimpleResponse> productSimpleResponseList = productSimpleResponses.getProductSimpleResponses();
+        Assertions.assertThat(productSimpleResponseList).hasSize(3);
+        Assertions.assertThat(productSimpleResponseList.get(0).getProductNum()).isEqualTo(product4.getNum());
+        Assertions.assertThat(productSimpleResponseList.get(1).getProductNum()).isEqualTo(product2.getNum());
+        Assertions.assertThat(productSimpleResponseList.get(2).getProductNum()).isEqualTo(product1.getNum());
+    }
+
+    private ProductSimpleResponses Second_카테고리_상품_조회_요청(SecondProductCategory secondCategory3) {
+        String path = CategoryViewControllerPath.CATEGORY_FIND_BY_SECOND.replace("{secondCategoryNum}", String.valueOf(secondCategory3.getNum()));
+        return getApi(path, "", new TypeReference<RestResponse<ProductSimpleResponses>>() {
+        }).getResult();
+    }
+
+    private void Second_카테고리_상품_조회_응답_검증(Product product3, Product product5, ProductSimpleResponses productSimpleResponses) {
+        List<ProductSimpleResponse> productSimpleResponseList = productSimpleResponses.getProductSimpleResponses();
+        Assertions.assertThat(productSimpleResponseList).hasSize(2);
+        Assertions.assertThat(productSimpleResponseList.get(0).getProductNum()).isEqualTo(product5.getNum());
+        Assertions.assertThat(productSimpleResponseList.get(1).getProductNum()).isEqualTo(product3.getNum());
+    }
+
+    private ProductSimpleResponses Third_카테고리_상품_조회_요청(ThirdProductCategory thirdCategory) {
+        String path = CategoryViewControllerPath.CATEGORY_FIND_BY_THIRD.replace("{thirdCategoryNum}", String.valueOf(thirdCategory.getNum()));
+        return getApi(path, "", new TypeReference<RestResponse<ProductSimpleResponses>>() {
+        }).getResult();
+    }
+
+    private void Third_카테고리_상품_조회_응답_검증(Product product1, Product product2, Product product4, ProductSimpleResponses productSimpleResponses) {
         List<ProductSimpleResponse> productSimpleResponseList = productSimpleResponses.getProductSimpleResponses();
         Assertions.assertThat(productSimpleResponseList).hasSize(3);
         Assertions.assertThat(productSimpleResponseList.get(0).getProductNum()).isEqualTo(product4.getNum());

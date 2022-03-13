@@ -35,4 +35,22 @@ public class CategoryViewController {
         return RestResponse.of(HttpStatus.OK, productsByFirstCategory);
     }
 
+    @GetMapping(CategoryViewControllerPath.CATEGORY_FIND_BY_SECOND)
+    public RestResponse<ProductSimpleResponses> findProductsBySecondCategory(
+            @NotNull @PathVariable Long secondCategoryNum,
+            @PageableDefault(sort = "updatedDate", direction = Sort.Direction.DESC, size = 10) Pageable pageable
+            ) {
+        ProductSimpleResponses productsBySecondCategory = categoryViewService.findProductsBySecondCategory(secondCategoryNum, pageable);
+        return RestResponse.of(HttpStatus.OK, productsBySecondCategory);
+    }
+
+    @GetMapping(CategoryViewControllerPath.CATEGORY_FIND_BY_THIRD)
+    public RestResponse<ProductSimpleResponses> findProductsByThirdCategory(
+            @NotNull @PathVariable Long thirdCategoryNum,
+            @PageableDefault(sort = "updatedDate", direction = Sort.Direction.DESC, size = 10) Pageable pageable
+    ) {
+        ProductSimpleResponses productsByThirdCategory = categoryViewService.findProductsByThirdCategory(thirdCategoryNum, pageable);
+        return RestResponse.of(HttpStatus.OK, productsByThirdCategory);
+    }
+
 }
