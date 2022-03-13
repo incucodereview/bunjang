@@ -14,18 +14,16 @@ import com.min.bunjang.product.dto.ProductDeleteRequest;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
-import com.min.bunjang.product.model.ProductState;
+import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTag;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
 import com.min.bunjang.store.model.Store;
 import org.assertj.core.api.Assertions;
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.List;
@@ -70,7 +68,7 @@ class ProductServiceTest extends ServiceTestConfig {
                 secondCate.getNum(),
                 thirdCate.getNum(),
                 "seoul",
-                ProductState.NEW_PRODUCT,
+                ProductQualityState.NEW_PRODUCT,
                 ExchangeState.IMPOSSIBILITY,
                 100000,
                 DeliveryChargeInPrice.EXCLUDED,
@@ -90,7 +88,7 @@ class ProductServiceTest extends ServiceTestConfig {
         Assertions.assertThat(product.getSecondProductCategory()).isNotNull();
         Assertions.assertThat(product.getThirdProductCategory()).isNotNull();
         Assertions.assertThat(product.getExchangeLocation()).isEqualTo(productCreateOrUpdateRequest.getExchangeLocation());
-        Assertions.assertThat(product.getProductState()).isEqualTo(productCreateOrUpdateRequest.getProductState());
+        Assertions.assertThat(product.getProductQualityState()).isEqualTo(productCreateOrUpdateRequest.getProductQualityState());
         Assertions.assertThat(product.getExchangeState()).isEqualTo(productCreateOrUpdateRequest.getExchangeState());
         Assertions.assertThat(product.getProductPrice()).isEqualTo(productCreateOrUpdateRequest.getProductPrice());
         Assertions.assertThat(product.getDeliveryChargeInPrice()).isEqualTo(productCreateOrUpdateRequest.getDeliveryChargeInPrice());
@@ -121,7 +119,7 @@ class ProductServiceTest extends ServiceTestConfig {
                 secondCate.getNum(),
                 thirdCate.getNum(),
                 "seoul",
-                ProductState.NEW_PRODUCT,
+                ProductQualityState.NEW_PRODUCT,
                 ExchangeState.IMPOSSIBILITY,
                 100000,
                 DeliveryChargeInPrice.EXCLUDED,
@@ -142,7 +140,7 @@ class ProductServiceTest extends ServiceTestConfig {
                 secondCate.getNum(),
                 thirdCate.getNum(),
                 "new seoul",
-                ProductState.USED_PRODUCT,
+                ProductQualityState.USED_PRODUCT,
                 ExchangeState.POSSIBILITY,
                 100000,
                 DeliveryChargeInPrice.INCLUDED,
@@ -158,7 +156,7 @@ class ProductServiceTest extends ServiceTestConfig {
         Product updatedProduct = productRepository.findAll().get(0);
         Assertions.assertThat(updatedProduct.getNum()).isEqualTo(savedProduct.getNum());
         Assertions.assertThat(updatedProduct.getExchangeLocation()).isEqualTo(productUpdateRequest.getExchangeLocation());
-        Assertions.assertThat(updatedProduct.getProductState()).isEqualTo(productUpdateRequest.getProductState());
+        Assertions.assertThat(updatedProduct.getProductQualityState()).isEqualTo(productUpdateRequest.getProductQualityState());
         Assertions.assertThat(updatedProduct.getExchangeState()).isEqualTo(productUpdateRequest.getExchangeState());
         Assertions.assertThat(updatedProduct.getProductPrice()).isEqualTo(productUpdateRequest.getProductPrice());
         Assertions.assertThat(updatedProduct.getDeliveryChargeInPrice()).isEqualTo(productUpdateRequest.getDeliveryChargeInPrice());

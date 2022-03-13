@@ -18,7 +18,7 @@ import com.min.bunjang.product.dto.ProductDeleteRequest;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
-import com.min.bunjang.product.model.ProductState;
+import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTag;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
@@ -72,7 +72,7 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                             secondCategory.getNum(),
                             thirdCategory.getNum(),
                             "seoul",
-                            ProductState.NEW_PRODUCT,
+                            ProductQualityState.NEW_PRODUCT,
                             ExchangeState.IMPOSSIBILITY,
                             100000,
                             DeliveryChargeInPrice.EXCLUDED,
@@ -99,7 +99,7 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                             secondCategory.getNum(),
                             thirdCategory.getNum(),
                             "new seoul",
-                            ProductState.USED_PRODUCT,
+                            ProductQualityState.USED_PRODUCT,
                             ExchangeState.POSSIBILITY,
                             100214,
                             DeliveryChargeInPrice.INCLUDED,
@@ -143,7 +143,7 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(product.getThirdProductCategory()).isNotNull();
         Assertions.assertThat(product.getProductName()).isEqualTo(productCreateOrUpdateRequest.getProductName());
         Assertions.assertThat(product.getExchangeLocation()).isEqualTo(productCreateOrUpdateRequest.getExchangeLocation());
-        Assertions.assertThat(product.getProductState()).isEqualTo(productCreateOrUpdateRequest.getProductState());
+        Assertions.assertThat(product.getProductQualityState()).isEqualTo(productCreateOrUpdateRequest.getProductQualityState());
         Assertions.assertThat(product.getExchangeState()).isEqualTo(productCreateOrUpdateRequest.getExchangeState());
         Assertions.assertThat(product.getDeliveryChargeInPrice()).isEqualTo(productCreateOrUpdateRequest.getDeliveryChargeInPrice());
         Assertions.assertThat(product.getProductAmount()).isEqualTo(productCreateOrUpdateRequest.getProductAmount());
@@ -163,7 +163,7 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(updatedProduct.getNum()).isEqualTo(product.getNum());
         Assertions.assertThat(updatedProduct.getProductName()).isEqualTo(productCreateOrUpdateRequest.getProductName());
         Assertions.assertThat(updatedProduct.getExchangeLocation()).isEqualTo(productCreateOrUpdateRequest.getExchangeLocation());
-        Assertions.assertThat(updatedProduct.getProductState()).isEqualTo(productCreateOrUpdateRequest.getProductState());
+        Assertions.assertThat(updatedProduct.getProductQualityState()).isEqualTo(productCreateOrUpdateRequest.getProductQualityState());
         Assertions.assertThat(updatedProduct.getExchangeState()).isEqualTo(productCreateOrUpdateRequest.getExchangeState());
         Assertions.assertThat(updatedProduct.getDeliveryChargeInPrice()).isEqualTo(productCreateOrUpdateRequest.getDeliveryChargeInPrice());
         Assertions.assertThat(updatedProduct.getProductAmount()).isEqualTo(productCreateOrUpdateRequest.getProductAmount());

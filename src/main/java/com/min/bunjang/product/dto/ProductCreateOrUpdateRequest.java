@@ -3,7 +3,7 @@ package com.min.bunjang.product.dto;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
-import com.min.bunjang.product.model.ProductState;
+import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTag;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class ProductCreateOrUpdateRequest {
     @NotNull
     private String exchangeLocation;
     @NotNull
-    private ProductState productState;
+    private ProductQualityState productQualityState;
     @NotNull
     private ExchangeState exchangeState;
     @NotNull

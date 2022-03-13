@@ -1,12 +1,12 @@
 package com.min.bunjang.product.model;
 
-public enum ProductState {
+public enum ProductQualityState {
     NEW_PRODUCT("새상품"),
     USED_PRODUCT("중고상품");
 
     private final String desc;
 
-    ProductState(String desc) {
+    ProductQualityState(String desc) {
         this.desc = desc;
     }
 }

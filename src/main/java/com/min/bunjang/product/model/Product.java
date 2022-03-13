@@ -54,7 +54,7 @@ public class Product extends BasicEntity {
 
     //이넘 컨버터를 왜 사용해야 하는지 알게되었다면 여기에 사용해도 되는 것인지 판단후 사용할 것. 당장은 @Enumerated(EnumType.STRING)로 사용
     @Enumerated(EnumType.STRING)
-    private ProductState productState;
+    private ProductQualityState productQualityState;
 
     @Enumerated(EnumType.STRING)
     private ExchangeState exchangeState;
@@ -93,7 +93,7 @@ public class Product extends BasicEntity {
             ThirdProductCategory thirdProductCategory,
             String productPhotos,
             String exchangeLocation,
-            ProductState productState,
+            ProductQualityState productQualityState,
             ExchangeState exchangeState,
             int productPrice,
             DeliveryChargeInPrice deliveryChargeInPrice,
@@ -107,7 +107,7 @@ public class Product extends BasicEntity {
         this.thirdProductCategory = thirdProductCategory;
         this.productPhotos = productPhotos;
         this.exchangeLocation = exchangeLocation;
-        this.productState = productState;
+        this.productQualityState = productQualityState;
         this.exchangeState = exchangeState;
         this.productPrice = productPrice;
         this.deliveryChargeInPrice = deliveryChargeInPrice;
@@ -130,7 +130,7 @@ public class Product extends BasicEntity {
                 thirdProductCategory,
                 null,
                 productCreateOrUpdateRequest.getExchangeLocation(),
-                productCreateOrUpdateRequest.getProductState(),
+                productCreateOrUpdateRequest.getProductQualityState(),
                 productCreateOrUpdateRequest.getExchangeState(),
                 productCreateOrUpdateRequest.getProductPrice(),
                 productCreateOrUpdateRequest.getDeliveryChargeInPrice(),
@@ -152,7 +152,7 @@ public class Product extends BasicEntity {
         this.secondProductCategory = secondProductCategory;
         this.thirdProductCategory = thirdProductCategory;
         this.exchangeLocation = productCreateOrUpdateRequest.getExchangeLocation();
-        this.productState = productCreateOrUpdateRequest.getProductState();
+        this.productQualityState = productCreateOrUpdateRequest.getProductQualityState();
         this.exchangeState = productCreateOrUpdateRequest.getExchangeState();
         this.productPrice = productCreateOrUpdateRequest.getProductPrice();
         this.deliveryChargeInPrice = productCreateOrUpdateRequest.getDeliveryChargeInPrice();

@@ -7,11 +7,9 @@ import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
-import com.min.bunjang.product.model.ProductState;
+import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.model.Store;
-
-import java.util.ArrayList;
 
 public class ProductHelper {
 
@@ -24,7 +22,7 @@ public class ProductHelper {
                 null,
                 null,
                 "e",
-                ProductState.NEW_PRODUCT,
+                ProductQualityState.NEW_PRODUCT,
                 ExchangeState.IMPOSSIBILITY,
                 100,
                 DeliveryChargeInPrice.EXCLUDED,
