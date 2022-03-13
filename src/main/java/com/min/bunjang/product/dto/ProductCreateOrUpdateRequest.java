@@ -5,6 +5,7 @@ import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTag;
+import com.min.bunjang.product.model.ProductTradeState;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,6 +32,8 @@ public class ProductCreateOrUpdateRequest {
     private Long thirdCategoryNum;
     @NotNull
     private String exchangeLocation;
+    @NotNull
+    private ProductTradeState productTradeState;
     @NotNull
     private ProductQualityState productQualityState;
     @NotNull

@@ -8,6 +8,7 @@ import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductQualityState;
+import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.model.Store;
 
@@ -22,6 +23,7 @@ public class ProductHelper {
                 null,
                 null,
                 "e",
+                ProductTradeState.SOLD_ING,
                 ProductQualityState.NEW_PRODUCT,
                 ExchangeState.IMPOSSIBILITY,
                 100,

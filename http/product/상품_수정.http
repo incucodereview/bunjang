@@ -19,6 +19,7 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
   "secondCategoryNum": 1,
   "thirdCategoryNum": 1,
   "exchangeLocation": "updatedExchangeLocation",
+  "productQualityState": "SOLD_ING",
   "productState": "NEW_PRODUCT",
   "exchangeState": "POSSIBILITY",
   "productPrice": 897762,

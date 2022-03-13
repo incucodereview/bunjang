@@ -20,6 +20,7 @@ import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTag;
+import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
 import com.min.bunjang.store.model.Store;
@@ -72,6 +73,7 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                             secondCategory.getNum(),
                             thirdCategory.getNum(),
                             "seoul",
+                            ProductTradeState.SOLD_ING,
                             ProductQualityState.NEW_PRODUCT,
                             ExchangeState.IMPOSSIBILITY,
                             100000,
@@ -99,6 +101,7 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                             secondCategory.getNum(),
                             thirdCategory.getNum(),
                             "new seoul",
+                            ProductTradeState.SOLD_ING,
                             ProductQualityState.USED_PRODUCT,
                             ExchangeState.POSSIBILITY,
                             100214,
