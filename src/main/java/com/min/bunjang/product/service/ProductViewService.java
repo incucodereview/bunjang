@@ -13,7 +13,11 @@ import com.min.bunjang.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,10 +34,16 @@ public class ProductViewService {
     public ProductSimpleResponses findProductsByStore(String email, Long storeNum, Pageable pageable) {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
         MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
-        Page<Product> productsByStore = productRepository.findByStoreNum(storeNum, pageable);
+//        Page<Product> productsByStore = productRepository.findByStoreNum(storeNum, pageable);
+//        return new ProductSimpleResponses(
+//                ProductSimpleResponse.listOf(productsByStore.getContent()),
+//                new PageDto(pageable.getPageSize(), pageable.getPageNumber(), productsByStore.getTotalElements())
+//        );
+        List<Product> d = new ArrayList<>();
+        Slice<Product> byStoreNum = productRepository.findByStoreNum(storeNum, pageable);
         return new ProductSimpleResponses(
-                ProductSimpleResponse.listOf(productsByStore.getContent()),
-                new PageDto(pageable.getPageSize(), pageable.getPageNumber(), productsByStore.getTotalElements())
+                ProductSimpleResponse.listOf(byStoreNum.getContent()),
+                null
         );
     }
 }

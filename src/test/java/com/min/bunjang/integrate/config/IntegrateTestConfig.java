@@ -5,7 +5,6 @@ import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.testconfig.RestDocsConfiguration;
 import io.restassured.RestAssured;
-import org.h2.store.Data;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

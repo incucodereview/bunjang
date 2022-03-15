@@ -1,6 +1,6 @@
 POST http://localhost:8080/product
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzE3OTE4MywiZXhwIjoxNjQ3MTgwOTgzfQ.3Y2nD65MStLNrANp_STchvKDwtNXpB5zC_sYjSGT1zU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzM1MjI5NCwiZXhwIjoxNjQ3MzU0MDk0fQ.qIDR9_Wo-5mgH4rurLqngmfm5AmeO8ZtFj0jtNsOAAc
 
 #res
 #{
@@ -14,7 +14,7 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 {
   "storeNum": 1,
   "productPhotos": null,
-  "productName": "productTempName2",
+  "productName": "productTempName7",
   "firstCategoryNum": 1,
   "secondCategoryNum": 1,
   "thirdCategoryNum": 1,
@@ -22,12 +22,12 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
   "productTradeState": "SOLD_ING",
   "productQualityState": "NEW_PRODUCT",
   "exchangeState": "POSSIBILITY",
-  "productPrice": 100009,
+  "productPrice": 20066,
   "deliveryChargeInPrice": "INCLUDED",
-  "productExplanation": "상품설명필드 입니다.",
+  "productExplanation": "상품설명필드 입니다.7",
   "tags": [
-    "tag1",
-    "tag2"
+    "tag5",
+    "tag1"
   ],
   "productAmount": 2
 }

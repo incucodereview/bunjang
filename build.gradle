@@ -38,6 +38,7 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.6.1'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.7'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.2.RELEASE'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'

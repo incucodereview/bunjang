@@ -1,6 +1,7 @@
-GET http://localhost:8080/store/1/products
+GET http://localhost:8080/store/1/products?page=1&size=3
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzE3OTE4MywiZXhwIjoxNjQ3MTgwOTgzfQ.3Y2nD65MStLNrANp_STchvKDwtNXpB5zC_sYjSGT1zU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzM1NDYwMywiZXhwIjoxNjQ3MzU2NDAzfQ.77xdN3ztk0UpbBudEz-sTLsWRAw1K6UMIaxhDFb8uPk
+
 
 #res
 #{
