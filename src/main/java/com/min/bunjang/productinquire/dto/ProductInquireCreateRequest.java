@@ -18,5 +18,9 @@ public class ProductInquireCreateRequest {
     private Long productNum;
     @NotEmpty
     private String inquireContent;
-    private Long inquireWriterNumForAnswer;
+    private Long mentionedStoreNumForAnswer;
+
+    public boolean isCheckExistenceMentionedStoreNum() {
+        return this.mentionedStoreNumForAnswer != null;
+    }
 }

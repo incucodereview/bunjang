@@ -1,6 +1,6 @@
 POST http://localhost:8080/product-inquire
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzQyMzMyMiwiZXhwIjoxNjQ3NDI1MTIyfQ.SRbEJ7dLsVST2Qcp5OQRhYQIBOPJ1pZS4-y0KDZffss
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzQ0MTIyNSwiZXhwIjoxNjQ3NDQzMDI1fQ.EOPFg-c4VxydVfUfmPFqhvD_vehnZQBuxgAO2tK5WDI
 
 #res
 #{
@@ -13,7 +13,7 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #req
 {
   "writerNum" :  1,
-  "productNum" : 4,
+  "productNum" : 5,
   "inquireContent" :  "제품 문의 입니다.",
   "inquireWriterNumForAnswer" : null
 }

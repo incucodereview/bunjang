@@ -7,6 +7,8 @@ import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.config.ServiceTestConfig;
+import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
@@ -27,6 +29,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
+import java.util.List;
 
 class ProductInquireServiceTest extends ServiceTestConfig {
     @Autowired
@@ -47,18 +50,26 @@ class ProductInquireServiceTest extends ServiceTestConfig {
     @Autowired
     private ThirdProductCategoryRepository thirdProductCategoryRepository;
 
-    @DisplayName("상품 문의를 생성하고, 상품에 문의정보가 적용된다.")
+    @DisplayName("상품 문의를 생성하고, 태그 정보가 있다면 태그정보와 함께 생성한다. 또한 문의가 달리는 상품에 문의정보가 적용된다.")
     @Test
     void productInquire_create() {
         //given
-        Member member = Member.createMember(MemberDirectCreateDto.of("email", "pwd", "name", null, null, MemberRole.ROLE_MEMBER));
-        Member savedMember = memberRepository.save(member);
-        Store savedStore = storeRepository.save(Store.createStore("storeName", "introduce", null, member));
+        String ownerEmail = "urisegea@naver.com";
+        String ownerPassword = "password";
+        Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
+
+        String writerEmail = "writer@naver.com";
+        String writerPassword = "password!writer";
+        Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
+
+        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
         ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
         ProductCreateOrUpdateRequest productCreateOrUpdateRequest = new ProductCreateOrUpdateRequest(
-                savedStore.getNum(),
+                null,
                 null,
                 "productName",
                 firstCategory.getNum(),
@@ -74,18 +85,27 @@ class ProductInquireServiceTest extends ServiceTestConfig {
                 Arrays.asList("tag1", "tag2"),
                 1
         );
-        Product savedProduct = productRepository.save(Product.createProduct(productCreateOrUpdateRequest, firstCategory, secondCategory, thirdCategory, savedStore));
+        Product savedProduct = productRepository.save(Product.createProduct(productCreateOrUpdateRequest, firstCategory, secondCategory, thirdCategory, owner));
 
-        ProductInquireCreateRequest productInquireCreateRequest = new ProductInquireCreateRequest(savedStore.getNum(), savedProduct.getNum(), "문의 내용", null);
+        ProductInquireCreateRequest productInquireCreateRequest = new ProductInquireCreateRequest(writer.getNum(), savedProduct.getNum(), "문의 내용", null);
         //when
-        productInquireService.createProductInquire(savedMember.getEmail(), productInquireCreateRequest);
+        productInquireService.createProductInquire(writerEmail, productInquireCreateRequest);
 
+
+        ProductInquireCreateRequest answerProductInquireCreateRequest = new ProductInquireCreateRequest(owner.getNum(), savedProduct.getNum(), "문의 내용 답변입니다", writer.getNum());
+        productInquireService.createProductInquire(ownerEmail, answerProductInquireCreateRequest);
         //then
-        ProductInquire productInquire = productInquireRepository.findAll().get(0);
+        List<ProductInquire> all = productInquireRepository.findAll();
 
-        Assertions.assertThat(productInquire.getProductNum()).isEqualTo(productInquireCreateRequest.getProductNum());
-        Assertions.assertThat(productInquire.getWriterNum()).isEqualTo(productInquireCreateRequest.getWriterNum());
-        Assertions.assertThat(productInquire.getInquireContent()).isEqualTo(productInquireCreateRequest.getInquireContent());
+        Assertions.assertThat(all.get(0).getProductNum()).isEqualTo(productInquireCreateRequest.getProductNum());
+        Assertions.assertThat(all.get(0).getWriterNum()).isEqualTo(productInquireCreateRequest.getWriterNum());
+        Assertions.assertThat(all.get(0).getInquireContent()).isEqualTo(productInquireCreateRequest.getInquireContent());
+
+        Assertions.assertThat(all.get(1).getProductNum()).isEqualTo(answerProductInquireCreateRequest.getProductNum());
+        Assertions.assertThat(all.get(1).getWriterNum()).isEqualTo(answerProductInquireCreateRequest.getWriterNum());
+        Assertions.assertThat(all.get(1).getInquireContent()).isEqualTo(answerProductInquireCreateRequest.getInquireContent());
+        Assertions.assertThat(all.get(1).getMentionedStoreNumForAnswer()).isEqualTo(answerProductInquireCreateRequest.getMentionedStoreNumForAnswer());
+
 
         Product product = productRepository.findById(savedProduct.getNum()).get();
         Assertions.assertThat(product.getProductInquires()).isNotNull();

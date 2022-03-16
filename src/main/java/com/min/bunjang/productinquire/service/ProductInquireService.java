@@ -28,7 +28,22 @@ public class ProductInquireService {
         Store store = storeRepository.findById(productInquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(productInquireCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
         MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
-        productInquireRepository.save(ProductInquire.createProductInquire(store.getNum(), product.getNum(), productInquireCreateRequest.getInquireContent(), productInquireCreateRequest.getInquireWriterNumForAnswer()));
+
+        ProductInquire savedProductInquire = productInquireRepository.save(ProductInquire.createProductInquire(
+                store.getNum(),
+                store.getStoreName(),
+                product.getNum(),
+                productInquireCreateRequest.getInquireContent()
+        ));
+        defineMentionByMentionNum(productInquireCreateRequest, savedProductInquire);
+    }
+
+    private void defineMentionByMentionNum(ProductInquireCreateRequest productInquireCreateRequest, ProductInquire savedProductInquire) {
+        //TODO 뭔가 태그는 상품문의 '생성'이라는 메서드에 적합한 내용인지 약간 애매해서 일단 메서드로 분리해 놓았다. 우선 해보자
+        if (productInquireCreateRequest.isCheckExistenceMentionedStoreNum()) {
+            Store mentionedStore = storeRepository.findById(productInquireCreateRequest.getMentionedStoreNumForAnswer()).orElseThrow(NotExistStoreException::new);
+            savedProductInquire.defineMention(mentionedStore.getNum(), mentionedStore.getStoreName());
+        }
     }
 
     @Transactional

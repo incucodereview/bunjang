@@ -11,9 +11,7 @@ import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
-import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
-import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
@@ -22,7 +20,10 @@ import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.productinquire.controller.ProductInquireControllerPath;
+import com.min.bunjang.productinquire.controller.ProductInquireViewControllerPath;
 import com.min.bunjang.productinquire.dto.ProductInquireCreateRequest;
+import com.min.bunjang.productinquire.dto.ProductInquireResponse;
+import com.min.bunjang.productinquire.dto.ProductInquireResponses;
 import com.min.bunjang.productinquire.model.ProductInquire;
 import com.min.bunjang.productinquire.repository.ProductInquireRepository;
 import com.min.bunjang.store.model.Store;
@@ -70,7 +71,7 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
         ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
         ProductCreateOrUpdateRequest productCreateOrUpdateRequest = new ProductCreateOrUpdateRequest(
-                owner.getNum(),
+                null,
                 null,
                 "productName",
                 firstCategory.getNum(),
@@ -94,15 +95,22 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
                     ProductInquireCreateRequest productInquireCreateRequest = new ProductInquireCreateRequest(writer.getNum(), savedProduct.getNum(), "문의 내용 입니다.", null);
 
                     //when
-                    postApi(ProductInquireControllerPath.PRODUCT_INQUIRE_CREATE, productInquireCreateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+                    상품문의_생성_요청(loginResult, productInquireCreateRequest);
 
                     //then
-                    ProductInquire productInquire = productInquireRepository.findAll().get(0);
-                    Assertions.assertThat(productInquire.getWriterNum()).isEqualTo(writer.getNum());
-                    Assertions.assertThat(productInquire.getProductNum()).isEqualTo(savedProduct.getNum());
-                    Assertions.assertThat(productInquire.getInquireContent()).isEqualTo(productInquireCreateRequest.getInquireContent());
-                    Assertions.assertThat(productInquire.getInquireWriterNumForAnswer()).isEqualTo(productInquireCreateRequest.getInquireWriterNumForAnswer());
+                    상품문의_생성_응답_검증(writer, savedProduct, productInquireCreateRequest);
 
+                }),
+
+                DynamicTest.dynamicTest("상품문의 목록 조회", () -> {
+                    //given
+                    Long productNum = savedProduct.getNum();
+
+                    //when
+                    ProductInquireResponses productInquireResponses = 상품문의_목록_조회_요청(loginResult, productNum);
+
+                    //then
+                    상품문의_목록_조회_응답_검증(productInquireResponses);
                 }),
 
                 DynamicTest.dynamicTest("상품 문의 삭제", () -> {
@@ -110,14 +118,47 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
                     ProductInquire productInquire = productInquireRepository.findAll().get(0);
 
                     //when
-                    String path = ProductInquireControllerPath.PRODUCT_INQUIRE_DELETE.replace("{inquireNum}", String.valueOf(productInquire.getNum()));
-                    deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+                    상품문의_삭제_요청(loginResult, productInquire);
 
                     //then
-                    List<ProductInquire> allProductInquiries = productInquireRepository.findAll();
-                    Assertions.assertThat(allProductInquiries).isEmpty();
+                    상품문의_삭제_응답_검증();
                 })
 
         );
+    }
+
+    private void 상품문의_생성_요청(TokenValuesDto loginResult, ProductInquireCreateRequest productInquireCreateRequest) {
+        postApi(ProductInquireControllerPath.PRODUCT_INQUIRE_CREATE, productInquireCreateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    }
+
+    private void 상품문의_생성_응답_검증(Store writer, Product savedProduct, ProductInquireCreateRequest productInquireCreateRequest) {
+        ProductInquire productInquire = productInquireRepository.findAll().get(0);
+        Assertions.assertThat(productInquire.getWriterNum()).isEqualTo(writer.getNum());
+        Assertions.assertThat(productInquire.getWriterName()).isEqualTo(writer.getStoreName());
+        Assertions.assertThat(productInquire.getProductNum()).isEqualTo(savedProduct.getNum());
+        Assertions.assertThat(productInquire.getInquireContent()).isEqualTo(productInquireCreateRequest.getInquireContent());
+        Assertions.assertThat(productInquire.getMentionedStoreNumForAnswer()).isEqualTo(productInquireCreateRequest.getMentionedStoreNumForAnswer());
+    }
+
+    private ProductInquireResponses 상품문의_목록_조회_요청(TokenValuesDto loginResult, Long productNum) {
+        String path = ProductInquireViewControllerPath.PRODUCT_INQUIRE_FIND_BY_PRODUCT.replace("{productNum}", String.valueOf(productNum));
+        ProductInquireResponses productInquireResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<ProductInquireResponses>>() {
+        }).getResult();
+        return productInquireResponses;
+    }
+
+    private void 상품문의_목록_조회_응답_검증(ProductInquireResponses productInquireResponses) {
+        List<ProductInquireResponse> productInquireResponseList = productInquireResponses.getProductInquireResponses();
+        Assertions.assertThat(productInquireResponseList).hasSize(1);
+    }
+
+    private void 상품문의_삭제_요청(TokenValuesDto loginResult, ProductInquire productInquire) {
+        String path = ProductInquireControllerPath.PRODUCT_INQUIRE_DELETE.replace("{inquireNum}", String.valueOf(productInquire.getNum()));
+        deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    }
+
+    private void 상품문의_삭제_응답_검증() {
+        List<ProductInquire> allProductInquiries = productInquireRepository.findAll();
+        Assertions.assertThat(allProductInquiries).isEmpty();
     }
 }

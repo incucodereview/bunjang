@@ -1,0 +1,48 @@
+GET http://localhost:8080/product/4/product-inquiries?page=0
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzQ0MTIyNSwiZXhwIjoxNjQ3NDQzMDI1fQ.EOPFg-c4VxydVfUfmPFqhvD_vehnZQBuxgAO2tK5WDI
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "productInquireResponses": [
+#      {
+#        "inquireNum": 4,
+#        "productNum": 4,
+#        "writerNum": 1,
+#        "writerName": "생성 테스트용 상점명 변경 테스트",
+#        "writerThumbnail": null,
+#        "inquireContent": "제품 문의 입니다.2",
+#        "createDate": "2022-03-16T23:34:29",
+#        "answeredStoreNum": null,
+#        "answeredStoreName": null
+#      },
+#      {
+#        "inquireNum": 3,
+#        "productNum": 4,
+#        "writerNum": 1,
+#        "writerName": "생성 테스트용 상점명 변경 테스트",
+#        "writerThumbnail": null,
+#        "inquireContent": "제품 문의 입니다.",
+#        "createDate": "2022-03-16T23:34:18",
+#        "answeredStoreNum": null,
+#        "answeredStoreName": null
+#      },
+#      {
+#        "inquireNum": 1,
+#        "productNum": 4,
+#        "writerNum": 1,
+#        "writerName": "생성 테스트용 상점명 변경 테스트",
+#        "writerThumbnail": null,
+#        "inquireContent": "제품 문의 입니다.",
+#        "createDate": "2022-03-16T18:39:55",
+#        "answeredStoreNum": null,
+#        "answeredStoreName": null
+#      }
+#    ]
+#  }
+#}
+#
+#Response code: 200; Time: 100ms; Content length: 725 bytes
