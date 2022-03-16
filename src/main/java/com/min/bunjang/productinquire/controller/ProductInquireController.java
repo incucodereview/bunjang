@@ -9,9 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,4 +31,16 @@ public class ProductInquireController {
         productInquireService.createProductInquire(memberAccount.getEmail(), productInquireCreateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
+
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+    @DeleteMapping(ProductInquireControllerPath.PRODUCT_INQUIRE_DELETE)
+    public RestResponse<Void> deleteProductInquire(
+            @NotNull @PathVariable Long inquireNum,
+            @AuthenticationPrincipal MemberAccount memberAccount
+    ) {
+        productInquireService.deleteProductInquire(memberAccount.getEmail(), inquireNum);
+        return RestResponse.of(HttpStatus.OK, null);
+    }
+
+
 }

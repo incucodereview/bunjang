@@ -33,6 +33,7 @@ import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
@@ -102,7 +103,21 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
                     Assertions.assertThat(productInquire.getInquireContent()).isEqualTo(productInquireCreateRequest.getInquireContent());
                     Assertions.assertThat(productInquire.getInquireWriterNumForAnswer()).isEqualTo(productInquireCreateRequest.getInquireWriterNumForAnswer());
 
+                }),
+
+                DynamicTest.dynamicTest("상품 문의 삭제", () -> {
+                    //given
+                    ProductInquire productInquire = productInquireRepository.findAll().get(0);
+
+                    //when
+                    String path = ProductInquireControllerPath.PRODUCT_INQUIRE_DELETE.replace("{inquireNum}", String.valueOf(productInquire.getNum()));
+                    deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+
+                    //then
+                    List<ProductInquire> allProductInquiries = productInquireRepository.findAll();
+                    Assertions.assertThat(allProductInquiries).isEmpty();
                 })
+
         );
     }
 }

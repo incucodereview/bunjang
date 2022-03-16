@@ -1,0 +1,11 @@
+DELETE http://localhost:8080/product-inquire/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzQyMzMyMiwiZXhwIjoxNjQ3NDI1MTIyfQ.SRbEJ7dLsVST2Qcp5OQRhYQIBOPJ1pZS4-y0KDZffss
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#Response code: 200; Time: 171ms; Content length: 48 bytes
