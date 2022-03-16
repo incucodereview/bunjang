@@ -23,13 +23,11 @@ import javax.validation.constraints.NotNull;
 public class ProductViewController {
     private final ProductViewService productViewService;
 
-    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @GetMapping(ProductViewControllerPath.PRODUCT_GET)
     public RestResponse<Void> getProduct(
-            @PathVariable Long productNum,
-            @AuthenticationPrincipal MemberAccount memberAccount
+            @NotNull @PathVariable Long productNum
     ) {
-        productViewService.getProduct(memberAccount.getEmail(), productNum);
+        productViewService.getProduct(productNum);
         return RestResponse.of(HttpStatus.OK, null);
     }
 

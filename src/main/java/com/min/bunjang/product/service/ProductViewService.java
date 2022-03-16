@@ -1,9 +1,12 @@
 package com.min.bunjang.product.service;
 
 import com.min.bunjang.common.dto.PageDto;
+import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.validator.MemberAndStoreValidator;
+import com.min.bunjang.product.dto.ProductDetailResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponses;
+import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
@@ -22,9 +25,9 @@ public class ProductViewService {
     private final ProductTagRepository productTagRepository;
     private final StoreRepository storeRepository;
 
-    public /*ProductDetailResponse*/void getProduct(String email, Long productNum) {
-//        Product product = productRepository.findById(productNum).orElseThrow(NotExistProductException::new);
-
+    public ProductDetailResponse getProduct(Long productNum) {
+        Product product = productRepository.findByNum(productNum).orElseThrow(NotExistProductException::new);
+        return null;
     }
 
     public ProductSimpleResponses findProductsByStore(String email, Long storeNum, Pageable pageable) {

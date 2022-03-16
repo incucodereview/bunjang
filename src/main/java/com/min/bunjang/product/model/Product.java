@@ -87,7 +87,7 @@ public class Product extends BasicEntity {
     private List<ProductTag> productTags = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "productNum", orphanRemoval = true)
-    private List<ProductInquire> productInquires = new ArrayList<>();
+    private Set<ProductInquire> productInquires = new HashSet<>();
 
     public Product(String productName) {
         this.productName = productName;
