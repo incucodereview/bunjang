@@ -2,8 +2,12 @@ package com.min.bunjang.productinquire.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.productinquire.dto.ProductInquireCreateRequest;
+import com.min.bunjang.productinquire.service.ProductInquireService;
+import com.min.bunjang.security.MemberAccount;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,10 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductInquireController {
     private final ProductInquireService productInquireService;
 
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PostMapping(ProductInquireControllerPath.PRODUCT_INQUIRE_CREATE)
     public RestResponse<Void> createProductInquire(
-            @Validated @RequestBody ProductInquireCreateRequest productInquireCreateRequest
+            @Validated @RequestBody ProductInquireCreateRequest productInquireCreateRequest,
+            @AuthenticationPrincipal MemberAccount memberAccount
     ) {
+        productInquireService.createProductInquire(memberAccount.getEmail(), productInquireCreateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 }

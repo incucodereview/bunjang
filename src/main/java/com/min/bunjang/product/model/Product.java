@@ -5,6 +5,7 @@ import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
+import com.min.bunjang.productinquire.model.ProductInquire;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
@@ -84,6 +85,9 @@ public class Product extends BasicEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
     private List<ProductTag> productTags = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "productNum", orphanRemoval = true)
+    private List<ProductInquire> productInquires = new ArrayList<>();
 
     public Product(String productName) {
         this.productName = productName;
@@ -180,7 +184,6 @@ public class Product extends BasicEntity {
         if (email == null) {
             return;
         }
-
         this.hits += 1;
     }
 

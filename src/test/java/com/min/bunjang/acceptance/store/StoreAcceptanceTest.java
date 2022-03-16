@@ -23,9 +23,6 @@ import java.util.stream.Stream;
 
 public class StoreAcceptanceTest extends AcceptanceTestConfig {
 
-    @Autowired
-    private StoreRepository storeRepository;
-
     @TestFactory
     Stream<DynamicTest> dynamicTestStream() {
         String email = "urisegea@naver.com";

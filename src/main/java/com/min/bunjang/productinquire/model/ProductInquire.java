@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProductInquire extends BasicEntity {
     @NotNull
-    private Long storeNum;
+    private Long writerNum;
 
     @NotNull
     private Long productNum;
@@ -24,14 +24,14 @@ public class ProductInquire extends BasicEntity {
 
     private Long inquireWriterNumForAnswer;
 
-    private ProductInquire(Long storeNum, Long productNum, String inquireContent, Long inquireWriterNumForAnswer) {
-        this.storeNum = storeNum;
+    private ProductInquire(Long writerNum, Long productNum, String inquireContent, Long inquireWriterNumForAnswer) {
+        this.writerNum = writerNum;
         this.productNum = productNum;
         this.inquireContent = inquireContent;
         this.inquireWriterNumForAnswer = inquireWriterNumForAnswer;
     }
 
-    public static ProductInquire createProductInquire(Long storeNum, Long productNum, String inquireContent, Long inquireWriterNumForAnswer) {
-        return new ProductInquire(storeNum, productNum, inquireContent, inquireWriterNumForAnswer);
+    public static ProductInquire createProductInquire(Long writerNum, Long productNum, String inquireContent, Long inquireWriterNumForAnswer) {
+        return new ProductInquire(writerNum, productNum, inquireContent, inquireWriterNumForAnswer);
     }
 }

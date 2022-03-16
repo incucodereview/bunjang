@@ -67,15 +67,17 @@ public class Member {
     private Store store;
 
     @Builder(access = AccessLevel.PRIVATE)
-    public Member(Long memberNum,
-                  String email,
-                  String password,
-                  String name,
-                  String phone,
-                  LocalDate birthDate,
-                  LocalDateTime joinDate,
-                  LocalDateTime updatedDate,
-                  MemberRole memberRole) {
+    public Member(
+            Long memberNum,
+            String email,
+            String password,
+            String name,
+            String phone,
+            LocalDate birthDate,
+            LocalDateTime joinDate,
+            LocalDateTime updatedDate,
+            MemberRole memberRole
+    ) {
         this.memberNum = memberNum;
         this.email = email;
         this.password = password;
@@ -116,7 +118,6 @@ public class Member {
 
     @Override
     public boolean equals(Object o) {
-
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
