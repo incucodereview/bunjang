@@ -1,0 +1,138 @@
+GET http://localhost:8080/product/4
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzUwNzExMywiZXhwIjoxNjQ3NTA4OTEzfQ.8pDh_ojyvXhmUOTDnVus15-VkHNo3WDeZ50E1IjNUL4
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "productNum": 4,
+#    "firstCategoryNum": 1,
+#    "secondCategoryNum": 1,
+#    "thirdCategoryNum": 1,
+#    "productPhotos": null,
+#    "productName": "productTempName3",
+#    "productPrice": 20000,
+#    "wishCount": 0,
+#    "hits": 1,
+#    "updateDateTime": "2022-03-15T22:59:06",
+#    "productTradeState": "SOLD_ING",
+#    "productQualityState": "NEW_PRODUCT",
+#    "exchangeState": "POSSIBILITY",
+#    "deliveryChargeInPrice": "INCLUDED",
+#    "exchangeLocation": "exchangeLocation",
+#    "productExplanation": "상품설명필드 입니다.3",
+#    "productTags": [
+#      "tag4",
+#      "tag6",
+#      "tag4",
+#      "tag6",
+#      "tag4",
+#      "tag6"
+#    ],
+#    "productInquiries": [
+#      {
+#        "inquireNum": 1,
+#        "productNum": 4,
+#        "writerNum": 1,
+#        "writerName": "생성 테스트용 상점명 변경 테스트",
+#        "writerThumbnail": null,
+#        "inquireContent": "제품 문의 입니다.",
+#        "createDate": "2022-03-16T18:39:55",
+#        "answeredStoreNum": null,
+#        "answeredStoreName": null
+#      },
+#      {
+#        "inquireNum": 3,
+#        "productNum": 4,
+#        "writerNum": 1,
+#        "writerName": "생성 테스트용 상점명 변경 테스트",
+#        "writerThumbnail": null,
+#        "inquireContent": "제품 문의 입니다.",
+#        "createDate": "2022-03-16T23:34:18",
+#        "answeredStoreNum": null,
+#        "answeredStoreName": "생성 테스트용 상점명 변경 테스트"
+#      },
+#      {
+#        "inquireNum": 4,
+#        "productNum": 4,
+#        "writerNum": 1,
+#        "writerName": "생성 테스트용 상점명 변경 테스트",
+#        "writerThumbnail": null,
+#        "inquireContent": "제품 문의 입니다.2",
+#        "createDate": "2022-03-16T23:34:29",
+#        "answeredStoreNum": null,
+#        "answeredStoreName": "생성 테스트용 상점명 변경 테스트"
+#      }
+#    ],
+#    "productSimpleResponses": [
+#      {
+#        "productNum": 2,
+#        "productThumbnail": null,
+#        "productName": "productTempName",
+#        "productPrice": 100009,
+#        "updateDateTime": "2022-03-12T23:32:48",
+#        "exchangeLocation": "exchangeLocation"
+#      },
+#      {
+#        "productNum": 3,
+#        "productThumbnail": null,
+#        "productName": "productTempName2",
+#        "productPrice": 100009,
+#        "updateDateTime": "2022-03-13T22:46:40",
+#        "exchangeLocation": "exchangeLocation"
+#      },
+#      {
+#        "productNum": 4,
+#        "productThumbnail": null,
+#        "productName": "productTempName3",
+#        "productPrice": 20000,
+#        "updateDateTime": "2022-03-15T22:59:06",
+#        "exchangeLocation": "exchangeLocation"
+#      },
+#      {
+#        "productNum": 5,
+#        "productThumbnail": null,
+#        "productName": "productTempName4",
+#        "productPrice": 200021,
+#        "updateDateTime": "2022-03-15T22:59:19",
+#        "exchangeLocation": "exchangeLocation"
+#      },
+#      {
+#        "productNum": 6,
+#        "productThumbnail": null,
+#        "productName": "productTempName5",
+#        "productPrice": 200021,
+#        "updateDateTime": "2022-03-15T22:59:30",
+#        "exchangeLocation": "exchangeLocation"
+#      },
+#      {
+#        "productNum": 7,
+#        "productThumbnail": null,
+#        "productName": "productTempName6",
+#        "productPrice": 20066,
+#        "updateDateTime": "2022-03-15T23:18:36",
+#        "exchangeLocation": "exchangeLocation"
+#      },
+#      {
+#        "productNum": 8,
+#        "productThumbnail": null,
+#        "productName": "productTempName7",
+#        "productPrice": 20066,
+#        "updateDateTime": "2022-03-15T23:19:15",
+#        "exchangeLocation": "exchangeLocation"
+#      }
+#    ],
+#    "storeSimpleResponse": {
+#      "storeNum": 1,
+#      "storeName": "생성 테스트용 상점명 변경 테스트",
+#      "storeThumbnail": null,
+#      "productCount": 7,
+#      "followerCount": 0,
+#      "storeReviewCount": 0
+#    }
+#  }
+#}
+#
+#Response code: 200; Time: 196ms; Content length: 2612 bytes

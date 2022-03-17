@@ -16,6 +16,7 @@ import com.min.bunjang.product.controller.ProductControllerPath;
 import com.min.bunjang.product.controller.ProductViewControllerPath;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.dto.ProductDeleteRequest;
+import com.min.bunjang.product.dto.ProductDetailResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponses;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
@@ -26,8 +27,10 @@ import com.min.bunjang.product.model.ProductTag;
 import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
+import com.min.bunjang.productinquire.controller.ProductInquireViewControllerPath;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
+import net.bytebuddy.implementation.bytecode.ShiftRight;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
@@ -91,6 +94,17 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
 
                     //then
                     상품_생성_응답_검증(productCreateOrUpdateRequest);
+                }),
+
+                DynamicTest.dynamicTest("상품단건 조회.", () -> {
+                    //given
+                    Product product = productRepository.findAll().get(0);
+
+                    //when
+                    ProductDetailResponse productDetailResponse = 상품단건_조회_요청(loginResult, product);
+
+                    //then
+                    상품단건_조회_응답_검증(store, firstCategory, secondCategory, thirdCategory, product, productDetailResponse);
                 }),
 
                 DynamicTest.dynamicTest("상점별 상품목록 조회.", () -> {
@@ -165,6 +179,36 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(productTags).hasSize(2);
         Assertions.assertThat(productTags.get(0).getTag()).isEqualTo(productCreateOrUpdateRequest.getTags().get(0));
         Assertions.assertThat(productTags.get(1).getTag()).isEqualTo(productCreateOrUpdateRequest.getTags().get(1));
+    }
+
+    private ProductDetailResponse 상품단건_조회_요청(TokenValuesDto loginResult, Product product) {
+        String path = ProductViewControllerPath.PRODUCT_GET.replace("{productNum}", String.valueOf(product.getNum()));
+        ProductDetailResponse productDetailResponse = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<ProductDetailResponse>>() {
+        }).getResult();
+        return productDetailResponse;
+    }
+
+    private void 상품단건_조회_응답_검증(Store store, FirstProductCategory firstCategory, SecondProductCategory secondCategory, ThirdProductCategory thirdCategory, Product product, ProductDetailResponse productDetailResponse) {
+        Assertions.assertThat(productDetailResponse.getProductNum()).isEqualTo(product.getNum());
+        Assertions.assertThat(productDetailResponse.getFirstCategoryNum()).isEqualTo(firstCategory.getNum());
+        Assertions.assertThat(productDetailResponse.getSecondCategoryNum()).isEqualTo(secondCategory.getNum());
+        Assertions.assertThat(productDetailResponse.getThirdCategoryNum()).isEqualTo(thirdCategory.getNum());
+        Assertions.assertThat(productDetailResponse.getProductName()).isEqualTo(product.getProductName());
+        Assertions.assertThat(productDetailResponse.getProductPrice()).isEqualTo(product.getProductPrice());
+        Assertions.assertThat(productDetailResponse.getWishCount()).isZero();
+        Assertions.assertThat(productDetailResponse.getHits()).isEqualTo(product.getHits() + 1);
+        Assertions.assertThat(productDetailResponse.getUpdateDateTime()).isEqualTo(product.getUpdatedDate());
+        Assertions.assertThat(productDetailResponse.getProductTradeState()).isEqualTo(product.getProductTradeState());
+        Assertions.assertThat(productDetailResponse.getProductQualityState()).isEqualTo(product.getProductQualityState());
+        Assertions.assertThat(productDetailResponse.getDeliveryChargeInPrice()).isEqualTo(product.getDeliveryChargeInPrice());
+        Assertions.assertThat(productDetailResponse.getExchangeLocation()).isEqualTo(product.getExchangeLocation());
+        Assertions.assertThat(productDetailResponse.getProductExplanation()).isEqualTo(product.getProductExplanation());
+        Assertions.assertThat(productDetailResponse.getProductTags()).hasSize(2);
+        Assertions.assertThat(productDetailResponse.getProductTags().get(0)).isEqualTo("tag1");
+        Assertions.assertThat(productDetailResponse.getProductTags().get(1)).isEqualTo("tag2");
+        Assertions.assertThat(productDetailResponse.getProductInquiries()).isEmpty();
+        Assertions.assertThat(productDetailResponse.getStoreSimpleResponse().getStoreNum()).isEqualTo(store.getNum());
+        Assertions.assertThat(productDetailResponse.getStoreSimpleResponse().getStoreName()).isEqualTo(store.getStoreName());
     }
 
     private ProductSimpleResponses 상점별_상품목록_조회_요청(TokenValuesDto loginResult, Store store) {

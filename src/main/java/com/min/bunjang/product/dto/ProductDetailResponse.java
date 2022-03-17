@@ -62,10 +62,10 @@ public class ProductDetailResponse {
                 product.getDeliveryChargeInPrice(),
                 product.getExchangeLocation(),
                 product.getProductExplanation(),
-                product.getProductTags().stream()
+                Optional.ofNullable(product.getProductTags()).orElse(null).stream()
                         .map(productTag -> productTag.getTag())
                         .collect(Collectors.toList()),
-                product.getProductInquires().stream()
+                Optional.ofNullable(product.getProductInquires()).orElse(null).stream()
                         .map(productInquire -> ProductInquireResponse.of(productInquire, product.checkAndReturnStore()))
                         .collect(Collectors.toList()),
                 productsByCategory.stream()

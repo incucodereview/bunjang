@@ -36,7 +36,7 @@ public class ProductInquireResponse {
                 productInquire.getInquireContent(),
                 productInquire.getUpdatedDate(),
                 Optional.ofNullable(productInquire.getMentionedStoreNumForAnswer()).orElse(null),
-                Optional.ofNullable(productInquire.getWriterName()).orElse(null)
+                Optional.ofNullable(productInquire.getMentionedStoreNameForAnswer()).orElse(null)
         );
     }
 
