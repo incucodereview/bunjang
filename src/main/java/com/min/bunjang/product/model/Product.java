@@ -100,7 +100,6 @@ public class Product extends BasicEntity {
             ThirdProductCategory thirdProductCategory,
             String productPhotos,
             String exchangeLocation,
-            ProductTradeState productTradeState,
             ProductQualityState productQualityState,
             ExchangeState exchangeState,
             int productPrice,
@@ -115,7 +114,7 @@ public class Product extends BasicEntity {
         this.thirdProductCategory = thirdProductCategory;
         this.productPhotos = productPhotos;
         this.exchangeLocation = exchangeLocation;
-        this.productTradeState = productTradeState;
+        this.productTradeState = ProductTradeState.SOLD_ING;
         this.productQualityState = productQualityState;
         this.exchangeState = exchangeState;
         this.productPrice = productPrice;
@@ -140,7 +139,6 @@ public class Product extends BasicEntity {
                 thirdProductCategory,
                 null,
                 productCreateOrUpdateRequest.getExchangeLocation(),
-                productCreateOrUpdateRequest.getProductTradeState(),
                 productCreateOrUpdateRequest.getProductQualityState(),
                 productCreateOrUpdateRequest.getExchangeState(),
                 productCreateOrUpdateRequest.getProductPrice(),
@@ -202,7 +200,9 @@ public class Product extends BasicEntity {
         return getStore();
     }
 
-    public void updateProduct
+    public void updateProductTradeState(ProductTradeState productTradeState) {
+        this.productTradeState = productTradeState;
+    }
 
     private Store getStore() {
         return this.store;

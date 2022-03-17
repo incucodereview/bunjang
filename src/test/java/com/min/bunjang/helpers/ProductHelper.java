@@ -23,7 +23,6 @@ public class ProductHelper {
                 null,
                 null,
                 "e",
-                ProductTradeState.SOLD_ING,
                 ProductQualityState.NEW_PRODUCT,
                 ExchangeState.IMPOSSIBILITY,
                 100,

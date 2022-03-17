@@ -63,6 +63,15 @@ public class ProductService {
     }
 
     @Transactional
+    public void updateProductTradeState(String email, Long productNum, ProductTradeStateUpdateRequest productTradeStateUpdateRequest) {
+        Product product = productRepository.findById(productNum).orElseThrow(NotExistProductException::new);
+        Store store = product.checkAndReturnStore();
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
+
+        product.updateProductTradeState(productTradeStateUpdateRequest.getProductTradeState());
+    }
+
+    @Transactional
     public void deleteProduct(String email, ProductDeleteRequest productDeleteRequest) {
         Store store = storeRepository.findById(productDeleteRequest.getStoreNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(productDeleteRequest.getProductNum()).orElseThrow(NotExistProductException::new);
@@ -70,14 +79,5 @@ public class ProductService {
 
         productTagRepository.deleteByProductNum(product.getNum());
         productRepository.deleteById(productDeleteRequest.getProductNum());
-    }
-
-    @Transactional
-    public void updateProductTradeState(String email, Long productNum, ProductTradeStateUpdateRequest productTradeStateUpdateRequest) {
-        Product product = productRepository.findById(productNum).orElseThrow(NotExistProductException::new);
-        Store store = product.checkAndReturnStore();
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
-
-
     }
 }

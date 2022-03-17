@@ -76,7 +76,6 @@ class ProductInquireServiceTest extends ServiceTestConfig {
                 secondCategory.getNum(),
                 thirdCategory.getNum(),
                 "seoul",
-                ProductTradeState.SOLD_ING,
                 ProductQualityState.NEW_PRODUCT,
                 ExchangeState.IMPOSSIBILITY,
                 100000,

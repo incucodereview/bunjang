@@ -85,6 +85,13 @@ public class AcceptanceTestConfig {
         return toResponseEntityFromMvcResult(response, responseType);
     }
 
+    public static <T> RestResponse<T> patchApi(String path, Object body, TypeReference<RestResponse<T>> responseType, String token) {
+        String response = baseConfig(token)
+                .body(toContent(body))
+                .patch(path).asString();
+        return toResponseEntityFromMvcResult(response, responseType);
+    }
+
     public static <T> RestResponse<T> deleteApi(String path, Object body, TypeReference<RestResponse<T>> responseType, String token) {
         String response = baseConfig(token)
                 .body(toContent(body))

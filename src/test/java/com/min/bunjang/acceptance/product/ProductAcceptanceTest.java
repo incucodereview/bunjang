@@ -19,6 +19,7 @@ import com.min.bunjang.product.dto.ProductDeleteRequest;
 import com.min.bunjang.product.dto.ProductDetailResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponses;
+import com.min.bunjang.product.dto.ProductTradeStateUpdateRequest;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
@@ -79,7 +80,6 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                             secondCategory.getNum(),
                             thirdCategory.getNum(),
                             "seoul",
-                            ProductTradeState.SOLD_ING,
                             ProductQualityState.NEW_PRODUCT,
                             ExchangeState.IMPOSSIBILITY,
                             100000,
@@ -115,6 +115,20 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                     상점별_상품목록_조회_응답_검증(productSimpleResponses);
                 }),
 
+                DynamicTest.dynamicTest("상품 거래상태 변경.", () -> {
+                    //given
+                    Product product = productRepository.findAll().get(0);
+                    ProductTradeStateUpdateRequest productTradeStateUpdateRequest = new ProductTradeStateUpdateRequest(ProductTradeState.SOLD_OUT);
+
+                    //when
+                    String path = ProductControllerPath.PRODUCT_UPDATE_TRADE_STATE.replace("{productNum}", String.valueOf(product.getNum()));
+                    patchApi(path, productTradeStateUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+
+                    //then
+                    Product updatedProduct = productRepository.findById(product.getNum()).get();
+                    Assertions.assertThat(updatedProduct.getProductTradeState()).isEqualTo(productTradeStateUpdateRequest.getProductTradeState());
+                }),
+
                 DynamicTest.dynamicTest("상품 수정.", () -> {
                     //given
                     Product product = productRepository.findAll().get(0);
@@ -126,7 +140,6 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                             secondCategory.getNum(),
                             thirdCategory.getNum(),
                             "new seoul",
-                            ProductTradeState.SOLD_ING,
                             ProductQualityState.USED_PRODUCT,
                             ExchangeState.POSSIBILITY,
                             100214,
