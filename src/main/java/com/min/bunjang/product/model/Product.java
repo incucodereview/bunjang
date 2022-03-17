@@ -163,7 +163,6 @@ public class Product extends BasicEntity {
         this.secondProductCategory = secondProductCategory;
         this.thirdProductCategory = thirdProductCategory;
         this.exchangeLocation = productCreateOrUpdateRequest.getExchangeLocation();
-        this.productTradeState = productCreateOrUpdateRequest.getProductTradeState();
         this.productQualityState = productCreateOrUpdateRequest.getProductQualityState();
         this.exchangeState = productCreateOrUpdateRequest.getExchangeState();
         this.productPrice = productCreateOrUpdateRequest.getProductPrice();
@@ -202,6 +201,8 @@ public class Product extends BasicEntity {
 
         return getStore();
     }
+
+    public void updateProduct
 
     private Store getStore() {
         return this.store;

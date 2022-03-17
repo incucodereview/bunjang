@@ -33,8 +33,6 @@ public class ProductCreateOrUpdateRequest {
     @NotNull
     private String exchangeLocation;
     @NotNull
-    private ProductTradeState productTradeState;
-    @NotNull
     private ProductQualityState productQualityState;
     @NotNull
     private ExchangeState exchangeState;

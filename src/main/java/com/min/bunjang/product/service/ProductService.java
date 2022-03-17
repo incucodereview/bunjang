@@ -10,6 +10,7 @@ import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.dto.ProductDeleteRequest;
+import com.min.bunjang.product.dto.ProductTradeStateUpdateRequest;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -20,6 +21,8 @@ import com.min.bunjang.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.constraints.NotNull;
 
 @Service
 @RequiredArgsConstructor
@@ -67,5 +70,14 @@ public class ProductService {
 
         productTagRepository.deleteByProductNum(product.getNum());
         productRepository.deleteById(productDeleteRequest.getProductNum());
+    }
+
+    @Transactional
+    public void updateProductTradeState(String email, Long productNum, ProductTradeStateUpdateRequest productTradeStateUpdateRequest) {
+        Product product = productRepository.findById(productNum).orElseThrow(NotExistProductException::new);
+        Store store = product.checkAndReturnStore();
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
+
+
     }
 }
