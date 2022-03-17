@@ -85,7 +85,7 @@ class ProductServiceTest extends ServiceTestConfig {
         //then
         Product product = productRepository.findAll().get(0);
         Assertions.assertThat(product.getNum()).isNotNull();
-        Assertions.assertThat(product.getStore()).isNotNull();
+        Assertions.assertThat(product.checkAndReturnStore()).isNotNull();
         Assertions.assertThat(product.getFirstProductCategory()).isNotNull();
         Assertions.assertThat(product.getSecondProductCategory()).isNotNull();
         Assertions.assertThat(product.getThirdProductCategory()).isNotNull();

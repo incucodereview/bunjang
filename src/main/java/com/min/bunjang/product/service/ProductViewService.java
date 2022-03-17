@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,10 +41,7 @@ public class ProductViewService {
     @Transactional(readOnly = true)
     public ProductDetailResponse getProduct(Long productNum, String email) {
         Product product = productRepository.findByNum(productNum).orElseThrow(NotExistProductException::new);
-        Store store = product.getStore();
-        if (store == null) {
-            throw new ImpossibleException("상품이 등록된 상점이 없습니다. 잘못된 요청입니다.");
-        }
+        Store store = product.checkAndReturnStore();
         addHitsIfExistEmail(email, product);
         List<Product> productsByCategory = checkLowestCategoryInProduct(product);
         return ProductDetailResponse.of(product, productsByCategory);
@@ -64,14 +62,10 @@ public class ProductViewService {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
         MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
         Page<Product> productsByStore = productRepository.findByStoreNum(storeNum, pageable);
+        Slice<Product> byStoreNum = productRepository.findByStoreNum(storeNum, pageable);
         return new ProductSimpleResponses(
-                ProductSimpleResponse.listOf(productsByStore.getContent()),
-                new PageDto(pageable.getPageSize(), pageable.getPageNumber(), productsByStore.getTotalElements())
+                ProductSimpleResponse.listOf(byStoreNum.getContent()),
+                null
         );
-//        Slice<Product> byStoreNum = productRepository.findByStoreNum(storeNum, pageable);
-//        return new ProductSimpleResponses(
-//                ProductSimpleResponse.listOf(byStoreNum.getContent()),
-//                null
-//        );
     }
 }

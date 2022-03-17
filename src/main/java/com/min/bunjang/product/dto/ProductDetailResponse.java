@@ -66,18 +66,18 @@ public class ProductDetailResponse {
                         .map(productTag -> productTag.getTag())
                         .collect(Collectors.toList()),
                 product.getProductInquires().stream()
-                        .map(productInquire -> ProductInquireResponse.of(productInquire, product.getStore()))
+                        .map(productInquire -> ProductInquireResponse.of(productInquire, product.checkAndReturnStore()))
                         .collect(Collectors.toList()),
                 productsByCategory.stream()
                         .map(ProductSimpleResponse::of)
                         .collect(Collectors.toList()),
                 StoreSimpleResponse.of(
-                        product.getStore().getNum(),
-                        product.getStore().getStoreName(),
-                        product.getStore().getStoreThumbnail(),
-                        product.getStore().getProducts().size(),
+                        product.checkAndReturnStore().getNum(),
+                        product.checkAndReturnStore().getStoreName(),
+                        product.checkAndReturnStore().getStoreThumbnail(),
+                        product.checkAndReturnStore().getProducts().size(),
                         0 /* TODO 팔로워 기능 구현후 수정해야한다. */,
-                        product.getStore().getStoreReviews().size()
+                        product.checkAndReturnStore().getStoreReviews().size()
                 ));
     }
 

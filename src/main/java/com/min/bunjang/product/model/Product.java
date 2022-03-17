@@ -3,6 +3,7 @@ package com.min.bunjang.product.model;
 import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
+import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.productinquire.model.ProductInquire;
@@ -35,12 +36,10 @@ public class Product extends BasicEntity {
     @NotBlank
     private String productName;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "first_product_category_num")
     private FirstProductCategory firstProductCategory;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "second_product_category_num")
     private SecondProductCategory secondProductCategory;
@@ -194,6 +193,18 @@ public class Product extends BasicEntity {
             return 0;
         }
         return this.wishProducts.size();
+    }
+
+    public Store checkAndReturnStore() {
+        if (this.store == null) {
+            throw new ImpossibleException("상품이 등록된 상점이 없습니다. 잘못된 요청입니다.");
+        }
+
+        return getStore();
+    }
+
+    private Store getStore() {
+        return this.store;
     }
 
 }
