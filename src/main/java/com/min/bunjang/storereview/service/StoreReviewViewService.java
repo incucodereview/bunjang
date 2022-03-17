@@ -1,8 +1,8 @@
 package com.min.bunjang.storereview.service;
 
 import com.min.bunjang.common.dto.PageDto;
-import com.min.bunjang.storereview.dto.StoreReviewListResponse;
-import com.min.bunjang.storereview.dto.StoreReviewListResponses;
+import com.min.bunjang.storereview.dto.response.StoreReviewListResponses;
+import com.min.bunjang.storereview.dto.response.StoreReviewResponse;
 import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.storereview.repository.StoreReviewRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class StoreReviewViewService {
     public StoreReviewListResponses findStoreReviewsByStore(Long storeNum, Pageable pageable) {
         Page<StoreReview> reviewPages = storeReviewRepository.findByOwnerNum(storeNum, pageable);
         return new StoreReviewListResponses(
-                StoreReviewListResponse.listOf(reviewPages.getContent()),
+                StoreReviewResponse.listOf(reviewPages.getContent()),
                 new PageDto(pageable.getPageSize(), pageable.getPageNumber(), reviewPages.getTotalElements())
         );
     }

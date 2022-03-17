@@ -2,9 +2,9 @@ package com.min.bunjang.storereview.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.security.MemberAccount;
-import com.min.bunjang.storereview.dto.StoreReviewCreateRequest;
-import com.min.bunjang.storereview.dto.StoreReviewResponse;
-import com.min.bunjang.storereview.dto.StoreReviewUpdateRequest;
+import com.min.bunjang.storereview.dto.request.StoreReviewCreateRequest;
+import com.min.bunjang.storereview.dto.response.StoreReviewResponse;
+import com.min.bunjang.storereview.dto.request.StoreReviewUpdateRequest;
 import com.min.bunjang.storereview.service.StoreReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

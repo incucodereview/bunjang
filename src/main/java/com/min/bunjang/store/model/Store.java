@@ -3,6 +3,8 @@ package com.min.bunjang.store.model;
 import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.product.model.Product;
+import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,7 +20,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,7 +45,14 @@ public class Store extends BasicEntity {
     private Set<Long> visitors = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "store", orphanRemoval = true)
+    private List<Product> Products = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "store", orphanRemoval = true)
     private Set<WishProduct> wishProducts = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerNum", orphanRemoval = true)
+    private Set<StoreReview> storeReviews = new HashSet<>();
+
 
     public Store(String storeName, String introduceContent, String storeThumbnail, Member member) {
         this.storeName = storeName;

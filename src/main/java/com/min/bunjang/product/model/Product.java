@@ -35,11 +35,12 @@ public class Product extends BasicEntity {
     @NotBlank
     private String productName;
 
-    //    @NotNull
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "first_product_category_num")
     private FirstProductCategory firstProductCategory;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "second_product_category_num")
     private SecondProductCategory secondProductCategory;
@@ -123,6 +124,7 @@ public class Product extends BasicEntity {
         this.productExplanation = productExplanation;
         this.productAmount = productAmount;
         this.store = store;
+        this.hits = 0;
     }
 
     public static Product createProduct(
@@ -185,6 +187,13 @@ public class Product extends BasicEntity {
             return;
         }
         this.hits += 1;
+    }
+
+    public int getWishProductCount() {
+        if (this.wishProducts.isEmpty()) {
+            return 0;
+        }
+        return this.wishProducts.size();
     }
 
 }

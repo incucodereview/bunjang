@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter
@@ -25,7 +26,7 @@ public class ProductInquireResponse {
     private Long answeredStoreNum;
     private String answeredStoreName;
 
-    public static ProductInquireResponse of(ProductInquire productInquire, Store writer, Long answeredStoreNum, String answeredStoreName) {
+    public static ProductInquireResponse of(ProductInquire productInquire, Store writer) {
         return new ProductInquireResponse(
                 productInquire.getNum(),
                 productInquire.getProductNum(),
@@ -34,14 +35,14 @@ public class ProductInquireResponse {
                 writer.getStoreThumbnail(),
                 productInquire.getInquireContent(),
                 productInquire.getUpdatedDate(),
-                answeredStoreNum,
-                answeredStoreName
+                Optional.ofNullable(productInquire.getMentionedStoreNumForAnswer()).orElse(null),
+                Optional.ofNullable(productInquire.getWriterName()).orElse(null)
         );
     }
 
-    public static List<ProductInquireResponse> listOf(List<ProductInquire> productInquires, Store writer, Long answeredStoreNum, String answeredStoreName) {
+    public static List<ProductInquireResponse> listOf(List<ProductInquire> productInquires, Store writer) {
         return productInquires.stream()
-                .map(productInquire -> ProductInquireResponse.of(productInquire, writer, answeredStoreNum, answeredStoreName))
+                .map(productInquire -> ProductInquireResponse.of(productInquire, writer))
                 .collect(Collectors.toList());
     }
 }

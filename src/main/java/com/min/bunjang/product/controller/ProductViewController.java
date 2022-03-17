@@ -25,9 +25,10 @@ public class ProductViewController {
 
     @GetMapping(ProductViewControllerPath.PRODUCT_GET)
     public RestResponse<Void> getProduct(
-            @NotNull @PathVariable Long productNum
+            @NotNull @PathVariable Long productNum,
+            @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        productViewService.getProduct(productNum);
+        productViewService.getProduct(productNum, memberAccount.getEmail());
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -41,6 +42,4 @@ public class ProductViewController {
         ProductSimpleResponses productSimpleResponses = productViewService.findProductsByStore(memberAccount.getEmail(), storeNum, pageable);
         return RestResponse.of(HttpStatus.OK, productSimpleResponses);
     }
-
-
 }

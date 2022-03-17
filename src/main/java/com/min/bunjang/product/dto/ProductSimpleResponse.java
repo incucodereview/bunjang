@@ -32,7 +32,7 @@ public class ProductSimpleResponse {
     public static ProductSimpleResponse of(Product product) {
         return new ProductSimpleResponse(
                 product.getNum(),
-                null/*product.getProductPhotos()*/,
+                null/* TODO product.getProductPhotos()*/,
                 product.getProductName(),
                 product.getProductPrice(),
                 product.getUpdatedDate(),
