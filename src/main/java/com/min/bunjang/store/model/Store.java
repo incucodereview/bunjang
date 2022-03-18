@@ -2,6 +2,7 @@ package com.min.bunjang.store.model;
 
 import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.model.BasicEntity;
+import com.min.bunjang.following.model.Following;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.storereview.model.StoreReview;
@@ -52,6 +53,12 @@ public class Store extends BasicEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerNum", orphanRemoval = true)
     private Set<StoreReview> storeReviews = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "followerStore", orphanRemoval = true)
+    private List<Following> followings = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "followedStore", orphanRemoval = true)
+    private List<Following> followers = new ArrayList<>();
 
 
     public Store(String storeName, String introduceContent, String storeThumbnail, Member member) {

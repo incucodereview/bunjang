@@ -28,7 +28,8 @@ public class StoreController {
     @PostMapping(StoreControllerPath.STORE_CREATE)
     public RestResponse<StoreCreateResponse> createStore(
             @Validated @RequestBody StoreCreateRequest storeCreateRequest,
-            @AuthenticationPrincipal MemberAccount memberAccount) {
+            @AuthenticationPrincipal MemberAccount memberAccount
+    ) {
         StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateRequest, memberAccount.getEmail());
         return RestResponse.of(HttpStatus.OK, storeCreateResponse);
     }
