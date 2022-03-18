@@ -27,7 +27,6 @@ public class FollowingService {
         MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, followerStore);
 
         followingRepository.save(Following.createFollowing(followerStore, followedStore));
-        System.out.println(followedStore.getStoreName());
     }
 
     @Transactional
