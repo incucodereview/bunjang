@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StoreController {
     private final StoreService storeService;
 
-    @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PostMapping(StoreControllerPath.STORE_CREATE)
     public RestResponse<StoreCreateResponse> createStore(
             @Validated @RequestBody StoreCreateRequest storeCreateRequest,
@@ -34,7 +34,7 @@ public class StoreController {
         return RestResponse.of(HttpStatus.OK, storeCreateResponse);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PutMapping(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
     public RestResponse<Void> updateIntroduceContent(
             @Validated @RequestBody StoreIntroduceUpdateDto storeIntroduceUpdateDto,
@@ -44,7 +44,7 @@ public class StoreController {
         return RestResponse.of(HttpStatus.OK, null);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PutMapping(StoreControllerPath.STORE_NAME_UPDATE)
     public RestResponse<Void> updateStoreName(
             @Validated @RequestBody StoreNameUpdateDto storeNameUpdateDto,
@@ -54,7 +54,7 @@ public class StoreController {
         return RestResponse.of(HttpStatus.OK, null);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PostMapping(StoreControllerPath.STORE_PLUS_VISITOR)
     public RestResponse<Void> plusVisitor(
             @Validated @RequestBody VisitorPlusDto visitorPlusDto,

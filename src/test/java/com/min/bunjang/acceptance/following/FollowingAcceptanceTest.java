@@ -70,6 +70,19 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
                     //then
                     List<Following> followings = followingRepository.findAll();
                     Assertions.assertThat(followings).hasSize(1);
+                }),
+
+                DynamicTest.dynamicTest("팔로잉 삭제.", () -> {
+                    //given
+                    Following following = followingRepository.findAll().get(0);
+
+                    //when
+                    String path = FollowingControllerPath.FOLLOWING_DELETE.replace("{storeNum}", String.valueOf(follower.getNum())).replace("{followingNum}", String.valueOf(following.getNum()));
+                    deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+
+                    //then
+                    List<Following> followings = followingRepository.findAll();
+                    Assertions.assertThat(followings).isEmpty();
                 })
         );
 

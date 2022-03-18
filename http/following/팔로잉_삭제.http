@@ -1,0 +1,12 @@
+DELETE http://localhost:8080/store/1/following/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzYxMjg2NSwiZXhwIjoxNjQ3NjE0NjY1fQ.dV1wppvJU91L2JEXeaWQeC8CfDtfVs2ZyA8Zox2MHd8
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+
+#req
