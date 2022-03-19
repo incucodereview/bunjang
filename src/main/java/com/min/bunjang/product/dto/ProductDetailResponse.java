@@ -71,14 +71,7 @@ public class ProductDetailResponse {
                 productsByCategory.stream()
                         .map(ProductSimpleResponse::of)
                         .collect(Collectors.toList()),
-                StoreSimpleResponse.of(
-                        product.checkAndReturnStore().getNum(),
-                        product.checkAndReturnStore().getStoreName(),
-                        product.checkAndReturnStore().getStoreThumbnail(),
-                        product.checkAndReturnStore().getProducts().size(),
-                        0 /* TODO 팔로워 기능 구현후 수정해야한다. */,
-                        product.checkAndReturnStore().getStoreReviews().size()
-                ));
+                StoreSimpleResponse.of(product.checkAndReturnStore()));
     }
 
 }

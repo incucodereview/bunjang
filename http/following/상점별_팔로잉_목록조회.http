@@ -1,0 +1,23 @@
+GET http://localhost:8080/store/1/followings
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzY5MTk3NSwiZXhwIjoxNjQ3NjkzNzc1fQ.6NH7EkeLlbb1AWpxAWQfdE0YbBUBR8DmvI_j8qdZWyc
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "storeSimpleResponses": [
+#      {
+#        "storeNum": 2,
+#        "storeName": "testStore",
+#        "storeThumbnail": null,
+#        "productCount": 0,
+#        "followerCount": 1,
+#        "storeReviewCount": 0
+#      }
+#    ]
+#  }
+#}
+#
+#Response code: 200; Time: 150ms; Content length: 187 bytes

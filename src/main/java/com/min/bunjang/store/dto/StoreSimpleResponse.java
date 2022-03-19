@@ -1,5 +1,6 @@
 package com.min.bunjang.store.dto;
 
+import com.min.bunjang.store.model.Store;
 import com.min.bunjang.storereview.dto.response.StoreReviewResponse;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,23 +22,20 @@ public class StoreSimpleResponse {
     private int storeReviewCount;
 //    private List<StoreReviewResponse> storeReviewResponses;
 
-    public static StoreSimpleResponse of(
-            Long storeNum,
-            String storeName,
-            String storeThumbnail,
-            int productCount,
-            int followerCount,
-            int storeReviewCount
-//            List<StoreReviewResponse> storeReviewResponses
-    ) {
+    public static StoreSimpleResponse of(Store store) {
         return new StoreSimpleResponse(
-                storeNum,
-                storeName,
-                storeThumbnail,
-                productCount,
-                followerCount,
-                storeReviewCount
-//                storeReviewResponses
+                store.getNum(),
+                store.getStoreName(),
+                store.getStoreThumbnail(),
+                store.getProducts().size(),
+                store.getFollowers().size(),
+                store.getStoreReviews().size()
         );
+    }
+
+    public static List<StoreSimpleResponse> listOf(List<Store> stores) {
+        return stores.stream()
+                .map(StoreSimpleResponse::of)
+                .collect(Collectors.toList());
     }
 }

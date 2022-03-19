@@ -10,12 +10,15 @@ import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.following.controller.FollowingControllerPath;
+import com.min.bunjang.following.controller.FollowingViewControllerPath;
 import com.min.bunjang.following.dto.FollowingCreateResponse;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.store.dto.StoreSimpleResponse;
+import com.min.bunjang.store.dto.StoreSimpleResponses;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
@@ -24,6 +27,7 @@ import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class FollowingAcceptanceTest extends AcceptanceTestConfig {
@@ -54,10 +58,10 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
         Store follower = StoreAcceptanceHelper.상점생성(followerMember, storeRepository);
         Store followed = StoreAcceptanceHelper.상점생성(followedMember, storeRepository);
 
-
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
         ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
+
 
         return Stream.of(
                 DynamicTest.dynamicTest("팔로잉 생성.", () -> {
@@ -72,6 +76,21 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
                     Assertions.assertThat(followings).hasSize(1);
                 }),
 
+                DynamicTest.dynamicTest("상점의 팔로잉 상점목록 조회.", () -> {
+                    //given
+                    followingRepository.save(Following.createFollowing(null, null));
+
+                    //when
+                    String path = FollowingViewControllerPath.FOLLOWINGS_FIND_BY_STORE.replace("{storeNum}", String.valueOf(follower.getNum()));
+                    List<StoreSimpleResponse> storeSimpleResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreSimpleResponses>>() {
+                    }).getResult().getStoreSimpleResponses();
+
+                    //then
+                    Assertions.assertThat(storeSimpleResponses).hasSize(1);
+                    Assertions.assertThat(storeSimpleResponses.get(0).getStoreNum()).isEqualTo(followed.getNum());
+
+                }),
+
                 DynamicTest.dynamicTest("팔로잉 삭제.", () -> {
                     //given
                     Following following = followingRepository.findAll().get(0);
@@ -81,8 +100,8 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
                     deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
 
                     //then
-                    List<Following> followings = followingRepository.findAll();
-                    Assertions.assertThat(followings).isEmpty();
+                    Optional<Following> deletedFollowing = followingRepository.findById(following.getNum());
+                    Assertions.assertThat(deletedFollowing.isPresent()).isFalse();
                 })
         );
 
