@@ -1,6 +1,7 @@
 package com.min.bunjang.following.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.following.dto.FollowingListResponse;
 import com.min.bunjang.following.service.FollowingViewService;
 import com.min.bunjang.store.dto.StoreSimpleResponses;
 import lombok.RequiredArgsConstructor;
@@ -17,10 +18,18 @@ public class FollowingViewController {
     private final FollowingViewService followingViewService;
 
     @GetMapping(FollowingViewControllerPath.FOLLOWINGS_FIND_BY_STORE)
-    public RestResponse<StoreSimpleResponses> findFollowingByStore(
+    public RestResponse<FollowingListResponse> findFollowingsByStore(
             @NotNull @PathVariable Long storeNum
     ) {
-        StoreSimpleResponses storeSimpleResponses = followingViewService.findFollowingByStore(storeNum);
-        return RestResponse.of(HttpStatus.OK, storeSimpleResponses);
+        FollowingListResponse followingListResponse = followingViewService.findFollowingsByStore(storeNum);
+        return RestResponse.of(HttpStatus.OK, followingListResponse);
+    }
+
+    @GetMapping(FollowingViewControllerPath.FOLLOWERS_FIND_BY_STORE)
+    public RestResponse<FollowingListResponse> findFollowersByStore(
+            @NotNull @PathVariable Long storeNum
+    ) {
+        FollowingListResponse followerListResponse = followingViewService.findFollowersByStore(storeNum);
+        return RestResponse.of(HttpStatus.OK, followerListResponse);
     }
 }

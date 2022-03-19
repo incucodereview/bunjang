@@ -1,4 +1,4 @@
-GET http://localhost:8080/store/1/followings
+GET http://localhost:8080/store/2/followers
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzY5MTk3NSwiZXhwIjoxNjQ3NjkzNzc1fQ.6NH7EkeLlbb1AWpxAWQfdE0YbBUBR8DmvI_j8qdZWyc
 
@@ -11,11 +11,11 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #      {
 #        "followingNum": 2,
 #        "storeSimpleResponses": {
-#          "storeNum": 2,
-#          "storeName": "testStore",
+#          "storeNum": 1,
+#          "storeName": "생성 테스트용 상점명 변경 테스트",
 #          "storeThumbnail": null,
-#          "productCount": 0,
-#          "followerCount": 1,
+#          "productCount": 7,
+#          "followerCount": 0,
 #          "storeReviewCount": 0
 #        }
 #      }
@@ -23,4 +23,4 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #  }
 #}
 #
-#Response code: 200; Time: 267ms; Content length: 230 bytes
+#Response code: 200; Time: 105ms; Content length: 239 bytes

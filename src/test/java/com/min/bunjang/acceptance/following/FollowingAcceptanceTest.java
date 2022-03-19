@@ -12,13 +12,13 @@ import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.following.controller.FollowingControllerPath;
 import com.min.bunjang.following.controller.FollowingViewControllerPath;
 import com.min.bunjang.following.dto.FollowingCreateResponse;
+import com.min.bunjang.following.dto.FollowingListResponse;
+import com.min.bunjang.following.dto.FollowingResponse;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
-import com.min.bunjang.store.dto.StoreSimpleResponse;
-import com.min.bunjang.store.dto.StoreSimpleResponses;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
@@ -82,12 +82,26 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
 
                     //when
                     String path = FollowingViewControllerPath.FOLLOWINGS_FIND_BY_STORE.replace("{storeNum}", String.valueOf(follower.getNum()));
-                    List<StoreSimpleResponse> storeSimpleResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreSimpleResponses>>() {
-                    }).getResult().getStoreSimpleResponses();
+                    List<FollowingResponse> followingResponseList = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<FollowingListResponse>>() {
+                    }).getResult().getFollowingResponseList();
 
                     //then
-                    Assertions.assertThat(storeSimpleResponses).hasSize(1);
-                    Assertions.assertThat(storeSimpleResponses.get(0).getStoreNum()).isEqualTo(followed.getNum());
+                    Assertions.assertThat(followingResponseList).hasSize(1);
+                    Assertions.assertThat(followingResponseList.get(0).getStoreSimpleResponses().getStoreNum()).isEqualTo(followed.getNum());
+                }),
+
+                DynamicTest.dynamicTest("상점의 팔로워 상점목록 조회.", () -> {
+                    //given
+                    followingRepository.save(Following.createFollowing(null, null));
+
+                    //when
+                    String path = FollowingViewControllerPath.FOLLOWERS_FIND_BY_STORE.replace("{storeNum}", String.valueOf(followed.getNum()));
+                    List<FollowingResponse> followingResponseList = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<FollowingListResponse>>() {
+                    }).getResult().getFollowingResponseList();
+
+                    //then
+                    Assertions.assertThat(followingResponseList).hasSize(1);
+                    Assertions.assertThat(followingResponseList.get(0).getStoreSimpleResponses().getStoreNum()).isEqualTo(follower.getNum());
                 }),
 
                 DynamicTest.dynamicTest("팔로잉 삭제.", () -> {

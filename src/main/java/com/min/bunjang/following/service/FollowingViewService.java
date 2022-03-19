@@ -1,5 +1,7 @@
 package com.min.bunjang.following.service;
 
+import com.min.bunjang.following.dto.FollowingListResponse;
+import com.min.bunjang.following.dto.FollowingResponse;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
 import com.min.bunjang.store.dto.StoreSimpleResponse;
@@ -19,11 +21,20 @@ public class FollowingViewService {
     private final FollowingRepository followingRepository;
 
     @Transactional(readOnly = true)
-    public StoreSimpleResponses findFollowingByStore(Long storeNum) {
+    public FollowingListResponse findFollowingsByStore(Long storeNum) {
         Slice<Following> followings = followingRepository.findByFollowerStoreNum(storeNum);
-        List<Store> followedStores = followings.getContent().stream()
-                .map(Following::getFollowedStore)
+        List<FollowingResponse> followingResponses = followings.getContent().stream()
+                .map(following -> FollowingResponse.of(following.getNum(), following.getFollowedStore()))
                 .collect(Collectors.toList());
-        return new StoreSimpleResponses(StoreSimpleResponse.listOf(followedStores));
+        return new FollowingListResponse(followingResponses);
+    }
+
+    @Transactional(readOnly = true)
+    public FollowingListResponse findFollowersByStore(Long storeNum) {
+        Slice<Following> followers = followingRepository.findByFollowedStoreNum(storeNum);
+        List<FollowingResponse> followingResponses = followers.getContent().stream()
+                .map(following -> FollowingResponse.of(following.getNum(), following.getFollowerStore()))
+                .collect(Collectors.toList());
+        return new FollowingListResponse(followingResponses);
     }
 }
