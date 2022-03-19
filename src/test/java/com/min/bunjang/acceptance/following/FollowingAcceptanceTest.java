@@ -22,6 +22,7 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,5 +119,10 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
                 })
         );
 
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }
