@@ -88,7 +88,6 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
                     //then
                     Assertions.assertThat(storeSimpleResponses).hasSize(1);
                     Assertions.assertThat(storeSimpleResponses.get(0).getStoreNum()).isEqualTo(followed.getNum());
-
                 }),
 
                 DynamicTest.dynamicTest("팔로잉 삭제.", () -> {
