@@ -60,6 +60,8 @@ public class Store extends BasicEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "followedStore", orphanRemoval = true)
     private List<Following> followers = new ArrayList<>();
 
+    private int hits;
+
 
     public Store(String storeName, String introduceContent, String storeThumbnail, Member member) {
         this.storeName = storeName;
@@ -83,6 +85,26 @@ public class Store extends BasicEntity {
     public Period calculateOpenTime() {
         LocalDate now = LocalDate.now();
         return Period.between(createdDate.toLocalDate(), now);
+    }
+
+    public double calculateAverageDealScore() {
+        if (this.storeReviews.isEmpty()) {
+            return 0;
+        }
+
+        double average = 0;
+        for (StoreReview storeReview : this.storeReviews) {
+            average += storeReview.getDealScore();
+        }
+
+        return average / this.storeReviews.size();
+    }
+
+    public void addHitsCount(String email) {
+        if (email == null) {
+            return;
+        }
+        this.hits += 1;
     }
 
     public void plusVisitor(Long visitorNum) {

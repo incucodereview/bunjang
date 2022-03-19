@@ -1,7 +1,9 @@
 package com.min.bunjang.product.dto;
 
 import com.min.bunjang.product.model.Product;
+import com.min.bunjang.product.model.ProductTradeState;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class ProductSimpleResponse {
     private Long productNum;
     private String productThumbnail;
@@ -19,15 +22,7 @@ public class ProductSimpleResponse {
     private int productPrice;
     private LocalDateTime updateDateTime;
     private String exchangeLocation;
-
-    public ProductSimpleResponse(Long productNum, String productThumbnail, String productName, int productPrice, LocalDateTime updateDateTime, String exchangeLocation) {
-        this.productNum = productNum;
-        this.productThumbnail = productThumbnail;
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.updateDateTime = updateDateTime;
-        this.exchangeLocation = exchangeLocation;
-    }
+    private ProductTradeState productTradeState;
 
     public static ProductSimpleResponse of(Product product) {
         return new ProductSimpleResponse(
@@ -36,7 +31,8 @@ public class ProductSimpleResponse {
                 product.getProductName(),
                 product.getProductPrice(),
                 product.getUpdatedDate(),
-                product.getExchangeLocation()
+                product.getExchangeLocation(),
+                product.getProductTradeState()
         );
     }
 
