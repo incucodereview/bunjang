@@ -2,6 +2,7 @@ GET http://localhost:8080/store/1
 Content-Type: application/json
 Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzY5ODYwNSwiZXhwIjoxNjQ3NzAwNDA1fQ.DkMzuEt6aOQ5gdmP6PMMmCEZPjRPv6TtXoXUwiKxrwA
 
+
 #res
 #{
 #  "statusCode": "OK",
