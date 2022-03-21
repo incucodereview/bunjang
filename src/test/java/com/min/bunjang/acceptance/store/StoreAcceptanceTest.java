@@ -137,7 +137,6 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(storeDetailResponse.getStoreName()).isEqualTo(store.getStoreName());
         Assertions.assertThat(storeDetailResponse.getHits()).isEqualTo(store.getHits() + 1);
         Assertions.assertThat(storeDetailResponse.getIntroduceContent()).isEqualTo(store.getIntroduceContent());
-        Assertions.assertThat(storeDetailResponse.getProductSimpleResponses()).hasSize(3);
     }
 
     private RestResponse<Void> 상점소개글_변경_요청(TokenValuesDto loginResult, StoreIntroduceUpdateDto storeIntroduceUpdateDto) {
