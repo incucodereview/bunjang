@@ -1,6 +1,6 @@
 GET http://localhost:8080/store/1
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzY5ODYwNSwiZXhwIjoxNjQ3NzAwNDA1fQ.DkMzuEt6aOQ5gdmP6PMMmCEZPjRPv6TtXoXUwiKxrwA
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0Nzg2ODY1MywiZXhwIjoxNjQ3ODcwNDUzfQ.NLB_bq7_3OyQvoqm4VsffhhEUCSsjAM9gIjxgCUJy1U
 
 
 #res
@@ -12,42 +12,12 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #    "storeThumbnail": null,
 #    "storeName": "생성 테스트용 상점명 변경 테스트",
 #    "storeScore": 0.0,
-#    "openDate": "P14D",
-#    "hits": 4,
-#    "introduceContent": "생성 테스트용 상점 소개글 수정",
-#    "productSimpleResponses": [
-#      {
-#        "productNum": 2,
-#        "productThumbnail": null,
-#        "productName": "productTempName",
-#        "productPrice": 100009,
-#        "updateDateTime": "2022-03-12T23:32:48",
-#        "exchangeLocation": "exchangeLocation",
-#        "productTradeState": null
-#      },
-#      {
-#        "productNum": 3,
-#        "productThumbnail": null,
-#        "productName": "productTempName2",
-#        "productPrice": 100009,
-#        "updateDateTime": "2022-03-13T22:46:40",
-#        "exchangeLocation": "exchangeLocation",
-#        "productTradeState": "SOLD_ING"
-#      },
-#      {
-#        "productNum": 4,
-#        "productThumbnail": null,
-#        "productName": "productTempName3",
-#        "productPrice": 20000,
-#        "updateDateTime": "2022-03-15T22:59:06",
-#        "exchangeLocation": "exchangeLocation",
-#        "productTradeState": "SOLD_ING"
-#      }...
-#    ]
+#    "openDate": "P16D",
+#    "hits": 5,
+#    "introduceContent": "생성 테스트용 상점 소개글 수정"
 #  }
 #}
 #
-#Response code: 200; Time: 327ms; Content length: 1641 bytes
-
+#Response code: 200; Time: 120ms; Content length: 196 bytes
 
 #req
