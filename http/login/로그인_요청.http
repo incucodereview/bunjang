@@ -16,6 +16,6 @@ Content-Type: application/json
 
 #req
 {
-  "email": "urisegea@naver.com",
-  "password": "alsdud6038"
+  "email": "notExistEmail@emai.com",
+  "password": "password"
 }

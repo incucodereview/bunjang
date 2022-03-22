@@ -1,6 +1,6 @@
 POST http://localhost:8080/product
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzM1MjI5NCwiZXhwIjoxNjQ3MzU0MDk0fQ.qIDR9_Wo-5mgH4rurLqngmfm5AmeO8ZtFj0jtNsOAAc
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5vdEV4aXN0RW1haWxAZW1haS5jb20iLCJpYXQiOjE2NDc5NTYxMjksImV4cCI6MTY0Nzk1NzkyOX0.elUXGdXKC2OnZzNQqfGk8T31Lpmep_odHtuZJfP2G4A
 
 #res
 #{
@@ -12,7 +12,7 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 
 
 {
-  "storeNum": 1,
+  "storeNum": 2,
   "productPhotos": null,
   "productName": "productTempName7",
   "firstCategoryNum": 1,

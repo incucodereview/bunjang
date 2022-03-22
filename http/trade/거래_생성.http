@@ -1,0 +1,21 @@
+POST http://localhost:8080/trade
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5vdEV4aXN0RW1haWxAZW1haS5jb20iLCJpYXQiOjE2NDc5NTYxMjksImV4cCI6MTY0Nzk1NzkyOX0.elUXGdXKC2OnZzNQqfGk8T31Lpmep_odHtuZJfP2G4A
+
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "sellerPhoneNumber": "010-5534-6038"
+#  }
+#}
+#Response code: 200; Time: 186ms; Content length: 81 bytes
+
+#req
+{
+  "sellerNum": 1,
+  "buyerNum": 2,
+  "tradeProductNum": 2
+}

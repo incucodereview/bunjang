@@ -6,6 +6,7 @@ import com.min.bunjang.following.model.Following;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.storereview.model.StoreReview;
+import com.min.bunjang.trade.model.Trade;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -54,14 +55,13 @@ public class Store extends BasicEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerNum", orphanRemoval = true)
     private Set<StoreReview> storeReviews = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "followerStore", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "followerStore", orphanRemoval = true)
     private List<Following> followings = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "followedStore", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "followedStore", orphanRemoval = true)
     private List<Following> followers = new ArrayList<>();
 
     private int hits;
-
 
     public Store(String storeName, String introduceContent, String storeThumbnail, Member member) {
         this.storeName = storeName;
