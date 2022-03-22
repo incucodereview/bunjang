@@ -9,6 +9,7 @@ import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.trade.dto.TradeCreateRequest;
 import com.min.bunjang.trade.dto.TradeCreateResponse;
+import com.min.bunjang.trade.exception.NotExistTradeException;
 import com.min.bunjang.trade.model.Trade;
 import com.min.bunjang.trade.model.TradeState;
 import com.min.bunjang.trade.repository.TradeRepository;
@@ -32,5 +33,21 @@ public class TradeService {
 
         tradeRepository.save(Trade.createTrade(seller, buyer, tradeProduct, TradeState.TRADE_ING));
         return new TradeCreateResponse(seller.getMember().getPhone());
+    }
+
+    @Transactional
+    public void completeTrade(String email, Long tradeNum) {
+        Trade trade = tradeRepository.findById(tradeNum).orElseThrow(NotExistTradeException::new);
+        trade.checkMatchSellerOrBuyerByEmail(email);
+
+        trade.completeTrade();
+    }
+
+    @Transactional
+    public void cancelTrade(String email, Long tradeNum) {
+        Trade trade = tradeRepository.findById(tradeNum).orElseThrow(NotExistTradeException::new);
+        trade.checkMatchSellerOrBuyerByEmail(email);
+
+        trade.cancelTrade();
     }
 }

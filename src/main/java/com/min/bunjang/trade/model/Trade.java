@@ -1,5 +1,6 @@
 package com.min.bunjang.trade.model;
 
+import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.store.model.Store;
@@ -39,5 +40,19 @@ public class Trade extends BasicEntity {
 
     public static Trade createTrade(Store seller, Store buyer, Product tradeProduct, TradeState tradeState) {
         return new Trade(seller, buyer, tradeProduct, tradeState);
+    }
+
+    public void cancelTrade() {
+        this.tradeState = TradeState.TRADE_CANCEL;
+    }
+
+    public void completeTrade() {
+        this.tradeState = TradeState.TRADE_COMPLETE;
+    }
+
+    public void checkMatchSellerOrBuyerByEmail(String email) {
+        if (!this.seller.verifyMatchMember(email) && !this.buyer.verifyMatchMember(email)) {
+            throw new ImpossibleException("판매자도 구매자도 아닌 회원의 거래 취소 요청입니다. 잘못된 접근입니다.");
+        }
     }
 }

@@ -25,6 +25,7 @@ import com.min.bunjang.trade.controller.TradeControllerPath;
 import com.min.bunjang.trade.dto.TradeCreateRequest;
 import com.min.bunjang.trade.dto.TradeCreateResponse;
 import com.min.bunjang.trade.model.Trade;
+import com.min.bunjang.trade.model.TradeState;
 import com.min.bunjang.trade.repository.TradeRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
@@ -97,6 +98,19 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
 
                     //then
                     거래_생성_응답_검증();
+                }),
+
+                DynamicTest.dynamicTest("거래 삭제.", () -> {
+                    //given
+                    Long tradeNum = tradeRepository.findAll().get(0).getNum();
+
+                    //when
+                    String path = TradeControllerPath.TRADE_CANCEL.replace("{tradeNum}", String.valueOf(tradeNum));
+                    deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+
+                    //then
+                    Trade trade = tradeRepository.findById(tradeNum).get();
+                    Assertions.assertThat(trade.getTradeState()).isEqualTo(TradeState.TRADE_CANCEL);
                 })
         );
 

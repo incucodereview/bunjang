@@ -1,0 +1,12 @@
+DELETE http://localhost:8080/trade/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5vdEV4aXN0RW1haWxAZW1haS5jb20iLCJpYXQiOjE2NDc5NjE5MTUsImV4cCI6MTY0Nzk2MzcxNX0.A5fph1RZXOflNsDo7oOSrl872OF4joAIDnJyXNktaU4
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#
+#Response code: 200; Time: 115ms; Content length: 48 bytes

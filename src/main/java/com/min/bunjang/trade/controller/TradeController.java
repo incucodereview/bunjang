@@ -10,9 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.NotNull;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,5 +31,15 @@ public class TradeController {
     ) {
         TradeCreateResponse tradeCreateResponse = tradeService.createTrade(memberAccount.getEmail(), tradeCreateRequest);
         return RestResponse.of(HttpStatus.OK, tradeCreateResponse);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+    @DeleteMapping(TradeControllerPath.TRADE_CANCEL)
+    public RestResponse<Void> cancelTrade(
+            @AuthenticationPrincipal MemberAccount memberAccount,
+            @NotNull @PathVariable Long tradeNum
+    ) {
+        tradeService.cancelTrade(memberAccount.getEmail(), tradeNum);
+        return RestResponse.of(HttpStatus.OK, null);
     }
 }
