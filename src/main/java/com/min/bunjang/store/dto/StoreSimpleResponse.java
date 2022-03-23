@@ -1,5 +1,6 @@
 package com.min.bunjang.store.dto;
 
+import com.min.bunjang.aws.s3.dto.S3FileDto;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.storereview.dto.response.StoreReviewResponse;
 import lombok.AccessLevel;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class StoreSimpleResponse {
     private Long storeNum;
     private String storeName;
-    private String storeThumbnail;
+    private S3FileDto storeThumbnail;
     private int productCount;
     private int followerCount;
     private int storeReviewCount;
@@ -26,7 +27,7 @@ public class StoreSimpleResponse {
         return new StoreSimpleResponse(
                 store.getNum(),
                 store.getStoreName(),
-                store.getStoreThumbnail(),
+                new S3FileDto(store.getStoreThumbnail().getNum(), store.getStoreThumbnail().getFileName(), store.getStoreThumbnail().getFilePath()),
                 store.getProducts().size(),
                 store.getFollowers().size(),
                 store.getStoreReviews().size()

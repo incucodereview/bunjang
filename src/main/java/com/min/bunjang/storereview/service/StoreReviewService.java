@@ -1,5 +1,6 @@
 package com.min.bunjang.storereview.service;
 
+import com.min.bunjang.aws.s3.dto.S3FileDto;
 import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
@@ -9,6 +10,7 @@ import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
+import com.min.bunjang.store.repository.StoreThumbnailRepository;
 import com.min.bunjang.storereview.dto.request.StoreReviewCreateRequest;
 import com.min.bunjang.storereview.dto.response.StoreReviewResponse;
 import com.min.bunjang.storereview.dto.request.StoreReviewUpdateRequest;
@@ -19,13 +21,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class StoreReviewService {
     private final StoreReviewRepository storeReviewRepository;
     private final ProductRepository productRepository;
     private final MemberRepository memberRepository;
+    private final StoreThumbnailRepository storeThumbnailRepository;
 
+    //TODO StoreReviewCreateRequest에 작성자 상점 num 추가해서 코드 줄이기
     @Transactional
     public StoreReviewResponse createStoreReview(String memberEmail, StoreReviewCreateRequest storeReviewCreateRequest) {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
@@ -39,12 +45,13 @@ public class StoreReviewService {
                 writer.getNum(),
                 writer.getStoreName(),
                 storeReviewCreateRequest.getDealScore(),
-                writer.getStoreThumbnail(),
+                Optional.ofNullable(writer.getStoreThumbnail().getNum()).orElse(null),
                 product.getNum(),
                 product.getProductName(),
                 storeReviewCreateRequest.getReviewContent()
         );
 
+        //TODO StoreReviewResponse에서 단순하게 그냥 StoreResponse포함하고 리뷰 내용 뭐 이정도만 해도 될지 의문 지금으로선 StoreReviewResponse를 왜 구현했는지도 의문
         return StoreReviewResponse.of(storeReviewRepository.save(storeReview));
     }
 

@@ -27,7 +27,7 @@ public class StoreReview extends BasicEntity {
     @NotNull
     private double dealScore;
 
-    private String storeThumbnail;
+    private Long storeThumbnailNum;
 
     @NotNull
     private Long productNum;
@@ -37,18 +37,18 @@ public class StoreReview extends BasicEntity {
     @NotBlank
     private String reviewContent;
 
-    public StoreReview(Long ownerNum, Long writerNum, String writerName, double dealScore, String storeThumbnail, Long productNum, String productName, String reviewContent) {
+    public StoreReview(Long ownerNum, Long writerNum, String writerName, double dealScore, Long storeThumbnail, Long productNum, String productName, String reviewContent) {
         this.ownerNum = ownerNum;
         this.writerNum = writerNum;
         this.writerName = writerName;
         this.dealScore = dealScore;
-        this.storeThumbnail = storeThumbnail;
+        this.storeThumbnailNum = storeThumbnail;
         this.productNum = productNum;
         this.productName = productName;
         this.reviewContent = reviewContent;
     }
 
-    public static StoreReview createStoreReview(Long ownerNum, Long writerNum, String writerName, double dealScore, String storeThumbnail, Long productNum, String productName, String reviewContent) {
+    public static StoreReview createStoreReview(Long ownerNum, Long writerNum, String writerName, double dealScore, Long storeThumbnail, Long productNum, String productName, String reviewContent) {
         return new StoreReview(
                 ownerNum,
                 writerNum,

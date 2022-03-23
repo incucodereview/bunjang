@@ -36,10 +36,11 @@ public class Store extends BasicEntity {
 
     private String introduceContent;
 
-    private String storeThumbnail;
-
     @OneToOne(fetch = FetchType.LAZY)
     private Member member;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private StoreThumbnail storeThumbnail;
 
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "visitor",
@@ -63,14 +64,14 @@ public class Store extends BasicEntity {
 
     private int hits;
 
-    public Store(String storeName, String introduceContent, String storeThumbnail, Member member) {
+    public Store(String storeName, String introduceContent, StoreThumbnail storeThumbnail, Member member) {
         this.storeName = storeName;
         this.introduceContent = introduceContent;
         this.storeThumbnail = storeThumbnail;
         this.member = member;
     }
 
-    public static Store createStore(String storeName, String introduceContent, String storeThumbnail, Member member) {
+    public static Store createStore(String storeName, String introduceContent, StoreThumbnail storeThumbnail, Member member) {
         return new Store(storeName, introduceContent, storeThumbnail, member);
     }
 

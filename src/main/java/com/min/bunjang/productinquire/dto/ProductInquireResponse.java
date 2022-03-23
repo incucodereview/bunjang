@@ -1,5 +1,6 @@
 package com.min.bunjang.productinquire.dto;
 
+import com.min.bunjang.aws.s3.dto.S3FileDto;
 import com.min.bunjang.productinquire.model.ProductInquire;
 import com.min.bunjang.store.model.Store;
 import lombok.AccessLevel;
@@ -20,7 +21,7 @@ public class ProductInquireResponse {
     private Long productNum;
     private Long writerNum;
     private String writerName;
-    private String writerThumbnail;
+    private S3FileDto writerThumbnail;
     private String inquireContent;
     private LocalDateTime createDate;
     private Long answeredStoreNum;
@@ -32,7 +33,7 @@ public class ProductInquireResponse {
                 productInquire.getProductNum(),
                 writer.getNum(),
                 writer.getStoreName(),
-                writer.getStoreThumbnail(),
+                new S3FileDto(writer.getStoreThumbnail().getNum(), writer.getStoreThumbnail().getFileName(), writer.getStoreThumbnail().getFilePath()),
                 productInquire.getInquireContent(),
                 productInquire.getUpdatedDate(),
                 Optional.ofNullable(productInquire.getMentionedStoreNumForAnswer()).orElse(null),
