@@ -1,5 +1,6 @@
-package com.min.bunjang.aws.s3;
+package com.min.bunjang.aws.s3.controller;
 
+import com.min.bunjang.aws.s3.service.S3UploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 

@@ -1,4 +1,4 @@
-package com.min.bunjang.aws.s3;
+package com.min.bunjang.aws.s3.proterties;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
