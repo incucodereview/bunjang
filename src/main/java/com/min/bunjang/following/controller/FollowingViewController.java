@@ -3,7 +3,6 @@ package com.min.bunjang.following.controller;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.following.dto.FollowingListResponse;
 import com.min.bunjang.following.service.FollowingViewService;
-import com.min.bunjang.store.dto.StoreSimpleResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;

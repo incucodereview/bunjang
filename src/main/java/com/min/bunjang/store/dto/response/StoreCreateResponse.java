@@ -1,13 +1,10 @@
-package com.min.bunjang.store.dto;
+package com.min.bunjang.store.dto.response;
 
 import com.min.bunjang.store.model.Store;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.Stack;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

@@ -1,12 +1,11 @@
 package com.min.bunjang.store.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.member.model.Member;
 import com.min.bunjang.security.MemberAccount;
-import com.min.bunjang.store.dto.StoreCreateRequest;
-import com.min.bunjang.store.dto.StoreCreateResponse;
-import com.min.bunjang.store.dto.StoreIntroduceUpdateDto;
-import com.min.bunjang.store.dto.StoreNameUpdateDto;
+import com.min.bunjang.store.dto.request.StoreCreateRequest;
+import com.min.bunjang.store.dto.response.StoreCreateResponse;
+import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
+import com.min.bunjang.store.dto.request.StoreNameUpdateRequest;
 import com.min.bunjang.store.dto.VisitorPlusDto;
 import com.min.bunjang.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
@@ -37,20 +36,20 @@ public class StoreController {
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PutMapping(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
     public RestResponse<Void> updateIntroduceContent(
-            @Validated @RequestBody StoreIntroduceUpdateDto storeIntroduceUpdateDto,
+            @Validated @RequestBody StoreIntroduceUpdateRequest storeIntroduceUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        storeService.updateIntroduceContent(memberAccount.getEmail(), storeIntroduceUpdateDto);
+        storeService.updateIntroduceContent(memberAccount.getEmail(), storeIntroduceUpdateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PutMapping(StoreControllerPath.STORE_NAME_UPDATE)
     public RestResponse<Void> updateStoreName(
-            @Validated @RequestBody StoreNameUpdateDto storeNameUpdateDto,
+            @Validated @RequestBody StoreNameUpdateRequest storeNameUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        storeService.updateStoreName(storeNameUpdateDto, memberAccount.getEmail());
+        storeService.updateStoreName(storeNameUpdateRequest, memberAccount.getEmail());
         return RestResponse.of(HttpStatus.OK, null);
     }
 

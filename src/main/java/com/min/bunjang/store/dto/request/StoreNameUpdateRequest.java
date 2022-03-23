@@ -1,4 +1,4 @@
-package com.min.bunjang.store.dto;
+package com.min.bunjang.store.dto.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class StoreNameUpdateDto {
+public class StoreNameUpdateRequest {
     @NotBlank
     private String updatedStoreName;
 }

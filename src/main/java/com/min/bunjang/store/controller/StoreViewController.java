@@ -2,12 +2,9 @@ package com.min.bunjang.store.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.security.MemberAccount;
-import com.min.bunjang.store.dto.StoreDetailResponse;
+import com.min.bunjang.store.dto.response.StoreDetailResponse;
 import com.min.bunjang.store.service.StoreViewService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;

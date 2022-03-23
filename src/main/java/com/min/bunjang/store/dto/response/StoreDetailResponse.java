@@ -1,4 +1,4 @@
-package com.min.bunjang.store.dto;
+package com.min.bunjang.store.dto.response;
 
 import com.min.bunjang.aws.s3.dto.S3FileDto;
 import com.min.bunjang.store.model.Store;

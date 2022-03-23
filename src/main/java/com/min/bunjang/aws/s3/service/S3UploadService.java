@@ -53,7 +53,11 @@ public class S3UploadService {
         return fileUrls;
     }
 
-    public String upload(MultipartFile multipartFile) {
-        return null;
+    public String upload(MultipartFile multipartFile) throws IOException {
+        String originalFilename = multipartFile.getOriginalFilename();
+
+        amazonS3.putObject(new PutObjectRequest(amazonS3BucketProperties.getBucket(), originalFilename, multipartFile.getInputStream(), null)
+                .withCannedAcl(CannedAccessControlList.PublicRead));
+        return String.valueOf(amazonS3.getUrl(amazonS3BucketProperties.getBucket(), originalFilename));
     }
 }

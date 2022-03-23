@@ -5,11 +5,10 @@ import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.integrate.config.IntegrateTestConfig;
 import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
-import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.controller.StoreControllerPath;
-import com.min.bunjang.store.dto.StoreCreateRequest;
-import com.min.bunjang.store.dto.StoreIntroduceUpdateDto;
-import com.min.bunjang.store.dto.StoreNameUpdateDto;
+import com.min.bunjang.store.dto.request.StoreCreateRequest;
+import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
+import com.min.bunjang.store.dto.request.StoreNameUpdateRequest;
 import com.min.bunjang.store.dto.VisitorPlusDto;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -20,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
@@ -92,13 +90,13 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         String updateIntroduceContent = "updateIntroduceContent";
 
-        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(updateIntroduceContent);
+        StoreIntroduceUpdateRequest storeIntroduceUpdateRequest = new StoreIntroduceUpdateRequest(updateIntroduceContent);
 
         //when & then
         mockMvc.perform(put(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken())
-                        .content(objectMapper.writeValueAsString(storeIntroduceUpdateDto)))
+                        .content(objectMapper.writeValueAsString(storeIntroduceUpdateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("store-introduceContent-update",
@@ -131,13 +129,13 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         String updateStoreName = "updateStoreName";
 
-        StoreNameUpdateDto storeNameUpdateDto  = new StoreNameUpdateDto(updateStoreName);
+        StoreNameUpdateRequest storeNameUpdateRequest = new StoreNameUpdateRequest(updateStoreName);
 
         //when & then
         mockMvc.perform(put(StoreControllerPath.STORE_NAME_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken())
-                        .content(objectMapper.writeValueAsString(storeNameUpdateDto)))
+                        .content(objectMapper.writeValueAsString(storeNameUpdateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("store-name-update",

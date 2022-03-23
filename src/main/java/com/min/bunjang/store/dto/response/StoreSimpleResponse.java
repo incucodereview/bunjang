@@ -1,8 +1,7 @@
-package com.min.bunjang.store.dto;
+package com.min.bunjang.store.dto.response;
 
 import com.min.bunjang.aws.s3.dto.S3FileDto;
 import com.min.bunjang.store.model.Store;
-import com.min.bunjang.storereview.dto.response.StoreReviewResponse;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

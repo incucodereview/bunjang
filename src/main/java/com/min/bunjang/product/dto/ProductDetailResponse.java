@@ -6,13 +6,12 @@ import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.productinquire.dto.ProductInquireResponse;
-import com.min.bunjang.store.dto.StoreSimpleResponse;
+import com.min.bunjang.store.dto.response.StoreSimpleResponse;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

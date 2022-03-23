@@ -1,7 +1,6 @@
 package com.min.bunjang.store.service;
 
-import com.min.bunjang.product.repository.ProductRepository;
-import com.min.bunjang.store.dto.StoreDetailResponse;
+import com.min.bunjang.store.dto.response.StoreDetailResponse;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;

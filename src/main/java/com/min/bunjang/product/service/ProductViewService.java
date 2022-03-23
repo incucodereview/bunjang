@@ -1,8 +1,5 @@
 package com.min.bunjang.product.service;
 
-import com.min.bunjang.category.service.CategoryViewService;
-import com.min.bunjang.common.dto.PageDto;
-import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.product.dto.ProductDetailResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponse;
@@ -11,8 +8,6 @@ import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
-import com.min.bunjang.productinquire.dto.ProductInquireResponse;
-import com.min.bunjang.store.dto.StoreSimpleResponse;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -24,11 +19,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.file.OpenOption;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

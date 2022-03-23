@@ -16,13 +16,12 @@ import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.controller.StoreControllerPath;
 import com.min.bunjang.store.controller.StoreViewControllerPath;
-import com.min.bunjang.store.dto.StoreCreateRequest;
-import com.min.bunjang.store.dto.StoreCreateResponse;
-import com.min.bunjang.store.dto.StoreDetailResponse;
-import com.min.bunjang.store.dto.StoreIntroduceUpdateDto;
-import com.min.bunjang.store.dto.StoreNameUpdateDto;
+import com.min.bunjang.store.dto.request.StoreCreateRequest;
+import com.min.bunjang.store.dto.response.StoreCreateResponse;
+import com.min.bunjang.store.dto.response.StoreDetailResponse;
+import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
+import com.min.bunjang.store.dto.request.StoreNameUpdateRequest;
 import com.min.bunjang.store.model.Store;
-import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -89,9 +88,9 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     Store store = storeRepository.findAll().get(0);
                     String introduceContent = "updateIntroduceContent";
 
-                    StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(introduceContent);
+                    StoreIntroduceUpdateRequest storeIntroduceUpdateRequest = new StoreIntroduceUpdateRequest(introduceContent);
                     //when
-                    상점소개글_변경_요청(loginResult, storeIntroduceUpdateDto);
+                    상점소개글_변경_요청(loginResult, storeIntroduceUpdateRequest);
 
                     //then
                     상점소개글_변경_요청_검증(store, introduceContent);
@@ -101,10 +100,10 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     //given
                     Store store = storeRepository.findAll().get(0);
                     String updateStoreName = "updateStoreName";
-                    StoreNameUpdateDto storeNameUpdateDto= new StoreNameUpdateDto(updateStoreName);
+                    StoreNameUpdateRequest storeNameUpdateRequest = new StoreNameUpdateRequest(updateStoreName);
 
                     //when
-                    상점이름_변경_요청(loginResult, storeNameUpdateDto);
+                    상점이름_변경_요청(loginResult, storeNameUpdateRequest);
 
                     //then
                     상점이름_변경_요청_검증(store, updateStoreName);
@@ -139,8 +138,8 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(storeDetailResponse.getIntroduceContent()).isEqualTo(store.getIntroduceContent());
     }
 
-    private RestResponse<Void> 상점소개글_변경_요청(TokenValuesDto loginResult, StoreIntroduceUpdateDto storeIntroduceUpdateDto) {
-        return putApi(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE, storeIntroduceUpdateDto, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    private RestResponse<Void> 상점소개글_변경_요청(TokenValuesDto loginResult, StoreIntroduceUpdateRequest storeIntroduceUpdateRequest) {
+        return putApi(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE, storeIntroduceUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상점소개글_변경_요청_검증(Store store, String introduceContent) {
@@ -148,8 +147,8 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(updatedIntroduceContent).isEqualTo(introduceContent);
     }
 
-    private void 상점이름_변경_요청(TokenValuesDto loginResult, StoreNameUpdateDto storeNameUpdateDto) {
-        putApi(StoreControllerPath.STORE_NAME_UPDATE, storeNameUpdateDto, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    private void 상점이름_변경_요청(TokenValuesDto loginResult, StoreNameUpdateRequest storeNameUpdateRequest) {
+        putApi(StoreControllerPath.STORE_NAME_UPDATE, storeNameUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상점이름_변경_요청_검증(Store store, String updateStoreName) {

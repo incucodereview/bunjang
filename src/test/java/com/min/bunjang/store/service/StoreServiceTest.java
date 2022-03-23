@@ -6,9 +6,9 @@ import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
-import com.min.bunjang.store.dto.StoreCreateRequest;
-import com.min.bunjang.store.dto.StoreCreateResponse;
-import com.min.bunjang.store.dto.StoreIntroduceUpdateDto;
+import com.min.bunjang.store.dto.request.StoreCreateRequest;
+import com.min.bunjang.store.dto.response.StoreCreateResponse;
+import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
 import com.min.bunjang.store.dto.VisitorPlusDto;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
@@ -87,10 +87,10 @@ class StoreServiceTest {
         Store savedStore = storeRepository.save(Store.createStore(storeName, introduceContent, null, savedMember));
 
         String updateIntroduceContent = "updateIntroduceContent";
-        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(updateIntroduceContent);
+        StoreIntroduceUpdateRequest storeIntroduceUpdateRequest = new StoreIntroduceUpdateRequest(updateIntroduceContent);
 
         //when
-        storeService.updateIntroduceContent(savedMember.getEmail(), storeIntroduceUpdateDto);
+        storeService.updateIntroduceContent(savedMember.getEmail(), storeIntroduceUpdateRequest);
 
         //then
         Store updatedStore = storeRepository.findById(savedStore.getNum()).get();
@@ -102,10 +102,10 @@ class StoreServiceTest {
     void store_NotExistStoreException() {
         //given
         String updateIntroduceContent = "updateIntroduceContent";
-        StoreIntroduceUpdateDto storeIntroduceUpdateDto = new StoreIntroduceUpdateDto(updateIntroduceContent);
+        StoreIntroduceUpdateRequest storeIntroduceUpdateRequest = new StoreIntroduceUpdateRequest(updateIntroduceContent);
 
         //when & then
-        Assertions.assertThatThrownBy(() -> storeService.updateIntroduceContent(savedMember.getEmail(), storeIntroduceUpdateDto)).isInstanceOf(NotExistStoreException.class);
+        Assertions.assertThatThrownBy(() -> storeService.updateIntroduceContent(savedMember.getEmail(), storeIntroduceUpdateRequest)).isInstanceOf(NotExistStoreException.class);
     }
 
     @DisplayName("상점 방문자를 계산한다")
