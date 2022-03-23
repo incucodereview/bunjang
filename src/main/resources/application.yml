@@ -5,3 +5,4 @@ spring:
       - db
       - security
       - email
+      - aws

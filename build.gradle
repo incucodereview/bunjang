@@ -45,6 +45,7 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     testImplementation 'io.rest-assured:rest-assured:3.3.0'
+    implementation 'org.springframework.cloud:spring-cloud-aws-context:2.2.1.RELEASE'
 }
 
 tasks.named('test') {
