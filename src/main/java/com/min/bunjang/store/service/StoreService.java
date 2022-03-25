@@ -62,4 +62,5 @@ public class StoreService {
         Store visitor = storeRepository.findByMember(visitorMember).orElseThrow(NotExistStoreException::new);
         owner.plusVisitor(visitor.getNum());
     }
+
 }
