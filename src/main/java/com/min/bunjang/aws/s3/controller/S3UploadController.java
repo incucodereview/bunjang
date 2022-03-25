@@ -24,7 +24,7 @@ public class S3UploadController {
 
     @PostMapping(S3UploadControllerPath.UPLOAD)
     public RestResponse<String> uploadFile(MultipartFile multipartFile) throws IOException {
-        String uploadedFileAddress = s3UploadService.upload(multipartFile);
+        String uploadedFileAddress = s3UploadService.uploadForMultiFile(multipartFile);
         return RestResponse.of(HttpStatus.OK, uploadedFileAddress);
     }
 }
