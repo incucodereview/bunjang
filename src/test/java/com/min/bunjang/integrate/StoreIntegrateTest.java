@@ -6,10 +6,10 @@ import com.min.bunjang.integrate.config.IntegrateTestConfig;
 import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.controller.StoreControllerPath;
-import com.min.bunjang.store.dto.request.StoreCreateRequest;
+import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
 import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
 import com.min.bunjang.store.dto.request.StoreNameUpdateRequest;
-import com.min.bunjang.store.dto.VisitorPlusDto;
+import com.min.bunjang.store.dto.request.VisitorPlusDto;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
@@ -48,13 +48,13 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         String storeName = "storeName";
         String introduceContent = "introduceContent";
 
-        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(storeName, introduceContent);
+        StoreCreateOrUpdateRequest storeCreateOrUpdateRequest = new StoreCreateOrUpdateRequest(storeName, introduceContent, null, null, null, null);
 
         //when & then
         mockMvc.perform(post(StoreControllerPath.STORE_CREATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken())
-                        .content(objectMapper.writeValueAsString(storeCreateRequest)))
+                        .content(objectMapper.writeValueAsString(storeCreateOrUpdateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("store-create",

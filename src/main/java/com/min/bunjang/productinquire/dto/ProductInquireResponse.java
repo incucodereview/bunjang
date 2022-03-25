@@ -33,7 +33,8 @@ public class ProductInquireResponse {
                 productInquire.getProductNum(),
                 writer.getNum(),
                 writer.getStoreName(),
-                new S3FileDto(writer.getStoreThumbnail().getNum(), writer.getStoreThumbnail().getFileName(), writer.getStoreThumbnail().getFilePath()),
+                //TODO StoreThumbnail 의 fileName 값에 대한 필요성을 다시 생각하고 필요 없다면 null을 어떻게 처리할지 -> S3FileDto을 변형하든 새로운 파일 DTO를 만들든. 애초에 파일에 이름이 필요한가..?
+                new S3FileDto(writer.getStoreThumbnail().getNum(), null, writer.getStoreThumbnail().getFilePath()),
                 productInquire.getInquireContent(),
                 productInquire.getUpdatedDate(),
                 Optional.ofNullable(productInquire.getMentionedStoreNumForAnswer()).orElse(null),

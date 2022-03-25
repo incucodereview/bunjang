@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
-public class StoreFileUploadTestController {
+public class StoreThumbnailUploadTestController {
     private final StoreThumbnailRepository storeThumbnailRepository;
     private final S3UploadService s3UploadService;
 
@@ -27,7 +27,7 @@ public class StoreFileUploadTestController {
     @ResponseBody
     public String saveFileUploadPage(String fileName, MultipartFile file) throws IOException {
         String filePath = s3UploadService.uploadForMultiFile(file);
-        StoreThumbnail save = storeThumbnailRepository.save(StoreThumbnail.createStoreThumbnail(fileName, filePath));
+        StoreThumbnail save = storeThumbnailRepository.save(StoreThumbnail.createStoreThumbnail(filePath));
         return filePath;
     }
 }

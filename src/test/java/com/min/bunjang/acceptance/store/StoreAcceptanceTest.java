@@ -16,7 +16,7 @@ import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.controller.StoreControllerPath;
 import com.min.bunjang.store.controller.StoreViewControllerPath;
-import com.min.bunjang.store.dto.request.StoreCreateRequest;
+import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
 import com.min.bunjang.store.dto.response.StoreCreateResponse;
 import com.min.bunjang.store.dto.response.StoreDetailResponse;
 import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
@@ -61,9 +61,9 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     //given
                     String storeName = "storeName";
                     String introduceContent = "introduceContent";
-                    StoreCreateRequest storeCreateRequest = new StoreCreateRequest(storeName, introduceContent);
+                    StoreCreateOrUpdateRequest storeCreateOrUpdateRequest = new StoreCreateOrUpdateRequest(storeName, introduceContent, null, null, null, null);
                     //when
-                    StoreCreateResponse storeCreateResponse = 상점생성_요청(loginResult, storeCreateRequest);
+                    StoreCreateResponse storeCreateResponse = 상점생성_요청(loginResult, storeCreateOrUpdateRequest);
 
                     //then
                     상점생성_요청_검증(storeName, introduceContent, storeCreateResponse);
@@ -112,8 +112,8 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
     }
 
 
-    private StoreCreateResponse 상점생성_요청(TokenValuesDto loginResult, StoreCreateRequest storeCreateRequest) {
-        return postApi(StoreControllerPath.STORE_CREATE, storeCreateRequest, new TypeReference<RestResponse<StoreCreateResponse>>() {
+    private StoreCreateResponse 상점생성_요청(TokenValuesDto loginResult, StoreCreateOrUpdateRequest storeCreateOrUpdateRequest) {
+        return postApi(StoreControllerPath.STORE_CREATE, storeCreateOrUpdateRequest, new TypeReference<RestResponse<StoreCreateResponse>>() {
         }, loginResult.getAccessToken()).getResult();
     }
 

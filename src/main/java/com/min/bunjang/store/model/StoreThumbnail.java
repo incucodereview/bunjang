@@ -15,18 +15,14 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StoreThumbnail extends BasicEntity {
     @NotBlank
-    private String fileName;
-
-    @NotBlank
     private String filePath;
 
-    private StoreThumbnail(String fileName, String filePath) {
-        this.fileName = fileName;
+    private StoreThumbnail(String filePath) {
         this.filePath = filePath;
     }
 
-    public static StoreThumbnail createStoreThumbnail(String fileName, String filePath) {
-        return new StoreThumbnail(fileName, filePath);
+    public static StoreThumbnail createStoreThumbnail(String filePath) {
+        return new StoreThumbnail(filePath);
     }
 }
 

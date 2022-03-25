@@ -1,32 +1,43 @@
 package com.min.bunjang.store.service;
 
+import com.min.bunjang.aws.s3.service.S3UploadService;
+import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.repository.MemberRepository;
-import com.min.bunjang.store.dto.request.StoreCreateRequest;
+import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
 import com.min.bunjang.store.dto.response.StoreCreateResponse;
 import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
 import com.min.bunjang.store.dto.request.StoreNameUpdateRequest;
-import com.min.bunjang.store.dto.VisitorPlusDto;
+import com.min.bunjang.store.dto.request.VisitorPlusDto;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
+import com.min.bunjang.store.model.StoreThumbnail;
 import com.min.bunjang.store.repository.StoreRepository;
+import com.min.bunjang.store.repository.StoreThumbnailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
 public class StoreService {
     private final StoreRepository storeRepository;
     private final MemberRepository memberRepository;
+    private final StoreThumbnailRepository storeThumbnailRepository;
+    private final S3UploadService s3UploadService;
 
+    //TODO 이건 StoreCreateResponse 왜 리턴하는지 생각하고 찾아 놓을것.
     @Transactional
-    public StoreCreateResponse createStore(StoreCreateRequest storeCreateRequest, String memberEmail) {
+    public StoreCreateResponse createStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, String memberEmail) throws IOException {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
-        Store store = Store.createStore(storeCreateRequest.getStoreName(), storeCreateRequest.getIntroduceContent(), null, member);
-        Store savedStore = storeRepository.save(store);
-        return StoreCreateResponse.of(savedStore);
+        String filePath = s3UploadService.uploadForMultiFile(storeCreateOrUpdateRequest.getStoreThumbnail());
+
+        StoreThumbnail storeThumbnail = storeThumbnailRepository.save(StoreThumbnail.createStoreThumbnail(filePath));
+        Store store = Store.createStore(storeCreateOrUpdateRequest.getStoreName(), storeCreateOrUpdateRequest.getIntroduceContent(), storeThumbnail, member);
+        return StoreCreateResponse.of(storeRepository.save(store));
     }
 
     @Transactional
@@ -38,6 +49,29 @@ public class StoreService {
 
         Store store = storeRepository.findById(member.getStore().getNum()).orElseThrow(NotExistStoreException::new);
         store.updateIntroduceContent(storeIntroduceUpdateRequest.getUpdateIntroduceContent());
+    }
+
+    @Transactional
+    public void updateStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, Long storeNum, String memberEmail) throws IOException {
+        Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(memberEmail, store);
+
+        store.updateStore(storeCreateOrUpdateRequest);
+        store.updateThumbnail(refineStoreThumbnail(storeCreateOrUpdateRequest, store));
+    }
+
+    private StoreThumbnail refineStoreThumbnail(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, Store store) throws IOException {
+        if (storeCreateOrUpdateRequest.getStoreThumbnail() == null) {
+            return null;
+        }
+
+        if (store.checkExistThumbnail()) {
+            storeThumbnailRepository.delete(store.getStoreThumbnail());
+            //기존 파일 삭제
+//                s3UploadService.
+        }
+        StoreThumbnail updatedThumbnail = StoreThumbnail.createStoreThumbnail(s3UploadService.uploadForMultiFile(storeCreateOrUpdateRequest.getStoreThumbnail()));
+        return storeThumbnailRepository.save(updatedThumbnail);
     }
 
     @Transactional

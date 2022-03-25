@@ -1,12 +1,12 @@
 package com.min.bunjang.aws.s3.service;
 
-import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.min.bunjang.aws.s3.proterties.AmazonS3BucketProperties;
 import com.min.bunjang.aws.s3.proterties.AmazonS3CredentialsProperties;
@@ -51,7 +51,7 @@ public class S3UploadService {
             String originalFilename = multipartFile.getOriginalFilename();
 
             putS3(multipartFile, originalFilename);
-            fileUrls.add(String.valueOf(amazonS3.getUrl(amazonS3BucketProperties.getBucket(), originalFilename)));
+            fileUrls.add(getThumbnailPath(originalFilename));
         }
 
         return fileUrls;

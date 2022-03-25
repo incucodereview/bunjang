@@ -2,11 +2,11 @@ package com.min.bunjang.store.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.security.MemberAccount;
-import com.min.bunjang.store.dto.request.StoreCreateRequest;
+import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
 import com.min.bunjang.store.dto.response.StoreCreateResponse;
 import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
 import com.min.bunjang.store.dto.request.StoreNameUpdateRequest;
-import com.min.bunjang.store.dto.VisitorPlusDto;
+import com.min.bunjang.store.dto.request.VisitorPlusDto;
 import com.min.bunjang.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 @RestController
 @RequiredArgsConstructor
 public class StoreController {
@@ -26,10 +28,10 @@ public class StoreController {
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PostMapping(StoreControllerPath.STORE_CREATE)
     public RestResponse<StoreCreateResponse> createStore(
-            @Validated @RequestBody StoreCreateRequest storeCreateRequest,
+            @Validated @RequestBody StoreCreateOrUpdateRequest storeCreateOrUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
-    ) {
-        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateRequest, memberAccount.getEmail());
+    ) throws IOException {
+        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateOrUpdateRequest, memberAccount.getEmail());
         return RestResponse.of(HttpStatus.OK, storeCreateResponse);
     }
 
