@@ -10,5 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InquireCreateRequest {
     private Long ownerNum;
+    private Long writerNum;
     private String inquireContent;
+    private Long mentionedStoreNumForAnswer;
+
+    public boolean isCheckExistenceMentionedStoreNum() {
+        return this.mentionedStoreNumForAnswer != null;
+    }
 }

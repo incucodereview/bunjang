@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 public class StoreInquireListResponse {
     private Long inquireNum;
     private String writerName;
-    private String writerThumbnail;
+    private Long writerThumbnail;
     private String inquireContent;
     private LocalDate postingDate;
 
-    public StoreInquireListResponse(Long inquireNum, String writerName, String writerThumbnail, String inquireContent, LocalDate postingDate) {
+    public StoreInquireListResponse(Long inquireNum, String writerName, Long writerThumbnail, String inquireContent, LocalDate postingDate) {
         this.inquireNum = inquireNum;
         this.writerName = writerName;
         this.writerThumbnail = writerThumbnail;

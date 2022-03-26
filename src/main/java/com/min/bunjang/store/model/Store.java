@@ -26,6 +26,7 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -148,6 +149,16 @@ public class Store extends BasicEntity {
         return this.storeThumbnail != null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Store store = (Store) o;
+        return hits == store.hits && Objects.equals(storeName, store.storeName) && Objects.equals(introduceContent, store.introduceContent) && Objects.equals(member, store.member) && Objects.equals(storeThumbnail, store.storeThumbnail) && Objects.equals(visitors, store.visitors) && Objects.equals(Products, store.Products) && Objects.equals(wishProducts, store.wishProducts) && Objects.equals(storeReviews, store.storeReviews) && Objects.equals(followings, store.followings) && Objects.equals(followers, store.followers) && Objects.equals(contactableTime, store.contactableTime) && Objects.equals(exchangeAndReturnAndRefundPolicy, store.exchangeAndReturnAndRefundPolicy) && Objects.equals(cautionNoteBeforeTrade, store.cautionNoteBeforeTrade);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(storeName, introduceContent, member, storeThumbnail, visitors, Products, wishProducts, storeReviews, followings, followers, hits, contactableTime, exchangeAndReturnAndRefundPolicy, cautionNoteBeforeTrade);
+    }
 }
