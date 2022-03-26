@@ -15,8 +15,8 @@ public class S3FileDto {
     private Long fileNum;
     private String fileName;
     private String fileLocation;
-
     public static S3FileDto of(Long fileNum, String fileName, String fileLocation) {
+
         return new S3FileDto(fileNum, fileName, fileLocation);
     }
 }

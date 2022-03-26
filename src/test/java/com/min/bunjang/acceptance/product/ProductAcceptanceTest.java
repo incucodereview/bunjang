@@ -96,6 +96,7 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
                     상품_생성_응답_검증(productCreateOrUpdateRequest);
                 }),
 
+                //! nullP
                 DynamicTest.dynamicTest("상품단건 조회.", () -> {
                     //given
                     Product product = productRepository.findAll().get(0);

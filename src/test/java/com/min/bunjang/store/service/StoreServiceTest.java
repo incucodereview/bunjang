@@ -80,6 +80,7 @@ class StoreServiceTest {
 
     }
 
+    //! 변경 안됨
     @DisplayName("상점 정보 수정시 수정한 정보가 적용된다.")
     @Test
     public void store_update() throws IOException {

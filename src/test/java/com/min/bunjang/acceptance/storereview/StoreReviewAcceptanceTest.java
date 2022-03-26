@@ -38,6 +38,7 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
     @Autowired
     private ProductRepository productRepository;
 
+    //! nullP
     @TestFactory
     Stream<DynamicTest> dynamicTestStream() {
         String ownerEmail = "urisegea@naver.com";

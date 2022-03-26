@@ -77,6 +77,7 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
                     Assertions.assertThat(followings).hasSize(1);
                 }),
 
+                //! nullP
                 DynamicTest.dynamicTest("상점의 팔로잉 상점목록 조회.", () -> {
                     //given
                     followingRepository.save(Following.createFollowing(null, null));

@@ -18,6 +18,7 @@ import com.min.bunjang.store.repository.StoreThumbnailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -33,9 +34,7 @@ public class StoreService {
     @Transactional
     public StoreCreateResponse createStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, String memberEmail) throws IOException {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
-        String filePath = s3UploadService.uploadForMultiFile(storeCreateOrUpdateRequest.getStoreThumbnail());
-
-        StoreThumbnail storeThumbnail = storeThumbnailRepository.save(StoreThumbnail.createStoreThumbnail(filePath));
+        StoreThumbnail storeThumbnail = refineStoreThumbnail(storeCreateOrUpdateRequest.getStoreThumbnail(), null);
         Store store = Store.createStore(storeCreateOrUpdateRequest.getStoreName(), storeCreateOrUpdateRequest.getIntroduceContent(), storeThumbnail, member);
         return StoreCreateResponse.of(storeRepository.save(store));
     }
@@ -57,20 +56,20 @@ public class StoreService {
         MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(memberEmail, store);
 
         store.updateStore(storeCreateOrUpdateRequest);
-        store.updateThumbnail(refineStoreThumbnail(storeCreateOrUpdateRequest, store));
+        store.updateThumbnail(refineStoreThumbnail(storeCreateOrUpdateRequest.getStoreThumbnail(), store));
     }
 
-    private StoreThumbnail refineStoreThumbnail(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, Store store) throws IOException {
-        if (storeCreateOrUpdateRequest.getStoreThumbnail() == null) {
+    private StoreThumbnail refineStoreThumbnail(MultipartFile multipartFile, Store store) throws IOException {
+        if (multipartFile == null) {
             return null;
         }
 
-        if (store.checkExistThumbnail()) {
+        if (store != null && store.checkExistThumbnail()) {
             storeThumbnailRepository.delete(store.getStoreThumbnail());
             //기존 파일 삭제
 //                s3UploadService.
         }
-        StoreThumbnail updatedThumbnail = StoreThumbnail.createStoreThumbnail(s3UploadService.uploadForMultiFile(storeCreateOrUpdateRequest.getStoreThumbnail()));
+        StoreThumbnail updatedThumbnail = StoreThumbnail.createStoreThumbnail(s3UploadService.uploadForMultiFile(multipartFile));
         return storeThumbnailRepository.save(updatedThumbnail);
     }
 

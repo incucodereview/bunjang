@@ -69,6 +69,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
                     상점생성_요청_검증(storeName, introduceContent, storeCreateResponse);
                 }),
 
+                //!nulP
                 DynamicTest.dynamicTest("상점 단건조회.", () -> {
                     //given
                     Store store = storeRepository.findAll().get(0);

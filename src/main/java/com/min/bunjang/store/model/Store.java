@@ -146,4 +146,5 @@ public class Store extends BasicEntity {
     public boolean checkExistThumbnail() {
         return this.storeThumbnail != null;
     }
+
 }

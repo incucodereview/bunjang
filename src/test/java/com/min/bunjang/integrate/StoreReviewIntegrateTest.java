@@ -73,6 +73,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
                 reviewContent
         );
 
+        //! 500
         //when & then
         mockMvc.perform(post(StoreReviewControllerPath.REVIEW_CREATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class StoreSimpleResponse {
     private Long storeNum;
     private String storeName;
-    private S3FileDto storeThumbnail;
+    private StoreThumbnailResponse storeThumbnail;
     private int productCount;
     private int followerCount;
     private int storeReviewCount;
@@ -27,7 +28,7 @@ public class StoreSimpleResponse {
                 store.getNum(),
                 store.getStoreName(),
                 //TODO StoreThumbnail 의 fileName 값에 대한 필요성을 다시 생각하고 필요 없다면 null을 어떻게 처리할지 -> S3FileDto을 변형하든 새로운 파일 DTO를 만들든. 애초에 파일에 이름이 필요한가..?
-                new S3FileDto(store.getStoreThumbnail().getNum(), null, store.getStoreThumbnail().getFilePath()),
+                StoreThumbnailResponse.of(store),
                 store.getProducts().size(),
                 store.getFollowers().size(),
                 store.getStoreReviews().size()

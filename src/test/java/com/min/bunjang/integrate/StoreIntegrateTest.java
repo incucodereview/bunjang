@@ -73,7 +73,11 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
                                 fieldWithPath("message").description("예외 발생시 메세지 정보 필드."),
                                 fieldWithPath("result.storeId").description("생성된 상점의 식별자 정보 필드"),
                                 fieldWithPath("result.storeName").description("생성된 상점의 이름 정보 필드"),
-                                fieldWithPath("result.introduceContent").description("생성된 상점의 소개글 정보 필드")
+                                fieldWithPath("result.introduceContent").description("생성된 상점의 소개글 정보 필드"),
+                                fieldWithPath("result.storeThumbnail").description("생성된 상점의 섬네일 정보 필드"),
+                                fieldWithPath("result.contactableTime").description("생성된 상점의 응답시간 정보 필드"),
+                                fieldWithPath("result.exchangeAndReturnAndRefundPolicy").description("생성된 상점의 교환/환불/반품 주의사항 정보 필드"),
+                                fieldWithPath("result.cautionNoteBeforeTrade").description("생성된 상점의 상품 구매전 주의사항 정보 필드")
                         )
                 ));
     }

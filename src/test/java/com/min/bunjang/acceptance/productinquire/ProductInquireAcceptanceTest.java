@@ -102,6 +102,7 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
 
                 }),
 
+                //! nullP
                 DynamicTest.dynamicTest("상품문의 목록 조회", () -> {
                     //given
                     Long productNum = savedProduct.getNum();
