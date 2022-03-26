@@ -63,6 +63,7 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
 
                     StoreReviewCreateRequest storeReviewCreateRequest = new StoreReviewCreateRequest(
                             owner.getNum(),
+                            writer.getNum(),
                             dealScore,
                             product.getNum(),
                             reviewContent

@@ -28,7 +28,6 @@ public class ProductInquireViewService {
                         productInquire,
                         storeRepository.findById(productInquire.getWriterNum()).orElseThrow(NotExistStoreException::new)))
                 .collect(Collectors.toList());
-        System.out.println(productInquires.getContent().size());
         return new ProductInquireResponses(productInquireResponses);
     }
 }

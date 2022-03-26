@@ -15,6 +15,8 @@ public class StoreReviewCreateRequest {
     @NotNull
     private Long ownerNum;
     @NotNull
+    private Long writerNum;
+    @NotNull
     private double dealScore;
     @NotNull
     private Long productNum;

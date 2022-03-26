@@ -68,6 +68,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
 
         StoreReviewCreateRequest storeReviewCreateRequest = new StoreReviewCreateRequest(
                 owner.getNum(),
+                writer.getNum(),
                 dealScore,
                 product.getNum(),
                 reviewContent
@@ -87,6 +88,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
                         ),
                         requestFields(
                                 fieldWithPath("ownerNum").description("후기 받은 상점 식별자 정보 필드."),
+                                fieldWithPath("writerNum").description("후기 작성자 식별자 정보 필드."),
                                 fieldWithPath("dealScore").description("후기평점 정보 필드"),
                                 fieldWithPath("productNum").description("거래한 제품의 식별자 정보 필드"),
                                 fieldWithPath("reviewContent").description("후기 내용 정보 필드")
@@ -128,7 +130,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         Product product = productRepository.save(new Product("productName"));
 
         StoreReview storeReview = storeReviewRepository.save(
-                StoreReview.createStoreReview(owner.getNum(), writer.getNum(), writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
         );
 
         //when & then
@@ -172,7 +174,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         Product product = productRepository.save(new Product("productName"));
 
         StoreReview storeReview = storeReviewRepository.save(
-                StoreReview.createStoreReview(owner.getNum(), writer.getNum(), writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
         );
 
         double updateDealScore = 4.5;
@@ -226,7 +228,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         Product product = productRepository.save(new Product("productName"));
 
         StoreReview storeReview = storeReviewRepository.save(
-                StoreReview.createStoreReview(owner.getNum(), writer.getNum(), writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
         );
 
         //when & then

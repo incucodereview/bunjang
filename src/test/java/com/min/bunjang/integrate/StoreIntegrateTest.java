@@ -62,8 +62,12 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("storeName").description("상점명 요청 필드"),
-                                fieldWithPath("introduceContent").description("상점 소개글 요청 필드")
+                                fieldWithPath("storeName").description("상점명 필드"),
+                                fieldWithPath("introduceContent").description("상점 소개글 필드"),
+                                fieldWithPath("storeThumbnail").description("상점 섬네일 필드"),
+                                fieldWithPath("contactableTime").description("상점 응답시간 필드"),
+                                fieldWithPath("exchangeAndReturnAndRefundPolicy").description("상점 교환/환불/반품 주의사항 정보 필드"),
+                                fieldWithPath("cautionNoteBeforeTrade").description("상점 구매전 주의사항 정보 필드")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
@@ -73,11 +77,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
                                 fieldWithPath("message").description("예외 발생시 메세지 정보 필드."),
                                 fieldWithPath("result.storeId").description("생성된 상점의 식별자 정보 필드"),
                                 fieldWithPath("result.storeName").description("생성된 상점의 이름 정보 필드"),
-                                fieldWithPath("result.introduceContent").description("생성된 상점의 소개글 정보 필드"),
-                                fieldWithPath("result.storeThumbnail").description("생성된 상점의 섬네일 정보 필드"),
-                                fieldWithPath("result.contactableTime").description("생성된 상점의 응답시간 정보 필드"),
-                                fieldWithPath("result.exchangeAndReturnAndRefundPolicy").description("생성된 상점의 교환/환불/반품 주의사항 정보 필드"),
-                                fieldWithPath("result.cautionNoteBeforeTrade").description("생성된 상점의 상품 구매전 주의사항 정보 필드")
+                                fieldWithPath("result.introduceContent").description("생성된 상점의 소개글 정보 필드")
                         )
                 ));
     }

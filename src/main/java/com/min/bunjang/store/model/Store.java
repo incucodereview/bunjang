@@ -54,7 +54,7 @@ public class Store extends BasicEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "store", orphanRemoval = true)
     private Set<WishProduct> wishProducts = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ownerNum", orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "owner", orphanRemoval = true)
     private Set<StoreReview> storeReviews = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "followerStore", orphanRemoval = true)
@@ -86,6 +86,7 @@ public class Store extends BasicEntity {
 
     public void updateStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest) {
         this.storeName = storeCreateOrUpdateRequest.getStoreName();
+        this.introduceContent = storeCreateOrUpdateRequest.getIntroduceContent();
         this.contactableTime = storeCreateOrUpdateRequest.getContactableTime();
         this.exchangeAndReturnAndRefundPolicy = storeCreateOrUpdateRequest.getExchangeAndReturnAndRefundPolicy();
         this.cautionNoteBeforeTrade = storeCreateOrUpdateRequest.getCautionNoteBeforeTrade();
@@ -146,5 +147,7 @@ public class Store extends BasicEntity {
     public boolean checkExistThumbnail() {
         return this.storeThumbnail != null;
     }
+
+
 
 }
