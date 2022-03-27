@@ -13,7 +13,10 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #        "productNum": 4,
 #        "writerNum": 1,
 #        "writerName": "생성 테스트용 상점명 변경 테스트",
-#        "writerThumbnail": null,
+#        "writerThumbnail": {
+#          "fileNum": 29,
+#          "fileLocation": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/petit-minou-lighthouse-g7a7213b31_1920.jpg"
+#        },
 #        "inquireContent": "제품 문의 입니다.2",
 #        "createDate": "2022-03-16T23:34:29",
 #        "answeredStoreNum": null,
@@ -24,7 +27,10 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #        "productNum": 4,
 #        "writerNum": 1,
 #        "writerName": "생성 테스트용 상점명 변경 테스트",
-#        "writerThumbnail": null,
+#        "writerThumbnail": {
+#          "fileNum": 29,
+#          "fileLocation": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/petit-minou-lighthouse-g7a7213b31_1920.jpg"
+#        },
 #        "inquireContent": "제품 문의 입니다.",
 #        "createDate": "2022-03-16T23:34:18",
 #        "answeredStoreNum": null,
@@ -35,7 +41,10 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #        "productNum": 4,
 #        "writerNum": 1,
 #        "writerName": "생성 테스트용 상점명 변경 테스트",
-#        "writerThumbnail": null,
+#        "writerThumbnail": {
+#          "fileNum": 29,
+#          "fileLocation": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/petit-minou-lighthouse-g7a7213b31_1920.jpg"
+#        },
 #        "inquireContent": "제품 문의 입니다.",
 #        "createDate": "2022-03-16T18:39:55",
 #        "answeredStoreNum": null,
@@ -45,4 +54,4 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 #  }
 #}
 #
-#Response code: 200; Time: 100ms; Content length: 725 bytes
+#Response code: 200; Time: 161ms; Content length: 1115 bytes
