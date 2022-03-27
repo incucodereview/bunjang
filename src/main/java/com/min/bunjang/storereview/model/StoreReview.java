@@ -39,9 +39,7 @@ public class StoreReview extends BasicEntity {
     @NotBlank
     private String reviewContent;
 
-    private Long storeThumbnailNum;
-
-    public StoreReview(Store owner, Store writer, String writerName, double dealScore, Long storeThumbnail, Long productNum, String productName, String reviewContent) {
+    public StoreReview(Store owner, Store writer, String writerName, double dealScore, Long productNum, String productName, String reviewContent) {
         this.owner = owner;
         this.writer = writer;
         this.writerName = writerName;
