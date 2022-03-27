@@ -28,6 +28,7 @@ import com.min.bunjang.trade.model.Trade;
 import com.min.bunjang.trade.model.TradeState;
 import com.min.bunjang.trade.repository.TradeRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,12 +107,10 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
                     Trade trade = tradeRepository.findAll().get(0);
 
                     //when
-                    String path = TradeControllerPath.TRADE_COMPLETE.replace("{tradeNum}", String.valueOf(trade.getNum()));
-                    postApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+                    거래_완료_요청(loginResult, TradeControllerPath.TRADE_COMPLETE, trade.getNum());
 
                     //then
-                    Trade completedTrade = tradeRepository.findById(trade.getNum()).get();
-                    Assertions.assertThat(completedTrade.getTradeState()).isEqualTo(TradeState.TRADE_COMPLETE);
+                    거래_완료_응답_검증(trade.getNum(), TradeState.TRADE_COMPLETE);
 
                 }),
 
@@ -120,12 +119,10 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
                     Long tradeNum = tradeRepository.findAll().get(0).getNum();
 
                     //when
-                    String path = TradeControllerPath.TRADE_CANCEL.replace("{tradeNum}", String.valueOf(tradeNum));
-                    deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+                    거래_삭제_요청(loginResult, tradeNum);
 
                     //then
-                    Trade trade = tradeRepository.findById(tradeNum).get();
-                    Assertions.assertThat(trade.getTradeState()).isEqualTo(TradeState.TRADE_CANCEL);
+                    거래_삭제_응답_검증(tradeNum, TradeState.TRADE_CANCEL);
                 })
         );
 
@@ -139,5 +136,30 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
     private void 거래_생성_응답_검증() {
         List<Trade> trades = tradeRepository.findAll();
         Assertions.assertThat(trades).hasSize(1);
+    }
+
+    private void 거래_완료_요청(TokenValuesDto loginResult, String tradeComplete, Long num) {
+        String path = tradeComplete.replace("{tradeNum}", String.valueOf(num));
+        patchApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    }
+
+    private void 거래_완료_응답_검증(Long num, TradeState tradeComplete) {
+        Trade completedTrade = tradeRepository.findById(num).get();
+        Assertions.assertThat(completedTrade.getTradeState()).isEqualTo(tradeComplete);
+    }
+
+    private void 거래_삭제_요청(TokenValuesDto loginResult, Long tradeNum) {
+        String path = TradeControllerPath.TRADE_CANCEL.replace("{tradeNum}", String.valueOf(tradeNum));
+        deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    }
+
+    private void 거래_삭제_응답_검증(Long tradeNum, TradeState tradeCancel) {
+        Trade trade = tradeRepository.findById(tradeNum).get();
+        Assertions.assertThat(trade.getTradeState()).isEqualTo(tradeCancel);
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }
