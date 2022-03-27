@@ -25,7 +25,7 @@ public class ProductDetailResponse {
     private Long firstCategoryNum;
     private Long secondCategoryNum;
     private Long thirdCategoryNum;
-    private List<String> productPhotos;
+    private List<ProductPhotoResponse> productPhotos;
     private String productName;
     private int productPrice;
     private int wishCount;
@@ -48,8 +48,9 @@ public class ProductDetailResponse {
                 product.getNum(),
                 product.getFirstProductCategory().getNum(),
                 product.getSecondProductCategory().getNum(),
+                //TODO 널포인트에러 가능성 다분
                 Optional.ofNullable(product.getThirdProductCategory().getNum()).orElse(null),
-                null/* TODO 이거도 여러 사진으로 고쳐줘야함 일단 s3 도입후 적용*/,
+                ProductPhotoResponse.listOf(product.getProductPhotos()),
                 product.getProductName(),
                 product.getProductPrice(),
                 product.getWishProductCount(),
@@ -61,6 +62,7 @@ public class ProductDetailResponse {
                 product.getDeliveryChargeInPrice(),
                 product.getExchangeLocation(),
                 product.getProductExplanation(),
+                //TODO 밑의 두 옵셔널 널포인트 에러 위험 다분
                 Optional.ofNullable(product.getProductTags()).orElse(null).stream()
                         .map(productTag -> productTag.getTag())
                         .collect(Collectors.toList()),

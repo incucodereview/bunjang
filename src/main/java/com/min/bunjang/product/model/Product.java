@@ -7,6 +7,7 @@ import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.productinquire.model.ProductInquire;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
@@ -48,9 +49,6 @@ public class Product extends BasicEntity {
     @JoinColumn(name = "third_product_category_num")
     private ThirdProductCategory thirdProductCategory;
 
-    //사진 관련 기능 s3하고 추가할것.
-    private String productPhotos;
-
     private String exchangeLocation;
 
     //이넘 컨버터를 왜 사용해야 하는지 알게되었다면 여기에 사용해도 되는 것인지 판단후 사용할 것. 당장은 @Enumerated(EnumType.STRING)로 사용
@@ -89,6 +87,10 @@ public class Product extends BasicEntity {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "productNum", orphanRemoval = true)
     private Set<ProductInquire> productInquires = new HashSet<>();
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "product", orphanRemoval = true)
+    private List<ProductPhoto> productPhotos = new ArrayList<>();
+
+
     public Product(String productName) {
         this.productName = productName;
     }
@@ -98,7 +100,6 @@ public class Product extends BasicEntity {
             FirstProductCategory firstProductCategory,
             SecondProductCategory secondProductCategory,
             ThirdProductCategory thirdProductCategory,
-            String productPhotos,
             String exchangeLocation,
             ProductQualityState productQualityState,
             ExchangeState exchangeState,
@@ -112,7 +113,6 @@ public class Product extends BasicEntity {
         this.firstProductCategory = firstProductCategory;
         this.secondProductCategory = secondProductCategory;
         this.thirdProductCategory = thirdProductCategory;
-        this.productPhotos = productPhotos;
         this.exchangeLocation = exchangeLocation;
         this.productTradeState = ProductTradeState.SOLD_ING;
         this.productQualityState = productQualityState;
@@ -137,7 +137,6 @@ public class Product extends BasicEntity {
                 firstProductCategory,
                 secondProductCategory,
                 thirdProductCategory,
-                null,
                 productCreateOrUpdateRequest.getExchangeLocation(),
                 productCreateOrUpdateRequest.getProductQualityState(),
                 productCreateOrUpdateRequest.getExchangeState(),
@@ -156,7 +155,6 @@ public class Product extends BasicEntity {
             ThirdProductCategory thirdProductCategory
     ) {
         this.productName = productCreateOrUpdateRequest.getProductName();
-        this.productPhotos = null;
         this.firstProductCategory = firstProductCategory;
         this.secondProductCategory = secondProductCategory;
         this.thirdProductCategory = thirdProductCategory;
@@ -197,15 +195,11 @@ public class Product extends BasicEntity {
             throw new ImpossibleException("상품이 등록된 상점이 없습니다. 잘못된 요청입니다.");
         }
 
-        return getStore();
+        return this.store;
     }
 
     public void updateProductTradeState(ProductTradeState productTradeState) {
         this.productTradeState = productTradeState;
-    }
-
-    private Store getStore() {
-        return this.store;
     }
 
 }

@@ -25,22 +25,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductViewService {
     private final ProductRepository productRepository;
-    private final ProductTagRepository productTagRepository;
     private final StoreRepository storeRepository;
-
 
     @Transactional(readOnly = true)
     public ProductDetailResponse getProduct(Long productNum, String email) {
         Product product = productRepository.findByNum(productNum).orElseThrow(NotExistProductException::new);
         Store store = product.checkAndReturnStore();
-        addHitsIfExistEmail(email, product);
+        product.addHitsCount(email);
         List<Product> productsByCategory = checkLowestCategoryInProduct(product);
         return ProductDetailResponse.of(product, productsByCategory);
     }
 
-    private void addHitsIfExistEmail(String email, Product product) {
-        product.addHitsCount(email);
-    }
 
     private List<Product> checkLowestCategoryInProduct(Product product) {
         if (product.getThirdProductCategory() != null) {
@@ -51,8 +46,7 @@ public class ProductViewService {
 
     public ProductSimpleResponses findProductsByStore(String email, Long storeNum, Pageable pageable) {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
-        Page<Product> productsByStore = productRepository.findByStoreNum(storeNum, pageable);
+//        Page<Product> productsByStore = productRepository.findByStoreNum(storeNum, pageable);
         Slice<Product> byStoreNum = productRepository.findByStoreNum(storeNum, pageable);
         return new ProductSimpleResponses(
                 ProductSimpleResponse.listOf(byStoreNum.getContent()),

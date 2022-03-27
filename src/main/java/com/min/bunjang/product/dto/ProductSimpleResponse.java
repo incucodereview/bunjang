@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ProductSimpleResponse {
     private Long productNum;
-    private String productThumbnail;
+    private List<ProductPhotoResponse> productPhotos;
     private String productName;
     private int productPrice;
     private LocalDateTime updateDateTime;
@@ -27,7 +27,7 @@ public class ProductSimpleResponse {
     public static ProductSimpleResponse of(Product product) {
         return new ProductSimpleResponse(
                 product.getNum(),
-                null/* TODO product.getProductPhotos()*/,
+                ProductPhotoResponse.listOf(product.getProductPhotos()),
                 product.getProductName(),
                 product.getProductPrice(),
                 product.getUpdatedDate(),

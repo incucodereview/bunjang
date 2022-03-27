@@ -5,14 +5,13 @@ import com.min.bunjang.following.dto.FollowingCreateResponse;
 import com.min.bunjang.following.exception.NotExistFollowingException;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.validation.constraints.NotNull;
 
 @Service
 @RequiredArgsConstructor

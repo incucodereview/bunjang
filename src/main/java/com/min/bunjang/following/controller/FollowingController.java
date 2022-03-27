@@ -1,6 +1,7 @@
 package com.min.bunjang.following.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.following.dto.FollowingCreateResponse;
 import com.min.bunjang.following.service.FollowingService;
 import com.min.bunjang.security.MemberAccount;
@@ -28,7 +29,7 @@ public class FollowingController {
             @Validated @RequestBody FollowingCreateResponse followingCreateResponse,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        followingService.createFollowing(memberAccount.getEmail(), followingCreateResponse);
+        followingService.createFollowing(MemberAndStoreValidator.verifyLoginRequest(memberAccount), followingCreateResponse);
         return RestResponse.of(HttpStatus.OK, null);
     }
 

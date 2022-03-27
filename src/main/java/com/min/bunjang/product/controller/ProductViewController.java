@@ -1,6 +1,7 @@
 package com.min.bunjang.product.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.product.dto.ProductDetailResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponses;
@@ -29,18 +30,17 @@ public class ProductViewController {
             @NotNull @PathVariable Long productNum,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        ProductDetailResponse productDetailResponse = productViewService.getProduct(productNum, memberAccount.getEmail());
+        ProductDetailResponse productDetailResponse = productViewService.getProduct(productNum, MemberAndStoreValidator.verifyLoginRequest(memberAccount));
         return RestResponse.of(HttpStatus.OK, productDetailResponse);
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @GetMapping(ProductViewControllerPath.PRODUCTS_FIND_BY_STORE)
     public RestResponse<ProductSimpleResponses> findProductsByStore(
             @NotNull @PathVariable Long storeNum,
             @AuthenticationPrincipal MemberAccount memberAccount,
             @PageableDefault(sort = "updatedDate", direction = Sort.Direction.DESC, size = 10) Pageable pageable
     ) {
-        ProductSimpleResponses productSimpleResponses = productViewService.findProductsByStore(memberAccount.getEmail(), storeNum, pageable);
+        ProductSimpleResponses productSimpleResponses = productViewService.findProductsByStore(MemberAndStoreValidator.verifyLoginRequest(memberAccount), storeNum, pageable);
         return RestResponse.of(HttpStatus.OK, productSimpleResponses);
     }
 }
