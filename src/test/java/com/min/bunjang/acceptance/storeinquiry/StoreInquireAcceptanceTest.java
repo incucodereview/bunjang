@@ -12,7 +12,7 @@ import com.min.bunjang.storeinquire.controller.StoreInquireControllerPath;
 import com.min.bunjang.storeinquire.controller.StoreInquireViewControllerPath;
 import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
 import com.min.bunjang.storeinquire.dto.InquireCreateResponse;
-import com.min.bunjang.storeinquire.dto.StoreInquireListResponse;
+import com.min.bunjang.storeinquire.dto.StoreInquireResponse;
 import com.min.bunjang.storeinquire.dto.StoreInquireListResponses;
 import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
@@ -118,9 +118,9 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private void 상점문의_목록조회_응답_검증(StoreInquireListResponses storeInquireListResponses) {
-        List<StoreInquireListResponse> storeInquireListResponse = storeInquireListResponses.getStoreInquireListResponse();
-        Assertions.assertThat(storeInquireListResponse).hasSize(1);
-        Assertions.assertThat(storeInquireListResponse.get(0).getInquireContent()).isEqualTo("인수테스트 상점 문의 내용");
+        List<StoreInquireResponse> storeInquireResponse = storeInquireListResponses.getStoreInquireResponse();
+        Assertions.assertThat(storeInquireResponse).hasSize(1);
+        Assertions.assertThat(storeInquireResponse.get(0).getInquireContent()).isEqualTo("인수테스트 상점 문의 내용");
     }
 
     @AfterEach

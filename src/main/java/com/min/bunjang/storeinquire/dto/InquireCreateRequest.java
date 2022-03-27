@@ -14,7 +14,7 @@ public class InquireCreateRequest {
     private String inquireContent;
     private Long mentionedStoreNumForAnswer;
 
-    public boolean isCheckExistenceMentionedStoreNum() {
+    public boolean checkExistenceMentionedStoreNum() {
         return this.mentionedStoreNumForAnswer != null;
     }
 }

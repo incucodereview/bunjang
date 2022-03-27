@@ -29,8 +29,7 @@ public class StoreInquireService {
         Store owner = storeRepository.findById(inquireCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
         Store writer = storeRepository.findById(inquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(memberEmail, writer);
-        StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer, null, inquireCreateRequest.getInquireContent());
-        storeInquire.defineStoreThumbnailNum(writer.getStoreThumbnail());
+        StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer, inquireCreateRequest.getInquireContent());
         defineMentionIfExistMentionNum(inquireCreateRequest, storeInquire);
 
         StoreInquire savedStoreInquire = storeInquiryRepository.save(storeInquire);
@@ -38,7 +37,7 @@ public class StoreInquireService {
     }
 
     private void defineMentionIfExistMentionNum(InquireCreateRequest inquireCreateRequest, StoreInquire storeInquire) {
-        if (inquireCreateRequest.isCheckExistenceMentionedStoreNum()) {
+        if (inquireCreateRequest.checkExistenceMentionedStoreNum()) {
             Store mentionedStore = storeRepository.findById(inquireCreateRequest.getMentionedStoreNumForAnswer()).orElseThrow(NotExistStoreException::new);
             storeInquire.defineMention(mentionedStore.getNum(), mentionedStore.getStoreName());
         }

@@ -1,0 +1,32 @@
+GET http://localhost:8080/store/1/inquiries
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5vdEV4aXN0RW1haWxAZW1haS5jb20iLCJpYXQiOjE2NDgzNTYwNTAsImV4cCI6MTY0ODM1Nzg1MH0.XIwBjh5XHa3FqS1qwVVruUuDs1nJczHRssTNvbvoTwQ
+
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "storeInquireResponse": [
+#      {
+#        "inquireNum": 1,
+#        "writerName": "testStore",
+#        "writerThumbnail": null,
+#        "inquireContent": "테스트용 상점문의 입니다.",
+#        "postingDate": "2022-03-05"
+#      }
+#    ],
+#    "pageDto": {
+#      "startPage": 1,
+#      "endPage": 0,
+#      "prev": false,
+#      "next": false,
+#      "total": 1,
+#      "realEndPage": 0,
+#      "currentPage": 0
+#    }
+#  }
+#}
+#
+#Response code: 200; Time: 115ms; Content length: 302 bytes

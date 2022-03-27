@@ -41,7 +41,7 @@ class StoreInquiryRepositoryTest {
         Member savedMember = memberRepository.save(member);
         Store store = Store.createStore("storeName", "introduce", null, savedMember);
         Store savedStore = storeRepository.save(store);
-        storeInquireRepository.save(StoreInquire.of(1L, savedStore, null, "content"));
+        storeInquireRepository.save(StoreInquire.of(1L, savedStore, "content"));
 
         //when
         boolean tureResult = storeInquireRepository.existsByNum(1L);
@@ -69,14 +69,14 @@ class StoreInquiryRepositoryTest {
         Store writer2 = storeRepository.save(Store.createStore("writer2", "introduce", null, writerMember2));
 
         List<StoreInquire> storeInquires = Arrays.asList(
-                StoreInquire.of(owner.getNum(), writer, null, "content1"),
-                StoreInquire.of(owner.getNum(), writer, null, "content2"),
-                StoreInquire.of(owner.getNum(), writer, null, "content3"),
-                StoreInquire.of(owner.getNum(), writer, null, "content4")
+                StoreInquire.of(owner.getNum(), writer,"content1"),
+                StoreInquire.of(owner.getNum(), writer,"content2"),
+                StoreInquire.of(owner.getNum(), writer,"content3"),
+                StoreInquire.of(owner.getNum(), writer,"content4")
         );
 
         storeInquireRepository.saveAll(storeInquires);
-        storeInquireRepository.save(StoreInquire.of(writer.getNum(), writer2, null, "content!!"));
+        storeInquireRepository.save(StoreInquire.of(writer.getNum(), writer2, "content!!"));
         PageRequest pageRequest = PageRequest.of(0, 10);
 
         //when

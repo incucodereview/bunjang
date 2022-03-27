@@ -1,7 +1,7 @@
 package com.min.bunjang.storeinquire.service;
 
 import com.min.bunjang.common.dto.PageDto;
-import com.min.bunjang.storeinquire.dto.StoreInquireListResponse;
+import com.min.bunjang.storeinquire.dto.StoreInquireResponse;
 import com.min.bunjang.storeinquire.dto.StoreInquireListResponses;
 import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
@@ -18,7 +18,7 @@ public class StoreInquireViewService {
     public StoreInquireListResponses findStoreInquiriesRelatedStore(Long storeNum, Pageable pageable) {
         Page<StoreInquire> storeInquiresByOwner = storeInquireRepository.findByOwnerNum(storeNum, pageable);
         return new StoreInquireListResponses(
-                StoreInquireListResponse.listOf(storeInquiresByOwner.getContent()),
+                StoreInquireResponse.listOf(storeInquiresByOwner.getContent()),
                 new PageDto(pageable.getPageSize(), pageable.getPageNumber(), storeInquiresByOwner.getTotalElements())
         );
     }

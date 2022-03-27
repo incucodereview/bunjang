@@ -24,8 +24,6 @@ public class StoreInquire extends BasicEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Store writer;
 
-    private Long writerThumbnail;
-
     @NotBlank
     private String content;
 
@@ -33,16 +31,14 @@ public class StoreInquire extends BasicEntity {
     private Long mentionedStoreNumForAnswer;
     private String mentionedStoreNameForAnswer;
 
-    // TODO: 섬네일은 s3 작업후 진행할 것. 일단 임시로 null처리
-    private StoreInquire(Long ownerNum, Store writer, Long writerThumbnail, String content) {
+    private StoreInquire(Long ownerNum, Store writer, String content) {
         this.ownerNum = ownerNum;
         this.writer = writer;
-        this.writerThumbnail = writerThumbnail;
         this.content = content;
     }
 
-    public static StoreInquire of(Long ownerNum, Store writer, Long writerThumbnail, String content) {
-        return new StoreInquire(ownerNum, writer, writerThumbnail, content);
+    public static StoreInquire of(Long ownerNum, Store writer, String content) {
+        return new StoreInquire(ownerNum, writer, content);
     }
 
     public void defineMention(Long mentionedStoreNumForAnswer, String mentionedStoreNameForAnswer) {
@@ -50,12 +46,4 @@ public class StoreInquire extends BasicEntity {
         this.mentionedStoreNameForAnswer = mentionedStoreNameForAnswer;
     }
 
-    //TODO StoreReview와 로직 중복.
-    public void defineStoreThumbnailNum(StoreThumbnail storeThumbnail) {
-        if (storeThumbnail == null) {
-            return;
-        }
-
-        this.writerThumbnail = storeThumbnail.getNum();
-    }
 }
