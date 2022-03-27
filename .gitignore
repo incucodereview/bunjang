@@ -42,3 +42,4 @@ src/main/resources/application-aws.yml
 src/main/resources/application-db.yml
 src/main/resources/application-security.yml
 src/main/resources/application-email.yml
+src/test/java/com/min/bunjang/aws/s3/AmazonS3CredentialsPropertiesTest.java
