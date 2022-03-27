@@ -130,7 +130,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         Product product = productRepository.save(new Product("productName"));
 
         StoreReview storeReview = storeReviewRepository.save(
-                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, product.getNum(), product.getProductName(), "reviewContent")
         );
 
         //when & then
@@ -174,7 +174,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         Product product = productRepository.save(new Product("productName"));
 
         StoreReview storeReview = storeReviewRepository.save(
-                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, product.getNum(), product.getProductName(), "reviewContent")
         );
 
         double updateDealScore = 4.5;
@@ -228,7 +228,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         Product product = productRepository.save(new Product("productName"));
 
         StoreReview storeReview = storeReviewRepository.save(
-                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, null, product.getNum(), product.getProductName(), "reviewContent")
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, product.getNum(), product.getProductName(), "reviewContent")
         );
 
         //when & then

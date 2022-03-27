@@ -1,7 +1,9 @@
 package com.min.bunjang.store.controller;
 
 import com.min.bunjang.aws.s3.service.S3UploadService;
+import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.model.StoreThumbnail;
+import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.store.repository.StoreThumbnailRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class StoreThumbnailUploadTestController {
     private final StoreThumbnailRepository storeThumbnailRepository;
+    private final StoreRepository storeRepository;
     private final S3UploadService s3UploadService;
 
     @GetMapping("/store/file")
@@ -27,7 +30,8 @@ public class StoreThumbnailUploadTestController {
     @ResponseBody
     public String saveFileUploadPage(String fileName, MultipartFile file) throws IOException {
         String filePath = s3UploadService.uploadForMultiFile(file);
-        StoreThumbnail save = storeThumbnailRepository.save(StoreThumbnail.createStoreThumbnail(filePath));
+        Store store = storeRepository.findById(1L).get();
+        StoreThumbnail save = storeThumbnailRepository.save(StoreThumbnail.createStoreThumbnail(filePath, store));
         return filePath;
     }
 }

@@ -1,5 +1,6 @@
 package com.min.bunjang.store.service;
 
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.dto.response.StoreDetailResponse;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
@@ -14,7 +15,7 @@ public class StoreViewService {
     private final StoreRepository storeRepository;
 
     @Transactional
-    public StoreDetailResponse findStore(String email, Long storeNum) {
+    public StoreDetailResponse findStore(MemberAccount email, Long storeNum) {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
         store.addHitsCount(email);
         return StoreDetailResponse.of(store);

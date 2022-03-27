@@ -61,10 +61,10 @@ class StoreReviewRepositoryTest {
         List<Product> savedProducts = productRepository.saveAll(products);
 
         List<StoreReview> storeReviews = Arrays.asList(
-                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 4.5, null, products.get(0).getNum(), products.get(0).getProductName(), "reviewContent1"),
-                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 4.0, null, products.get(1).getNum(), products.get(1).getProductName(), "reviewContent2"),
-                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, null, products.get(2).getNum(), products.get(2).getProductName(), "reviewContent3"),
-                StoreReview.createStoreReview(owner2, writer, writer.getStoreName(), 5.0, null, products.get(3).getNum(), products.get(3).getProductName(), "reviewContent4")
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 4.5, products.get(0).getNum(), products.get(0).getProductName(), "reviewContent1"),
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 4.0, products.get(1).getNum(), products.get(1).getProductName(), "reviewContent2"),
+                StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, products.get(2).getNum(), products.get(2).getProductName(), "reviewContent3"),
+                StoreReview.createStoreReview(owner2, writer, writer.getStoreName(), 5.0, products.get(3).getNum(), products.get(3).getProductName(), "reviewContent4")
         );
 
         List<StoreReview> savedStoreReviews = storeReviewRepository.saveAll(storeReviews);

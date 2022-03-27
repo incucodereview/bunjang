@@ -5,6 +5,7 @@ import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
 import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.trade.model.Trade;
@@ -41,7 +42,7 @@ public class Store extends BasicEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "store", orphanRemoval = true)
     private StoreThumbnail storeThumbnail;
 
     @ElementCollection(fetch = FetchType.LAZY)
@@ -123,7 +124,7 @@ public class Store extends BasicEntity {
         return average / this.storeReviews.size();
     }
 
-    public void addHitsCount(String email) {
+    public void addHitsCount(MemberAccount email) {
         if (email == null) {
             return;
         }

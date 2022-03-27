@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -23,7 +24,8 @@ public class StoreViewController {
             @NotNull @PathVariable Long storeNum,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        StoreDetailResponse storeDetailResponse = storeViewService.findStore(memberAccount.getEmail(), storeNum);
+        //TODO MemberAccount null 체크 고민필요...
+        StoreDetailResponse storeDetailResponse = storeViewService.findStore(memberAccount, storeNum);
         return RestResponse.of(HttpStatus.OK, storeDetailResponse);
     }
 }

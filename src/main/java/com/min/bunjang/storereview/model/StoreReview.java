@@ -44,19 +44,17 @@ public class StoreReview extends BasicEntity {
         this.writer = writer;
         this.writerName = writerName;
         this.dealScore = dealScore;
-        this.storeThumbnailNum = storeThumbnail;
         this.productNum = productNum;
         this.productName = productName;
         this.reviewContent = reviewContent;
     }
 
-    public static StoreReview createStoreReview(Store owner, Store writer, String writerName, double dealScore, Long storeThumbnail, Long productNum, String productName, String reviewContent) {
+    public static StoreReview createStoreReview(Store owner, Store writer, String writerName, double dealScore, Long productNum, String productName, String reviewContent) {
         return new StoreReview(
                 owner,
                 writer,
                 writerName,
                 dealScore,
-                storeThumbnail,
                 productNum,
                 productName,
                 reviewContent
@@ -78,13 +76,5 @@ public class StoreReview extends BasicEntity {
 
     public boolean verifyWriter(Store writer) {
         return this.writer.equals(writer);
-    }
-
-    public void defineStoreThumbnailNum(StoreThumbnail storeThumbnail) {
-        if (storeThumbnail == null) {
-            return;
-        }
-
-        this.storeThumbnailNum = storeThumbnail.getNum();
     }
 }

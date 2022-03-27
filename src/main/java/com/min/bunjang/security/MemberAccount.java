@@ -19,6 +19,14 @@ public class MemberAccount extends User {
     }
 
     public String getEmail() {
-        return super.getUsername();
+        String username = member.getEmail();
+        if (username == null) {
+            return null;
+        }
+        return username;
     }
+
+    //Member memberFetch = Optional.ofNullable(memberDetails)
+    //                .map(m -> memberQueryRepository.findByEmailFetch(m.getEmail()))
+    //                .orElse(null);
 }

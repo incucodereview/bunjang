@@ -69,7 +69,7 @@ public class StoreService {
             //기존 파일 삭제
 //                s3UploadService.
         }
-        StoreThumbnail updatedThumbnail = StoreThumbnail.createStoreThumbnail(s3UploadService.uploadForMultiFile(multipartFile));
+        StoreThumbnail updatedThumbnail = StoreThumbnail.createStoreThumbnail(s3UploadService.uploadForMultiFile(multipartFile), store);
         return storeThumbnailRepository.save(updatedThumbnail);
     }
 

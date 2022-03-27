@@ -1,25 +1,31 @@
 POST http://localhost:8080/store-review
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjU3NTU4OCwiZXhwIjoxNjQ2NTc3Mzg4fQ.RDIMmJ3P87F8L_jL-wTJq2zKoSGX0BzKlFdiZ9dfpzU
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0ODM1NzA5NCwiZXhwIjoxNjQ4MzU4ODk0fQ.o6DG4pwznh-FSdOv0bm-xuGjBOytEfnMUsj9uubuA0U
 
 
 #res
 #{
-#  "statusCode": "CREATED",
+#  "statusCode": "OK",
 #  "message": null,
 #  "result": {
-#    "inquireNum": 1,
+#    "reviewNum": 2,
+#    "writerNum": 2,
+#    "writerThumbnail": null,
 #    "writerName": "testStore",
-#    "inquireContent": "테스트용 상점문의 입니다."
+#    "dealScore": 3.0,
+#    "productNum": 2,
+#    "productName": "productTempName",
+#    "reviewContent": "테스트용 상점후기 입니다.",
+#    "postingDate": "2022-03-27"
 #  }
 #}
-
-## 상품관련 로직 구현후 다시 할것.
+## 이렇게 생성 요청의 응답이 이렇게 있는것 보단 단건조회가.... 근데 단건조회는 또 없구나. 음...일단 고민해볼것.
 
 #req
 {
-  "ownerNum": 1,
-  "dealScore": 3.0,
-  "productNum": 1,
-  "reviewContent": "테스트용 상점후기 입니다."
+  "ownerNum": 2,
+  "writerNum": 1,
+  "dealScore": 4.0,
+  "productNum": 9,
+  "reviewContent": "1->2테스트용 상점후기 입니다."
 }

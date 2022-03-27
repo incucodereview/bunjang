@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 public class StoreReviewResponse {
+    private Long reviewNum;
     private Long writerNum;
     private StoreThumbnailResponse writerThumbnail;
     private String writerName;
@@ -24,7 +25,8 @@ public class StoreReviewResponse {
     private LocalDate postingDate;
 
 
-    public StoreReviewResponse(Long writerNum, StoreThumbnailResponse writerThumbnail, String writerName, double dealScore, Long productNum, String productName, String reviewContent, LocalDate postingDate) {
+    public StoreReviewResponse(Long reviewNum, Long writerNum, StoreThumbnailResponse writerThumbnail, String writerName, double dealScore, Long productNum, String productName, String reviewContent, LocalDate postingDate) {
+        this.reviewNum = reviewNum;
         this.writerNum = writerNum;
         this.writerThumbnail = writerThumbnail;
         this.writerName = writerName;
@@ -37,6 +39,7 @@ public class StoreReviewResponse {
 
     public static StoreReviewResponse of(StoreReview storeReview) {
         return new StoreReviewResponse(
+                storeReview.getNum(),
                 storeReview.getWriter().getNum(),
                 StoreThumbnailResponse.of(storeReview.getWriter()),
                 storeReview.getWriterName(),

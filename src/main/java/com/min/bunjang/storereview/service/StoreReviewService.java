@@ -31,7 +31,6 @@ public class StoreReviewService {
     private final MemberRepository memberRepository;
     private final StoreRepository storeRepository;
 
-    //TODO StoreReviewCreateRequest에 작성자 상점 num 추가해서 코드 줄이기
     @Transactional
     public StoreReviewResponse createStoreReview(String memberEmail, StoreReviewCreateRequest storeReviewCreateRequest) {
         Store owner = storeRepository.findById(storeReviewCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
@@ -43,13 +42,10 @@ public class StoreReviewService {
                 writer,
                 writer.getStoreName(),
                 storeReviewCreateRequest.getDealScore(),
-                null,
                 product.getNum(),
                 product.getProductName(),
                 storeReviewCreateRequest.getReviewContent()
         );
-
-        storeReview.defineStoreThumbnailNum(writer.getStoreThumbnail());
 
         //TODO StoreReviewResponse에서 단순하게 그냥 StoreResponse포함하고 리뷰 내용 뭐 이정도만 해도 될지 의문 지금으로선 StoreReviewResponse를 왜 구현했는지도 의문
         return StoreReviewResponse.of(storeReviewRepository.save(storeReview));
