@@ -86,6 +86,7 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
                 Arrays.asList("tag1", "tag2"),
                 1
         );
+
         Product savedProduct = productRepository.save(Product.createProduct(productCreateOrUpdateRequest, firstCategory, secondCategory, thirdCategory, seller));
 
         return Stream.of(
@@ -98,6 +99,20 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
 
                     //then
                     거래_생성_응답_검증();
+                }),
+
+                DynamicTest.dynamicTest("거래 완료.", () -> {
+                    //given
+                    Trade trade = tradeRepository.findAll().get(0);
+
+                    //when
+                    String path = TradeControllerPath.TRADE_COMPLETE.replace("{tradeNum}", String.valueOf(trade.getNum()));
+                    postApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+
+                    //then
+                    Trade completedTrade = tradeRepository.findById(trade.getNum()).get();
+                    Assertions.assertThat(completedTrade.getTradeState()).isEqualTo(TradeState.TRADE_COMPLETE);
+
                 }),
 
                 DynamicTest.dynamicTest("거래 삭제.", () -> {

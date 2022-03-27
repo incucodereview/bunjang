@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,16 @@ public class TradeController {
     ) {
         TradeCreateResponse tradeCreateResponse = tradeService.createTrade(memberAccount.getEmail(), tradeCreateRequest);
         return RestResponse.of(HttpStatus.OK, tradeCreateResponse);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+    @PatchMapping(TradeControllerPath.TRADE_COMPLETE)
+    public RestResponse<Void> completeTrade(
+            @NotNull @PathVariable Long tradeNum,
+            @AuthenticationPrincipal MemberAccount memberAccount
+    ) {
+        tradeService.completeTrade(memberAccount.getEmail(), tradeNum);
+        return RestResponse.of(HttpStatus.OK, null);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")

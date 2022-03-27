@@ -38,16 +38,16 @@ public class TradeService {
     @Transactional
     public void completeTrade(String email, Long tradeNum) {
         Trade trade = tradeRepository.findById(tradeNum).orElseThrow(NotExistTradeException::new);
-        trade.checkMatchSellerOrBuyerByEmail(email);
 
+        trade.checkMatchSellerOrBuyerByEmail(email);
         trade.completeTrade();
     }
 
     @Transactional
     public void cancelTrade(String email, Long tradeNum) {
         Trade trade = tradeRepository.findById(tradeNum).orElseThrow(NotExistTradeException::new);
-        trade.checkMatchSellerOrBuyerByEmail(email);
 
+        trade.checkMatchSellerOrBuyerByEmail(email);
         trade.cancelTrade();
     }
 }

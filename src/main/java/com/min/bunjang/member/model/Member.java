@@ -63,6 +63,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberRole memberRole;
 
+    @Enumerated(EnumType.STRING)
+    private MemberGender memberGender;
+
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "member", orphanRemoval = true)
     private Store store;
 
@@ -112,8 +115,8 @@ public class Member {
         return this.email.equals(rowEmail);
     }
 
-    public boolean existStore() {
-        return this.store != null;
+    public void changeGender(MemberGender memberGender) {
+        this.memberGender = memberGender;
     }
 
     @Override
