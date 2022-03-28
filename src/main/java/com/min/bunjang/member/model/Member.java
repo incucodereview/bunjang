@@ -1,5 +1,6 @@
 package com.min.bunjang.member.model;
 
+import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.login.exception.NotMacheEmailAndPasswordException;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.store.model.Store;
@@ -111,8 +112,15 @@ public class Member {
         }
     }
 
-    public boolean verifyEmailMatch(String rowEmail) {
-        return this.email.equals(rowEmail);
+    public void verifyEmailMatch(String rowEmail) {
+        if (rowEmail == null){
+            throw new ImpossibleException("요청한 사용자 정보가 없습니다.. 잘못된 접근입니다.");
+        }
+
+        if (!this.email.equals(rowEmail)) {
+            throw new ImpossibleException("요청한 사용자와 해당 멤버정보가 다릅니다. 잘못된 접근입니다.");
+        }
+
     }
 
     public void changeGender(MemberGender memberGender) {

@@ -33,6 +33,7 @@ public class WishProductViewService {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
         Member member = memberRepository.findByEmail(ownerEmail).orElseThrow(NotExistMemberException::new);
         verifyImpossibleException(store, member);
+
         Page<WishProduct> wishProductPages = wishProductRepository.findByStore(store, pageable);
         return new WishProductResponses(
                 WishProductResponse.listOf(wishProductPages.getContent()),
@@ -42,11 +43,7 @@ public class WishProductViewService {
 
     //TODO 좋은 메서드 이름이 아니다... 또 해당 로직이 여기에 있어야 하는지 엔티티에 있어야하는지도 불확정함. 변경 가능성 다분함.
     private void verifyImpossibleException(Store store, Member member) {
-        if (store.getMember() == null) {
-            throw new ImpossibleException("상점과 연동된 회원이 없습니다. 모순된 데이터 입니다. 개발팀에 문의해주세요");
-        }
-
-        if (!member.verifyEmailMatch(store.getMember().getEmail())) {
+        if (store.verifyMatchMember(member.getEmail())) {
             throw new ImpossibleException("상점오너의 조회 요청이 아니므로 찜목록을 반환할 필요가 없습니다.");
         }
     }
