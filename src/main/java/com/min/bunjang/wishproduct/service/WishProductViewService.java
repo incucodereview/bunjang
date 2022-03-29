@@ -43,7 +43,7 @@ public class WishProductViewService {
 
     //TODO 좋은 메서드 이름이 아니다... 또 해당 로직이 여기에 있어야 하는지 엔티티에 있어야하는지도 불확정함. 변경 가능성 다분함.
     private void verifyImpossibleException(Store store, Member member) {
-        if (store.verifyMatchMember(member.getEmail())) {
+        if (!store.verifyMatchMember(member.getEmail())) {
             throw new ImpossibleException("상점오너의 조회 요청이 아니므로 찜목록을 반환할 필요가 없습니다.");
         }
     }

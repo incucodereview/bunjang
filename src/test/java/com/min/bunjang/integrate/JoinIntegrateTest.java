@@ -160,7 +160,8 @@ public class JoinIntegrateTest extends IntegrateTestConfig {
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("요청 데이터의 타입필드, 요청 객체는 JSON 형태로 요청")
                         ),
                         requestFields(
-                                fieldWithPath("email").description("이메일 인증후 응답된 회원 이메일 데이터.")
+                                fieldWithPath("email").description("이메일 인증후 응답된 회원 이메일 데이터."),
+                                fieldWithPath("memberGender").description("회원가입에 필요한 회원 성별 데이터.")
                         ),
                         responseHeaders(
                                 headerWithName(HttpHeaders.CONTENT_TYPE).description("응답 데이터의 타입필드, 응답 객체는 JSON 형태로 응답")
