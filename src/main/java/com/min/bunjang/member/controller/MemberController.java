@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,6 +30,17 @@ public class MemberController {
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
         memberService.changeGender(memberNum, memberGender, memberAccount);
+        return RestResponse.of(HttpStatus.OK, null);
+    }
+
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+    @PatchMapping(MemberControllerPath.MEMBER_CHANGE_BIRTHDAY)
+    public RestResponse<Void> changeBirthDay(
+            @NotNull @PathVariable Long memberNum,
+            @RequestParam LocalDate memberBirthDay,
+            @AuthenticationPrincipal MemberAccount memberAccount
+    ) {
+        memberService.changeBirthDay(memberNum,  memberBirthDay, memberAccount);
         return RestResponse.of(HttpStatus.OK, null);
     }
 }

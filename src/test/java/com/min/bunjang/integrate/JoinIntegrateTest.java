@@ -9,6 +9,7 @@ import com.min.bunjang.join.controller.EmailJoinControllerPath;
 import com.min.bunjang.join.dto.JoinRequest;
 import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.member.model.JoinTempMember;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
 import com.min.bunjang.testconfig.RestDocsConfiguration;
 import org.junit.jupiter.api.AfterEach;
@@ -147,7 +148,7 @@ public class JoinIntegrateTest extends IntegrateTestConfig {
         JoinTempMember joinTempMember = JoinTempMember.createJoinTempMember(tempJoinRequest, bCryptPasswordEncoder);
         JoinTempMember savedJoinTempMember = joinTempMemberRepository.save(joinTempMember);
 
-        JoinRequest joinRequest = new JoinRequest(savedJoinTempMember.getEmail());
+        JoinRequest joinRequest = new JoinRequest(savedJoinTempMember.getEmail(), MemberGender.MEN);
 
         //when & then
         mockMvc.perform(post(EmailJoinControllerPath.JOIN_MEMBER_REQUEST)

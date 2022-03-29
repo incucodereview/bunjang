@@ -2,6 +2,7 @@ package com.min.bunjang.storeinquire.repository;
 
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.model.Store;
@@ -37,7 +38,7 @@ class StoreInquiryRepositoryTest {
     @Test
     void name() {
         //given
-        Member member = Member.createMember(MemberDirectCreateDto.of("email", "password", null, null, null, MemberRole.ROLE_MEMBER));
+        Member member = Member.createMember(MemberDirectCreateDto.of("email", "password", null, null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
         Member savedMember = memberRepository.save(member);
         Store store = Store.createStore("storeName", "introduce", null, savedMember);
         Store savedStore = storeRepository.save(store);
@@ -56,9 +57,9 @@ class StoreInquiryRepositoryTest {
     @Test
     public void name2() {
         //given
-        Member member1 = Member.createMember(MemberDirectCreateDto.of("email", "password", null, null, null, MemberRole.ROLE_MEMBER));
-        Member member2 = Member.createMember(MemberDirectCreateDto.of("email2", "password2", null, null, null, MemberRole.ROLE_MEMBER));
-        Member member3 = Member.createMember(MemberDirectCreateDto.of("email3", "password3", null, null, null, MemberRole.ROLE_MEMBER));
+        Member member1 = Member.createMember(MemberDirectCreateDto.of("email", "password", null, null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
+        Member member2 = Member.createMember(MemberDirectCreateDto.of("email2", "password2", null, null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
+        Member member3 = Member.createMember(MemberDirectCreateDto.of("email3", "password3", null, null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
 
         Member ownerMember = memberRepository.save(member1);
         Member writerMember1 = memberRepository.save(member2);

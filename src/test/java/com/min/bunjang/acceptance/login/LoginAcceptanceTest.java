@@ -5,6 +5,7 @@ import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.login.controller.LoginControllerPath;
 import com.min.bunjang.login.dto.LoginRequest;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
@@ -32,7 +33,8 @@ public class LoginAcceptanceTest extends AcceptanceTestConfig {
                 "min",
                 "phone",
                 LocalDate.of(1996, 10, 14),
-                MemberRole.ROLE_ADMIN
+                MemberRole.ROLE_ADMIN,
+                MemberGender.MEN
         ));
         memberRepository.save(member);
 

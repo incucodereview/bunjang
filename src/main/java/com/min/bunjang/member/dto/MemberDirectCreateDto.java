@@ -1,6 +1,7 @@
 package com.min.bunjang.member.dto;
 
 import com.min.bunjang.member.model.JoinTempMember;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -19,35 +20,39 @@ public class MemberDirectCreateDto {
     private String phone;
     private LocalDate birthDate;
     private MemberRole memberRole;
+    private MemberGender memberGender;
 
-    private MemberDirectCreateDto(String email, String password, String name, String phone, LocalDate birthDate, MemberRole memberRole) {
+    public MemberDirectCreateDto(String email, String password, String name, String phone, LocalDate birthDate, MemberRole memberRole, MemberGender memberGender) {
         this.email = email;
         this.password = password;
         this.name = name;
         this.phone = phone;
         this.birthDate = birthDate;
         this.memberRole = memberRole;
+        this.memberGender = memberGender;
     }
 
-    public static MemberDirectCreateDto of(String email, String password, String name, String phone, LocalDate birthDate, MemberRole memberRole) {
+    public static MemberDirectCreateDto of(String email, String password, String name, String phone, LocalDate birthDate, MemberRole memberRole,MemberGender memberGender) {
         return new MemberDirectCreateDto(
                 email,
                 password,
                 name,
                 phone,
                 birthDate,
-                memberRole
+                memberRole,
+                memberGender
         );
     }
 
-    public static MemberDirectCreateDto toMemberThroughTempMember(JoinTempMember joinTempMember, MemberRole memberRole) {
+    public static MemberDirectCreateDto toMemberThroughTempMember(JoinTempMember joinTempMember, MemberRole memberRole, MemberGender memberGender) {
         return new MemberDirectCreateDto(
                 joinTempMember.getEmail(),
                 joinTempMember.getPassword(),
                 joinTempMember.getName(),
                 joinTempMember.getPhone(),
                 joinTempMember.getBirthDate(),
-                memberRole
+                memberRole,
+                memberGender
         );
     }
 }

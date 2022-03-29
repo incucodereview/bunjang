@@ -3,6 +3,7 @@ package com.min.bunjang.login.service;
 import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.config.ServiceTestConfig;
 import com.min.bunjang.login.dto.LoginRequest;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.exception.NotExistMemberException;
@@ -42,7 +43,8 @@ class LoginServiceTest extends ServiceTestConfig {
                 "min",
                 "phone",
                 LocalDate.of(1996, 10, 14),
-                MemberRole.ROLE_ADMIN
+                MemberRole.ROLE_ADMIN,
+                MemberGender.MEN
         ));
         memberRepository.save(member);
 

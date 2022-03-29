@@ -7,10 +7,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import com.min.bunjang.category.repository.FirstProductCategoryRepository;
+import com.min.bunjang.category.repository.SecondProductCategoryRepository;
+import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.member.repository.MemberRepository;
+import com.min.bunjang.product.repository.ProductRepository;
+import com.min.bunjang.product.repository.ProductTagRepository;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.sun.istack.Nullable;
 import io.restassured.RestAssured;
@@ -51,6 +56,18 @@ public class AcceptanceTestConfig {
 
     @Autowired
     protected StoreRepository storeRepository;
+
+    @Autowired
+    protected ProductRepository productRepository;
+
+    @Autowired
+    protected FirstProductCategoryRepository firstProductCategoryRepository;
+
+    @Autowired
+    protected SecondProductCategoryRepository secondProductCategoryRepository;
+
+    @Autowired
+    protected ThirdProductCategoryRepository thirdProductCategoryRepository;
 
     @BeforeEach
     public void setUp() {

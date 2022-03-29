@@ -40,7 +40,7 @@ public class EmailJoinController {
 
     @PostMapping(EmailJoinControllerPath.JOIN_MEMBER_REQUEST)
     public RestResponse<Void> joinMember(@Validated @RequestBody JoinRequest joinRequest) {
-        emailJoinService.joinMember(joinRequest.getEmail());
+        emailJoinService.joinMember(joinRequest);
         return RestResponse.of(HttpStatus.CREATED, null);
     }
 

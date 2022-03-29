@@ -6,6 +6,7 @@ import com.min.bunjang.login.controller.LoginControllerPath;
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;
@@ -24,7 +25,8 @@ public class MemberAcceptanceHelper {
                 "name",
                 "phone",
                 LocalDate.of(1996, 10, 14),
-                MemberRole.ROLE_MEMBER
+                MemberRole.ROLE_MEMBER,
+                MemberGender.MEN
         );
         return memberRepository.save(Member.createMember(memberDirectCreateDto));
     }

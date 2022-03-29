@@ -4,6 +4,7 @@ import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
@@ -45,7 +46,7 @@ class StoreServiceTest {
     void setUp() {
         String email = "email@email";
         String password = "password";
-        Member member = Member.createMember(MemberDirectCreateDto.of(email, password, "name", "phone", null, MemberRole.ROLE_MEMBER));
+        Member member = Member.createMember(MemberDirectCreateDto.of(email, password, "name", "phone", null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
         savedMember = memberRepository.save(member);
     }
 
@@ -147,7 +148,7 @@ class StoreServiceTest {
         String introduceContent = "introduceContent";
         Store owner = storeRepository.save(Store.createStore(storeName, introduceContent, null, savedMember));
 
-        Member member = Member.createMember(MemberDirectCreateDto.of("email", "password", "name", "phone", null, MemberRole.ROLE_MEMBER));
+        Member member = Member.createMember(MemberDirectCreateDto.of("email", "password", "name", "phone", null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
         Member newMember = memberRepository.save(member);
 
         String storeName2 = "storeName";

@@ -43,19 +43,7 @@ import java.util.stream.Stream;
 
 public class ProductAcceptanceTest extends AcceptanceTestConfig {
     @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
     private ProductTagRepository productTagRepository;
-
-    @Autowired
-    private FirstProductCategoryRepository firstProductCategoryRepository;
-
-    @Autowired
-    private SecondProductCategoryRepository secondProductCategoryRepository;
-
-    @Autowired
-    private ThirdProductCategoryRepository thirdProductCategoryRepository;
 
     @TestFactory
     Stream<DynamicTest> dynamicTestStream() {

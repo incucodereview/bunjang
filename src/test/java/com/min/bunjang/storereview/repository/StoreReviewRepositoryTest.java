@@ -2,6 +2,7 @@ package com.min.bunjang.storereview.repository;
 
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.product.model.Product;
@@ -40,9 +41,9 @@ class StoreReviewRepositoryTest {
     @Test
     public void name() {
         //given
-        Member member1 = Member.createMember(MemberDirectCreateDto.of("email", "password", null, null, null, MemberRole.ROLE_MEMBER));
-        Member member2 = Member.createMember(MemberDirectCreateDto.of("email2", "password2", null, null, null, MemberRole.ROLE_MEMBER));
-        Member member3 = Member.createMember(MemberDirectCreateDto.of("email3", "password3", null, null, null, MemberRole.ROLE_MEMBER));
+        Member member1 = Member.createMember(MemberDirectCreateDto.of("email", "password", null, null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
+        Member member2 = Member.createMember(MemberDirectCreateDto.of("email2", "password2", null, null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
+        Member member3 = Member.createMember(MemberDirectCreateDto.of("email3", "password3", null, null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
 
         Member ownerMember = memberRepository.save(member1);
         Member ownerMember2 = memberRepository.save(member2);

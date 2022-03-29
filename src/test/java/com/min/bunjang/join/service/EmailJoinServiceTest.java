@@ -4,9 +4,11 @@ import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
+import com.min.bunjang.join.dto.JoinRequest;
 import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.member.model.JoinTempMember;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
 import com.min.bunjang.member.repository.MemberRepository;
@@ -131,8 +133,9 @@ class EmailJoinServiceTest {
         JoinTempMember savedTempMember = joinTempMemberRepository.save(JoinTempMember.createJoinTempMember(tempJoinRequest, bCryptPasswordEncoder));
         ConfirmationToken savedConfirmationToken = confirmationTokenRepository.save(ConfirmationToken.createEmailConfirmationToken(savedTempMember.getEmail()));
 
+        JoinRequest joinRequest = new JoinRequest(savedConfirmationToken.getEmail(), MemberGender.MEN);
         //when
-        emailJoinService.joinMember(savedConfirmationToken.getEmail());
+        emailJoinService.joinMember(joinRequest);
 
         //then
         Member joinedMember = memberRepository.findByEmail(savedConfirmationToken.getEmail()).get();

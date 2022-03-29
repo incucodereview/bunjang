@@ -10,6 +10,7 @@ import com.min.bunjang.join.dto.JoinRequest;
 import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.member.model.JoinTempMember;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
 import com.min.bunjang.member.repository.MemberRepository;
@@ -63,7 +64,7 @@ public class JoinAcceptanceTest extends AcceptanceTestConfig {
 
                 DynamicTest.dynamicTest("이메일 인증후 회원가입 요청", () -> {
                     //given
-                    JoinRequest joinRequest = new JoinRequest(email);
+                    JoinRequest joinRequest = new JoinRequest(email, MemberGender.MEN);
 
                     //when
                     인증후일반회원_등록_요청(joinRequest);

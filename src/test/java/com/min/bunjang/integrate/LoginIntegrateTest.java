@@ -6,6 +6,7 @@ import com.min.bunjang.login.controller.LoginControllerPath;
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.testconfig.RestDocsConfiguration;
@@ -54,7 +55,8 @@ public class LoginIntegrateTest extends IntegrateTestConfig {
                 "min",
                 "phone",
                 LocalDate.of(1996, 10, 14),
-                MemberRole.ROLE_ADMIN
+                MemberRole.ROLE_ADMIN,
+                MemberGender.MEN
         ));
         memberRepository.save(member);
 

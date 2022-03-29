@@ -80,7 +80,8 @@ public class Member {
             LocalDate birthDate,
             LocalDateTime joinDate,
             LocalDateTime updatedDate,
-            MemberRole memberRole
+            MemberRole memberRole,
+            MemberGender memberGender
     ) {
         this.memberNum = memberNum;
         this.email = email;
@@ -91,6 +92,7 @@ public class Member {
         this.joinDate = joinDate;
         this.updatedDate = updatedDate;
         this.memberRole = memberRole;
+        this.memberGender = memberGender;
     }
 
     public static Member createMember(MemberDirectCreateDto memberDirectCreateDto) {
@@ -103,6 +105,7 @@ public class Member {
                 .joinDate(LocalDateTime.now())
                 .updatedDate(LocalDateTime.now())
                 .memberRole(memberDirectCreateDto.getMemberRole())
+                .memberGender(memberDirectCreateDto.getMemberGender())
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.min.bunjang.join.dto;
 
+import com.min.bunjang.member.model.MemberGender;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,4 +14,5 @@ import javax.validation.constraints.NotBlank;
 public class JoinRequest {
     @NotBlank
     private String email;
+    private MemberGender memberGender;
 }

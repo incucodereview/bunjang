@@ -3,6 +3,7 @@ package com.min.bunjang.wishproduct.service;
 import com.min.bunjang.config.ServiceTestConfig;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -39,7 +40,7 @@ class WishProductServiceTest extends ServiceTestConfig {
     @Test
     public void wishProduct_create() {
         //given
-        Member member = Member.createMember(MemberDirectCreateDto.of("email", "pwd", "name", null, null, MemberRole.ROLE_MEMBER));
+        Member member = Member.createMember(MemberDirectCreateDto.of("email", "pwd", "name", null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
         Member savedMember = memberRepository.save(member);
         Store savedStore = storeRepository.save(Store.createStore("storeName", "introduce", null, member));
         Product savedProduct = productRepository.save(new Product("productName"));
@@ -60,7 +61,7 @@ class WishProductServiceTest extends ServiceTestConfig {
     @Test
     public void wishProduct_delete() {
         //given
-        Member member = Member.createMember(MemberDirectCreateDto.of("email", "pwd", "name", null, null, MemberRole.ROLE_MEMBER));
+        Member member = Member.createMember(MemberDirectCreateDto.of("email", "pwd", "name", null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
         memberRepository.save(member);
         Store savedStore = storeRepository.save(Store.createStore("storeName", "introduce", null, member));
         Product savedProduct = productRepository.save(new Product("productName"));

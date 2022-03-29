@@ -3,6 +3,7 @@ package com.min.bunjang.join.service;
 import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
+import com.min.bunjang.join.dto.JoinRequest;
 import com.min.bunjang.join.event.JoinEmailEvent;
 import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.join.exception.WrongCertificationJoinException;
@@ -39,9 +40,9 @@ public class EmailJoinService {
     }
 
     @Transactional
-    public void joinMember(String email) {
-        JoinTempMember joinTempMember = joinTempMemberRepository.findById(email).orElseThrow(NotExistTempMemberException::new);
-        Member member = Member.createMember(MemberDirectCreateDto.toMemberThroughTempMember(joinTempMember, MemberRole.ROLE_MEMBER));
+    public void joinMember(JoinRequest joinRequest) {
+        JoinTempMember joinTempMember = joinTempMemberRepository.findById(joinRequest.getEmail()).orElseThrow(NotExistTempMemberException::new);
+        Member member = Member.createMember(MemberDirectCreateDto.toMemberThroughTempMember(joinTempMember, MemberRole.ROLE_MEMBER, joinRequest.getMemberGender()));
 
         memberRepository.save(member);
         joinTempMemberRepository.delete(joinTempMember);

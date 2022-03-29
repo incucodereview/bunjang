@@ -8,6 +8,7 @@ import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
+import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
@@ -52,7 +53,7 @@ class ProductRepositoryTest {
     @Test
     public void name() {
         //given
-        Member member = Member.createMember(MemberDirectCreateDto.of("email", "password", "name", null, null, MemberRole.ROLE_MEMBER));
+        Member member = Member.createMember(MemberDirectCreateDto.of("email", "password", "name", null, null, MemberRole.ROLE_MEMBER, MemberGender.MEN));
         Member savedMember = memberRepository.save(member);
         Store savedStore = storeRepository.save(Store.createStore("storeName", "content", null, savedMember));
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));

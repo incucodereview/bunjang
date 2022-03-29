@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -21,5 +22,11 @@ public class MemberService {
         Member member = memberRepository.findById(memberNum).orElseThrow(NotExistMemberException::new);
         member.verifyEmailMatch(memberAccount.getEmail());
         member.changeGender(memberGender);
+    }
+
+    public void changeBirthDay(Long memberNum, LocalDate memberGender, MemberAccount memberAccount) {
+        Member member = memberRepository.findById(memberNum).orElseThrow(NotExistMemberException::new);
+        member.verifyEmailMatch(memberAccount.getEmail());
+//        member.changeGender(memberGender);
     }
 }
