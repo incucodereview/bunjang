@@ -1,0 +1,17 @@
+PATCH http://localhost:8080/member/4/phone
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0ODU1ODA4OCwiZXhwIjoxNjQ4NTU5ODg4fQ.XL28oZ9NAXVt2RGqjW8ZmLB0qMm-_MPG6E_sgdqHL1s
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#
+#Response code: 200; Time: 154ms; Content length: 48 bytes
+
+#req
+{
+  "phone": "010-3333-8192"
+}
