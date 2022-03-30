@@ -1,7 +1,14 @@
+buildscript {
+    ext {
+        querydslPluginVersion = "5.0.0"
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'org.asciidoctor.convert' version '1.5.8'
+//    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
     id 'java'
 }
 
@@ -39,6 +46,12 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-mail:2.6.1'
     implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.7'
+
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.querydsl:querydsl-apt'
+    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.2.RELEASE'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
@@ -65,4 +78,30 @@ test {
 asciidoctor {
     inputs.dir snippetsDir
     dependsOn test
+}
+
+////querydsl 추가 시작
+
+//apply plugin: 'io.spring.dependency-management'
+//apply plugin: "com.ewerk.gradle.plugins.querydsl"
+//
+//def querydslDir = "$buildDir/generated/querydsl"
+//querydsl {
+//    library = "com.querydsl:querydsl-apt"
+//    jpa = true
+//    querydslDefault = true
+//    querydslSourcesDir = querydslDir
+//}
+//sourceSets {
+//    main.java.srcDir querydslDir
+//}
+//compileQuerydsl {
+//    options.annotationProcessorPath = configurations.querydsl
+//}
+//compileQuerydsl.doFirst {
+//    if(file(querydslDir).exists())
+//        delete(file(querydslDir))
+//}
+clean {
+    delete file('src/main/generated') // 인텔리제이 Annotation processor 생성물 생성 위치
 }
