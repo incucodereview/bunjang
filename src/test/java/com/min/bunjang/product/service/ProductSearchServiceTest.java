@@ -55,8 +55,8 @@ public class ProductSearchServiceTest extends ServiceTestConfig {
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
         ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
 
-        IntStream.range(0,10).forEach(idx -> generateProduct("productNameV1" + idx, "exchangeLocationV1" + idx, store, firstCategory, secondCategory, thirdCategory));
-        IntStream.range(10,20).forEach(idx -> generateProduct("productNameV2" + idx, "exchangeLocationV2" + idx, store, firstCategory, secondCategory, thirdCategory));
+        IntStream.range(0, 10).forEach(idx -> generateProduct("productNameV1" + idx, "exchangeLocationV1" + idx, store, firstCategory, secondCategory, thirdCategory));
+        IntStream.range(10, 20).forEach(idx -> generateProduct("productNameV2" + idx, "exchangeLocationV2" + idx, store, firstCategory, secondCategory, thirdCategory));
 
         String keyword = "V2";
 
@@ -70,11 +70,13 @@ public class ProductSearchServiceTest extends ServiceTestConfig {
         Assertions.assertThat(productSimpleResponseList).hasSize(10);
     }
 
-    private void generateProduct(String productName, String exchangeLocation,
-                                 Store store,
-                                 FirstProductCategory firstProductCategory,
-                                 SecondProductCategory secondProductCategory,
-                                 ThirdProductCategory thirdProductCategory
+    private void generateProduct(
+            String productName,
+            String exchangeLocation,
+            Store store,
+            FirstProductCategory firstProductCategory,
+            SecondProductCategory secondProductCategory,
+            ThirdProductCategory thirdProductCategory
     ) {
 
         ProductCreateOrUpdateRequest productCreateOrUpdateRequest = new ProductCreateOrUpdateRequest(

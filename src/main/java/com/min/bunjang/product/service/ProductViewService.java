@@ -1,18 +1,15 @@
 package com.min.bunjang.product.service;
 
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.product.dto.ProductDetailResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponses;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
-import com.min.bunjang.product.repository.ProductTagRepository;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
@@ -32,12 +29,11 @@ public class ProductViewService {
         Product product = productRepository.findByNum(productNum).orElseThrow(NotExistProductException::new);
         Store store = product.checkAndReturnStore();
         product.addHitsCount(email);
-        List<Product> productsByCategory = checkLowestCategoryInProduct(product);
+        List<Product> productsByCategory = checkExistLowestCategoryInProduct(product);
         return ProductDetailResponse.of(product, productsByCategory);
     }
 
-
-    private List<Product> checkLowestCategoryInProduct(Product product) {
+    private List<Product> checkExistLowestCategoryInProduct(Product product) {
         if (product.getThirdProductCategory() != null) {
             return productRepository.findByThirdProductCategoryNum(product.getThirdProductCategory().getNum(), PageRequest.of(0, 24)).getContent();
         }

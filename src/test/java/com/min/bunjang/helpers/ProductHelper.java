@@ -34,4 +34,27 @@ public class ProductHelper {
         Product product = Product.createProduct(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory, store);
         return productRepository.save(product);
     }
+
+    public static Product 상품생성_상품이름_거래지역_적용(Store store, String productName, String exchangeLocation, FirstProductCategory firstProductCategory, SecondProductCategory secondProductCategory, ThirdProductCategory thirdProductCategory, ProductRepository productRepository) {
+        ProductCreateOrUpdateRequest productCreateOrUpdateRequest = new ProductCreateOrUpdateRequest(
+                store.getNum(),
+                null,
+                productName,
+                null,
+                null,
+                null,
+                exchangeLocation,
+                ProductQualityState.NEW_PRODUCT,
+                ExchangeState.IMPOSSIBILITY,
+                100,
+                DeliveryChargeInPrice.EXCLUDED,
+                "ex",
+                null,
+                1);
+
+        Product product = Product.createProduct(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory, store);
+        return productRepository.save(product);
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.min.bunjang.product.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.product.dto.ProductSimpleResponses;
 import com.min.bunjang.product.service.ProductSearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -17,11 +18,11 @@ public class ProductSearchController {
     private final ProductSearchService productSearchService;
 
     @GetMapping(ProductSearchControllerPath.PRODUCT_SEARCH_BY_KEYWORD)
-    public RestResponse<Void> searchProductByKeyword(
+    public RestResponse<ProductSimpleResponses> searchProductByKeyword(
             @RequestParam("keyword") String keyword,
             @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 100) Pageable pageable
     ) {
-        productSearchService.searchProductByKeyword(keyword, pageable);
-        return RestResponse.of(HttpStatus.OK, null);
+        ProductSimpleResponses productSimpleResponses = productSearchService.searchProductByKeyword(keyword, pageable);
+        return RestResponse.of(HttpStatus.OK, productSimpleResponses);
     }
 }
