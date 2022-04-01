@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductSearchService {
     private final ProductSearchRepository productSearchRepository;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ProductSimpleResponses searchProductByKeyword(String keyword, Pageable pageable) {
         Page<Product> products = productSearchRepository.searchByKeyword(keyword, pageable);
 

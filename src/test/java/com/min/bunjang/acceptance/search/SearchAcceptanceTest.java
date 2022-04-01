@@ -37,10 +37,10 @@ public class SearchAcceptanceTest extends AcceptanceTestConfig {
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
         ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
 
-        Product produc1 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "하하", "seoul", firstCategory, secondCategory, thirdCategory, productRepository);
-        Product produc2 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "히히하", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
-        Product produc3 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "하하히히", "seoul samsung", firstCategory, secondCategory, thirdCategory, productRepository);
-        Product produc4 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "seoul man", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
+        Product product1 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "하하", "seoul", firstCategory, secondCategory, thirdCategory, productRepository);
+        Product product2 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "히히하", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
+        Product product3 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "하하히히", "seoul samsung", firstCategory, secondCategory, thirdCategory, productRepository);
+        Product product4 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "seoul man", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
 
         return Stream.of(
                 DynamicTest.dynamicTest("상품명 키워드 검색.", () -> {

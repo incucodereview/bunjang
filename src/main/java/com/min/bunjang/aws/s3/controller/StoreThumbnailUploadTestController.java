@@ -1,4 +1,4 @@
-package com.min.bunjang.store.controller;
+package com.min.bunjang.aws.s3.controller;
 
 import com.min.bunjang.aws.s3.service.S3UploadService;
 import com.min.bunjang.product.dto.ProductPhotoResponse;
