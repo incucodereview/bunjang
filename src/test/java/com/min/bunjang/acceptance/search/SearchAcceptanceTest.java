@@ -13,6 +13,8 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.controller.ProductSearchControllerPath;
 import com.min.bunjang.product.dto.ProductSimpleResponses;
 import com.min.bunjang.product.model.Product;
+import com.min.bunjang.store.controller.StoreSearchControllerPath;
+import com.min.bunjang.store.dto.response.StoreSimpleResponses;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
@@ -36,6 +38,12 @@ public class SearchAcceptanceTest extends AcceptanceTestConfig {
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
         ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
+
+        storeRepository.save(Store.createStore("spring", "intro", null, member));
+        storeRepository.save(Store.createStore("spring2", "intro", null, member));
+        storeRepository.save(Store.createStore("summer", "intro", null, member));
+        storeRepository.save(Store.createStore("fall", "intro", null, member));
+        storeRepository.save(Store.createStore("winter", "intro", null, member));
 
         Product product1 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "하하", "seoul", firstCategory, secondCategory, thirdCategory, productRepository);
         Product product2 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "히히하", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
@@ -69,6 +77,22 @@ public class SearchAcceptanceTest extends AcceptanceTestConfig {
 
                     //then
                     Assertions.assertThat(result.getProductSimpleResponses()).hasSize(3);
+                }),
+
+                DynamicTest.dynamicTest("상점명 키워드 검색.", () -> {
+                    //given
+                    String keyword = "spring";
+                    Map<String, String> parameter = new HashMap<>();
+                    parameter.put("keyword", keyword);
+
+                    //when
+                    StoreSimpleResponses result = getApiWithKeyword(StoreSearchControllerPath.STORE_SEARCH_BY_KEYWORD, loginResult.getAccessToken(), parameter, new TypeReference<RestResponse<StoreSimpleResponses>>() {
+                    }).getResult();
+
+                    //then
+                    Assertions.assertThat(result.getStoreSimpleResponses()).hasSize(2);
+                    Assertions.assertThat(result.getStoreSimpleResponses().get(0).getStoreName()).isEqualTo("spring2");
+                    Assertions.assertThat(result.getStoreSimpleResponses().get(1).getStoreName()).isEqualTo("spring");
                 })
         );
 

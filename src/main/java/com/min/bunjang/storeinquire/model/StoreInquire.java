@@ -2,7 +2,6 @@ package com.min.bunjang.storeinquire.model;
 
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.store.model.Store;
-import com.min.bunjang.store.model.StoreThumbnail;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
