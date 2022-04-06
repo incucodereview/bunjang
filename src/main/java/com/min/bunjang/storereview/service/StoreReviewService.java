@@ -48,6 +48,7 @@ public class StoreReviewService {
         );
 
         //TODO StoreReviewResponse에서 단순하게 그냥 StoreResponse포함하고 리뷰 내용 뭐 이정도만 해도 될지 의문 지금으로선 StoreReviewResponse를 왜 구현했는지도 의문
+        //TODO -> 현재 상점리뷰는 상품을 구매한 이력이 있어야 남길수 있는데 확인이 불가능하다. 오히려 리뷰생성로직이 변해야하는 상황. 일단 응답은 만들어진 리뷰를 리턴하는 대로 둠.
         return StoreReviewResponse.of(storeReviewRepository.save(storeReview));
     }
 

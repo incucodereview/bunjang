@@ -18,7 +18,7 @@ public class FollowingViewService {
     private final FollowingRepository followingRepository;
 
     @Transactional(readOnly = true)
-    public FollowingListResponse findFollowingsByStore(Long storeNum) {
+    public FollowingListResponse findThatStoreHaveFollowings(Long storeNum) {
         Slice<Following> followings = followingRepository.findByFollowerStoreNum(storeNum);
         List<FollowingResponse> followingResponses = followings.getContent().stream()
                 .map(following -> FollowingResponse.of(following.getNum(), following.getFollowedStore()))
@@ -27,7 +27,7 @@ public class FollowingViewService {
     }
 
     @Transactional(readOnly = true)
-    public FollowingListResponse findFollowersByStore(Long storeNum) {
+    public FollowingListResponse findThatStoreHaveFollowers(Long storeNum) {
         Slice<Following> followers = followingRepository.findByFollowedStoreNum(storeNum);
         List<FollowingResponse> followingResponses = followers.getContent().stream()
                 .map(following -> FollowingResponse.of(following.getNum(), following.getFollowerStore()))

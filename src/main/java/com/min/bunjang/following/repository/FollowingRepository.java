@@ -5,7 +5,8 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FollowingRepository extends JpaRepository<Following, Long> {
-    //TODO 명확한 네이밍으로 변경할 필요성이 느껴짐 너무 햇갈린다;;;;
+    //storeNum의 팔로워 리스트
     Slice<Following> findByFollowerStoreNum(Long followerStoreNum);
+    //storeNum의 팔로잉 리스트
     Slice<Following> findByFollowedStoreNum(Long followedStoreNum);
 }

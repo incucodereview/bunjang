@@ -20,7 +20,7 @@ public class FollowingViewController {
     public RestResponse<FollowingListResponse> findFollowingsByStore(
             @NotNull @PathVariable Long storeNum
     ) {
-        FollowingListResponse followingListResponse = followingViewService.findFollowingsByStore(storeNum);
+        FollowingListResponse followingListResponse = followingViewService.findThatStoreHaveFollowings(storeNum);
         return RestResponse.of(HttpStatus.OK, followingListResponse);
     }
 
@@ -28,7 +28,7 @@ public class FollowingViewController {
     public RestResponse<FollowingListResponse> findFollowersByStore(
             @NotNull @PathVariable Long storeNum
     ) {
-        FollowingListResponse followerListResponse = followingViewService.findFollowersByStore(storeNum);
+        FollowingListResponse followerListResponse = followingViewService.findThatStoreHaveFollowers(storeNum);
         return RestResponse.of(HttpStatus.OK, followerListResponse);
     }
 }

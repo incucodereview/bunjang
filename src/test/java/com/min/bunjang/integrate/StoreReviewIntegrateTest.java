@@ -141,7 +141,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
                 StoreReview.createStoreReview(owner, writer, writer.getStoreName(), 5.0, product.getNum(), product.getProductName(), "reviewContent")
         );
 
-        //when & then
+        //when & then완
         mockMvc.perform(RestDocumentationRequestBuilders.get(StoreReviewViewControllerPath.REVIEW_FIND_BY_STORE, owner.getNum())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
