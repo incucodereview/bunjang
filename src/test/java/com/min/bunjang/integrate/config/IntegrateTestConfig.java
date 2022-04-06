@@ -1,8 +1,13 @@
 package com.min.bunjang.integrate.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.min.bunjang.category.repository.FirstProductCategoryRepository;
+import com.min.bunjang.category.repository.SecondProductCategoryRepository;
+import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.database.DatabaseCleanup;
 import com.min.bunjang.member.repository.MemberRepository;
+import com.min.bunjang.product.repository.ProductRepository;
+import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.testconfig.RestDocsConfiguration;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,6 +39,21 @@ public class IntegrateTestConfig {
 
     @Autowired
     protected MemberRepository memberRepository;
+
+    @Autowired
+    protected StoreRepository storeRepository;
+
+    @Autowired
+    protected ProductRepository productRepository;
+
+    @Autowired
+    protected FirstProductCategoryRepository firstProductCategoryRepository;
+
+    @Autowired
+    protected SecondProductCategoryRepository secondProductCategoryRepository;
+
+    @Autowired
+    protected ThirdProductCategoryRepository thirdProductCategoryRepository;
 
     @Autowired
     protected BCryptPasswordEncoder bCryptPasswordEncoder;

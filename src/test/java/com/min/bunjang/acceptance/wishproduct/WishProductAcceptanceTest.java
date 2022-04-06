@@ -2,8 +2,12 @@ package com.min.bunjang.acceptance.wishproduct;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
+import com.min.bunjang.category.model.FirstProductCategory;
+import com.min.bunjang.category.model.SecondProductCategory;
+import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.ProductHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
@@ -39,7 +43,6 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
     @Autowired
     private WishProductRepository wishProductRepository;
 
-    // ERROR
     @TestFactory
     Stream<DynamicTest> dynamicTestStream() {
         String ownerEmail = "urisegea@naver.com";
@@ -53,8 +56,12 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
-        //TODO 임시 생성자로 생성해놓음.
-        Product product = productRepository.save(new Product("productName"));
+
+        FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
+        SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
+        ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
+
+        Product product = ProductHelper.상품생성(owner, firstCategory, secondCategory, thirdCategory, productRepository);
 
         return Stream.of(
                 DynamicTest.dynamicTest("찜목록에 찜상품 생성(추가).", () -> {

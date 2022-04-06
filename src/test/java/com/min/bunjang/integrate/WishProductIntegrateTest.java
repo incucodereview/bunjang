@@ -1,6 +1,10 @@
 package com.min.bunjang.integrate;
 
+import com.min.bunjang.category.model.FirstProductCategory;
+import com.min.bunjang.category.model.SecondProductCategory;
+import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.ProductHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.integrate.config.IntegrateTestConfig;
 import com.min.bunjang.login.jwt.TokenProvider;
@@ -43,12 +47,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class WishProductIntegrateTest extends IntegrateTestConfig {
     @Autowired
-    private StoreRepository storeRepository;
-
-    @Autowired
-    private ProductRepository productRepository;
-
-    @Autowired
     private WishProductRepository wishProductRepository;
 
     @DisplayName("찜상품 생성 통합테스트")
@@ -66,8 +64,12 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
-        //TODO 임시 생성자로 생성해놓음.
-        Product product = productRepository.save(new Product("productName"));
+
+        FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
+        SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
+        ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
+
+        Product product = ProductHelper.상품생성(owner, firstCategory, secondCategory, thirdCategory, productRepository);
 
         WishProductCreateRequest wishProductCreateRequest = new WishProductCreateRequest(owner.getNum(), product.getNum());
 
@@ -112,8 +114,12 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
-        //TODO 임시 생성자로 생성해놓음.
-        Product product = productRepository.save(new Product("productName"));
+
+        FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
+        SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
+        ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
+
+        Product product = ProductHelper.상품생성(owner, firstCategory, secondCategory, thirdCategory, productRepository);
 
         WishProductCreateRequest wishProductCreateRequest = new WishProductCreateRequest(owner.getNum(), product.getNum());
 
@@ -152,8 +158,11 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
 
-        //TODO 임시 생성자로 생성해놓음.
-        Product product = productRepository.save(new Product("productName"));
+        FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
+        SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
+        ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
+
+        Product product = ProductHelper.상품생성(owner, firstCategory, secondCategory, thirdCategory, productRepository);
 
         wishProductRepository.save(new WishProduct(owner, product));
 
