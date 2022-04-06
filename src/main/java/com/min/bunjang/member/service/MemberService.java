@@ -20,7 +20,6 @@ public class MemberService {
     public void changeGender(Long memberNum, MemberGenderUpdateRequest memberGenderUpdateRequest, MemberAccount memberAccount) {
         Member member = memberRepository.findById(memberNum).orElseThrow(NotExistMemberException::new);
         member.verifyEmailMatch(memberAccount.getEmail());
-        //TODO 이렇게 한 dto에서 원하는 값만 채우고 나머지 null로하는거 굉장히 별로고 위험함 그냥 dto 3개만드는 것도 방법
         member.changeGender(memberGenderUpdateRequest.getMemberGender());
     }
 

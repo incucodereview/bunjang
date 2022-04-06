@@ -27,7 +27,6 @@ public class StoreSimpleResponse {
         return new StoreSimpleResponse(
                 store.getNum(),
                 store.getStoreName(),
-                //TODO StoreThumbnail 의 fileName 값에 대한 필요성을 다시 생각하고 필요 없다면 null을 어떻게 처리할지 -> S3FileDto을 변형하든 새로운 파일 DTO를 만들든. 애초에 파일에 이름이 필요한가..?
                 StoreThumbnailResponse.of(store),
                 store.getProducts().size(),
                 store.getFollowers().size(),

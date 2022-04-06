@@ -30,7 +30,6 @@ public class StoreService {
     private final StoreThumbnailRepository storeThumbnailRepository;
     private final S3UploadService s3UploadService;
 
-    //TODO 이건 StoreCreateResponse 왜 리턴하는지 생각하고 찾아 놓을것.
     @Transactional
     public StoreCreateResponse createStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, String memberEmail) throws IOException {
         Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);

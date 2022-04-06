@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -48,8 +49,7 @@ public class ProductDetailResponse {
                 product.getNum(),
                 product.getFirstProductCategory().getNum(),
                 product.getSecondProductCategory().getNum(),
-                //TODO 널포인트에러 가능성 다분
-                Optional.ofNullable(product.getThirdProductCategory().getNum()).orElse(null),
+                checkThirdCategoryForPreventionNPE(product),
                 ProductPhotoResponse.listOf(product.getProductPhotos()),
                 product.getProductName(),
                 product.getProductPrice(),
@@ -62,17 +62,32 @@ public class ProductDetailResponse {
                 product.getDeliveryChargeInPrice(),
                 product.getExchangeLocation(),
                 product.getProductExplanation(),
-                //TODO 밑의 두 옵셔널 널포인트 에러 위험 다분
-                Optional.ofNullable(product.getProductTags()).orElse(null).stream()
+                product.getProductTags().stream()
                         .map(productTag -> productTag.getTag())
                         .collect(Collectors.toList()),
-                Optional.ofNullable(product.getProductInquires()).orElse(null).stream()
+                product.getProductInquires().stream()
                         .map(productInquire -> ProductInquireResponse.of(productInquire, product.checkAndReturnStore()))
                         .collect(Collectors.toList()),
-                productsByCategory.stream()
-                        .map(ProductSimpleResponse::of)
-                        .collect(Collectors.toList()),
+                checkProductByCategoriesForPreventionNPE(productsByCategory),
                 StoreSimpleResponse.of(product.checkAndReturnStore()));
+    }
+
+    private static Long checkThirdCategoryForPreventionNPE(Product product) {
+        if (product.getThirdProductCategory() == null) {
+            return null;
+        }
+
+        return product.getThirdProductCategory().getNum();
+    }
+
+    private static List<ProductSimpleResponse> checkProductByCategoriesForPreventionNPE(List<Product> productsByCategory) {
+        if (productsByCategory == null) {
+            return null;
+        }
+
+        return productsByCategory.stream()
+                .map(ProductSimpleResponse::of)
+                .collect(Collectors.toList());
     }
 
 }
