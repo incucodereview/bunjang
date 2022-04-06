@@ -1,6 +1,5 @@
 package com.min.bunjang.store.repository;
 
-import com.min.bunjang.product.model.Product;
 import com.min.bunjang.store.model.Store;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.impl.JPAQueryFactory;

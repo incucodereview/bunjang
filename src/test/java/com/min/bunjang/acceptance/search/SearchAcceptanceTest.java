@@ -18,6 +18,7 @@ import com.min.bunjang.store.dto.response.StoreSimpleResponses;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
@@ -48,7 +49,7 @@ public class SearchAcceptanceTest extends AcceptanceTestConfig {
         Product product1 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "하하", "seoul", firstCategory, secondCategory, thirdCategory, productRepository);
         Product product2 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "히히하", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
         Product product3 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "하하히히", "seoul samsung", firstCategory, secondCategory, thirdCategory, productRepository);
-        Product product4 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "seoul man", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
+        Product product4 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "busan man", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
 
         return Stream.of(
                 DynamicTest.dynamicTest("상품명 키워드 검색.", () -> {
@@ -58,11 +59,10 @@ public class SearchAcceptanceTest extends AcceptanceTestConfig {
                     parameter.put("keyword", keyword);
 
                     //when
-                    ProductSimpleResponses result = getApiWithKeyword(ProductSearchControllerPath.PRODUCT_SEARCH_BY_KEYWORD, loginResult.getAccessToken(), parameter, new TypeReference<RestResponse<ProductSimpleResponses>>() {
-                    }).getResult();
+                    ProductSimpleResponses result = 상품_상품명_검색_요청(loginResult, parameter);
 
                     //then
-                    Assertions.assertThat(result.getProductSimpleResponses()).hasSize(2);
+                    상품_상품명_검색_응답_검증(product1, product3, result);
                 }),
 
                 DynamicTest.dynamicTest("지역명 키워드 검색.", () -> {
@@ -72,11 +72,10 @@ public class SearchAcceptanceTest extends AcceptanceTestConfig {
                     parameter.put("keyword", keyword);
 
                     //when
-                    ProductSimpleResponses result = getApiWithKeyword(ProductSearchControllerPath.PRODUCT_SEARCH_BY_KEYWORD, loginResult.getAccessToken(), parameter, new TypeReference<RestResponse<ProductSimpleResponses>>() {
-                    }).getResult();
+                    ProductSimpleResponses result = 상품_지역명_검색_요청(loginResult, parameter);
 
                     //then
-                    Assertions.assertThat(result.getProductSimpleResponses()).hasSize(3);
+                    상품_지역명_검색_응답_검증(product1, product3, result);
                 }),
 
                 DynamicTest.dynamicTest("상점명 키워드 검색.", () -> {
@@ -86,15 +85,51 @@ public class SearchAcceptanceTest extends AcceptanceTestConfig {
                     parameter.put("keyword", keyword);
 
                     //when
-                    StoreSimpleResponses result = getApiWithKeyword(StoreSearchControllerPath.STORE_SEARCH_BY_KEYWORD, loginResult.getAccessToken(), parameter, new TypeReference<RestResponse<StoreSimpleResponses>>() {
-                    }).getResult();
+                    StoreSimpleResponses result = 상점명_검색_요청(loginResult, parameter);
 
                     //then
-                    Assertions.assertThat(result.getStoreSimpleResponses()).hasSize(2);
-                    Assertions.assertThat(result.getStoreSimpleResponses().get(0).getStoreName()).isEqualTo("spring2");
-                    Assertions.assertThat(result.getStoreSimpleResponses().get(1).getStoreName()).isEqualTo("spring");
+                    상점명_검색_응답_검증(result);
                 })
         );
 
+    }
+
+    private ProductSimpleResponses 상품_상품명_검색_요청(TokenValuesDto loginResult, Map<String, String> parameter) {
+        ProductSimpleResponses result = getApiWithKeyword(ProductSearchControllerPath.PRODUCT_SEARCH_BY_KEYWORD, loginResult.getAccessToken(), parameter, new TypeReference<RestResponse<ProductSimpleResponses>>() {
+        }).getResult();
+        return result;
+    }
+
+    private void 상품_상품명_검색_응답_검증(Product product1, Product product3, ProductSimpleResponses result) {
+        Assertions.assertThat(result.getProductSimpleResponses()).hasSize(2);
+        Assertions.assertThat(result.getProductSimpleResponses().get(0).getProductName()).isEqualTo(product3.getProductName());
+        Assertions.assertThat(result.getProductSimpleResponses().get(1).getProductName()).isEqualTo(product1.getProductName());
+    }
+
+    private ProductSimpleResponses 상품_지역명_검색_요청(TokenValuesDto loginResult, Map<String, String> parameter) {
+        return getApiWithKeyword(ProductSearchControllerPath.PRODUCT_SEARCH_BY_KEYWORD, loginResult.getAccessToken(), parameter, new TypeReference<RestResponse<ProductSimpleResponses>>() {
+        }).getResult();
+    }
+
+    private void 상품_지역명_검색_응답_검증(Product product1, Product product3, ProductSimpleResponses result) {
+        Assertions.assertThat(result.getProductSimpleResponses()).hasSize(2);
+        Assertions.assertThat(result.getProductSimpleResponses().get(0).getExchangeLocation()).isEqualTo(product3.getExchangeLocation());
+        Assertions.assertThat(result.getProductSimpleResponses().get(1).getExchangeLocation()).isEqualTo(product1.getExchangeLocation());
+    }
+
+    private StoreSimpleResponses 상점명_검색_요청(TokenValuesDto loginResult, Map<String, String> parameter) {
+        return getApiWithKeyword(StoreSearchControllerPath.STORE_SEARCH_BY_KEYWORD, loginResult.getAccessToken(), parameter, new TypeReference<RestResponse<StoreSimpleResponses>>() {
+                        }).getResult();
+    }
+
+    private void 상점명_검색_응답_검증(StoreSimpleResponses result) {
+        Assertions.assertThat(result.getStoreSimpleResponses()).hasSize(2);
+        Assertions.assertThat(result.getStoreSimpleResponses().get(0).getStoreName()).isEqualTo("spring2");
+        Assertions.assertThat(result.getStoreSimpleResponses().get(1).getStoreName()).isEqualTo("spring");
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }
