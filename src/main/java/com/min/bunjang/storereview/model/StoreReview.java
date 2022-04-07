@@ -74,7 +74,4 @@ public class StoreReview extends BasicEntity {
         this.reviewContent = reviewContent;
     }
 
-    public boolean verifyWriter(Store writer) {
-        return this.writer.equals(writer);
-    }
 }
