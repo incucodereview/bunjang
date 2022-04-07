@@ -37,7 +37,7 @@ public class ProductService {
     @Transactional
     public void createProduct(String email, ProductCreateOrUpdateRequest productCreateOrUpdateRequest) {
         Store store = storeRepository.findById(productCreateOrUpdateRequest.getStoreNum()).orElseThrow(NotExistStoreException::new);
-        //TODO 상품 엔티티의 카테고리 연관관계를 Num으로만 설정하면 밑의 조회하는 쿼리보단 각 카테고리 레포지토리에 Num을 줘서 있는지 없는지를 판단해주는게 성능면에서 좋을수 있기에 속도 확인해보기.
+        //TODO 상품 엔티티의 카테고리 연관관계를 Num으로만 설정하면 밑의 조회하는 쿼리보단 각 카테고리 레포지토리에 Num을 줘서 있는지 없는지를 판단해주는게 성능면에서 좋을수 있기에 속도 확인해보기. -> V2에서 진행할것.
         FirstProductCategory firstProductCategory = firstProductCategoryRepository.findById(productCreateOrUpdateRequest.getFirstCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         SecondProductCategory secondProductCategory = secondProductCategoryRepository.findById(productCreateOrUpdateRequest.getSecondCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         ThirdProductCategory thirdProductCategory = thirdProductCategoryRepository.findById(productCreateOrUpdateRequest.getThirdCategoryNum()).orElseThrow(NotExistProductCategoryException::new);

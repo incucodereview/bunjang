@@ -46,16 +46,8 @@ public class StoreInquireService {
     @Transactional
     public void deleteStoreInquire(String email, Long inquireNum) {
         StoreInquire storeInquire = storeInquiryRepository.findById(inquireNum).orElseThrow(NotExistStoreInquireException::new);
-        Member member = memberRepository.findByEmail(email).orElseThrow(NotExistMemberException::new);
-        Store writer = storeRepository.findByMember(member).orElseThrow(NotExistStoreException::new);
-        //TODO 애매....하다. 이것도 로직 변경 고민후 변경해볼것. 로직이 storeInquire.getWriter().equals(writer)가 false 이다.... 왜이럻까?
-        if (!storeInquire.getWriter().getNum().equals(writer.getNum())) {
-            throw new WrongWriterException("작성자가 아닌 사용자가 삭제를 요청했습니다. 잘못된 접근입니다.");
-        }
+        MemberAndStoreValidator.verifyMemberAndStoreInquireWriterMatchByEmail(email, storeInquire);
 
-        if (!storeInquiryRepository.existsByNum(inquireNum)) {
-            throw new NotExistStoreInquireException();
-        }
         storeInquiryRepository.deleteById(inquireNum);
     }
 }
