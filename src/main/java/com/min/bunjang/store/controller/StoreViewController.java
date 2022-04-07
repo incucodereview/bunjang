@@ -24,7 +24,6 @@ public class StoreViewController {
             @NotNull @PathVariable Long storeNum,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        //TODO MemberAccount null 체크 고민필요...
         StoreDetailResponse storeDetailResponse = storeViewService.findStore(memberAccount, storeNum);
         return RestResponse.of(HttpStatus.OK, storeDetailResponse);
     }

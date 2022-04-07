@@ -28,15 +28,14 @@ import java.util.Optional;
 public class StoreReviewService {
     private final StoreReviewRepository storeReviewRepository;
     private final ProductRepository productRepository;
-    private final MemberRepository memberRepository;
     private final StoreRepository storeRepository;
 
     @Transactional
-    public StoreReviewResponse createStoreReview(String memberEmail, StoreReviewCreateRequest storeReviewCreateRequest) {
+    public StoreReviewResponse createStoreReview(String requesterEmail, StoreReviewCreateRequest storeReviewCreateRequest) {
         Store owner = storeRepository.findById(storeReviewCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
         Store writer = storeRepository.findById(storeReviewCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(storeReviewCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(memberEmail, writer);
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, writer);
         StoreReview storeReview = StoreReview.createStoreReview(
                 owner,
                 writer,
@@ -53,21 +52,21 @@ public class StoreReviewService {
     }
 
     @Transactional
-    public void updateStoreReview(String memberEmail, StoreReviewUpdateRequest storeReviewUpdateRequest) {
+    public void updateStoreReview(String requesterEmail, StoreReviewUpdateRequest storeReviewUpdateRequest) {
         StoreReview storeReview = storeReviewRepository.findById(storeReviewUpdateRequest.getReviewNum()).orElseThrow(NotExistStoreReviewException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(memberEmail, storeReview.getWriter());
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, storeReview.getWriter());
 
         storeReview.updateReviewContent(storeReviewUpdateRequest.getUpdatedReviewContent(), storeReviewUpdateRequest.getUpdatedDealScore());
     }
 
     @Transactional
-    public void deleteStoreReview(String memberEmail, Long reviewNum) {
+    public void deleteStoreReview(String requesterEmail, Long reviewNum) {
         if (reviewNum == null) {
             throw new ImpossibleException("삭제요청한 리뷰의 식별자가 null입니다. 잘못된 요청입니다.");
         }
 
         StoreReview storeReview = storeReviewRepository.findById(reviewNum).orElseThrow(NotExistStoreReviewException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(memberEmail, storeReview.getWriter());
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, storeReview.getWriter());
 
         storeReviewRepository.deleteById(reviewNum);
     }

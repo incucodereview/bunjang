@@ -15,9 +15,9 @@ public class StoreViewService {
     private final StoreRepository storeRepository;
 
     @Transactional
-    public StoreDetailResponse findStore(MemberAccount email, Long storeNum) {
+    public StoreDetailResponse findStore(MemberAccount requesterEmail, Long storeNum) {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
-        store.addHitsCount(email);
+        store.addHitsCount(requesterEmail);
         return StoreDetailResponse.of(store);
     }
 }

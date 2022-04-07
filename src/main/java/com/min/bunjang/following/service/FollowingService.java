@@ -5,7 +5,6 @@ import com.min.bunjang.following.dto.FollowingCreateResponse;
 import com.min.bunjang.following.exception.NotExistFollowingException;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
-import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -20,18 +19,18 @@ public class FollowingService {
     private final StoreRepository storeRepository;
 
     @Transactional
-    public void createFollowing(String email, FollowingCreateResponse followingCreateResponse) {
+    public void createFollowing(String requesterEmail, FollowingCreateResponse followingCreateResponse) {
         Store followerStore = storeRepository.findById(followingCreateResponse.getFollowerStoreNum()).orElseThrow(NotExistStoreException::new);
         Store followedStore = storeRepository.findById(followingCreateResponse.getFollowedStoreNum()).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, followerStore);
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, followerStore);
 
         followingRepository.save(Following.createFollowing(followerStore, followedStore));
     }
 
     @Transactional
-    public void deleteFollowing(String email, Long storeNum, Long followingNum) {
+    public void deleteFollowing(String requesterEmail, Long storeNum, Long followingNum) {
         Store follower = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, follower);
+        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, follower);
 
         Following following = followingRepository.findById(followingNum).orElseThrow(NotExistFollowingException::new);
         followingRepository.delete(following);

@@ -35,11 +35,11 @@ public class ProductInquireService {
                 product.getNum(),
                 productInquireCreateRequest.getInquireContent()
         ));
+
         defineMentionByMentionNum(productInquireCreateRequest, savedProductInquire);
     }
 
     private void defineMentionByMentionNum(ProductInquireCreateRequest productInquireCreateRequest, ProductInquire savedProductInquire) {
-        //TODO 뭔가 태그는 상품문의 '생성'이라는 메서드에 적합한 내용인지 약간 애매해서 일단 메서드로 분리해 놓았다
         if (productInquireCreateRequest.isCheckExistenceMentionedStoreNum()) {
             Store mentionedStore = storeRepository.findById(productInquireCreateRequest.getMentionedStoreNumForAnswer()).orElseThrow(NotExistStoreException::new);
             savedProductInquire.defineMention(mentionedStore.getNum(), mentionedStore.getStoreName());
