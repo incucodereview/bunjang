@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class WishProductViewService {
     private final WishProductRepository wishProductRepository;
     private final StoreRepository storeRepository;
-    private final MemberRepository memberRepository;
 
     @Transactional(readOnly = true)
     public WishProductResponses findWishProductsByStore(String ownerEmail, Long storeNum, Pageable pageable) {
