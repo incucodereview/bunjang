@@ -11,6 +11,7 @@ import com.min.bunjang.storeinquire.dto.InquireCreateResponse;
 import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,4 +51,8 @@ class StoreInquireServiceTest extends ServiceTestConfig {
         Assertions.assertThat(savedStoreInquire.getMentionedStoreNameForAnswer()).isEqualTo(writer.getStoreName());
     }
 
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
+    }
 }

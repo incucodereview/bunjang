@@ -27,7 +27,6 @@ public class StoreInquire extends BasicEntity {
     @NotBlank
     private String content;
 
-    //TODO 맨션 관련 추가 테스트 필요.
     private Long mentionedStoreNumForAnswer;
     private String mentionedStoreNameForAnswer;
 
