@@ -19,7 +19,7 @@ public class PageDto {
     //TODO 이거 로직 개선해야됨. 3/2
     public PageDto(int pageSize, int currentPage, long total){
         this.total = total;
-        this.endPage = (int) (Math.ceil(total/10.0)) * 10;
+        this.endPage =  (int) (Math.ceil(2) / 10 * 10);
         this.startPage = endPage - 9;
         this.realEndPage = (int) total / pageSize;
 
