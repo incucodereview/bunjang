@@ -22,7 +22,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class StoreInquireService {
     private final StoreInquireRepository storeInquiryRepository;
     private final StoreRepository storeRepository;
-    private final MemberRepository memberRepository;
 
     @Transactional
     public InquireCreateResponse createStoreInquiry(String memberEmail, InquireCreateRequest inquireCreateRequest) {

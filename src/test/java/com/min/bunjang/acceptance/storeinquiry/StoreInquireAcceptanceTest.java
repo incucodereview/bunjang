@@ -55,6 +55,7 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
                     String inquiryContent = "인수테스트 상점 문의 내용";
 
                     InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), writer.getNum(), inquiryContent, null);
+
                     //when
                     InquireCreateResponse inquireCreateResponse = 상점문의생성_요청(loginResult, inquireCreateRequest);
 
