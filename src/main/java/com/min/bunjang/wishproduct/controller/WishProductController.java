@@ -42,4 +42,6 @@ public class WishProductController {
         wishProductService.deleteWishProducts(memberAccount.getEmail(), wishProductsDeleteRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
+
+
 }
