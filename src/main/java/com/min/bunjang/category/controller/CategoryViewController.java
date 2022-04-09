@@ -39,7 +39,7 @@ public class CategoryViewController {
     public RestResponse<ProductSimpleResponses> findProductsBySecondCategory(
             @NotNull @PathVariable Long secondCategoryNum,
             @PageableDefault(sort = "updatedDate", direction = Sort.Direction.DESC, size = 10) Pageable pageable
-            ) {
+    ) {
         ProductSimpleResponses productsBySecondCategory = categoryViewService.findProductsBySecondCategory(secondCategoryNum, pageable);
         return RestResponse.of(HttpStatus.OK, productsBySecondCategory);
     }

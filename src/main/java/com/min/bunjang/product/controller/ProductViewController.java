@@ -5,8 +5,10 @@ import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.product.dto.ProductDetailResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponses;
+import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.service.ProductViewService;
 import com.min.bunjang.security.MemberAccount;
+import com.min.bunjang.store.exception.NotExistStoreException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,11 +16,14 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,5 +47,17 @@ public class ProductViewController {
     ) {
         ProductSimpleResponses productSimpleResponses = productViewService.findProductsByStore(MemberAndStoreValidator.verifyLoginRequest(memberAccount), storeNum, pageable);
         return RestResponse.of(HttpStatus.OK, productSimpleResponses);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NotExistProductException.class)
+    public RestResponse<Void> notExistProductExceptionHandler(NotExistProductException e) {
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NotExistStoreException.class)
+    public RestResponse<Void> notExistStoreExceptionHandler(NotExistStoreException e) {
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
     }
 }

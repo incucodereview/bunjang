@@ -1,9 +1,12 @@
 package com.min.bunjang.member.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.following.exception.NotExistFollowingException;
+import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.member.dto.MemberBirthDayUpdateRequest;
 import com.min.bunjang.member.dto.MemberGenderUpdateRequest;
 import com.min.bunjang.member.dto.MemberPhoneUpdateRequest;
+import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.service.MemberService;
 import com.min.bunjang.security.MemberAccount;
 import lombok.RequiredArgsConstructor;
@@ -11,12 +14,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 
 @RestController
 @RequiredArgsConstructor
@@ -54,5 +60,11 @@ public class MemberController {
     ) {
         memberService.changePhone(memberNum, memberPhoneUpdateRequest, memberAccount);
         return RestResponse.of(HttpStatus.OK, null);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NotExistMemberException.class)
+    public RestResponse<Void> notExistMemberExceptionHandler(NotExistMemberException e) {
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
     }
 }

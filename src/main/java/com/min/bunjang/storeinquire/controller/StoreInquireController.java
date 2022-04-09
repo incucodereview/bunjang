@@ -50,13 +50,13 @@ public class StoreInquireController {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = NotExistStoreException.class)
-    public RestResponse<Void> notExistStoreExceptionHandler(WrongConfirmEmailToken e) {
+    public RestResponse<Void> notExistStoreExceptionHandler(NotExistStoreException e) {
         return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = NotExistStoreInquireException.class)
-    public RestResponse<Void> notExistStoreInquireExceptionHandler(WrongConfirmEmailToken e) {
+    public RestResponse<Void> notExistStoreInquireExceptionHandler(NotExistStoreInquireException e) {
         return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
     }
 }

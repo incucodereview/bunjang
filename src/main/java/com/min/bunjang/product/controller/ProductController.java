@@ -1,26 +1,33 @@
 package com.min.bunjang.product.controller;
 
+import com.min.bunjang.category.exception.NotExistProductCategoryException;
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.following.exception.NotExistFollowingException;
 import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.dto.ProductDeleteRequest;
 import com.min.bunjang.product.dto.ProductTradeStateUpdateRequest;
+import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.product.service.ProductService;
 import com.min.bunjang.security.MemberAccount;
+import com.min.bunjang.store.exception.NotExistStoreException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.Arrays;
 
 @RestController
 @RequiredArgsConstructor
@@ -69,5 +76,21 @@ public class ProductController {
         return RestResponse.of(HttpStatus.OK, null);
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NotExistProductException.class)
+    public RestResponse<Void> notExistProductExceptionHandler(NotExistProductException e) {
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
+    }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NotExistProductCategoryException.class)
+    public RestResponse<Void> notExistProductCategoryExceptionHandler(NotExistProductCategoryException e) {
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NotExistStoreException.class)
+    public RestResponse<Void> notExistStoreExceptionHandler(NotExistStoreException e) {
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
+    }
 }
