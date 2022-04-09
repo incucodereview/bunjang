@@ -26,7 +26,7 @@ import java.util.Arrays;
 
 @RestController
 @RequiredArgsConstructor
-public class 가 {
+public class StoreInquireController {
     private final StoreInquireService storeInquireService;
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
