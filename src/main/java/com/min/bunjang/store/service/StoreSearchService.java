@@ -20,5 +20,4 @@ public class StoreSearchService {
         Page<Store> stores = storeSearchRepository.searchByKeyword(keyword, pageable);
         return new StoreSimpleResponses(StoreSimpleResponse.listOf(stores.getContent()));
     }
-
 }

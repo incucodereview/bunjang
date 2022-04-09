@@ -1,24 +1,29 @@
 package com.min.bunjang.store.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
+import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
 import com.min.bunjang.store.dto.response.StoreCreateResponse;
 import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
 import com.min.bunjang.store.dto.request.StoreNameUpdateRequest;
 import com.min.bunjang.store.dto.request.VisitorPlusDto;
+import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.service.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @RestController
 @RequiredArgsConstructor
@@ -65,4 +70,15 @@ public class StoreController {
         return RestResponse.of(HttpStatus.OK, null);
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NotExistMemberException.class)
+    public RestResponse<Void> notExistMemberExceptionHandler(NotExistMemberException e) {
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = NotExistStoreException.class)
+    public RestResponse<Void> notExistStoreExceptionHandler(NotExistStoreException e) {
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
+    }
 }
