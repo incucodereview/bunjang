@@ -1,4 +1,4 @@
-package com.min.bunjang.trade.dto;
+package com.min.bunjang.wishproduct.dto.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.security.SecureRandom;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class TradeCreateResponse {
-    private String sellerPhoneNumber;
+public class WishProductsDeleteRequest {
+    private List<Long> wishProductNumsForDelete;
+    private Long storeNum;
 }

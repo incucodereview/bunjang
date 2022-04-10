@@ -1,8 +1,8 @@
 package com.min.bunjang.product.service;
 
 import com.min.bunjang.common.dto.PageDto;
-import com.min.bunjang.product.dto.ProductSimpleResponse;
-import com.min.bunjang.product.dto.ProductSimpleResponses;
+import com.min.bunjang.product.dto.response.ProductSimpleResponse;
+import com.min.bunjang.product.dto.response.ProductSimpleResponses;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductSearchRepository;
 import lombok.RequiredArgsConstructor;

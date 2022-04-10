@@ -1,4 +1,4 @@
-package com.min.bunjang.trade.dto;
+package com.min.bunjang.wishproduct.dto.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,11 +10,9 @@ import javax.validation.constraints.NotNull;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class TradeCreateRequest {
+public class WishProductCreateRequest {
     @NotNull
-    private Long sellerNum;
+    private Long storeNum;
     @NotNull
-    private Long buyerNum;
-    @NotNull
-    private Long tradeProductNum;
+    private Long productNum;
 }

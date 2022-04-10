@@ -9,7 +9,7 @@ import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storeinquire.controller.StoreInquireControllerPath;
 import com.min.bunjang.storeinquire.controller.StoreInquireViewControllerPath;
-import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
+import com.min.bunjang.storeinquire.dto.request.InquireCreateRequest;
 import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
 import com.min.bunjang.token.dto.TokenValuesDto;

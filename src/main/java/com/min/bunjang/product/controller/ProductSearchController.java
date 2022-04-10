@@ -1,7 +1,7 @@
 package com.min.bunjang.product.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.product.dto.ProductSimpleResponses;
+import com.min.bunjang.product.dto.response.ProductSimpleResponses;
 import com.min.bunjang.product.service.ProductSearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

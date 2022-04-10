@@ -1,5 +1,6 @@
-package com.min.bunjang.productinquire.dto;
+package com.min.bunjang.product.dto.response;
 
+import com.min.bunjang.common.dto.PageDto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ProductInquireResponses {
-    private List<ProductInquireResponse> productInquireResponses;
+public class ProductSimpleResponses {
+    private List<ProductSimpleResponse> productSimpleResponses;
+    private PageDto pageDto;
 }

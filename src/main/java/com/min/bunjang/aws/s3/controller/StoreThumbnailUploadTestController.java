@@ -1,13 +1,10 @@
 package com.min.bunjang.aws.s3.controller;
 
 import com.min.bunjang.aws.s3.service.S3UploadService;
-import com.min.bunjang.product.dto.ProductPhotoResponse;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductPhoto;
 import com.min.bunjang.product.repository.ProductPhotoRepository;
 import com.min.bunjang.product.repository.ProductRepository;
-import com.min.bunjang.store.model.Store;
-import com.min.bunjang.store.model.StoreThumbnail;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.store.repository.StoreThumbnailRepository;
 import lombok.RequiredArgsConstructor;

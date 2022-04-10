@@ -2,6 +2,8 @@ package com.min.bunjang.product.dto;
 
 import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.category.model.SecondProductCategory;
+import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
+import com.min.bunjang.product.dto.response.ProductDetailResponse;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
@@ -12,9 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ProductDetailResponseTest {
 

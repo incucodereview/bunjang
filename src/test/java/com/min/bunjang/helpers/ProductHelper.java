@@ -3,12 +3,11 @@ package com.min.bunjang.helpers;
 import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
-import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
+import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductQualityState;
-import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.model.Store;
 

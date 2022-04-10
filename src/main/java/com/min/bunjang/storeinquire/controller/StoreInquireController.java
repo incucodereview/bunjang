@@ -1,11 +1,10 @@
 package com.min.bunjang.storeinquire.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
-import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
-import com.min.bunjang.storeinquire.dto.InquireCreateResponse;
+import com.min.bunjang.storeinquire.dto.request.InquireCreateRequest;
+import com.min.bunjang.storeinquire.dto.response.InquireCreateResponse;
 import com.min.bunjang.storeinquire.exception.NotExistStoreInquireException;
 import com.min.bunjang.storeinquire.service.StoreInquireService;
 import lombok.RequiredArgsConstructor;

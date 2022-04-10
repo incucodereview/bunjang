@@ -1,4 +1,4 @@
-package com.min.bunjang.storeinquire.dto;
+package com.min.bunjang.storeinquire.dto.response;
 
 import com.min.bunjang.common.dto.PageDto;
 import lombok.AccessLevel;

@@ -1,5 +1,6 @@
 package com.min.bunjang.store.dto.request;
 
+import com.min.bunjang.store.common.StoreRequestValidatorMessages;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class StoreNameUpdateRequest {
-    @NotBlank
+    @NotBlank(message = StoreRequestValidatorMessages.STORE_BLANK_NAME)
     private String updatedStoreName;
 }

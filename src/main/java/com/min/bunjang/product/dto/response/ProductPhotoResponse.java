@@ -1,6 +1,5 @@
-package com.min.bunjang.product.dto;
+package com.min.bunjang.product.dto.response;
 
-import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductPhoto;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

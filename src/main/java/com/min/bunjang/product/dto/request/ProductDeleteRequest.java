@@ -1,5 +1,6 @@
-package com.min.bunjang.product.dto;
+package com.min.bunjang.product.dto.request;
 
+import com.min.bunjang.product.common.ProductRequestValidatorMessages;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +12,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ProductDeleteRequest {
-    @NotNull
+    @NotNull(message = ProductRequestValidatorMessages.PRODUCT_BLANK_NUM)
     private Long productNum;
-
-    @NotNull
+    @NotNull(message = ProductRequestValidatorMessages.PRODUCT_BLANK_STORE_NUM)
     private Long storeNum;
 }

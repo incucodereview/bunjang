@@ -1,7 +1,7 @@
 package com.min.bunjang.productinquire.service;
 
-import com.min.bunjang.productinquire.dto.ProductInquireResponse;
-import com.min.bunjang.productinquire.dto.ProductInquireResponses;
+import com.min.bunjang.productinquire.dto.response.ProductInquireResponse;
+import com.min.bunjang.productinquire.dto.response.ProductInquireResponses;
 import com.min.bunjang.productinquire.model.ProductInquire;
 import com.min.bunjang.productinquire.repository.ProductInquireRepository;
 import com.min.bunjang.store.exception.NotExistStoreException;
@@ -12,7 +12,6 @@ import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service

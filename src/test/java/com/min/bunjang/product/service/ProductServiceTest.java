@@ -9,14 +9,13 @@ import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.config.ServiceTestConfig;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
-import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
-import com.min.bunjang.product.dto.ProductDeleteRequest;
+import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
+import com.min.bunjang.product.dto.request.ProductDeleteRequest;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTag;
-import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
 import com.min.bunjang.store.model.Store;
@@ -88,7 +87,7 @@ class ProductServiceTest extends ServiceTestConfig {
         Assertions.assertThat(product.getFirstProductCategory()).isNotNull();
         Assertions.assertThat(product.getSecondProductCategory()).isNotNull();
         Assertions.assertThat(product.getThirdProductCategory()).isNotNull();
-        Assertions.assertThat(product.getExchangeLocation()).isEqualTo(productCreateOrUpdateRequest.getExchangeLocation());
+        Assertions.assertThat(product.getTradeLocation()).isEqualTo(productCreateOrUpdateRequest.getTradeLocation());
         Assertions.assertThat(product.getProductQualityState()).isEqualTo(productCreateOrUpdateRequest.getProductQualityState());
         Assertions.assertThat(product.getExchangeState()).isEqualTo(productCreateOrUpdateRequest.getExchangeState());
         Assertions.assertThat(product.getProductPrice()).isEqualTo(productCreateOrUpdateRequest.getProductPrice());
@@ -156,7 +155,7 @@ class ProductServiceTest extends ServiceTestConfig {
         //then
         Product updatedProduct = productRepository.findAll().get(0);
         Assertions.assertThat(updatedProduct.getNum()).isEqualTo(savedProduct.getNum());
-        Assertions.assertThat(updatedProduct.getExchangeLocation()).isEqualTo(productUpdateRequest.getExchangeLocation());
+        Assertions.assertThat(updatedProduct.getTradeLocation()).isEqualTo(productUpdateRequest.getTradeLocation());
         Assertions.assertThat(updatedProduct.getProductQualityState()).isEqualTo(productUpdateRequest.getProductQualityState());
         Assertions.assertThat(updatedProduct.getExchangeState()).isEqualTo(productUpdateRequest.getExchangeState());
         Assertions.assertThat(updatedProduct.getProductPrice()).isEqualTo(productUpdateRequest.getProductPrice());

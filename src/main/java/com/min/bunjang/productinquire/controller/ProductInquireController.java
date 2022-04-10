@@ -1,9 +1,8 @@
 package com.min.bunjang.productinquire.controller;
 
-import com.min.bunjang.category.exception.NotExistProductCategoryException;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.product.exception.NotExistProductException;
-import com.min.bunjang.productinquire.dto.ProductInquireCreateRequest;
+import com.min.bunjang.productinquire.dto.request.ProductInquireCreateRequest;
 import com.min.bunjang.productinquire.exception.NotExistProductInquireException;
 import com.min.bunjang.productinquire.service.ProductInquireService;
 import com.min.bunjang.security.MemberAccount;

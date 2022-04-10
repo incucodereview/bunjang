@@ -1,7 +1,7 @@
 package com.min.bunjang.productinquire.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.productinquire.dto.ProductInquireResponses;
+import com.min.bunjang.productinquire.dto.response.ProductInquireResponses;
 import com.min.bunjang.productinquire.service.ProductInquireViewService;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import lombok.RequiredArgsConstructor;

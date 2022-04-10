@@ -5,7 +5,7 @@ import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
-import com.min.bunjang.productinquire.dto.ProductInquireCreateRequest;
+import com.min.bunjang.productinquire.dto.request.ProductInquireCreateRequest;
 import com.min.bunjang.productinquire.exception.NotExistProductInquireException;
 import com.min.bunjang.productinquire.model.ProductInquire;
 import com.min.bunjang.productinquire.repository.ProductInquireRepository;

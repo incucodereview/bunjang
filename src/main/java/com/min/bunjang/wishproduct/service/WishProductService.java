@@ -1,17 +1,14 @@
 package com.min.bunjang.wishproduct.service;
 
 import com.min.bunjang.common.exception.ImpossibleException;
-import com.min.bunjang.member.exception.NotExistMemberException;
-import com.min.bunjang.member.model.Member;
-import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
-import com.min.bunjang.wishproduct.dto.WishProductCreateRequest;
-import com.min.bunjang.wishproduct.dto.WishProductsDeleteRequest;
+import com.min.bunjang.wishproduct.dto.request.WishProductCreateRequest;
+import com.min.bunjang.wishproduct.dto.request.WishProductsDeleteRequest;
 import com.min.bunjang.wishproduct.exception.NotExistWishProductException;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import com.min.bunjang.wishproduct.repository.WishProductRepository;

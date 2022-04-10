@@ -1,15 +1,11 @@
 package com.min.bunjang.storeinquire.service;
 
-import com.min.bunjang.common.exception.WrongWriterException;
 import com.min.bunjang.common.validator.MemberAndStoreValidator;
-import com.min.bunjang.member.exception.NotExistMemberException;
-import com.min.bunjang.member.model.Member;
-import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
-import com.min.bunjang.storeinquire.dto.InquireCreateRequest;
-import com.min.bunjang.storeinquire.dto.InquireCreateResponse;
+import com.min.bunjang.storeinquire.dto.request.InquireCreateRequest;
+import com.min.bunjang.storeinquire.dto.response.InquireCreateResponse;
 import com.min.bunjang.storeinquire.exception.NotExistStoreInquireException;
 import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;

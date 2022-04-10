@@ -1,7 +1,6 @@
-package com.min.bunjang.wishproduct.dto;
+package com.min.bunjang.wishproduct.dto.response;
 
-import com.min.bunjang.product.dto.ProductDetailResponse;
-import com.min.bunjang.product.dto.ProductPhotoResponse;
+import com.min.bunjang.product.dto.response.ProductPhotoResponse;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

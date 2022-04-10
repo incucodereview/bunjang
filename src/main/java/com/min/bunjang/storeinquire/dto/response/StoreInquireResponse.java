@@ -1,4 +1,4 @@
-package com.min.bunjang.storeinquire.dto;
+package com.min.bunjang.storeinquire.dto.response;
 
 import com.min.bunjang.store.dto.response.StoreThumbnailResponse;
 import com.min.bunjang.storeinquire.model.StoreInquire;
@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter

@@ -1,4 +1,4 @@
-package com.min.bunjang.product.dto;
+package com.min.bunjang.product.dto.response;
 
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductTradeState;
@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +30,7 @@ public class ProductSimpleResponse {
                 product.getProductName(),
                 product.getProductPrice(),
                 product.getUpdatedDate(),
-                product.getExchangeLocation(),
+                product.getTradeLocation(),
                 product.getProductTradeState()
         );
     }

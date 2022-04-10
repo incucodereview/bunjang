@@ -1,5 +1,6 @@
 package com.min.bunjang.storereview.dto.request;
 
+import com.min.bunjang.storereview.common.StoreReviewRequestValidatorMessages;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,14 +13,14 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class StoreReviewCreateRequest {
-    @NotNull
+    @NotNull(message = StoreReviewRequestValidatorMessages.STORE_REVIEW_BLANK_OWNER_NUM)
     private Long ownerNum;
-    @NotNull
+    @NotNull(message = StoreReviewRequestValidatorMessages.STORE_REVIEW_BLANK_WRITER_NUM)
     private Long writerNum;
-    @NotNull
+    @NotNull(message = StoreReviewRequestValidatorMessages.STORE_REVIEW_BLANK_DEAL_SCORE)
     private double dealScore;
-    @NotNull
+    @NotNull(message = StoreReviewRequestValidatorMessages.STORE_REVIEW_BLANK_PRODUCT_NUM)
     private Long productNum;
-    @NotBlank
+    @NotNull(message = StoreReviewRequestValidatorMessages.STORE_REVIEW_BLANK_CONTENT)
     private String reviewContent;
 }

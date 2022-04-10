@@ -1,7 +1,7 @@
 package com.min.bunjang.storeinquire.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.storeinquire.dto.StoreInquireListResponses;
+import com.min.bunjang.storeinquire.dto.response.StoreInquireListResponses;
 import com.min.bunjang.storeinquire.service.StoreInquireViewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;

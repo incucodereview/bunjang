@@ -1,6 +1,5 @@
-package com.min.bunjang.productinquire.dto;
+package com.min.bunjang.productinquire.dto.response;
 
-import com.min.bunjang.aws.s3.dto.S3FileDto;
 import com.min.bunjang.productinquire.model.ProductInquire;
 import com.min.bunjang.store.dto.response.StoreThumbnailResponse;
 import com.min.bunjang.store.model.Store;

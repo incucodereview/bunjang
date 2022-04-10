@@ -8,9 +8,9 @@ import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.validator.MemberAndStoreValidator;
-import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
-import com.min.bunjang.product.dto.ProductDeleteRequest;
-import com.min.bunjang.product.dto.ProductTradeStateUpdateRequest;
+import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
+import com.min.bunjang.product.dto.request.ProductDeleteRequest;
+import com.min.bunjang.product.dto.request.ProductTradeStateUpdateRequest;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -21,8 +21,6 @@ import com.min.bunjang.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.validation.constraints.NotNull;
 
 @Service
 @RequiredArgsConstructor

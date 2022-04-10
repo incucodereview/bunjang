@@ -12,6 +12,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class MemberGenderUpdateRequest {
-    @NotNull
+    @NotNull(message = "")
     private MemberGender memberGender;
 }

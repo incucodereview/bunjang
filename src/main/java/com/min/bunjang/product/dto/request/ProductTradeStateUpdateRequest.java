@@ -1,5 +1,6 @@
-package com.min.bunjang.product.dto;
+package com.min.bunjang.product.dto.request;
 
+import com.min.bunjang.product.common.ProductRequestValidatorMessages;
 import com.min.bunjang.product.model.ProductTradeState;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ProductTradeStateUpdateRequest {
-    @NotNull
+    @NotNull(message = ProductRequestValidatorMessages.PRODUCT_BLANK_TRADE_STATE)
     private ProductTradeState productTradeState;
 }

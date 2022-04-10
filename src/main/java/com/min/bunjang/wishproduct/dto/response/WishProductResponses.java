@@ -1,4 +1,4 @@
-package com.min.bunjang.product.dto;
+package com.min.bunjang.wishproduct.dto.response;
 
 import com.min.bunjang.common.dto.PageDto;
 import lombok.AccessLevel;
@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class ProductSimpleResponses {
-    private List<ProductSimpleResponse> productSimpleResponses;
+public class WishProductResponses {
+    private List<WishProductResponse> wishProductResponses;
     private PageDto pageDto;
 }

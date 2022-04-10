@@ -1,8 +1,8 @@
 package com.min.bunjang.storeinquire.service;
 
 import com.min.bunjang.common.dto.PageDto;
-import com.min.bunjang.storeinquire.dto.StoreInquireResponse;
-import com.min.bunjang.storeinquire.dto.StoreInquireListResponses;
+import com.min.bunjang.storeinquire.dto.response.StoreInquireResponse;
+import com.min.bunjang.storeinquire.dto.response.StoreInquireListResponses;
 import com.min.bunjang.storeinquire.model.StoreInquire;
 import com.min.bunjang.storeinquire.repository.StoreInquireRepository;
 import lombok.RequiredArgsConstructor;

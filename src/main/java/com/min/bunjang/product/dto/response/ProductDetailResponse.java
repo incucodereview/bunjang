@@ -1,21 +1,19 @@
-package com.min.bunjang.product.dto;
+package com.min.bunjang.product.dto.response;
 
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
 import com.min.bunjang.product.model.ExchangeState;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.product.model.ProductTradeState;
-import com.min.bunjang.productinquire.dto.ProductInquireResponse;
+import com.min.bunjang.productinquire.dto.response.ProductInquireResponse;
 import com.min.bunjang.store.dto.response.StoreSimpleResponse;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Getter
@@ -36,7 +34,7 @@ public class ProductDetailResponse {
     private ProductQualityState productQualityState;
     private ExchangeState exchangeState;
     private DeliveryChargeInPrice deliveryChargeInPrice;
-    private String exchangeLocation;
+    private String tradeLocation;
     private String productExplanation;
     private List<String> productTags;
     private List<ProductInquireResponse> productInquiries;
@@ -60,7 +58,7 @@ public class ProductDetailResponse {
                 product.getProductQualityState(),
                 product.getExchangeState(),
                 product.getDeliveryChargeInPrice(),
-                product.getExchangeLocation(),
+                product.getTradeLocation(),
                 product.getProductExplanation(),
                 product.getProductTags().stream()
                         .map(productTag -> productTag.getTag())

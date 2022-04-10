@@ -5,9 +5,8 @@ import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.common.exception.ImpossibleException;
 import com.min.bunjang.common.model.BasicEntity;
-import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
+import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
 import com.min.bunjang.productinquire.model.ProductInquire;
-import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import lombok.AccessLevel;
@@ -49,7 +48,7 @@ public class Product extends BasicEntity {
     @JoinColumn(name = "third_product_category_num")
     private ThirdProductCategory thirdProductCategory;
 
-    private String exchangeLocation;
+    private String tradeLocation;
 
     //이넘 컨버터를 왜 사용해야 하는지 알게되었다면 여기에 사용해도 되는 것인지 판단후 사용할 것. 당장은 @Enumerated(EnumType.STRING)로 사용
     @Enumerated(EnumType.STRING)
@@ -100,7 +99,7 @@ public class Product extends BasicEntity {
             FirstProductCategory firstProductCategory,
             SecondProductCategory secondProductCategory,
             ThirdProductCategory thirdProductCategory,
-            String exchangeLocation,
+            String tradeLocation,
             ProductQualityState productQualityState,
             ExchangeState exchangeState,
             int productPrice,
@@ -113,7 +112,7 @@ public class Product extends BasicEntity {
         this.firstProductCategory = firstProductCategory;
         this.secondProductCategory = secondProductCategory;
         this.thirdProductCategory = thirdProductCategory;
-        this.exchangeLocation = exchangeLocation;
+        this.tradeLocation = tradeLocation;
         this.productTradeState = ProductTradeState.SOLD_ING;
         this.productQualityState = productQualityState;
         this.exchangeState = exchangeState;
@@ -137,7 +136,7 @@ public class Product extends BasicEntity {
                 firstProductCategory,
                 secondProductCategory,
                 thirdProductCategory,
-                productCreateOrUpdateRequest.getExchangeLocation(),
+                productCreateOrUpdateRequest.getTradeLocation(),
                 productCreateOrUpdateRequest.getProductQualityState(),
                 productCreateOrUpdateRequest.getExchangeState(),
                 productCreateOrUpdateRequest.getProductPrice(),
@@ -158,7 +157,7 @@ public class Product extends BasicEntity {
         this.firstProductCategory = firstProductCategory;
         this.secondProductCategory = secondProductCategory;
         this.thirdProductCategory = thirdProductCategory;
-        this.exchangeLocation = productCreateOrUpdateRequest.getExchangeLocation();
+        this.tradeLocation = productCreateOrUpdateRequest.getTradeLocation();
         this.productQualityState = productCreateOrUpdateRequest.getProductQualityState();
         this.exchangeState = productCreateOrUpdateRequest.getExchangeState();
         this.productPrice = productCreateOrUpdateRequest.getProductPrice();

@@ -2,12 +2,10 @@ package com.min.bunjang.product.controller;
 
 import com.min.bunjang.category.exception.NotExistProductCategoryException;
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.following.exception.NotExistFollowingException;
-import com.min.bunjang.product.dto.ProductCreateOrUpdateRequest;
-import com.min.bunjang.product.dto.ProductDeleteRequest;
-import com.min.bunjang.product.dto.ProductTradeStateUpdateRequest;
+import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
+import com.min.bunjang.product.dto.request.ProductDeleteRequest;
+import com.min.bunjang.product.dto.request.ProductTradeStateUpdateRequest;
 import com.min.bunjang.product.exception.NotExistProductException;
-import com.min.bunjang.product.model.ProductTradeState;
 import com.min.bunjang.product.service.ProductService;
 import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
