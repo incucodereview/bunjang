@@ -2,10 +2,9 @@ package com.min.bunjang.following.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.common.validator.MemberAndStoreValidator;
-import com.min.bunjang.following.dto.FollowingCreateResponse;
+import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.exception.NotExistFollowingException;
 import com.min.bunjang.following.service.FollowingService;
-import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import lombok.RequiredArgsConstructor;
@@ -32,10 +31,10 @@ public class FollowingController {
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PostMapping(FollowingControllerPath.FOLLOWING_CREATE)
     public RestResponse<Void> createFollowing(
-            @Validated @RequestBody FollowingCreateResponse followingCreateResponse,
+            @Validated @RequestBody FollowingCreateRequest followingCreateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        followingService.createFollowing(MemberAndStoreValidator.verifyLoginRequest(memberAccount), followingCreateResponse);
+        followingService.createFollowing(MemberAndStoreValidator.verifyLoginRequest(memberAccount), followingCreateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 

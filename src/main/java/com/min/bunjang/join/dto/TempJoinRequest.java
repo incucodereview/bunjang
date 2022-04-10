@@ -1,5 +1,6 @@
 package com.min.bunjang.join.dto;
 
+import com.min.bunjang.join.common.JoinRequestValidatorMessages;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,14 +14,14 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class TempJoinRequest {
-    @NotBlank
+    @NotBlank(message = JoinRequestValidatorMessages.JOIN_BLANK_EMAIL)
     private String email;
-    @NotBlank
+    @NotBlank(message = JoinRequestValidatorMessages.JOIN_BLANK_PASSWORD)
     private String password;
-    @NotBlank
+    @NotBlank(message = JoinRequestValidatorMessages.JOIN_BLANK_NAME)
     private String name;
-    @NotBlank
+    @NotBlank(message = JoinRequestValidatorMessages.JOIN_BLANK_PHONE)
     private String phone;
-    @NotNull
+    @NotNull(message = JoinRequestValidatorMessages.JOIN_BLANK_BIRTHDATE)
     private LocalDate birthDate;
 }

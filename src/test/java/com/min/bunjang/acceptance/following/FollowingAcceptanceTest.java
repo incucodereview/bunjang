@@ -11,9 +11,9 @@ import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.following.controller.FollowingControllerPath;
 import com.min.bunjang.following.controller.FollowingViewControllerPath;
-import com.min.bunjang.following.dto.FollowingCreateResponse;
-import com.min.bunjang.following.dto.FollowingListResponse;
-import com.min.bunjang.following.dto.FollowingResponse;
+import com.min.bunjang.following.dto.request.FollowingCreateRequest;
+import com.min.bunjang.following.dto.response.FollowingListResponse;
+import com.min.bunjang.following.dto.response.FollowingResponse;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
@@ -67,10 +67,10 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
         return Stream.of(
                 DynamicTest.dynamicTest("팔로잉 생성.", () -> {
                     //given
-                    FollowingCreateResponse followingCreateResponse = new FollowingCreateResponse(follower.getNum(), followed.getNum());
+                    FollowingCreateRequest followingCreateRequest = new FollowingCreateRequest(follower.getNum(), followed.getNum());
 
                     //when
-                    postApi(FollowingControllerPath.FOLLOWING_CREATE, followingCreateResponse, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+                    postApi(FollowingControllerPath.FOLLOWING_CREATE, followingCreateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
 
                     //then
                     List<Following> followings = followingRepository.findAll();

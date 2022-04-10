@@ -1,7 +1,7 @@
 package com.min.bunjang.following.service;
 
 import com.min.bunjang.config.ServiceTestConfig;
-import com.min.bunjang.following.dto.FollowingCreateResponse;
+import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
@@ -38,10 +38,10 @@ class FollowingServiceTest extends ServiceTestConfig {
         Store follower = StoreAcceptanceHelper.상점생성(followerMember, storeRepository);
         Store followed = StoreAcceptanceHelper.상점생성(followedMember, storeRepository);
 
-        FollowingCreateResponse followingCreateResponse = new FollowingCreateResponse(follower.getNum(), followed.getNum());
+        FollowingCreateRequest followingCreateRequest = new FollowingCreateRequest(follower.getNum(), followed.getNum());
 
         //when
-        followingService.createFollowing(followerEmail, followingCreateResponse);
+        followingService.createFollowing(followerEmail, followingCreateRequest);
 
         //then
         List<Following> all = followingRepository.findAll();

@@ -1,7 +1,7 @@
 package com.min.bunjang.category.service;
 
-import com.min.bunjang.category.dto.AllCategoryListResponse;
-import com.min.bunjang.category.dto.FirstProductCategoryResponse;
+import com.min.bunjang.category.dto.response.AllCategoryListResponse;
+import com.min.bunjang.category.dto.response.FirstProductCategoryResponse;
 import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.common.dto.PageDto;

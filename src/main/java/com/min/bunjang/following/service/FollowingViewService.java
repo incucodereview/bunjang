@@ -1,7 +1,7 @@
 package com.min.bunjang.following.service;
 
-import com.min.bunjang.following.dto.FollowingListResponse;
-import com.min.bunjang.following.dto.FollowingResponse;
+import com.min.bunjang.following.dto.response.FollowingListResponse;
+import com.min.bunjang.following.dto.response.FollowingResponse;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
 import lombok.RequiredArgsConstructor;

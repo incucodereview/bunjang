@@ -1,4 +1,4 @@
-package com.min.bunjang.following.dto;
+package com.min.bunjang.category.dto.response;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,6 @@ import java.util.List;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class FollowingListResponse {
-    private List<FollowingResponse> followingResponseList;
+public class AllCategoryListResponse {
+    private List<FirstProductCategoryResponse> firstProductCategoryResponseList;
 }

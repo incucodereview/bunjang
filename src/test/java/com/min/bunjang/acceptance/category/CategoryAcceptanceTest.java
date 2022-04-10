@@ -3,7 +3,7 @@ package com.min.bunjang.acceptance.category;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.category.controller.CategoryViewControllerPath;
-import com.min.bunjang.category.dto.AllCategoryListResponse;
+import com.min.bunjang.category.dto.response.AllCategoryListResponse;
 import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;

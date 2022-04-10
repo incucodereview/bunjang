@@ -1,7 +1,6 @@
-package com.min.bunjang.category.dto;
+package com.min.bunjang.category.dto.response;
 
 import com.min.bunjang.category.model.FirstProductCategory;
-import com.min.bunjang.category.model.SecondProductCategory;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter

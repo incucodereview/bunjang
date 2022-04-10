@@ -1,4 +1,4 @@
-package com.min.bunjang.following.dto;
+package com.min.bunjang.following.dto.response;
 
 import com.min.bunjang.store.dto.response.StoreSimpleResponse;
 import com.min.bunjang.store.model.Store;

@@ -1,4 +1,4 @@
-package com.min.bunjang.category.dto;
+package com.min.bunjang.category.dto.response;
 
 import com.min.bunjang.category.model.SecondProductCategory;
 import lombok.AccessLevel;

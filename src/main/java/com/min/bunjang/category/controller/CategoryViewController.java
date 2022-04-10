@@ -1,6 +1,6 @@
 package com.min.bunjang.category.controller;
 
-import com.min.bunjang.category.dto.AllCategoryListResponse;
+import com.min.bunjang.category.dto.response.AllCategoryListResponse;
 import com.min.bunjang.category.service.CategoryViewService;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.product.dto.ProductSimpleResponses;

@@ -1,6 +1,6 @@
 package com.min.bunjang.login.dto;
 
-import com.min.bunjang.login.common.LoginValidatorMessages;
+import com.min.bunjang.login.common.LoginRequestValidatorMessages;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,8 +12,8 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class LoginRequest {
-    @NotBlank(message = LoginValidatorMessages.LOGIN_REQUEST_BLANK_EMAIL)
+    @NotBlank(message = LoginRequestValidatorMessages.LOGIN_BLANK_EMAIL)
     private String email;
-    @NotBlank(message = LoginValidatorMessages.LOGIN_REQUEST_BLANK_PASSWORD)
+    @NotBlank(message = LoginRequestValidatorMessages.LOGIN_BLANK_PASSWORD)
     private String password;
 }
