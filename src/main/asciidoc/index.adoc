@@ -65,56 +65,56 @@ mins1031;
 
 이메일과 비밀번호를 통해 JWT 토큰 방식의 로그인을 진행한다
 
-operation::login[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::login[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 회원가입 - 임시
 
 개인정보 입력을 통해 임시회원 가입을 진행한다.
 
-operation::email-temp-join[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::email-temp-join[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 이메일 인증
 
 이메일로 전송된 토큰으로 본인인증을 진행한다.
 
-operation::confirm-email[snippets='request-headers,request-parameters,response-headers,response-fields,response-body']
+operation::confirm-email[snippets='http-request,request-headers,request-parameters,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 회원가입
 
 이메일 인증후 정식회원으로 가입된다.
 
-operation::email-join[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::email-join[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점 생성
 
 회원가입후 상점을 생성한다.
 
-operation::store-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::store-create[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점 소개글 변경
 
 상점의 소개글을 변경한다.
 
-operation::store-introduceContent-update[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::store-introduceContent-update[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점이름 변경
 
 상점의 이름을 변경한다.
 
-operation::store-name-update[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::store-name-update[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점 방문자 증가
 
 상점의 방문자 카운트룰 중가시킨다.
 
-operation::store-plusVisitor[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::store-plusVisitor[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 
 [[resources-login]]
@@ -122,61 +122,61 @@ operation::store-plusVisitor[snippets='request-headers,request-fields,request-bo
 
 상점에 대한 문의를 생성한다.
 
-operation::storeInquiry-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::storeInquiry-create[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점 문의 목록 조회
 
 상점에 대한 상점문의 목록을 조회한다.
 
-operation::storeInquiry-findByOwner[snippets='request-headers,path-parameters,response-headers,response-body']
+operation::storeInquiry-findByOwner[snippets='http-request,request-headers,path-parameters,response-headers,response-body']
 
 [[resources-login]]
 == 상점 문의 삭제
 
-회원가입후 상점을 생성한다.
+회원가입후 상점을 생성한다.f
 
-operation::storeInquiry-delete[snippets='request-headers,path-parameters,response-headers,response-fields,response-body']
+operation::storeInquiry-delete[snippets='http-request,request-headers,path-parameters,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점 후기 생성
 
 상점후기를 생성한다.
 
-operation::storeReview-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::storeReview-create[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점 후기 조회
 
 상점의 후기들을 조회한다.
 
-operation::storeReview-findByOwner[snippets='request-headers,path-parameters,response-headers,response-body']
+operation::storeReview-findByOwner[snippets='http-request,request-headers,path-parameters,response-headers,response-body']
 
 [[resources-login]]
 == 상점 후기 변경
 
 상점후기를 변경한다.
 
-operation::storeReview-update[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::storeReview-update[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 상점 후기 삭제
 
 상점후기를 삭제한다.
 
-operation::storeReview-delete[snippets='request-headers,path-parameters,response-headers,response-fields,response-body']
+operation::storeReview-delete[snippets='http-request,request-headers,path-parameters,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 찜목록 상품 생성(추가)
 
 찜목록에 상품을 생성한다
 
-operation::wishProduct-create[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::wishProduct-create[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
 [[resources-login]]
 == 찜목록 상품(들) 삭제
 
 찜목록에 상품(들)을 삭제한다.
 
-operation::wishProduct-delete[snippets='request-headers,request-fields,request-body,response-headers,response-fields,response-body']
+operation::wishProduct-delete[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 

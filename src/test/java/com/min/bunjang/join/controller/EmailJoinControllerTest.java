@@ -1,6 +1,7 @@
 package com.min.bunjang.join.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.min.bunjang.config.ControllerTestConfig;
 import com.min.bunjang.join.dto.JoinRequest;
 import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.join.service.EmailJoinService;
@@ -38,21 +39,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("h2")
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(controllers = EmailJoinController.class)
-class EmailJoinControllerTest {
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+class EmailJoinControllerTest extends ControllerTestConfig {
 
     @MockBean
     private EmailJoinService emailJoinService;
 
     @MockBean
     private TokenProvider tokenProvider;
-
-    @MockBean
-    private CustomPrincipalDetailsService customPrincipalDetailsService;
 
     @DisplayName("임시 회원가입 요청에 200 코드를 응답한다")
     @Test
