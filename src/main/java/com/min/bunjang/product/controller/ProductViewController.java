@@ -52,7 +52,7 @@ public class ProductViewController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = NotExistProductException.class)
     public RestResponse<Void> notExistProductExceptionHandler(NotExistProductException e) {
-        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() + Arrays.asList(e.getStackTrace()));
+        return RestResponse.error(HttpStatus.BAD_REQUEST, e.getMessage() +Arrays.asList(e.getStackTrace()));
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
