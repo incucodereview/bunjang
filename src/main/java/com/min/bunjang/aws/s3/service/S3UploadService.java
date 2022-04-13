@@ -3,6 +3,7 @@ package com.min.bunjang.aws.s3.service;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -32,15 +33,15 @@ public class S3UploadService {
     private final AmazonS3BucketProperties amazonS3BucketProperties;
     private AmazonS3 amazonS3;
 
-    @Value("${cloud.aws.region.static}")
-    private String region;
+//    @Value("${cloud.aws.region.static}")
+//    private String region;
 
     @PostConstruct
     public void setS3Client() {
         AWSCredentials credentials = new BasicAWSCredentials(amazonS3CredentialsProperties.getAccessKey(), amazonS3CredentialsProperties.getSecretKey());
         amazonS3 = AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(region)
+                .withRegion(Regions.AP_NORTHEAST_2)
                 .build();
     }
 
