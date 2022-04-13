@@ -1,1 +1,1 @@
- java -Dserver.port=$PORT -Dspring.profiles=dev $JAVA_OPTS -jar build/libs/*.jar
+ java -Dserver.port=$PORT -Dspring.profiles.active=dev $JAVA_OPTS -jar build/libs/bunjang-0.0.1-SNAPSHOT.jar
