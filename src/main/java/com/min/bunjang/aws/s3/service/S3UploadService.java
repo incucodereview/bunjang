@@ -33,9 +33,6 @@ public class S3UploadService {
     private final AmazonS3BucketProperties amazonS3BucketProperties;
     private AmazonS3 amazonS3;
 
-//    @Value("${cloud.aws.region.static}")
-//    private String region;
-
     @PostConstruct
     public void setS3Client() {
         AWSCredentials credentials = new BasicAWSCredentials(amazonS3CredentialsProperties.getAccessKey(), amazonS3CredentialsProperties.getSecretKey());
