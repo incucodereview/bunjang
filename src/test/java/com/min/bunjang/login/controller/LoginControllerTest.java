@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.login.service.LoginService;
+import com.min.bunjang.security.CustomPrincipalDetailsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,6 +39,8 @@ class LoginControllerTest {
     @MockBean
     private TokenProvider tokenProvider;
 
+    @MockBean
+    private CustomPrincipalDetailsService customPrincipalDetailsService;
 
     @DisplayName("로그인 컨트롤러가 200을 응답한다")
     @Test

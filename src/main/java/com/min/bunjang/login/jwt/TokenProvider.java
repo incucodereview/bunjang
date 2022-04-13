@@ -6,6 +6,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,8 +28,8 @@ public class TokenProvider {
     private final Long accessExpired;
     private final Long refreshExpired;
 
-    @Autowired
-    private CustomPrincipalDetailsService customPrincipalDetailsService;
+//    @Autowired
+//    private CustomPrincipalDetailsService customPrincipalDetailsService;
 
     public TokenProvider(JwtTokenProperty jwtTokenProperty) {
         this.accessTokenSecretKey = Base64.getEncoder().encodeToString(jwtTokenProperty.getAccessKey().getBytes());
@@ -64,16 +66,16 @@ public class TokenProvider {
         return body.get("email", String.class);
     }
 
-    public Authentication getAuthentication(HttpServletRequest request) {
-        try {
-            String token = request.getHeader(ACCESS_TOKEN_KEY_OF_HEADER);
-            String emailFromAccessToken = getEmailFromAccessToken(token);
-            UserDetails userDetails = customPrincipalDetailsService.loadUserByUsername(emailFromAccessToken);
-            return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
-        } catch (RuntimeException e) {
-            return null;
-        }
-    }
+//    public Authentication getAuthentication(HttpServletRequest request) {
+//        try {
+//            String token = request.getHeader(ACCESS_TOKEN_KEY_OF_HEADER);
+//            String emailFromAccessToken = getEmailFromAccessToken(token);
+//            UserDetails userDetails = customPrincipalDetailsService.loadUserByUsername(emailFromAccessToken);
+//            return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+//        } catch (RuntimeException e) {
+//            return null;
+//        }
+//    }
 
     private Claims decodeToken(String token, String secretKey) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();

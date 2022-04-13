@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CustomPrincipalDetailsService implements UserDetailsService {
-
     private final MemberRepository memberRepository;
 
     @Override

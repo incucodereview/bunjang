@@ -7,6 +7,7 @@ import com.min.bunjang.join.service.EmailJoinService;
 import com.min.bunjang.login.jwt.TokenProvider;
 import com.min.bunjang.member.exception.NotExistTempMemberException;
 import com.min.bunjang.member.model.MemberGender;
+import com.min.bunjang.security.CustomPrincipalDetailsService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -49,6 +50,9 @@ class EmailJoinControllerTest {
 
     @MockBean
     private TokenProvider tokenProvider;
+
+    @MockBean
+    private CustomPrincipalDetailsService customPrincipalDetailsService;
 
     @DisplayName("임시 회원가입 요청에 200 코드를 응답한다")
     @Test

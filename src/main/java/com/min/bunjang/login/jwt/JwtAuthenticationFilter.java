@@ -1,11 +1,15 @@
 package com.min.bunjang.login.jwt;
 
+import com.min.bunjang.security.CustomPrincipalDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -18,15 +22,17 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
     private TokenProvider tokenProvider;
+    private CustomPrincipalDetailsService customPrincipalDetailsService;
 
-    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, TokenProvider tokenProvider) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, TokenProvider tokenProvider, CustomPrincipalDetailsService customPrincipalDetailsService) {
         super(authenticationManager);
         this.tokenProvider = tokenProvider;
+        this.customPrincipalDetailsService = customPrincipalDetailsService;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        Authentication authentication = tokenProvider.getAuthentication(request);
+        Authentication authentication = getAuthentication(request);
         if (authentication != null) {
             log.info("filter 통과! - 토큰값 유효");
             SecurityContext securityContext = SecurityContextHolder.getContext();
@@ -34,5 +40,16 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         }
 
         chain.doFilter(request, response);
+    }
+
+    private Authentication getAuthentication(HttpServletRequest request) {
+        try {
+            String token = request.getHeader(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER);
+            String emailFromAccessToken = tokenProvider.getEmailFromAccessToken(token);
+            UserDetails userDetails = customPrincipalDetailsService.loadUserByUsername(emailFromAccessToken);
+            return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        } catch (RuntimeException e) {
+            return null;
+        }
     }
 }
