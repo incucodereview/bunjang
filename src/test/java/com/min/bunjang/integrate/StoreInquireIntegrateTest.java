@@ -61,6 +61,7 @@ public class StoreInquireIntegrateTest extends IntegrateTestConfig {
         Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
 
         InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), visitor.getNum(), "상점문의", null);
+
         //when & then
         mockMvc.perform(post(StoreInquireControllerPath.CREATE_INQUIRY)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)

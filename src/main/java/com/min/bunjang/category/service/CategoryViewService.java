@@ -29,6 +29,7 @@ public class CategoryViewService {
         return new AllCategoryListResponse(FirstProductCategoryResponse.listOf(allCategories));
     }
 
+    @Transactional(readOnly = true)
     public ProductSimpleResponses findProductsByFirstCategory(Long firstCategoryNum, Pageable pageable) {
         Page<Product> firstProductCategories = productRepository.findByFirstProductCategoryNum(firstCategoryNum, pageable);
         List<ProductSimpleResponse> productSimpleResponseList = ProductSimpleResponse.listOf(firstProductCategories.getContent());
@@ -38,6 +39,7 @@ public class CategoryViewService {
         );
     }
 
+    @Transactional(readOnly = true)
     public ProductSimpleResponses findProductsBySecondCategory(Long secondCategoryNum, Pageable pageable) {
         Page<Product> secondProductCategories = productRepository.findBySecondProductCategoryNum(secondCategoryNum, pageable);
         List<ProductSimpleResponse> productSimpleResponseList = ProductSimpleResponse.listOf(secondProductCategories.getContent());
@@ -47,6 +49,7 @@ public class CategoryViewService {
         );
     }
 
+    @Transactional(readOnly = true)
     public ProductSimpleResponses findProductsByThirdCategory(Long thirdCategoryNum, Pageable pageable) {
         Page<Product> thirdProductCategories = productRepository.findByThirdProductCategoryNum(thirdCategoryNum, pageable);
         List<ProductSimpleResponse> productSimpleResponseList = ProductSimpleResponse.listOf(thirdProductCategories.getContent());
