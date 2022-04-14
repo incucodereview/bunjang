@@ -1,4 +1,4 @@
-package com.min.bunjang.login.jwt.properties;
+package com.min.bunjang.token.jwt.properties;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

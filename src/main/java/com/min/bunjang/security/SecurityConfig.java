@@ -1,7 +1,9 @@
 package com.min.bunjang.security;
 
-import com.min.bunjang.login.jwt.JwtAuthenticationFilter;
-import com.min.bunjang.login.jwt.TokenProvider;
+import com.min.bunjang.token.jwt.JwtAccessDeniedHandler;
+import com.min.bunjang.token.jwt.JwtAuthenticationEntryPoint;
+import com.min.bunjang.token.jwt.JwtAuthenticationFilter;
+import com.min.bunjang.token.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +14,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
@@ -22,6 +23,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final TokenProvider tokenProvider;
     private final CustomPrincipalDetailsService customPrincipalDetailsService;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -44,6 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(authenticationManagerBean(), tokenProvider, customPrincipalDetailsService), BasicAuthenticationFilter.class);
     }

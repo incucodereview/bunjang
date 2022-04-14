@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ProductCreateOrUpdateRequest {
-    @NotBlank(message = ProductRequestValidatorMessages.PRODUCT_BLANK_STORE_NUM)
+    @NotNull(message = ProductRequestValidatorMessages.PRODUCT_BLANK_STORE_NUM)
     private Long storeNum;
     private List<String> productPhotos;
     @NotBlank(message = ProductRequestValidatorMessages.PRODUCT_BLANK_NAME)

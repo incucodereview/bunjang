@@ -1,4 +1,4 @@
-package com.min.bunjang.login.jwt;
+package com.min.bunjang.token.jwt;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

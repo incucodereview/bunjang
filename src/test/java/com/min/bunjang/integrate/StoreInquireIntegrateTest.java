@@ -3,7 +3,7 @@ package com.min.bunjang.integrate;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.integrate.config.IntegrateTestConfig;
-import com.min.bunjang.login.jwt.TokenProvider;
+import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;

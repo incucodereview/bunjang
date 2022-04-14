@@ -2,7 +2,7 @@ package com.min.bunjang.login.service;
 
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.token.dto.TokenValuesDto;
-import com.min.bunjang.login.jwt.TokenProvider;
+import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.repository.MemberRepository;

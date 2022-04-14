@@ -1,6 +1,6 @@
-package com.min.bunjang.login.jwt;
+package com.min.bunjang.token.jwt;
 
-import com.min.bunjang.login.jwt.properties.JwtTokenProperty;
+import com.min.bunjang.token.jwt.properties.JwtTokenProperty;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

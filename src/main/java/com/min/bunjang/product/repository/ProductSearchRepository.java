@@ -20,7 +20,7 @@ public class ProductSearchRepository {
         QueryResults<Product> productQueryResults = jpaQueryFactory.selectFrom(product)
                 .distinct()
                 .where(
-                        product.productName.containsIgnoreCase(keyword).or(product.exchangeLocation.containsIgnoreCase(keyword))
+                        product.productName.containsIgnoreCase(keyword).or(product.tradeLocation.containsIgnoreCase(keyword))
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

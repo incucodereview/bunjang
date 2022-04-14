@@ -1,7 +1,10 @@
 package com.min.bunjang.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.min.bunjang.login.jwt.TokenProvider;
+import com.min.bunjang.security.CustomPrincipalDetailsService;
+import com.min.bunjang.token.jwt.JwtAccessDeniedHandler;
+import com.min.bunjang.token.jwt.JwtAuthenticationEntryPoint;
+import com.min.bunjang.token.jwt.TokenProvider;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,4 +24,12 @@ public class ControllerTestConfig {
 
     @MockBean
     protected TokenProvider tokenProvider;
+
+    @MockBean
+    protected CustomPrincipalDetailsService customPrincipalDetailsService;
+    @MockBean
+    protected JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    @MockBean
+    protected JwtAccessDeniedHandler jwtAccessDeniedHandler;
+
 }

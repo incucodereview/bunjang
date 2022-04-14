@@ -1,8 +1,8 @@
 package com.min.bunjang.token.service;
 
 import com.min.bunjang.common.database.DatabaseCleanup;
-import com.min.bunjang.login.jwt.TokenProvider;
-import com.min.bunjang.login.jwt.properties.JwtTokenProperty;
+import com.min.bunjang.token.jwt.TokenProvider;
+import com.min.bunjang.token.jwt.properties.JwtTokenProperty;
 import com.min.bunjang.token.dto.TokenValidResponse;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.token.exception.ExpiredRefreshTokenException;

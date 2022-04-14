@@ -1,4 +1,4 @@
-package com.min.bunjang.login.jwt;
+package com.min.bunjang.token.jwt;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

@@ -1,4 +1,4 @@
-package com.min.bunjang.login.jwt.properties;
+package com.min.bunjang.token.jwt.properties;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
