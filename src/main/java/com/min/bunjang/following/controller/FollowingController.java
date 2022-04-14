@@ -28,7 +28,7 @@ import java.util.Arrays;
 public class FollowingController {
     private final FollowingService followingService;
 
-    @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping(FollowingControllerPath.FOLLOWING_CREATE)
     public RestResponse<Void> createFollowing(
             @Validated @RequestBody FollowingCreateRequest followingCreateRequest,

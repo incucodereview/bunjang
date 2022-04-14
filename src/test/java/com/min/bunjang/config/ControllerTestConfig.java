@@ -15,7 +15,6 @@ import org.springframework.test.web.servlet.MockMvc;
 @ActiveProfiles("h2")
 @ExtendWith(MockitoExtension.class)
 public class ControllerTestConfig {
-
     @Autowired
     protected MockMvc mockMvc;
 
@@ -27,9 +26,10 @@ public class ControllerTestConfig {
 
     @MockBean
     protected CustomPrincipalDetailsService customPrincipalDetailsService;
+
     @MockBean
     protected JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @MockBean
     protected JwtAccessDeniedHandler jwtAccessDeniedHandler;
-
 }

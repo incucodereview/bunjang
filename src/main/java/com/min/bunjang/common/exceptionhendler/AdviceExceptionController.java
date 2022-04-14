@@ -4,6 +4,7 @@ import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.common.exception.ImpossibleException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -49,9 +50,15 @@ public class AdviceExceptionController {
 //        return RestResponse.error(e.getMessage());
 //    }
 
-//    @ResponseStatus(HttpStatus.FORBIDDEN)
-//    @ExceptionHandler({CustomAccessDeniedException.class, AccessDeniedException.class})
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AccessDeniedException.class)
+    public RestResponse<Void> accessDeniedException(Exception e) {
+        return RestResponse.error(HttpStatus.FORBIDDEN, e.getMessage());
+    }
+
+//    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+//    @ExceptionHandler(AccessDeniedException.class)
 //    public RestResponse<Void> expectedException(Exception e) {
-//        return RestResponse.error("403", e.getMessage());
+//        return RestResponse.error(HttpStatus.UNAUTHORIZED, e.getMessage());
 //    }
 }
