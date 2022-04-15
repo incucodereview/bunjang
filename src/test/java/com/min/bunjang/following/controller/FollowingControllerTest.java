@@ -5,6 +5,7 @@ import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.service.FollowingService;
 import com.min.bunjang.login.controller.LoginController;
 import com.min.bunjang.token.jwt.TokenProvider;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,6 +23,7 @@ class FollowingControllerTest extends ControllerTestConfig {
     @MockBean
     private FollowingService followingService;
 
+    @Disabled
     @DisplayName("로그인 없이 접근한 경우 ")
     @Test
     public void following_403_exception() throws Exception {

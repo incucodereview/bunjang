@@ -36,7 +36,6 @@ public class AcceptanceTestConfig {
     private static ObjectMapper objectMapper = new ObjectMapper();
 
     static {
-        // writeValueAsString 할 경우 LocalDate 타입을 직렬화에 필요한 코드
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
