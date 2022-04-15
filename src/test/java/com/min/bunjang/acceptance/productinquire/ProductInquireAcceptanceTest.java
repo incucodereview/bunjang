@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.productinquire;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.category.model.FirstProductCategory;
@@ -127,8 +128,8 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
         );
     }
 
-    private void 상품문의_생성_요청(TokenValuesDto loginResult, ProductInquireCreateRequest productInquireCreateRequest) {
-        postApi(ProductInquireControllerPath.PRODUCT_INQUIRE_CREATE, productInquireCreateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    private void 상품문의_생성_요청(TokenValuesDto loginResult, ProductInquireCreateRequest productInquireCreateRequest) throws JsonProcessingException {
+        postRequest(ProductInquireControllerPath.PRODUCT_INQUIRE_CREATE, productInquireCreateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상품문의_생성_응답_검증(Store writer, Product savedProduct, ProductInquireCreateRequest productInquireCreateRequest) {
@@ -142,7 +143,7 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
 
     private ProductInquireResponses 상품문의_목록_조회_요청(TokenValuesDto loginResult, Long productNum) {
         String path = ProductInquireViewControllerPath.PRODUCT_INQUIRE_FIND_BY_PRODUCT.replace("{productNum}", String.valueOf(productNum));
-        ProductInquireResponses productInquireResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<ProductInquireResponses>>() {
+        ProductInquireResponses productInquireResponses = getRequest(path, loginResult.getAccessToken(), new TypeReference<RestResponse<ProductInquireResponses>>() {
         }).getResult();
         return productInquireResponses;
     }
@@ -152,9 +153,9 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(productInquireResponseList).hasSize(1);
     }
 
-    private void 상품문의_삭제_요청(TokenValuesDto loginResult, ProductInquire productInquire) {
+    private void 상품문의_삭제_요청(TokenValuesDto loginResult, ProductInquire productInquire) throws JsonProcessingException {
         String path = ProductInquireControllerPath.PRODUCT_INQUIRE_DELETE.replace("{inquireNum}", String.valueOf(productInquire.getNum()));
-        deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+        deleteRequest(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상품문의_삭제_응답_검증() {

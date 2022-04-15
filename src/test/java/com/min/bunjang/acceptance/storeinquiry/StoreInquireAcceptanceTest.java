@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.storeinquiry;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
@@ -90,8 +91,8 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
         );
     }
 
-    private InquireCreateResponse 상점문의생성_요청(TokenValuesDto loginResult, InquireCreateRequest inquireCreateRequest) {
-        InquireCreateResponse inquireCreateResponse = postApi(StoreInquireControllerPath.CREATE_INQUIRY, inquireCreateRequest, new TypeReference<RestResponse<InquireCreateResponse>>() {
+    private InquireCreateResponse 상점문의생성_요청(TokenValuesDto loginResult, InquireCreateRequest inquireCreateRequest) throws JsonProcessingException {
+        InquireCreateResponse inquireCreateResponse = postRequest(StoreInquireControllerPath.CREATE_INQUIRY, inquireCreateRequest, new TypeReference<RestResponse<InquireCreateResponse>>() {
         }, loginResult.getAccessToken()).getResult();
         return inquireCreateResponse;
     }
@@ -101,9 +102,9 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(inquireCreateResponse.getInquireContent()).isEqualTo(inquiryContent);
     }
 
-    private void 상점문의삭제_요청(TokenValuesDto loginResult, Long storeInquireNum) {
+    private void 상점문의삭제_요청(TokenValuesDto loginResult, Long storeInquireNum) throws JsonProcessingException {
         String path = StoreInquireControllerPath.DELETE_INQUIRY.replace("{inquireNum}", String.valueOf(storeInquireNum));
-        deleteApi(path, null, new TypeReference<RestResponse<RestResponse<Void>>>() {}, loginResult.getAccessToken());
+        deleteRequest(path, null, new TypeReference<RestResponse<RestResponse<Void>>>() {}, loginResult.getAccessToken());
     }
 
     private void 상점문의삭제_응답_검증(Long storeInquireNum) {
@@ -113,7 +114,7 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
 
     private StoreInquireListResponses 상점문의_목록조회_요청(TokenValuesDto loginResult, Long storeNum) {
         String path = StoreInquireViewControllerPath.INQUIRIES_FIND_RELATED_STORE.replace("{storeNum}", String.valueOf(storeNum));
-        StoreInquireListResponses storeInquireListResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreInquireListResponses>>() {
+        StoreInquireListResponses storeInquireListResponses = getRequest(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreInquireListResponses>>() {
         }).getResult();
         return storeInquireListResponses;
     }

@@ -13,13 +13,11 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
-import com.min.bunjang.member.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
@@ -76,7 +74,7 @@ public class JoinAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private void 임시회원가입_요청(TempJoinRequest tempJoinRequest) {
-        postApi(EmailJoinControllerPath.JOIN_TEMP_MEMBER_REQUEST, tempJoinRequest, new TypeReference<RestResponse<Void>>() {}, "");
+        postRequest(EmailJoinControllerPath.JOIN_TEMP_MEMBER_REQUEST, tempJoinRequest, new TypeReference<RestResponse<Void>>() {}, "");
     }
 
     private void 임시회원가입_검증(String email, String password, String name, String phone, LocalDate birthDate) {
@@ -97,7 +95,7 @@ public class JoinAcceptanceTest extends AcceptanceTestConfig {
 
     private String 이메일인증_요청(String token) {
         String path = EmailJoinControllerPath.CONFIRM_EMAIL_REQUEST + "?token=" + token;
-        String certifiedMemberEmail = getApi(path, "", new TypeReference<RestResponse<String>>() {}).getResult();
+        String certifiedMemberEmail = getRequest(path, "", new TypeReference<RestResponse<String>>() {}).getResult();
         return certifiedMemberEmail;
     }
 
@@ -108,7 +106,7 @@ public class JoinAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private void 인증후일반회원_등록_요청(JoinRequest joinRequest) {
-        postApi(EmailJoinControllerPath.JOIN_MEMBER_REQUEST, joinRequest, new TypeReference<RestResponse<Void>>() {}, "");
+        postRequest(EmailJoinControllerPath.JOIN_MEMBER_REQUEST, joinRequest, new TypeReference<RestResponse<Void>>() {}, "");
     }
 
     private void 인증후일반회원_등록_검증(String email, String password, String name, String phone, LocalDate birthDate) {

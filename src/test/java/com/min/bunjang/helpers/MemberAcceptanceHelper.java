@@ -14,7 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 
-import static com.min.bunjang.acceptance.common.AcceptanceTestConfig.postApi;
+import static com.min.bunjang.acceptance.common.AcceptanceTestConfig.postRequest;
 
 public class MemberAcceptanceHelper {
 
@@ -32,7 +32,7 @@ public class MemberAcceptanceHelper {
     }
 
     public static RestResponse<TokenValuesDto> 로그인(String email, String password) {
-        return postApi(LoginControllerPath.LOGIN, new LoginRequest(email, password), new TypeReference<RestResponse<TokenValuesDto>>() {
+        return postRequest(LoginControllerPath.LOGIN, new LoginRequest(email, password), new TypeReference<RestResponse<TokenValuesDto>>() {
         }, "");
     }
 }

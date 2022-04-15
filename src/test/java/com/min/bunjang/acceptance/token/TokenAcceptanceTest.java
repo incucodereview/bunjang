@@ -5,7 +5,6 @@ import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
-import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.token.controller.TokenControllerPath;
 import com.min.bunjang.token.dto.TokenValidResponse;
 import com.min.bunjang.token.dto.TokenValuesDto;
@@ -13,8 +12,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class TokenAcceptanceTest extends AcceptanceTestConfig {
 
@@ -36,7 +33,7 @@ public class TokenAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private RestResponse<TokenValidResponse> 토큰인증_요청(TokenValuesDto tokenValuesDto) {
-        RestResponse<TokenValidResponse> response = postApi(TokenControllerPath.VALIDATE_TOKEN_STATUS, TokenValuesDto.of(tokenValuesDto.getAccessToken(), tokenValuesDto.getRefreshToken()),
+        RestResponse<TokenValidResponse> response = postRequest(TokenControllerPath.VALIDATE_TOKEN_STATUS, TokenValuesDto.of(tokenValuesDto.getAccessToken(), tokenValuesDto.getRefreshToken()),
                 new TypeReference<RestResponse<TokenValidResponse>>() {}, "");
         return response;
     }

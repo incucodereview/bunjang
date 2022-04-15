@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.wishproduct;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.category.model.FirstProductCategory;
@@ -108,11 +109,11 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
 
     private void 찜목록_조회_요청(TokenValuesDto loginResult, Long storeNum) {
         String path = WishProductViewControllerPath.WISH_PRODUCT_FIND_BY_STORE.replace("{storeNum}", String.valueOf(storeNum));
-        getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<WishProductResponses>>() {});
+        getRequest(path, loginResult.getAccessToken(), new TypeReference<RestResponse<WishProductResponses>>() {});
     }
 
-    private void 찜상품_생성_요청(TokenValuesDto loginResult, WishProductCreateRequest wishProductCreateRequest) {
-        postApi(WishProductControllerPath.WISH_PRODUCT_CREATE, wishProductCreateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    private void 찜상품_생성_요청(TokenValuesDto loginResult, WishProductCreateRequest wishProductCreateRequest) throws JsonProcessingException {
+        postRequest(WishProductControllerPath.WISH_PRODUCT_CREATE, wishProductCreateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 찜상품_생성_응답_검증() {
@@ -120,8 +121,8 @@ public class WishProductAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(wishProduct).isNotNull();
     }
 
-    private void 찜상품_삭제_요청(TokenValuesDto loginResult, WishProductsDeleteRequest wishProductsDeleteRequest) {
-        deleteApi(WishProductControllerPath.WISH_PRODUCT_DELETE, wishProductsDeleteRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    private void 찜상품_삭제_요청(TokenValuesDto loginResult, WishProductsDeleteRequest wishProductsDeleteRequest) throws JsonProcessingException {
+        deleteRequest(WishProductControllerPath.WISH_PRODUCT_DELETE, wishProductsDeleteRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 찜상풍_삭제_응답_검증() {

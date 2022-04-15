@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.store;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.category.model.FirstProductCategory;
@@ -113,8 +114,8 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
     }
 
 
-    private StoreCreateResponse 상점생성_요청(TokenValuesDto loginResult, StoreCreateOrUpdateRequest storeCreateOrUpdateRequest) {
-        return postApi(StoreControllerPath.STORE_CREATE, storeCreateOrUpdateRequest, new TypeReference<RestResponse<StoreCreateResponse>>() {
+    private StoreCreateResponse 상점생성_요청(TokenValuesDto loginResult, StoreCreateOrUpdateRequest storeCreateOrUpdateRequest) throws JsonProcessingException {
+        return postRequest(StoreControllerPath.STORE_CREATE, storeCreateOrUpdateRequest, new TypeReference<RestResponse<StoreCreateResponse>>() {
         }, loginResult.getAccessToken()).getResult();
     }
 
@@ -126,7 +127,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
 
     private StoreDetailResponse 상점_단건조회_요청(TokenValuesDto loginResult, Store store) {
         String path = StoreViewControllerPath.STORE_FIND.replace("{storeNum}", String.valueOf(store.getNum()));
-        StoreDetailResponse storeDetailResponse = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreDetailResponse>>() {
+        StoreDetailResponse storeDetailResponse = getRequest(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreDetailResponse>>() {
         }).getResult();
         return storeDetailResponse;
     }
@@ -139,8 +140,8 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(storeDetailResponse.getIntroduceContent()).isEqualTo(store.getIntroduceContent());
     }
 
-    private RestResponse<Void> 상점소개글_변경_요청(TokenValuesDto loginResult, StoreIntroduceUpdateRequest storeIntroduceUpdateRequest) {
-        return putApi(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE, storeIntroduceUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    private RestResponse<Void> 상점소개글_변경_요청(TokenValuesDto loginResult, StoreIntroduceUpdateRequest storeIntroduceUpdateRequest) throws JsonProcessingException {
+        return putRequest(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE, storeIntroduceUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상점소개글_변경_요청_검증(Store store, String introduceContent) {
@@ -148,8 +149,8 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(updatedIntroduceContent).isEqualTo(introduceContent);
     }
 
-    private void 상점이름_변경_요청(TokenValuesDto loginResult, StoreNameUpdateRequest storeNameUpdateRequest) {
-        putApi(StoreControllerPath.STORE_NAME_UPDATE, storeNameUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+    private void 상점이름_변경_요청(TokenValuesDto loginResult, StoreNameUpdateRequest storeNameUpdateRequest) throws JsonProcessingException {
+        putRequest(StoreControllerPath.STORE_NAME_UPDATE, storeNameUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상점이름_변경_요청_검증(Store store, String updateStoreName) {

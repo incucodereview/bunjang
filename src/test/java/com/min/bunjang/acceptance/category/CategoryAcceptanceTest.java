@@ -107,7 +107,7 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private AllCategoryListResponse 모든카테고리_조회_요청(String categoryFindAll) {
-        return getApi(categoryFindAll, "", new TypeReference<RestResponse<AllCategoryListResponse>>() {
+        return getRequest(categoryFindAll, "", new TypeReference<RestResponse<AllCategoryListResponse>>() {
         }).getResult();
     }
 
@@ -141,7 +141,7 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
 
     private ProductSimpleResponses 루트_카테고리_상품_조회_요청(FirstProductCategory firstCategory) {
         String path = CategoryViewControllerPath.CATEGORY_FIND_BY_FIRST.replace("{firstCategoryNum}", String.valueOf(firstCategory.getNum()));
-        ProductSimpleResponses productSimpleResponses = getApi(path, "", new TypeReference<RestResponse<ProductSimpleResponses>>() {
+        ProductSimpleResponses productSimpleResponses = getRequest(path, "", new TypeReference<RestResponse<ProductSimpleResponses>>() {
         }).getResult();
         return productSimpleResponses;
     }
@@ -156,7 +156,7 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
 
     private ProductSimpleResponses Second_카테고리_상품_조회_요청(SecondProductCategory secondCategory3) {
         String path = CategoryViewControllerPath.CATEGORY_FIND_BY_SECOND.replace("{secondCategoryNum}", String.valueOf(secondCategory3.getNum()));
-        return getApi(path, "", new TypeReference<RestResponse<ProductSimpleResponses>>() {
+        return getRequest(path, "", new TypeReference<RestResponse<ProductSimpleResponses>>() {
         }).getResult();
     }
 
@@ -169,7 +169,7 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
 
     private ProductSimpleResponses Third_카테고리_상품_조회_요청(ThirdProductCategory thirdCategory) {
         String path = CategoryViewControllerPath.CATEGORY_FIND_BY_THIRD.replace("{thirdCategoryNum}", String.valueOf(thirdCategory.getNum()));
-        return getApi(path, "", new TypeReference<RestResponse<ProductSimpleResponses>>() {
+        return getRequest(path, "", new TypeReference<RestResponse<ProductSimpleResponses>>() {
         }).getResult();
     }
 

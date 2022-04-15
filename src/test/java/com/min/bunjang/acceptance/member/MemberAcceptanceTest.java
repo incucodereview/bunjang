@@ -1,20 +1,16 @@
 package com.min.bunjang.acceptance.member;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
-import com.min.bunjang.category.model.FirstProductCategory;
-import com.min.bunjang.category.model.SecondProductCategory;
-import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.controller.MemberControllerPath;
 import com.min.bunjang.member.dto.MemberBirthDayUpdateRequest;
 import com.min.bunjang.member.dto.MemberGenderUpdateRequest;
 import com.min.bunjang.member.dto.MemberPhoneUpdateRequest;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
-import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DynamicTest;
@@ -70,9 +66,9 @@ public class MemberAcceptanceTest extends AcceptanceTestConfig {
         );
     }
 
-    private void 회원_성별_변경_요청(Member member, TokenValuesDto loginResult, MemberGenderUpdateRequest memberGenderUpdateRequest) {
+    private void 회원_성별_변경_요청(Member member, TokenValuesDto loginResult, MemberGenderUpdateRequest memberGenderUpdateRequest) throws JsonProcessingException {
         String path = MemberControllerPath.MEMBER_CHANGE_GENDER.replace("{memberNum}", String.valueOf(member.getMemberNum()));
-        patchApi(path, memberGenderUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+        patchRequest(path, memberGenderUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 회원_성별_변경_응답_검증(Member member) {
@@ -80,9 +76,9 @@ public class MemberAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(updateGenderMember.getMemberGender()).isEqualTo(MemberGender.WOMEN);
     }
 
-    private void 회원_생년월일_변경_요청(Member member, TokenValuesDto loginResult, MemberBirthDayUpdateRequest memberBirthDayUpdateRequest) {
+    private void 회원_생년월일_변경_요청(Member member, TokenValuesDto loginResult, MemberBirthDayUpdateRequest memberBirthDayUpdateRequest) throws JsonProcessingException {
         String path = MemberControllerPath.MEMBER_CHANGE_BIRTHDAY.replace("{memberNum}", String.valueOf(member.getMemberNum()));
-        patchApi(path, memberBirthDayUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+        patchRequest(path, memberBirthDayUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 회원_생년월일_변경_응답_검증(Member member, LocalDate birthDate) {
@@ -90,9 +86,9 @@ public class MemberAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(updateBirthDateMember.getBirthDate()).isEqualTo(birthDate);
     }
 
-    private void 회원_폰넘버_변경_요청(Member member, TokenValuesDto loginResult, MemberPhoneUpdateRequest memberPhoneUpdateRequest) {
+    private void 회원_폰넘버_변경_요청(Member member, TokenValuesDto loginResult, MemberPhoneUpdateRequest memberPhoneUpdateRequest) throws JsonProcessingException {
         String path = MemberControllerPath.MEMBER_CHANGE_PHONE.replace("{memberNum}", String.valueOf(member.getMemberNum()));
-        patchApi(path, memberPhoneUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+        patchRequest(path, memberPhoneUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 회원_폰넘버_변경_응답_검증(Member member, String phoneNum) {

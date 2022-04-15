@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.storereview;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
@@ -117,8 +118,8 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
         );
     }
 
-    private StoreReviewResponse 상점후기_생성_요청(TokenValuesDto loginResult, StoreReviewCreateRequest storeReviewCreateRequest) {
-        return postApi(StoreReviewControllerPath.REVIEW_CREATE, storeReviewCreateRequest, new TypeReference<RestResponse<StoreReviewResponse>>() {
+    private StoreReviewResponse 상점후기_생성_요청(TokenValuesDto loginResult, StoreReviewCreateRequest storeReviewCreateRequest) throws JsonProcessingException {
+        return postRequest(StoreReviewControllerPath.REVIEW_CREATE, storeReviewCreateRequest, new TypeReference<RestResponse<StoreReviewResponse>>() {
         }, loginResult.getAccessToken()).getResult();
     }
 
@@ -131,8 +132,8 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(storeReviewResponse.getReviewContent()).isEqualTo(reviewContent);
     }
 
-    private RestResponse<Void> 상점후기_변경_요청(TokenValuesDto loginResult, StoreReviewUpdateRequest storeReviewUpdateRequest) {
-        return putApi(StoreReviewControllerPath.REVIEW_UPDATE, storeReviewUpdateRequest, new TypeReference<RestResponse<Void>>() {
+    private RestResponse<Void> 상점후기_변경_요청(TokenValuesDto loginResult, StoreReviewUpdateRequest storeReviewUpdateRequest) throws JsonProcessingException {
+        return putRequest(StoreReviewControllerPath.REVIEW_UPDATE, storeReviewUpdateRequest, new TypeReference<RestResponse<Void>>() {
         }, loginResult.getAccessToken());
     }
 
@@ -142,9 +143,9 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(updatedStoreReview.getReviewContent()).isEqualTo(updateStoreReview);
     }
 
-    private void 상점후기_삭제_요청(TokenValuesDto loginResult, StoreReview storeReview) {
+    private void 상점후기_삭제_요청(TokenValuesDto loginResult, StoreReview storeReview) throws JsonProcessingException {
         String path = StoreReviewControllerPath.REVIEW_DELETE.replace("{reviewNum}", String.valueOf(storeReview.getNum()));
-        deleteApi(path, null, new TypeReference<RestResponse<Void>>() {
+        deleteRequest(path, null, new TypeReference<RestResponse<Void>>() {
         }, loginResult.getAccessToken());
     }
 
@@ -155,7 +156,7 @@ public class StoreReviewAcceptanceTest extends AcceptanceTestConfig {
 
     private StoreReviewListResponses 상점후기_조회_요청(TokenValuesDto loginResult, Long storeNum) {
         String path = StoreReviewViewControllerPath.REVIEW_FIND_BY_STORE.replace("{storeNum}", String.valueOf(storeNum));
-        StoreReviewListResponses storeReviewListResponses = getApi(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreReviewListResponses>>() {
+        StoreReviewListResponses storeReviewListResponses = getRequest(path, loginResult.getAccessToken(), new TypeReference<RestResponse<StoreReviewListResponses>>() {
         }).getResult();
         return storeReviewListResponses;
     }

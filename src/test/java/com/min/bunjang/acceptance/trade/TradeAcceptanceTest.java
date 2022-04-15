@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.trade;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.category.model.FirstProductCategory;
@@ -127,8 +128,8 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
 
     }
 
-    private void 거래_생성_요청(TokenValuesDto loginResult, TradeCreateRequest tradeCreateRequest) {
-        postApi(TradeControllerPath.TRADE_CREATE, tradeCreateRequest, new TypeReference<RestResponse<TradeCreateResponse>>() {
+    private void 거래_생성_요청(TokenValuesDto loginResult, TradeCreateRequest tradeCreateRequest) throws JsonProcessingException {
+        postRequest(TradeControllerPath.TRADE_CREATE, tradeCreateRequest, new TypeReference<RestResponse<TradeCreateResponse>>() {
         }, loginResult.getAccessToken());
     }
 
@@ -137,9 +138,9 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(trades).hasSize(1);
     }
 
-    private void 거래_완료_요청(TokenValuesDto loginResult, String tradeComplete, Long num) {
+    private void 거래_완료_요청(TokenValuesDto loginResult, String tradeComplete, Long num) throws JsonProcessingException {
         String path = tradeComplete.replace("{tradeNum}", String.valueOf(num));
-        patchApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+        patchRequest(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 거래_완료_응답_검증(Long num, TradeState tradeComplete) {
@@ -147,9 +148,9 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(completedTrade.getTradeState()).isEqualTo(tradeComplete);
     }
 
-    private void 거래_삭제_요청(TokenValuesDto loginResult, Long tradeNum) {
+    private void 거래_삭제_요청(TokenValuesDto loginResult, Long tradeNum) throws JsonProcessingException {
         String path = TradeControllerPath.TRADE_CANCEL.replace("{tradeNum}", String.valueOf(tradeNum));
-        deleteApi(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+        deleteRequest(path, null, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 거래_삭제_응답_검증(Long tradeNum, TradeState tradeCancel) {
