@@ -3,7 +3,6 @@ package com.min.bunjang.following.controller;
 import com.min.bunjang.config.ControllerTestConfig;
 import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.service.FollowingService;
-import com.min.bunjang.login.controller.LoginController;
 import com.min.bunjang.token.jwt.TokenProvider;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,7 +31,7 @@ class FollowingControllerTest extends ControllerTestConfig {
         //when && then
         mockMvc.perform(post(FollowingControllerPath.FOLLOWING_CREATE)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, "")
+                .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, "")
                 .content(objectMapper.writeValueAsString(followingCreateRequest)))
                 .andDo(print())
                 .andExpect(status().isForbidden());

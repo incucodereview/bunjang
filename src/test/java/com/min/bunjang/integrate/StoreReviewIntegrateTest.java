@@ -80,7 +80,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         mockMvc.perform(post(StoreReviewControllerPath.REVIEW_CREATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(storeReviewCreateRequest))
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("storeReview-create",
@@ -142,7 +142,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         //when & then완
         mockMvc.perform(RestDocumentationRequestBuilders.get(StoreReviewViewControllerPath.REVIEW_FIND_BY_STORE, owner.getNum())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("storeReview-findByOwner",
@@ -196,7 +196,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         mockMvc.perform(put(StoreReviewControllerPath.REVIEW_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(storeReviewUpdateRequest))
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("storeReview-update",
@@ -248,7 +248,7 @@ public class StoreReviewIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.delete(StoreReviewControllerPath.REVIEW_DELETE, storeReview.getNum())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("storeReview-delete",

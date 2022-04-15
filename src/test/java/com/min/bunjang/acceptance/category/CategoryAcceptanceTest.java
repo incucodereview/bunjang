@@ -21,6 +21,7 @@ import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.model.Store;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -178,5 +179,10 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(productSimpleResponseList.get(0).getProductNum()).isEqualTo(product4.getNum());
         Assertions.assertThat(productSimpleResponseList.get(1).getProductNum()).isEqualTo(product2.getNum());
         Assertions.assertThat(productSimpleResponseList.get(2).getProductNum()).isEqualTo(product1.getNum());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

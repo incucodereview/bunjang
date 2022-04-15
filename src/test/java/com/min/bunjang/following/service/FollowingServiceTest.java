@@ -9,6 +9,7 @@ import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.model.Store;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,10 @@ class FollowingServiceTest extends ServiceTestConfig {
         Following following = all.get(0);
         Assertions.assertThat(following.getFollowerStore()).isNotNull();
         Assertions.assertThat(following.getFollowedStore()).isNotNull();
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

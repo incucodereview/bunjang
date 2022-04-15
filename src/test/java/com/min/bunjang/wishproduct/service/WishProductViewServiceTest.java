@@ -14,6 +14,7 @@ import com.min.bunjang.wishproduct.dto.response.WishProductResponses;
 import com.min.bunjang.wishproduct.model.WishProduct;
 import com.min.bunjang.wishproduct.repository.WishProductRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +68,10 @@ class WishProductViewServiceTest extends ServiceTestConfig {
         Assertions.assertThat(wishProductResponses.get(0).getWishProductNum()).isEqualTo(savedWishProducts.get(0).getNum());
         Assertions.assertThat(wishProductResponses.get(1).getWishProductNum()).isEqualTo(savedWishProducts.get(1).getNum());
         Assertions.assertThat(wishProductResponses.get(2).getWishProductNum()).isEqualTo(savedWishProducts.get(2).getNum());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseCleanup.execute();
     }
 }

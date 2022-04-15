@@ -48,7 +48,7 @@ public class Member {
     private Long memberNum;
 
     @NotBlank
-    @Column(name = "email", unique = true)
+    @Column(unique = true)
     private String email;
 
     @NotBlank

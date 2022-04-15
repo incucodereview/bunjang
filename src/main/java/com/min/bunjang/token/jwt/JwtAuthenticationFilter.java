@@ -42,7 +42,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
     private Authentication getAuthentication(HttpServletRequest request) {
         try {
-            String token = request.getHeader(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER);
+            String token = request.getHeader(TokenProvider.ACCESS_TOKEN_KEY_NAME);
             String emailFromAccessToken = tokenProvider.getEmailFromAccessToken(token);
             UserDetails userDetails = customPrincipalDetailsService.loadUserByUsername(emailFromAccessToken);
             return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());

@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class TokenProvider {
 
-    public static final String ACCESS_TOKEN_KEY_OF_HEADER = "Authorization";
+    public static final String ACCESS_TOKEN_KEY_NAME = "Authorization";
 
     private final String accessTokenSecretKey;
     private final String refreshTokenSecretKey;

@@ -53,7 +53,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(post(StoreControllerPath.STORE_CREATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken())
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken())
                         .content(objectMapper.writeValueAsString(storeCreateOrUpdateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -99,7 +99,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(put(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken())
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken())
                         .content(objectMapper.writeValueAsString(storeIntroduceUpdateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -138,7 +138,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(put(StoreControllerPath.STORE_NAME_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken())
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken())
                         .content(objectMapper.writeValueAsString(storeNameUpdateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -181,7 +181,7 @@ public class StoreIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(post(StoreControllerPath.STORE_PLUS_VISITOR)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken())
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken())
                         .content(objectMapper.writeValueAsString(visitorPlusDto)))
                 .andExpect(status().isOk())
                 .andDo(print())

@@ -65,7 +65,7 @@ public class StoreInquireIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(post(StoreInquireControllerPath.CREATE_INQUIRY)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken())
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken())
                         .content(objectMapper.writeValueAsString(inquireCreateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -153,7 +153,7 @@ public class StoreInquireIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.delete(StoreInquireControllerPath.DELETE_INQUIRY, savedStoreInquiry.getNum())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken()))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andDo(document("storeInquiry-delete",

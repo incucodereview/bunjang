@@ -75,7 +75,7 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
         mockMvc.perform(post(WishProductControllerPath.WISH_PRODUCT_CREATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(wishProductCreateRequest))
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("wishProduct-create",
@@ -124,7 +124,7 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
         //when & then
         mockMvc.perform(RestDocumentationRequestBuilders.get(WishProductViewControllerPath.WISH_PRODUCT_FIND_BY_STORE, owner.getNum())
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("wishProduct-findAll-byStore",
@@ -170,7 +170,7 @@ public class WishProductIntegrateTest extends IntegrateTestConfig {
         mockMvc.perform(delete(WishProductControllerPath.WISH_PRODUCT_DELETE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(objectMapper.writeValueAsString(wishProductsDeleteRequest))
-                        .header(TokenProvider.ACCESS_TOKEN_KEY_OF_HEADER, loginResult.getAccessToken()))
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken()))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("wishProduct-delete",
