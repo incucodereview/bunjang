@@ -73,48 +73,48 @@ public class AcceptanceTestConfig {
     }
 
     public static <T> RestResponse<T> getRequest(String path, String token, TypeReference<RestResponse<T>> responseType) {
-        String response = String.valueOf(
+        String response =
                 restAssuredCommonGiven(token)
-                .get(path));
+                .get(path).asString();
         return toRestResponseFromResult(response, responseType);
     }
 
     public static <T> RestResponse<T> getRequestWithKeyword(String path, String token, Map<String, String> parameter, TypeReference<RestResponse<T>> responseType) throws JsonProcessingException {
-        String response = String.valueOf(
+        String response =
                 restAssuredCommonGivenWithParam(token, parameter)
-                .get(path));
-        return objectMapper.readValue(response, responseType);
+                .get(path).asString();
+        return toRestResponseFromResult(response, responseType);
     }
 
     public static <T> RestResponse<T> postRequest(String path, Object body, TypeReference<RestResponse<T>> responseType, String token) throws JsonProcessingException {
-        String response = String.valueOf(
+        String response =
                 restAssuredCommonGiven(token)
                 .body(makeBodyToString(body))
-                .post(path));
-        return objectMapper.readValue(response, responseType);
+                .post(path).asString();
+        return toRestResponseFromResult(response, responseType);
     }
 
     public static <T> RestResponse<T> putRequest(String path, Object body, TypeReference<RestResponse<T>> responseType, String token) throws JsonProcessingException {
-        String response = String.valueOf(restAssuredCommonGiven(token)
+        String response = restAssuredCommonGiven(token)
                 .body(makeBodyToString(body))
-                .put(path));
-        return objectMapper.readValue(response, responseType);
+                .put(path).asString();
+        return toRestResponseFromResult(response, responseType);
     }
 
     public static <T> RestResponse<T> patchRequest(String path, Object body, TypeReference<RestResponse<T>> responseType, String token) throws JsonProcessingException {
-        String response = String.valueOf(
+        String response =
                 restAssuredCommonGiven(token)
                 .body(makeBodyToString(body))
-                .patch(path));
-        return objectMapper.readValue(response, responseType);
+                .patch(path).asString();
+        return toRestResponseFromResult(response, responseType);
     }
 
     public static <T> RestResponse<T> deleteRequest(String path, Object body, TypeReference<RestResponse<T>> responseType, String token) throws JsonProcessingException {
-        String response = String.valueOf(
+        String response =
                 restAssuredCommonGiven(token)
                 .body(makeBodyToString(body))
-                .delete(path));
-        return objectMapper.readValue(response, responseType);
+                .delete(path).asString();
+        return toRestResponseFromResult(response, responseType);
     }
 
     private static RequestSpecification restAssuredCommonGiven(String token) {
@@ -139,7 +139,7 @@ public class AcceptanceTestConfig {
     private static String makeBodyToString(Object body) {
         String bodyString = null;
         try {
-            bodyString = objectMapper.writeValueAsString(bodyString);
+            bodyString = objectMapper.writeValueAsString(body);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
