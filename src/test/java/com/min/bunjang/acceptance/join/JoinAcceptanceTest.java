@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.join;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
@@ -73,7 +74,7 @@ public class JoinAcceptanceTest extends AcceptanceTestConfig {
         );
     }
 
-    private void 임시회원가입_요청(TempJoinRequest tempJoinRequest) {
+    private void 임시회원가입_요청(TempJoinRequest tempJoinRequest) throws JsonProcessingException {
         postRequest(EmailJoinControllerPath.JOIN_TEMP_MEMBER_REQUEST, tempJoinRequest, new TypeReference<RestResponse<Void>>() {}, "");
     }
 
@@ -105,7 +106,7 @@ public class JoinAcceptanceTest extends AcceptanceTestConfig {
         Assertions.assertThat(certifiedMemberEmail).isEqualTo(email);
     }
 
-    private void 인증후일반회원_등록_요청(JoinRequest joinRequest) {
+    private void 인증후일반회원_등록_요청(JoinRequest joinRequest) throws JsonProcessingException {
         postRequest(EmailJoinControllerPath.JOIN_MEMBER_REQUEST, joinRequest, new TypeReference<RestResponse<Void>>() {}, "");
     }
 

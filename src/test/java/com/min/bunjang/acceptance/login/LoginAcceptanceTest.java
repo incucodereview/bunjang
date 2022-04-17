@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.login;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
@@ -20,7 +21,7 @@ import java.time.LocalDate;
 public class LoginAcceptanceTest extends AcceptanceTestConfig {
 
     @Test
-    void name() {
+    void name() throws JsonProcessingException {
         //given
         String email = "email";
         String password = "password";

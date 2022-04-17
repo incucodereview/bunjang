@@ -1,5 +1,6 @@
 package com.min.bunjang.helpers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.login.controller.LoginControllerPath;
@@ -31,7 +32,7 @@ public class MemberAcceptanceHelper {
         return memberRepository.save(Member.createMember(memberDirectCreateDto));
     }
 
-    public static RestResponse<TokenValuesDto> 로그인(String email, String password) {
+    public static RestResponse<TokenValuesDto> 로그인(String email, String password) throws JsonProcessingException {
         return postRequest(LoginControllerPath.LOGIN, new LoginRequest(email, password), new TypeReference<RestResponse<TokenValuesDto>>() {
         }, "");
     }

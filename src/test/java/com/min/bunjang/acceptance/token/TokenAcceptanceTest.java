@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.token;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
@@ -17,7 +18,7 @@ public class TokenAcceptanceTest extends AcceptanceTestConfig {
 
     @DisplayName("토큰 인증 인수테스트 - 요청은 한경우 밖에 없기에 다이나믹 테스트 보단 일반 테스트로 진행한다.")
     @Test
-    void name() {
+    void name() throws JsonProcessingException {
         //given
         String email = "email@email.com";
         String password = "password";
@@ -32,7 +33,7 @@ public class TokenAcceptanceTest extends AcceptanceTestConfig {
         토큰인증_요청_검증(tokenValuesDto, response);
     }
 
-    private RestResponse<TokenValidResponse> 토큰인증_요청(TokenValuesDto tokenValuesDto) {
+    private RestResponse<TokenValidResponse> 토큰인증_요청(TokenValuesDto tokenValuesDto) throws JsonProcessingException {
         RestResponse<TokenValidResponse> response = postRequest(TokenControllerPath.VALIDATE_TOKEN_STATUS, TokenValuesDto.of(tokenValuesDto.getAccessToken(), tokenValuesDto.getRefreshToken()),
                 new TypeReference<RestResponse<TokenValidResponse>>() {}, "");
         return response;

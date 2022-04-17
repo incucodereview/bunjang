@@ -56,7 +56,7 @@ public class ProductInquireAcceptanceTest extends AcceptanceTestConfig {
     private ThirdProductCategoryRepository thirdProductCategoryRepository;
 
     @TestFactory
-    Stream<DynamicTest> dynamicTestStream() {
+    Stream<DynamicTest> dynamicTestStream() throws JsonProcessingException {
         String ownerEmail = "urisegea@naver.com";
         String ownerPassword = "password";
         Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);

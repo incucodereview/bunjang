@@ -54,7 +54,7 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
     private ThirdProductCategoryRepository thirdProductCategoryRepository;
 
     @TestFactory
-    Stream<DynamicTest> dynamicTestStream() {
+    Stream<DynamicTest> dynamicTestStream() throws JsonProcessingException {
         String sellerEmail = "urisegea@naver.com";
         String sellerPassword = "password";
         Member sellerMember = MemberAcceptanceHelper.회원가입(sellerEmail, sellerPassword, memberRepository, bCryptPasswordEncoder);

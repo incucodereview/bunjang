@@ -1,5 +1,6 @@
 package com.min.bunjang.acceptance.following;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.category.model.FirstProductCategory;
@@ -46,7 +47,7 @@ public class FollowingAcceptanceTest extends AcceptanceTestConfig {
     private FollowingRepository followingRepository;
 
     @TestFactory
-    Stream<DynamicTest> dynamicTestStream() {
+    Stream<DynamicTest> dynamicTestStream() throws JsonProcessingException {
         String followerEmail = "urisegea@naver.com";
         String followerPassword = "password";
         Member followerMember = MemberAcceptanceHelper.회원가입(followerEmail, followerPassword, memberRepository, bCryptPasswordEncoder);

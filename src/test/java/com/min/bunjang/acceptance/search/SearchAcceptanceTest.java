@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 public class SearchAcceptanceTest extends AcceptanceTestConfig {
 
     @TestFactory
-    Stream<DynamicTest> dynamicTestStream() {
+    Stream<DynamicTest> dynamicTestStream() throws JsonProcessingException {
         String email = "urisegea@naver.com";
         String password = "password";
         Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
