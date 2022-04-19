@@ -1,8 +1,6 @@
-package com.min.bunjang.integrate;
+package com.min.bunjang.document;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.min.bunjang.common.database.DatabaseCleanup;
-import com.min.bunjang.integrate.config.IntegrateTestConfig;
+import com.min.bunjang.document.config.DocumentTestConfig;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
 import com.min.bunjang.join.controller.EmailJoinControllerPath;
@@ -11,22 +9,13 @@ import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.member.model.JoinTempMember;
 import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.repository.JoinTempMemberRepository;
-import com.min.bunjang.testconfig.RestDocsConfiguration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDate;
 
@@ -43,7 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class JoinIntegrateTest extends IntegrateTestConfig {
+public class JoinDocumentTest extends DocumentTestConfig {
 
     @Autowired
     private JoinTempMemberRepository joinTempMemberRepository;

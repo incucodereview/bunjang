@@ -1,8 +1,8 @@
-package com.min.bunjang.integrate;
+package com.min.bunjang.document;
 
 import com.min.bunjang.helpers.MemberAcceptanceHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
-import com.min.bunjang.integrate.config.IntegrateTestConfig;
+import com.min.bunjang.document.config.DocumentTestConfig;
 import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.controller.StoreControllerPath;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class StoreIntegrateTest extends IntegrateTestConfig {
+public class StoreDocumentTest extends DocumentTestConfig {
     @Autowired
     private StoreRepository storeRepository;
 

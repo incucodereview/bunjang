@@ -1,4 +1,4 @@
-package com.min.bunjang.integrate.config;
+package com.min.bunjang.document.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 @Import(RestDocsConfiguration.class)
-public class IntegrateTestConfig {
+public class DocumentTestConfig {
 
     @Autowired
     protected ObjectMapper objectMapper;
