@@ -60,10 +60,22 @@ mins1031;
 | 요청한 리소스가 없음.
 |===
 
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
 [[resources-login]]
 == 로그인-JWT
 
 이메일과 비밀번호를 통해 JWT 토큰 방식의 로그인을 진행한다
+include::{snippets}/login/curl-request.adoc[]
+include::{snippets}/login/request-headers.adoc[]
+include::{snippets}/login/request-fields.adoc[]
+include::{snippets}/login/request-body.adoc[]
+include::{snippets}/login/response-headers.adoc[]
+include::{snippets}/login/request-fields.adoc[]
+include::{snippets}/login/request-body.adoc[]
 
 operation::login[snippets='http-request,request-headers,request-fields,request-body,response-headers,response-fields,response-body']
 
