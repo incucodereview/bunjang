@@ -1,7 +1,7 @@
 package com.min.bunjang.wishproduct.service;
 
 import com.min.bunjang.common.dto.PageDto;
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
+import com.min.bunjang.common.validator.RightRequesterChecker;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -24,7 +24,7 @@ public class WishProductViewService {
     @Transactional(readOnly = true)
     public WishProductResponses findWishProductsByStore(String ownerEmail, Long storeNum, Pageable pageable) {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(ownerEmail, store);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(ownerEmail, store);
 
         Page<WishProduct> wishProductPages = wishProductRepository.findByStore(store, pageable);
         return new WishProductResponses(

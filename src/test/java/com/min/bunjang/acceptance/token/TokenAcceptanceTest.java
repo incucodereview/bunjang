@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.token.controller.TokenControllerPath;
 import com.min.bunjang.token.dto.TokenValidResponse;
@@ -22,9 +22,9 @@ public class TokenAcceptanceTest extends AcceptanceTestConfig {
         //given
         String email = "email@email.com";
         String password = "password";
-        Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
+        Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
 
-        TokenValuesDto tokenValuesDto = MemberAcceptanceHelper.로그인(email, password).getResult();
+        TokenValuesDto tokenValuesDto = MemberHelper.인수테스트_로그인(email, password).getResult();
 
         //when
         RestResponse<TokenValidResponse> response = 토큰인증_요청(tokenValuesDto);
@@ -46,6 +46,6 @@ public class TokenAcceptanceTest extends AcceptanceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

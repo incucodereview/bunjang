@@ -1,6 +1,6 @@
 package com.min.bunjang.join.service;
 
-import com.min.bunjang.common.database.DatabaseCleanup;
+import com.min.bunjang.common.database.DatabaseFormat;
 import com.min.bunjang.join.confirmtoken.exception.WrongConfirmEmailToken;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
@@ -16,18 +16,15 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
-import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
 
@@ -50,7 +47,7 @@ class EmailJoinServiceTest {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private DatabaseCleanup databaseCleanup;
+    private DatabaseFormat databaseFormat;
 
     @MockBean
     private JavaMailSender javaMailSender;
@@ -152,6 +149,6 @@ class EmailJoinServiceTest {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

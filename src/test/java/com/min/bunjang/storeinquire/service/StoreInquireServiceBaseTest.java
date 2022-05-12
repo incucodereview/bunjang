@@ -1,6 +1,6 @@
 package com.min.bunjang.storeinquire.service;
 
-import com.min.bunjang.config.ServiceTestConfig;
+import com.min.bunjang.config.ServiceBaseTest;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
@@ -18,7 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 
-class StoreInquireServiceTest extends ServiceTestConfig {
+class StoreInquireServiceBaseTest extends ServiceBaseTest {
 
     @Autowired
     private StoreInquireService storeInquireService;
@@ -53,6 +53,6 @@ class StoreInquireServiceTest extends ServiceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

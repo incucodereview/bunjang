@@ -1,6 +1,6 @@
 package com.min.bunjang.following.controller;
 
-import com.min.bunjang.config.ControllerTestConfig;
+import com.min.bunjang.config.ControllerBaseTest;
 import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.service.FollowingService;
 import com.min.bunjang.token.jwt.TokenProvider;
@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = FollowingController.class)
-class FollowingControllerTest extends ControllerTestConfig {
+class FollowingControllerBaseTest extends ControllerBaseTest {
 
     @MockBean
     private FollowingService followingService;

@@ -1,7 +1,6 @@
 package com.min.bunjang.following.controller;
 
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
 import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.exception.NotExistFollowingException;
 import com.min.bunjang.following.service.FollowingService;
@@ -34,7 +33,7 @@ public class FollowingController {
             @Validated @RequestBody FollowingCreateRequest followingCreateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        followingService.createFollowing(MemberAndStoreValidator.verifyLoginRequest(memberAccount), followingCreateRequest);
+        followingService.createFollowing(memberAccount, followingCreateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -45,7 +44,7 @@ public class FollowingController {
             @NotNull @PathVariable Long followingNum,
             @NotNull @PathVariable Long storeNum
     ) {
-        followingService.deleteFollowing(memberAccount.getEmail(), followingNum, storeNum);
+        followingService.deleteFollowing(memberAccount, followingNum, storeNum);
         return RestResponse.of(HttpStatus.OK, null);
     }
 

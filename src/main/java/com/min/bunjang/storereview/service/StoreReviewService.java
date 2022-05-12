@@ -1,10 +1,7 @@
 package com.min.bunjang.storereview.service;
 
 import com.min.bunjang.common.exception.ImpossibleException;
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
-import com.min.bunjang.member.exception.NotExistMemberException;
-import com.min.bunjang.member.model.Member;
-import com.min.bunjang.member.repository.MemberRepository;
+import com.min.bunjang.common.validator.RightRequesterChecker;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -21,8 +18,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class StoreReviewService {
@@ -35,7 +30,7 @@ public class StoreReviewService {
         Store owner = storeRepository.findById(storeReviewCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
         Store writer = storeRepository.findById(storeReviewCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(storeReviewCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, writer);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(requesterEmail, writer);
         StoreReview storeReview = StoreReview.createStoreReview(
                 owner,
                 writer,
@@ -54,7 +49,7 @@ public class StoreReviewService {
     @Transactional
     public void updateStoreReview(String requesterEmail, StoreReviewUpdateRequest storeReviewUpdateRequest) {
         StoreReview storeReview = storeReviewRepository.findById(storeReviewUpdateRequest.getReviewNum()).orElseThrow(NotExistStoreReviewException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, storeReview.getWriter());
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(requesterEmail, storeReview.getWriter());
 
         storeReview.updateReviewContent(storeReviewUpdateRequest.getUpdatedReviewContent(), storeReviewUpdateRequest.getUpdatedDealScore());
     }
@@ -66,7 +61,7 @@ public class StoreReviewService {
         }
 
         StoreReview storeReview = storeReviewRepository.findById(reviewNum).orElseThrow(NotExistStoreReviewException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, storeReview.getWriter());
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(requesterEmail, storeReview.getWriter());
 
         storeReviewRepository.deleteById(reviewNum);
     }

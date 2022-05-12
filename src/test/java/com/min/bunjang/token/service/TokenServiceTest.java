@@ -1,6 +1,6 @@
 package com.min.bunjang.token.service;
 
-import com.min.bunjang.common.database.DatabaseCleanup;
+import com.min.bunjang.common.database.DatabaseFormat;
 import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.token.jwt.properties.JwtTokenProperty;
 import com.min.bunjang.token.dto.TokenValidResponse;
@@ -28,7 +28,7 @@ import java.util.Date;
 @ActiveProfiles("h2")
 class TokenServiceTest {
     @Autowired
-    private DatabaseCleanup databaseCleanup;
+    private DatabaseFormat databaseFormat;
 
     @Autowired
     private TokenService tokenService;
@@ -167,6 +167,6 @@ class TokenServiceTest {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

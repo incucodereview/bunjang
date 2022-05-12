@@ -124,6 +124,6 @@ public class JoinAcceptanceTest extends AcceptanceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

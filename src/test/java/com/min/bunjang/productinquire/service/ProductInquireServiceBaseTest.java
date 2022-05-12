@@ -6,8 +6,8 @@ import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
-import com.min.bunjang.config.ServiceTestConfig;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.config.ServiceBaseTest;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
@@ -28,7 +28,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Arrays;
 import java.util.List;
 
-class ProductInquireServiceTest extends ServiceTestConfig {
+class ProductInquireServiceBaseTest extends ServiceBaseTest {
     @Autowired
     private ProductInquireService productInquireService;
 
@@ -53,11 +53,11 @@ class ProductInquireServiceTest extends ServiceTestConfig {
         //given
         String ownerEmail = "urisegea@naver.com";
         String ownerPassword = "password";
-        Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
+        Member ownerMember = MemberHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
 
         String writerEmail = "writer@naver.com";
         String writerPassword = "password!writer";
-        Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
+        Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);

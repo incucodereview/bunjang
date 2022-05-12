@@ -47,6 +47,6 @@ public class LoginAcceptanceTest extends AcceptanceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

@@ -162,4 +162,23 @@ public class Store extends BasicEntity {
     public int hashCode() {
         return Objects.hash(storeName, introduceContent, member, storeThumbnail, visitors, Products, wishProducts, storeReviews, followings, followers, hits, contactableTime, exchangeAndReturnAndRefundPolicy, cautionNoteBeforeTrade);
     }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "storeName='" + storeName + '\'' +
+                ", introduceContent='" + introduceContent + '\'' +
+                ", storeThumbnail=" + storeThumbnail +
+                ", visitors=" + visitors +
+                ", Products=" + Products +
+                ", wishProducts=" + wishProducts +
+                ", storeReviews=" + storeReviews +
+                ", followings=" + followings +
+                ", followers=" + followers +
+                ", hits=" + hits +
+                ", contactableTime='" + contactableTime + '\'' +
+                ", exchangeAndReturnAndRefundPolicy='" + exchangeAndReturnAndRefundPolicy + '\'' +
+                ", cautionNoteBeforeTrade='" + cautionNoteBeforeTrade + '\'' +
+                '}';
+    }
 }

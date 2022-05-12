@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.member.controller.MemberControllerPath;
 import com.min.bunjang.member.dto.MemberBirthDayUpdateRequest;
 import com.min.bunjang.member.dto.MemberGenderUpdateRequest;
@@ -25,8 +25,8 @@ public class MemberAcceptanceTest extends AcceptanceTestConfig {
     Stream<DynamicTest> dynamicTestStream() throws JsonProcessingException {
         String email = "urisegea@naver.com";
         String password = "password";
-        Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(email, password).getResult();
+        Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(email, password).getResult();
 
         return Stream.of(
                 DynamicTest.dynamicTest("회원 성별 변경.", () -> {

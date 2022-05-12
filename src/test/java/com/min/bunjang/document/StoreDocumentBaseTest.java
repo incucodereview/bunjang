@@ -1,8 +1,8 @@
 package com.min.bunjang.document;
 
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
-import com.min.bunjang.document.config.DocumentTestConfig;
+import com.min.bunjang.config.DocumentBaseTest;
 import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.controller.StoreControllerPath;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class StoreDocumentTest extends DocumentTestConfig {
+public class StoreDocumentBaseTest extends DocumentBaseTest {
     @Autowired
     private StoreRepository storeRepository;
 
@@ -42,8 +42,8 @@ public class StoreDocumentTest extends DocumentTestConfig {
         //given
         String email = "email";
         String password = "password";
-        Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(email, password).getResult();
+        Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(email, password).getResult();
 
         String storeName = "storeName";
         String introduceContent = "introduceContent";
@@ -88,8 +88,8 @@ public class StoreDocumentTest extends DocumentTestConfig {
         //given
         String email = "email1";
         String password = "password";
-        Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(email, password).getResult();
+        Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(email, password).getResult();
 
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         String updateIntroduceContent = "updateIntroduceContent";
@@ -127,8 +127,8 @@ public class StoreDocumentTest extends DocumentTestConfig {
         //given
         String email = "email";
         String password = "password";
-        Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(email, password).getResult();
+        Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(email, password).getResult();
 
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         String updateStoreName = "updateStoreName";
@@ -166,12 +166,12 @@ public class StoreDocumentTest extends DocumentTestConfig {
         //given
         String ownerEmail = "urisegea@naver.com";
         String ownerPassword = "password";
-        Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
+        Member ownerMember = MemberHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
 
         String visitorEmail = "visitor@naver.com";
         String visitorPassword = "password!visitor";
-        Member visitorMember = MemberAcceptanceHelper.회원가입(visitorEmail, visitorPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(visitorEmail, visitorPassword).getResult();
+        Member visitorMember = MemberHelper.회원가입(visitorEmail, visitorPassword, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(visitorEmail, visitorPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
@@ -205,6 +205,6 @@ public class StoreDocumentTest extends DocumentTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

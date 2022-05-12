@@ -10,7 +10,7 @@ import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
@@ -57,12 +57,12 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
     Stream<DynamicTest> dynamicTestStream() throws JsonProcessingException {
         String sellerEmail = "urisegea@naver.com";
         String sellerPassword = "password";
-        Member sellerMember = MemberAcceptanceHelper.회원가입(sellerEmail, sellerPassword, memberRepository, bCryptPasswordEncoder);
+        Member sellerMember = MemberHelper.회원가입(sellerEmail, sellerPassword, memberRepository, bCryptPasswordEncoder);
 
         String buyerEmail = "writer@naver.com";
         String buyerPassword = "password!writer";
-        Member buyerMember = MemberAcceptanceHelper.회원가입(buyerEmail, buyerPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(buyerEmail, buyerPassword).getResult();
+        Member buyerMember = MemberHelper.회원가입(buyerEmail, buyerPassword, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(buyerEmail, buyerPassword).getResult();
 
         Store seller = StoreAcceptanceHelper.상점생성(sellerMember, storeRepository);
         Store buyer = StoreAcceptanceHelper.상점생성(buyerMember, storeRepository);
@@ -160,6 +160,6 @@ public class TradeAcceptanceTest extends AcceptanceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

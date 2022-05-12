@@ -6,7 +6,7 @@ import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
-import com.min.bunjang.config.ServiceTestConfig;
+import com.min.bunjang.config.ServiceBaseTest;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class ProductSearchServiceTest extends ServiceTestConfig {
+public class ProductSearchServiceBaseTest extends ServiceBaseTest {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -101,6 +101,6 @@ public class ProductSearchServiceTest extends ServiceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

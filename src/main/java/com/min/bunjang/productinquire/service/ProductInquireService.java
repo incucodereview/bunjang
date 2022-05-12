@@ -1,7 +1,7 @@
 package com.min.bunjang.productinquire.service;
 
 import com.min.bunjang.common.exception.ImpossibleException;
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
+import com.min.bunjang.common.validator.RightRequesterChecker;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -27,7 +27,7 @@ public class ProductInquireService {
     public void createProductInquire(String email, ProductInquireCreateRequest productInquireCreateRequest) {
         Store store = storeRepository.findById(productInquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(productInquireCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(email, store);
 
         ProductInquire savedProductInquire = productInquireRepository.save(ProductInquire.createProductInquire(
                 store.getNum(),
@@ -53,7 +53,7 @@ public class ProductInquireService {
         }
         ProductInquire productInquire = productInquireRepository.findById(inquireNum).orElseThrow(NotExistProductInquireException::new);
         Store store = storeRepository.findById(productInquire.getWriterNum()).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, store);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(email, store);
 
         productInquireRepository.delete(productInquire);
     }

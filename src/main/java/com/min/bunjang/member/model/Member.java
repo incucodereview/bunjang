@@ -150,4 +150,20 @@ public class Member {
     public int hashCode() {
         return Objects.hash(memberNum, email, password, name, phone, birthDate, joinDate, updatedDate, memberRole, store);
     }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "memberNum=" + memberNum +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birthDate=" + birthDate +
+                ", joinDate=" + joinDate +
+                ", updatedDate=" + updatedDate +
+                ", memberRole=" + memberRole +
+                ", memberGender=" + memberGender +
+                '}';
+    }
 }

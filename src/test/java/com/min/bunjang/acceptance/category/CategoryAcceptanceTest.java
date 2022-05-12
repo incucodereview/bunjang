@@ -11,7 +11,7 @@ import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.ProductHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
 import com.min.bunjang.member.model.Member;
@@ -46,8 +46,8 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
     Stream<DynamicTest> dynamicTestStream() throws InterruptedException {
         String email = "urisegea@naver.com";
         String password = "password";
-        Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
-        Member member2 = MemberAcceptanceHelper.회원가입("temp@emial", password, memberRepository, bCryptPasswordEncoder);
+        Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
+        Member member2 = MemberHelper.회원가입("temp@emial", password, memberRepository, bCryptPasswordEncoder);
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         Store store2 = StoreAcceptanceHelper.상점생성(member2, storeRepository);
 
@@ -183,6 +183,6 @@ public class CategoryAcceptanceTest extends AcceptanceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

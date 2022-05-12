@@ -1,6 +1,6 @@
 package com.min.bunjang.document;
 
-import com.min.bunjang.document.config.DocumentTestConfig;
+import com.min.bunjang.config.DocumentBaseTest;
 import com.min.bunjang.login.controller.LoginControllerPath;
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
@@ -28,7 +28,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class LoginDocumentTest extends DocumentTestConfig {
+public class LoginDocumentBaseTest extends DocumentBaseTest {
     @Autowired
     private MemberRepository memberRepository;
 
@@ -79,6 +79,6 @@ public class LoginDocumentTest extends DocumentTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

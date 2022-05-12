@@ -1,6 +1,6 @@
 package com.min.bunjang.wishproduct.service;
 
-import com.min.bunjang.config.ServiceTestConfig;
+import com.min.bunjang.config.ServiceBaseTest;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class WishProductServiceTest extends ServiceTestConfig {
+class WishProductServiceBaseTest extends ServiceBaseTest {
     @Autowired
     private WishProductService wishProductService;
 
@@ -91,6 +91,6 @@ class WishProductServiceTest extends ServiceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

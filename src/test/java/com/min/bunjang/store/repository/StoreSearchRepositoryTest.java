@@ -1,10 +1,7 @@
 package com.min.bunjang.store.repository;
 
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
-import com.min.bunjang.member.dto.MemberDirectCreateDto;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.member.model.Member;
-import com.min.bunjang.member.model.MemberGender;
-import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.store.model.Store;
 import org.assertj.core.api.Assertions;
@@ -16,11 +13,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.stream.IntStream;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles("h2")
@@ -43,7 +37,7 @@ class StoreSearchRepositoryTest {
     public void search_store_by_storeName() {
         //given
         IntStream.range(1, 6).forEach(idx -> {
-            Member member = memberRepository.save(MemberAcceptanceHelper.회원가입("email" + idx, "password", memberRepository, bCryptPasswordEncoder));
+            Member member = memberRepository.save(MemberHelper.회원가입("email" + idx, "password", memberRepository, bCryptPasswordEncoder));
             storeRepository.save(Store.createStore("storeName" + idx, "intro", null, member));
         });
         String keyword = "1";

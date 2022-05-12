@@ -1,7 +1,6 @@
 package com.min.bunjang.login.service;
 
-import com.min.bunjang.common.database.DatabaseCleanup;
-import com.min.bunjang.config.ServiceTestConfig;
+import com.min.bunjang.config.ServiceBaseTest;
 import com.min.bunjang.login.dto.LoginRequest;
 import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.token.dto.TokenValuesDto;
@@ -9,7 +8,6 @@ import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberRole;
-import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.token.model.RefreshToken;
 import com.min.bunjang.token.repository.RefreshTokenRepository;
 import org.assertj.core.api.Assertions;
@@ -17,13 +15,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
-class LoginServiceTest extends ServiceTestConfig {
+class LoginServiceBaseTest extends ServiceBaseTest {
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 
@@ -74,6 +70,6 @@ class LoginServiceTest extends ServiceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

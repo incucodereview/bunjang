@@ -7,10 +7,10 @@ import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.ProductHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
-import com.min.bunjang.document.config.DocumentTestConfig;
+import com.min.bunjang.config.DocumentBaseTest;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.store.model.Store;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class CategoryDocumentTest extends DocumentTestConfig {
+public class CategoryDocumentBaseTest extends DocumentBaseTest {
 
     @Autowired
     private FirstProductCategoryRepository firstProductCategoryRepository;
@@ -46,7 +46,7 @@ public class CategoryDocumentTest extends DocumentTestConfig {
     @Autowired
     private ThirdProductCategoryRepository thirdProductCategoryRepository;
 
-    @DisplayName("모든 카테고리 조회 통합테스트")
+    @DisplayName("모든 카테고리 조회 문서회")
     @Test
     public void category_all_find() throws Exception {
         //given
@@ -89,7 +89,7 @@ public class CategoryDocumentTest extends DocumentTestConfig {
                 ));
     }
 
-    @DisplayName("first 카테고리의 상품 조회 통합테스트")
+    @DisplayName("first 카테고리의 상품 조회 문서화")
     @Test
     public void category_find_by_firstCategory() throws Exception {
         //given
@@ -101,7 +101,7 @@ public class CategoryDocumentTest extends DocumentTestConfig {
         SecondProductCategory saveSecondCate = secondProductCategoryRepository.save(category2);
         ThirdProductCategory saveThirdCate = thirdProductCategoryRepository.save(category3);
 
-        Member member = MemberAcceptanceHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
+        Member member = MemberHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         Product product1 = ProductHelper.상품생성(store, saveFirstCate, saveSecondCate, saveThirdCate, productRepository);
 
@@ -130,7 +130,7 @@ public class CategoryDocumentTest extends DocumentTestConfig {
                 ));
     }
 
-    @DisplayName("second 카테고리의 상품 조회 통합테스트")
+    @DisplayName("second 카테고리의 상품 조회 문서화")
     @Test
     public void category_find_by_secondCategory() throws Exception {
         //given
@@ -142,7 +142,7 @@ public class CategoryDocumentTest extends DocumentTestConfig {
         SecondProductCategory saveSecondCate = secondProductCategoryRepository.save(category2);
         ThirdProductCategory saveThirdCate = thirdProductCategoryRepository.save(category3);
 
-        Member member = MemberAcceptanceHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
+        Member member = MemberHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         Product product1 = ProductHelper.상품생성(store, saveFirstCate, saveSecondCate, saveThirdCate, productRepository);
 
@@ -183,7 +183,7 @@ public class CategoryDocumentTest extends DocumentTestConfig {
         SecondProductCategory saveSecondCate = secondProductCategoryRepository.save(category2);
         ThirdProductCategory saveThirdCate = thirdProductCategoryRepository.save(category3);
 
-        Member member = MemberAcceptanceHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
+        Member member = MemberHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
         Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
         Product product1 = ProductHelper.상품생성(store, saveFirstCate, saveSecondCate, saveThirdCate, productRepository);
 
@@ -214,6 +214,6 @@ public class CategoryDocumentTest extends DocumentTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

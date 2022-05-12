@@ -1,6 +1,6 @@
 package com.min.bunjang.trade.service;
 
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
+import com.min.bunjang.common.validator.RightRequesterChecker;
 import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
@@ -29,7 +29,7 @@ public class TradeService {
         Store seller = storeRepository.findById(tradeCreateRequest.getSellerNum()).orElseThrow(NotExistStoreException::new);
         Store buyer = storeRepository.findById(tradeCreateRequest.getBuyerNum()).orElseThrow(NotExistStoreException::new);
         Product tradeProduct = productRepository.findById(tradeCreateRequest.getTradeProductNum()).orElseThrow(NotExistProductException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(email, buyer);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(email, buyer);
 
         tradeRepository.save(Trade.createTrade(seller, buyer, tradeProduct, TradeState.TRADE_ING));
         return new TradeCreateResponse(seller.getMember().getPhone());

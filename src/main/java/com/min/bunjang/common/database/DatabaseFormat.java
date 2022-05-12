@@ -12,12 +12,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class DatabaseCleanup {
+public class DatabaseFormat {
     @Autowired(required = false)
     private DataSource dataSource;
 
     @Transactional
-    public void execute() {
+    public void clean() {
         try {
             Connection c = dataSource.getConnection();
             Statement s = c.createStatement();

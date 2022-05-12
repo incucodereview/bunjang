@@ -9,7 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
-import com.min.bunjang.common.database.DatabaseCleanup;
+import com.min.bunjang.common.database.DatabaseFormat;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.repository.MemberRepository;
@@ -44,7 +44,7 @@ public class AcceptanceTestConfig {
     int port;
 
     @Autowired
-    protected DatabaseCleanup databaseCleanup;
+    protected DatabaseFormat databaseFormat;
 
     @Autowired
     protected MemberRepository memberRepository;

@@ -3,10 +3,10 @@ package com.min.bunjang.document;
 import com.min.bunjang.category.model.FirstProductCategory;
 import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.ProductHelper;
 import com.min.bunjang.helpers.StoreAcceptanceHelper;
-import com.min.bunjang.document.config.DocumentTestConfig;
+import com.min.bunjang.config.DocumentBaseTest;
 import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
@@ -43,7 +43,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class WishProductDocumentTest extends DocumentTestConfig {
+public class WishProductDocumentBaseTest extends DocumentBaseTest {
     @Autowired
     private WishProductRepository wishProductRepository;
 
@@ -53,12 +53,12 @@ public class WishProductDocumentTest extends DocumentTestConfig {
         //given
         String ownerEmail = "urisegea@naver.com";
         String ownerPassword = "password";
-        Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
+        Member ownerMember = MemberHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
 
         String writerEmail = "visitor@naver.com";
         String writerPassword = "password!visitor";
-        Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(ownerEmail, ownerPassword).getResult();
+        Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(ownerEmail, ownerPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
@@ -103,12 +103,12 @@ public class WishProductDocumentTest extends DocumentTestConfig {
         //given
         String ownerEmail = "urisegea@naver.com";
         String ownerPassword = "password";
-        Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
+        Member ownerMember = MemberHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
 
         String writerEmail = "visitor@naver.com";
         String writerPassword = "password!visitor";
-        Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(ownerEmail, ownerPassword).getResult();
+        Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(ownerEmail, ownerPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
@@ -146,12 +146,12 @@ public class WishProductDocumentTest extends DocumentTestConfig {
         //given
         String ownerEmail = "urisegea@naver.com";
         String ownerPassword = "password";
-        Member ownerMember = MemberAcceptanceHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
+        Member ownerMember = MemberHelper.회원가입(ownerEmail, ownerPassword, memberRepository, bCryptPasswordEncoder);
 
         String writerEmail = "visitor@naver.com";
         String writerPassword = "password!visitor";
-        Member writerMember = MemberAcceptanceHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(ownerEmail, ownerPassword).getResult();
+        Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(ownerEmail, ownerPassword).getResult();
 
         Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
         Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
@@ -194,6 +194,6 @@ public class WishProductDocumentTest extends DocumentTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

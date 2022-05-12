@@ -1,6 +1,6 @@
 package com.min.bunjang.document;
 
-import com.min.bunjang.document.config.DocumentTestConfig;
+import com.min.bunjang.config.DocumentBaseTest;
 import com.min.bunjang.join.confirmtoken.model.ConfirmationToken;
 import com.min.bunjang.join.confirmtoken.repository.ConfirmationTokenRepository;
 import com.min.bunjang.join.controller.EmailJoinControllerPath;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class JoinDocumentTest extends DocumentTestConfig {
+public class JoinDocumentBaseTest extends DocumentBaseTest {
 
     @Autowired
     private JoinTempMemberRepository joinTempMemberRepository;
@@ -165,6 +165,6 @@ public class JoinDocumentTest extends DocumentTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

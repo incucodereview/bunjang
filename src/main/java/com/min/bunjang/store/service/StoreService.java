@@ -1,7 +1,7 @@
 package com.min.bunjang.store.service;
 
 import com.min.bunjang.aws.s3.service.S3UploadService;
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
+import com.min.bunjang.common.validator.RightRequesterChecker;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.repository.MemberRepository;
@@ -52,7 +52,7 @@ public class StoreService {
     @Transactional
     public void updateStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, Long storeNum, String memberEmail) throws IOException {
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(memberEmail, store);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberEmail, store);
 
         store.updateStore(storeCreateOrUpdateRequest);
         store.updateThumbnail(refineStoreThumbnail(storeCreateOrUpdateRequest.getStoreThumbnail(), store));

@@ -1,23 +1,19 @@
 package com.min.bunjang.join.controller;
 
-import com.min.bunjang.config.ControllerTestConfig;
+import com.min.bunjang.config.ControllerBaseTest;
 import com.min.bunjang.join.dto.JoinRequest;
 import com.min.bunjang.join.dto.TempJoinRequest;
 import com.min.bunjang.join.service.EmailJoinService;
-import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.exception.NotExistTempMemberException;
 import com.min.bunjang.member.model.MemberGender;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 
@@ -29,7 +25,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = EmailJoinController.class)
-class EmailJoinControllerTest extends ControllerTestConfig {
+class EmailJoinControllerBaseTest extends ControllerBaseTest {
     @MockBean
     private EmailJoinService emailJoinService;
 

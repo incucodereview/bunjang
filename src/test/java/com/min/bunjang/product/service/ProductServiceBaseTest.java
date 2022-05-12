@@ -6,8 +6,8 @@ import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
-import com.min.bunjang.config.ServiceTestConfig;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.config.ServiceBaseTest;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.dto.request.ProductDeleteRequest;
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-class ProductServiceTest extends ServiceTestConfig {
+class ProductServiceBaseTest extends ServiceBaseTest {
     @Autowired
     private ProductService productService;
 
@@ -54,7 +54,7 @@ class ProductServiceTest extends ServiceTestConfig {
     public void product_create() {
         //given
         String email = "email@email.com";
-        Member member = MemberAcceptanceHelper.회원가입(email, "password", memberRepository, bCryptPasswordEncoder);
+        Member member = MemberHelper.회원가입(email, "password", memberRepository, bCryptPasswordEncoder);
         Store savedStore = storeRepository.save(Store.createStore("storeName", "introduce", null, member));
         FirstProductCategory firstCate = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCate = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCate));
@@ -105,7 +105,7 @@ class ProductServiceTest extends ServiceTestConfig {
     public void product_update() {
         //given
         String email = "email@email.com";
-        Member member = MemberAcceptanceHelper.회원가입(email, "password", memberRepository, bCryptPasswordEncoder);
+        Member member = MemberHelper.회원가입(email, "password", memberRepository, bCryptPasswordEncoder);
         Store savedStore = storeRepository.save(Store.createStore("storeName", "introduce", null, member));
         FirstProductCategory firstCate = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCate = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCate));
@@ -173,7 +173,7 @@ class ProductServiceTest extends ServiceTestConfig {
     public void product_delete() {
         //given
         String email = "email@email.com";
-        Member member = MemberAcceptanceHelper.회원가입(email, "password", memberRepository, bCryptPasswordEncoder);
+        Member member = MemberHelper.회원가입(email, "password", memberRepository, bCryptPasswordEncoder);
         Store savedStore = storeRepository.save(Store.createStore("storeName", "introduce", null, member));
 
         Product product = productRepository.save(new Product("productName"));
@@ -188,6 +188,6 @@ class ProductServiceTest extends ServiceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }

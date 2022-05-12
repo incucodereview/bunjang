@@ -1,6 +1,6 @@
 package com.min.bunjang.storeinquire.service;
 
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
+import com.min.bunjang.common.validator.RightRequesterChecker;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -23,7 +23,7 @@ public class StoreInquireService {
     public InquireCreateResponse createStoreInquiry(String memberEmail, InquireCreateRequest inquireCreateRequest) {
         Store owner = storeRepository.findById(inquireCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
         Store writer = storeRepository.findById(inquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(memberEmail, writer);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberEmail, writer);
         StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer, inquireCreateRequest.getInquireContent());
         defineMentionIfExistMentionNum(inquireCreateRequest, storeInquire);
 
@@ -41,7 +41,7 @@ public class StoreInquireService {
     @Transactional
     public void deleteStoreInquire(String email, Long inquireNum) {
         StoreInquire storeInquire = storeInquiryRepository.findById(inquireNum).orElseThrow(NotExistStoreInquireException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreInquireWriterMatchByEmail(email, storeInquire);
+        RightRequesterChecker.verifyMemberAndStoreInquireWriterMatchByEmail(email, storeInquire);
 
         storeInquiryRepository.deleteById(inquireNum);
     }

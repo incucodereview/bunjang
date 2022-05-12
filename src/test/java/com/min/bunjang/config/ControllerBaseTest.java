@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @ActiveProfiles("h2")
 @ExtendWith(MockitoExtension.class)
-public class ControllerTestConfig {
+public class ControllerBaseTest {
     @Autowired
     protected MockMvc mockMvc;
 

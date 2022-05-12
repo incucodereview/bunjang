@@ -1,10 +1,11 @@
 package com.min.bunjang.following.service;
 
-import com.min.bunjang.common.validator.MemberAndStoreValidator;
+import com.min.bunjang.common.validator.RightRequesterChecker;
 import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.exception.NotExistFollowingException;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -19,18 +20,20 @@ public class FollowingService {
     private final StoreRepository storeRepository;
 
     @Transactional
-    public void createFollowing(String requesterEmail, FollowingCreateRequest followingCreateRequest) {
+    public void createFollowing(MemberAccount memberAccount, FollowingCreateRequest followingCreateRequest) {
+        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
         Store followerStore = storeRepository.findById(followingCreateRequest.getFollowerStoreNum()).orElseThrow(NotExistStoreException::new);
         Store followedStore = storeRepository.findById(followingCreateRequest.getFollowedStoreNum()).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, followerStore);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), followerStore);
 
         followingRepository.save(Following.createFollowing(followerStore, followedStore));
     }
 
     @Transactional
-    public void deleteFollowing(String requesterEmail, Long storeNum, Long followingNum) {
+    public void deleteFollowing(MemberAccount memberAccount, Long storeNum, Long followingNum) {
+        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
         Store follower = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
-        MemberAndStoreValidator.verifyMemberAndStoreMatchByEmail(requesterEmail, follower);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), follower);
 
         Following following = followingRepository.findById(followingNum).orElseThrow(NotExistFollowingException::new);
         followingRepository.delete(following);

@@ -3,7 +3,7 @@ package com.min.bunjang.category;
 import com.min.bunjang.category.controller.CategoryViewController;
 import com.min.bunjang.category.controller.CategoryViewControllerPath;
 import com.min.bunjang.category.service.CategoryViewService;
-import com.min.bunjang.config.ControllerTestConfig;
+import com.min.bunjang.config.ControllerBaseTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,7 +14,7 @@ import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuild
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = CategoryViewController.class)
-public class CategoryControllerTest extends ControllerTestConfig {
+public class CategoryControllerBaseTest extends ControllerBaseTest {
 
     @MockBean
     private CategoryViewService categoryViewService;

@@ -1,6 +1,5 @@
 package com.min.bunjang.storeinquire.model;
 
-import com.min.bunjang.common.exception.WrongWriterException;
 import com.min.bunjang.common.model.BasicEntity;
 import com.min.bunjang.store.model.Store;
 import lombok.AccessLevel;

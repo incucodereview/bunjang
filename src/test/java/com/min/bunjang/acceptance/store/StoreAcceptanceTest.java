@@ -10,7 +10,7 @@ import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.common.dto.RestResponse;
-import com.min.bunjang.helpers.MemberAcceptanceHelper;
+import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.ProductHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
@@ -50,8 +50,8 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
     Stream<DynamicTest> dynamicTestStream() throws JsonProcessingException {
         String email = "urisegea@naver.com";
         String password = "password";
-        Member member = MemberAcceptanceHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
-        TokenValuesDto loginResult = MemberAcceptanceHelper.로그인(email, password).getResult();
+        Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
+        TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(email, password).getResult();
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -160,6 +160,6 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
 
     @AfterEach
     void tearDown() {
-        databaseCleanup.execute();
+        databaseFormat.clean();
     }
 }
