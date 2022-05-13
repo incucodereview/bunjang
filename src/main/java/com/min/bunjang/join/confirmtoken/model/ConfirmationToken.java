@@ -40,6 +40,7 @@ public class ConfirmationToken {
     @LastModifiedDate
     private LocalDateTime updatedDate;
 
+    //TODO 토큰 생성자로 생성해서 리턴하고 토큰값도 암호화 해주는게 좋을듯.
     public static ConfirmationToken createEmailConfirmationToken(String email) {
         ConfirmationToken confirmationToken = new ConfirmationToken();
         confirmationToken.expirationDate = LocalDateTime.now().plusMinutes(EMAIL_TOKEN_EXPIRATION_TIME_VALUE); // 5분후 만료
