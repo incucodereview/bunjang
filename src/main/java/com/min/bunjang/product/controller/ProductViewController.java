@@ -47,6 +47,7 @@ public class ProductViewController {
         return RestResponse.of(HttpStatus.OK, productSimpleResponses);
     }
 
+    ////// exception handlers //////
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = NotExistProductException.class)
     public RestResponse<Void> notExistProductExceptionHandler(NotExistProductException e) {

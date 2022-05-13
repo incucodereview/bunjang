@@ -38,7 +38,7 @@ public class MemberHelper {
         }, "");
     }
 
-    public static TokenValuesDto 로그인(String email, String password, LoginService loginService) throws JsonProcessingException {
+    public static TokenValuesDto 로그인(String email, String password, LoginService loginService) {
         return loginService.login(new LoginRequest(email, password));
     }
 }

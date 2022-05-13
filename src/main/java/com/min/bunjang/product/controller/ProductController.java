@@ -74,6 +74,8 @@ public class ProductController {
         return RestResponse.of(HttpStatus.OK, null);
     }
 
+    /////// exception handler ///////
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = NotExistProductException.class)
     public RestResponse<Void> notExistProductExceptionHandler(NotExistProductException e) {
