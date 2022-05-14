@@ -31,6 +31,7 @@ import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -233,7 +234,7 @@ public class ProductIntegrateTest extends IntegrateBaseTest {
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
         ThirdProductCategory thirdCategory = thirdProductCategoryRepository.save(ThirdProductCategory.createThirdCategory("thirdCate", secondCategory));
 
-        ProductCreateOrUpdateRequest productCreateOrUpdateRequest = new ProductCreateOrUpdateRequest(
+        ProductCreateOrUpdateRequest productCreateRequest = new ProductCreateOrUpdateRequest(
                 store.getNum(),
                 null,
                 "productName",
@@ -250,22 +251,40 @@ public class ProductIntegrateTest extends IntegrateBaseTest {
                 1
         );
 
-        Product product = productRepository.save(Product.createProduct(productCreateOrUpdateRequest, firstCategory, secondCategory, thirdCategory, store));
+        Product product = productRepository.save(Product.createProduct(productCreateRequest, firstCategory, secondCategory, thirdCategory, store));
 
-        ProductTradeStateUpdateRequest productTradeStateUpdateRequest = new ProductTradeStateUpdateRequest(ProductTradeState.SOLD_OUT);
+        ProductCreateOrUpdateRequest productUpdateRequest = new ProductCreateOrUpdateRequest(
+                store.getNum(),
+                null,
+                "updateProductName",
+                firstCategory.getNum(),
+                secondCategory.getNum(),
+                thirdCategory.getNum(),
+                "seoul gangnam",
+                ProductQualityState.NEW_PRODUCT,
+                ExchangeState.POSSIBILITY,
+                100000,
+                DeliveryChargeInPrice.EXCLUDED,
+                "업데이트 된 제품 설명 입니다.",
+                Arrays.asList("tag2", "tag3"),
+                1
+        );
 
         //when
-        String path = ProductControllerPath.PRODUCT_UPDATE_TRADE_STATE.replace("{productNum}", String.valueOf(product.getNum()));
-        mockMvc.perform(patch(path)
+        String path = ProductControllerPath.PRODUCT_UPDATE.replace("{productNum}", String.valueOf(product.getNum()));
+        mockMvc.perform(put(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, tokenValuesDto.getAccessToken())
-                        .content(objectMapper.writeValueAsString(productTradeStateUpdateRequest)))
+                        .content(objectMapper.writeValueAsString(productUpdateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print());
 
         //then
         Product updatedProduct = productRepository.findById(product.getNum()).get();
-        Assertions.assertThat(updatedProduct.getProductTradeState()).isEqualTo(productTradeStateUpdateRequest.getProductTradeState());
+        Assertions.assertThat(updatedProduct.getProductName()).isEqualTo(productUpdateRequest.getProductName());
+        Assertions.assertThat(updatedProduct.getTradeLocation()).isEqualTo(productUpdateRequest.getTradeLocation());
+        Assertions.assertThat(updatedProduct.getExchangeState()).isEqualTo(productUpdateRequest.getExchangeState());
+        Assertions.assertThat(updatedProduct.getProductExplanation()).isEqualTo(productUpdateRequest.getProductExplanation());
     }
 
     @AfterEach
