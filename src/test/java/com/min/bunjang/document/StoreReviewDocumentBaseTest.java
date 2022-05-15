@@ -5,7 +5,7 @@ import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.ProductHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.config.DocumentBaseTest;
 import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
@@ -55,8 +55,8 @@ public class StoreReviewDocumentBaseTest extends DocumentBaseTest {
         Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(writerEmail, writerPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreHelper.상점생성(writerMember, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -126,8 +126,8 @@ public class StoreReviewDocumentBaseTest extends DocumentBaseTest {
         Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(writerEmail, writerPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreHelper.상점생성(writerMember, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -174,8 +174,8 @@ public class StoreReviewDocumentBaseTest extends DocumentBaseTest {
         Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(writerEmail, writerPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreHelper.상점생성(writerMember, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -232,8 +232,8 @@ public class StoreReviewDocumentBaseTest extends DocumentBaseTest {
         Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(writerEmail, writerPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreHelper.상점생성(writerMember, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));

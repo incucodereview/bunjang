@@ -8,7 +8,7 @@ import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.helpers.MemberHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.controller.ProductControllerPath;
 import com.min.bunjang.product.controller.ProductViewControllerPath;
@@ -46,7 +46,7 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
         String password = "password";
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(email, password).getResult();
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));

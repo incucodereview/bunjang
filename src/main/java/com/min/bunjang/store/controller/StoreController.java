@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,7 +42,7 @@ public class StoreController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
-    @PutMapping(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
+    @PatchMapping(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
     public RestResponse<Void> updateIntroduceContent(
             @Validated @RequestBody StoreIntroduceUpdateRequest storeIntroduceUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
@@ -51,7 +52,7 @@ public class StoreController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
-    @PutMapping(StoreControllerPath.STORE_NAME_UPDATE)
+    @PatchMapping(StoreControllerPath.STORE_NAME_UPDATE)
     public RestResponse<Void> updateStoreName(
             @Validated @RequestBody StoreNameUpdateRequest storeNameUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount

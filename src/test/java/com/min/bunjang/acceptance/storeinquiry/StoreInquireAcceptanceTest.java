@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.min.bunjang.acceptance.common.AcceptanceTestConfig;
 import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.helpers.MemberHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -47,8 +47,8 @@ public class StoreInquireAcceptanceTest extends AcceptanceTestConfig {
         Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(writerEmail, writerPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreHelper.상점생성(writerMember, storeRepository);
 
         return Stream.of(
                 DynamicTest.dynamicTest("상점문의 생성.", () -> {

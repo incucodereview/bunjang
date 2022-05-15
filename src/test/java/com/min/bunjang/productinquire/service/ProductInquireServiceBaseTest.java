@@ -8,7 +8,7 @@ import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
 import com.min.bunjang.config.ServiceBaseTest;
 import com.min.bunjang.helpers.MemberHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.dto.request.ProductCreateOrUpdateRequest;
 import com.min.bunjang.product.model.DeliveryChargeInPrice;
@@ -59,8 +59,8 @@ class ProductInquireServiceBaseTest extends ServiceBaseTest {
         String writerPassword = "password!writer";
         Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreHelper.상점생성(writerMember, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));

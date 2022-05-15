@@ -8,6 +8,7 @@ import com.min.bunjang.common.database.DatabaseFormat;
 import com.min.bunjang.login.service.LoginService;
 import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.product.repository.ProductRepository;
+import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.token.jwt.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -81,6 +83,15 @@ public class IntegrateBaseTest {
 
     protected ResultActions postRequest(String path, String accessToken, Object body) throws Exception {
         return mockMvc.perform(post(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, accessToken)
+                        .content(objectMapper.writeValueAsString(body)))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    protected ResultActions patchRequest(String path, String accessToken, Object body) throws Exception {
+        return mockMvc.perform(patch(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, accessToken)
                         .content(objectMapper.writeValueAsString(body)))

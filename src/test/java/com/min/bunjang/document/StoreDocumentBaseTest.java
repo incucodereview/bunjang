@@ -1,7 +1,7 @@
 package com.min.bunjang.document;
 
 import com.min.bunjang.helpers.MemberHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.config.DocumentBaseTest;
 import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
@@ -27,6 +27,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -91,13 +92,13 @@ public class StoreDocumentBaseTest extends DocumentBaseTest {
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(email, password).getResult();
 
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
         String updateIntroduceContent = "updateIntroduceContent";
 
         StoreIntroduceUpdateRequest storeIntroduceUpdateRequest = new StoreIntroduceUpdateRequest(updateIntroduceContent);
 
         //when & then
-        mockMvc.perform(put(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
+        mockMvc.perform(patch(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken())
                         .content(objectMapper.writeValueAsString(storeIntroduceUpdateRequest)))
@@ -130,13 +131,13 @@ public class StoreDocumentBaseTest extends DocumentBaseTest {
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(email, password).getResult();
 
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
         String updateStoreName = "updateStoreName";
 
         StoreNameUpdateRequest storeNameUpdateRequest = new StoreNameUpdateRequest(updateStoreName);
 
         //when & then
-        mockMvc.perform(put(StoreControllerPath.STORE_NAME_UPDATE)
+        mockMvc.perform(patch(StoreControllerPath.STORE_NAME_UPDATE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken())
                         .content(objectMapper.writeValueAsString(storeNameUpdateRequest)))
@@ -173,8 +174,8 @@ public class StoreDocumentBaseTest extends DocumentBaseTest {
         Member visitorMember = MemberHelper.회원가입(visitorEmail, visitorPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(visitorEmail, visitorPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store visitor = StoreHelper.상점생성(visitorMember, storeRepository);
 
         VisitorPlusDto visitorPlusDto = new VisitorPlusDto(owner.getNum());
 

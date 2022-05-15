@@ -141,7 +141,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private RestResponse<Void> 상점소개글_변경_요청(TokenValuesDto loginResult, StoreIntroduceUpdateRequest storeIntroduceUpdateRequest) throws JsonProcessingException {
-        return putRequest(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE, storeIntroduceUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+        return patchRequest(StoreControllerPath.STORE_INTRODUCE_CONTENT_UPDATE, storeIntroduceUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상점소개글_변경_요청_검증(Store store, String introduceContent) {
@@ -150,7 +150,7 @@ public class StoreAcceptanceTest extends AcceptanceTestConfig {
     }
 
     private void 상점이름_변경_요청(TokenValuesDto loginResult, StoreNameUpdateRequest storeNameUpdateRequest) throws JsonProcessingException {
-        putRequest(StoreControllerPath.STORE_NAME_UPDATE, storeNameUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
+        patchRequest(StoreControllerPath.STORE_NAME_UPDATE, storeNameUpdateRequest, new TypeReference<RestResponse<Void>>() {}, loginResult.getAccessToken());
     }
 
     private void 상점이름_변경_요청_검증(Store store, String updateStoreName) {

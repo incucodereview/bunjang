@@ -5,7 +5,7 @@ import com.min.bunjang.category.model.SecondProductCategory;
 import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.config.IntegrateBaseTest;
 import com.min.bunjang.helpers.MemberHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.controller.ProductControllerPath;
 import com.min.bunjang.product.controller.ProductViewControllerPath;
@@ -47,7 +47,7 @@ public class ProductIntegrateTest extends IntegrateBaseTest {
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto tokenValuesDto = MemberHelper.로그인(email, password, loginService);
 
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -92,7 +92,7 @@ public class ProductIntegrateTest extends IntegrateBaseTest {
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto tokenValuesDto = MemberHelper.로그인(email, password, loginService);
 
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -135,7 +135,7 @@ public class ProductIntegrateTest extends IntegrateBaseTest {
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto tokenValuesDto = MemberHelper.로그인(email, password, loginService);
 
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -178,7 +178,7 @@ public class ProductIntegrateTest extends IntegrateBaseTest {
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto tokenValuesDto = MemberHelper.로그인(email, password, loginService);
 
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -228,7 +228,7 @@ public class ProductIntegrateTest extends IntegrateBaseTest {
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto tokenValuesDto = MemberHelper.로그인(email, password, loginService);
 
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));

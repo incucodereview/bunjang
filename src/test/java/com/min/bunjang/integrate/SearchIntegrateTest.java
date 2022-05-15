@@ -6,7 +6,7 @@ import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.config.IntegrateBaseTest;
 import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.ProductHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.controller.ProductSearchControllerPath;
 import com.min.bunjang.product.model.Product;
@@ -30,7 +30,7 @@ public class SearchIntegrateTest extends IntegrateBaseTest {
         String password = "password";
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.로그인(email, password, loginService);
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -63,7 +63,7 @@ public class SearchIntegrateTest extends IntegrateBaseTest {
         String password = "password";
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.로그인(email, password, loginService);
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -95,7 +95,7 @@ public class SearchIntegrateTest extends IntegrateBaseTest {
         String password = "password";
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.로그인(email, password, loginService);
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
 
         FirstProductCategory firstCategory = firstProductCategoryRepository.save(FirstProductCategory.createFirstProductCategory("firstCate"));
         SecondProductCategory secondCategory = secondProductCategoryRepository.save(SecondProductCategory.createSecondCategory("secondCate", firstCategory));
@@ -111,7 +111,6 @@ public class SearchIntegrateTest extends IntegrateBaseTest {
         Product product2 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "조던2", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
         Product product3 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "에조던어", "seoul samsung", firstCategory, secondCategory, thirdCategory, productRepository);
         Product product4 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "저어던에", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
-
 
         //when & then
         ResultActions resultActions = getRequestWithParam(loginResult.getAccessToken(), StoreSearchControllerPath.STORE_SEARCH_BY_KEYWORD, "keyword", "spring");

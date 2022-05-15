@@ -5,7 +5,7 @@ import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
 import com.min.bunjang.helpers.MemberHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.model.Store;
@@ -37,8 +37,8 @@ class FollowingServiceTest extends ServiceBaseTest {
         String followedPassword = "password!writer";
         Member followedMember = MemberHelper.회원가입(followedEmail, followedPassword, memberRepository, bCryptPasswordEncoder);
 
-        Store follower = StoreAcceptanceHelper.상점생성(followerMember, storeRepository);
-        Store followed = StoreAcceptanceHelper.상점생성(followedMember, storeRepository);
+        Store follower = StoreHelper.상점생성(followerMember, storeRepository);
+        Store followed = StoreHelper.상점생성(followedMember, storeRepository);
 
         FollowingCreateRequest followingCreateRequest = new FollowingCreateRequest(follower.getNum(), followed.getNum());
 

@@ -13,6 +13,7 @@ import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,10 @@ public class LoginIntegrateTest extends IntegrateBaseTest {
                 .content(objectMapper.writeValueAsString(loginRequest)))
                 .andExpect(status().isOk())
                 .andDo(print());
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseFormat.clean();
     }
 }

@@ -1,7 +1,7 @@
 package com.min.bunjang.document;
 
 import com.min.bunjang.helpers.MemberHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.config.DocumentBaseTest;
 import com.min.bunjang.token.jwt.TokenProvider;
 import com.min.bunjang.member.model.Member;
@@ -57,8 +57,8 @@ public class StoreInquireDocumentBaseTest extends DocumentBaseTest {
         Member visitorMember = MemberHelper.회원가입(visitorEmail, visitorPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(visitorEmail, visitorPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store visitor = StoreHelper.상점생성(visitorMember, storeRepository);
 
         InquireCreateRequest inquireCreateRequest = new InquireCreateRequest(owner.getNum(), visitor.getNum(), "상점문의", null);
 
@@ -105,8 +105,8 @@ public class StoreInquireDocumentBaseTest extends DocumentBaseTest {
         Member writerMember = MemberHelper.회원가입(writerEmail, writerPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(writerEmail, writerPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store writer = StoreAcceptanceHelper.상점생성(writerMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store writer = StoreHelper.상점생성(writerMember, storeRepository);
 
         storeInquireRepository.saveAll(Arrays.asList(
                 StoreInquire.of(owner.getNum(), writer, "content1"),
@@ -144,8 +144,8 @@ public class StoreInquireDocumentBaseTest extends DocumentBaseTest {
         Member visitorMember = MemberHelper.회원가입(visitorEmail, visitorPassword, memberRepository, bCryptPasswordEncoder);
         TokenValuesDto loginResult = MemberHelper.인수테스트_로그인(visitorEmail, visitorPassword).getResult();
 
-        Store owner = StoreAcceptanceHelper.상점생성(ownerMember, storeRepository);
-        Store visitor = StoreAcceptanceHelper.상점생성(visitorMember, storeRepository);
+        Store owner = StoreHelper.상점생성(ownerMember, storeRepository);
+        Store visitor = StoreHelper.상점생성(visitorMember, storeRepository);
 
         StoreInquire storeInquire = StoreInquire.of(owner.getNum(), visitor, "상점문의");
         StoreInquire savedStoreInquiry = storeInquireRepository.save(storeInquire);

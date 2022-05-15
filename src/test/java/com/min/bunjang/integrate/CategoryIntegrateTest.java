@@ -7,7 +7,7 @@ import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.config.IntegrateBaseTest;
 import com.min.bunjang.helpers.MemberHelper;
 import com.min.bunjang.helpers.ProductHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.store.model.Store;
@@ -59,7 +59,7 @@ public class CategoryIntegrateTest extends IntegrateBaseTest {
         ThirdProductCategory saveThirdCate = thirdProductCategoryRepository.save(category3);
 
         Member member = MemberHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
         Product product1 = ProductHelper.상품생성(store, saveFirstCate, saveSecondCate, saveThirdCate, productRepository);
 
         //when && then
@@ -83,7 +83,7 @@ public class CategoryIntegrateTest extends IntegrateBaseTest {
         ThirdProductCategory saveThirdCate = thirdProductCategoryRepository.save(category3);
 
         Member member = MemberHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
         Product product1 = ProductHelper.상품생성(store, saveFirstCate, saveSecondCate, saveThirdCate, productRepository);
 
         //when && then
@@ -107,7 +107,7 @@ public class CategoryIntegrateTest extends IntegrateBaseTest {
         ThirdProductCategory saveThirdCate = thirdProductCategoryRepository.save(category3);
 
         Member member = MemberHelper.회원가입("email", "password", memberRepository, bCryptPasswordEncoder);
-        Store store = StoreAcceptanceHelper.상점생성(member, storeRepository);
+        Store store = StoreHelper.상점생성(member, storeRepository);
         Product product1 = ProductHelper.상품생성(store, saveFirstCate, saveSecondCate, saveThirdCate, productRepository);
 
         //when && then

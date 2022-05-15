@@ -6,7 +6,7 @@ import com.min.bunjang.following.dto.request.FollowingCreateRequest;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
 import com.min.bunjang.helpers.MemberHelper;
-import com.min.bunjang.helpers.StoreAcceptanceHelper;
+import com.min.bunjang.helpers.StoreHelper;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
@@ -44,8 +44,8 @@ public class FollowingIntegrateTest extends IntegrateBaseTest {
         String followedPassword = "password!writer";
         Member followedMember = MemberHelper.회원가입(followedEmail, followedPassword, memberRepository, bCryptPasswordEncoder);
 
-        Store follower = StoreAcceptanceHelper.상점생성(followerMember, storeRepository);
-        Store followed = StoreAcceptanceHelper.상점생성(followedMember, storeRepository);
+        Store follower = StoreHelper.상점생성(followerMember, storeRepository);
+        Store followed = StoreHelper.상점생성(followedMember, storeRepository);
 
         TokenValuesDto tokenValuesDto = MemberHelper.로그인(followerEmail, followerPassword, loginService);
 
@@ -76,8 +76,8 @@ public class FollowingIntegrateTest extends IntegrateBaseTest {
         String followedPassword = "password!writer";
         Member followedMember = MemberHelper.회원가입(followedEmail, followedPassword, memberRepository, bCryptPasswordEncoder);
 
-        Store follower = StoreAcceptanceHelper.상점생성(followerMember, storeRepository);
-        Store followed = StoreAcceptanceHelper.상점생성(followedMember, storeRepository);
+        Store follower = StoreHelper.상점생성(followerMember, storeRepository);
+        Store followed = StoreHelper.상점생성(followedMember, storeRepository);
 
         TokenValuesDto tokenValuesDto = MemberHelper.로그인(followerEmail, followerPassword, loginService);
 
