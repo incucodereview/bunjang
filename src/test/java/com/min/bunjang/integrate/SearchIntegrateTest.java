@@ -112,6 +112,7 @@ public class SearchIntegrateTest extends IntegrateBaseTest {
         Product product3 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "에조던어", "seoul samsung", firstCategory, secondCategory, thirdCategory, productRepository);
         Product product4 = ProductHelper.상품생성_상품이름_거래지역_적용(store, "저어던에", "busan", firstCategory, secondCategory, thirdCategory, productRepository);
 
+
         //when & then
         ResultActions resultActions = getRequestWithParam(loginResult.getAccessToken(), StoreSearchControllerPath.STORE_SEARCH_BY_KEYWORD, "keyword", "spring");
         resultActions.andExpect(jsonPath("result.storeSimpleResponses.[0]").isNotEmpty());
