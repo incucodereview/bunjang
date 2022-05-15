@@ -70,6 +70,15 @@ public class IntegrateBaseTest {
                 .andDo(print());
     }
 
+    protected ResultActions getRequestWithParam(String accessToken, String path, String paramKey, String paramValue) throws Exception {
+        return mockMvc.perform(get(path)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, accessToken)
+                        .param(paramKey, paramValue))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
     protected ResultActions postRequest(String path, String accessToken, Object body) throws Exception {
         return mockMvc.perform(post(path)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
