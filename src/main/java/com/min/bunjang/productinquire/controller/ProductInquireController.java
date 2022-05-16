@@ -34,7 +34,7 @@ public class ProductInquireController {
             @Validated @RequestBody ProductInquireCreateRequest productInquireCreateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        productInquireService.createProductInquire(memberAccount.getEmail(), productInquireCreateRequest);
+        productInquireService.createProductInquire(memberAccount, productInquireCreateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -44,9 +44,11 @@ public class ProductInquireController {
             @NotNull @PathVariable Long inquireNum,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        productInquireService.deleteProductInquire(memberAccount.getEmail(), inquireNum);
+        productInquireService.deleteProductInquire(memberAccount, inquireNum);
         return RestResponse.of(HttpStatus.OK, null);
     }
+
+    ////// exception handler //////
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = NotExistProductException.class)

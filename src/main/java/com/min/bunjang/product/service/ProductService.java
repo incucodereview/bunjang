@@ -15,6 +15,7 @@ import com.min.bunjang.product.exception.NotExistProductException;
 import com.min.bunjang.product.model.Product;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.product.repository.ProductTagRepository;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -33,26 +34,27 @@ public class ProductService {
     private final ThirdProductCategoryRepository thirdProductCategoryRepository;
 
     @Transactional
-    public void createProduct(String requesterEmail, ProductCreateOrUpdateRequest productCreateOrUpdateRequest) {
+    public void createProduct(MemberAccount memberAccount, ProductCreateOrUpdateRequest productCreateOrUpdateRequest) {
         Store store = storeRepository.findById(productCreateOrUpdateRequest.getStoreNum()).orElseThrow(NotExistStoreException::new);
         //TODO !상품 엔티티의 카테고리 연관관계를 Num으로만 설정하면 밑의 조회하는 쿼리보단 각 카테고리 레포지토리에 Num을 줘서 있는지 없는지를 판단해주는게 성능면에서 좋을수 있기에 속도 확인해보기. -> V2에서 진행할것.
         FirstProductCategory firstProductCategory = firstProductCategoryRepository.findById(productCreateOrUpdateRequest.getFirstCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         SecondProductCategory secondProductCategory = secondProductCategoryRepository.findById(productCreateOrUpdateRequest.getSecondCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         ThirdProductCategory thirdProductCategory = thirdProductCategoryRepository.findById(productCreateOrUpdateRequest.getThirdCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
-        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(requesterEmail, store);
+        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         Product savedProduct = productRepository.save(Product.createProduct(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory, store));
         productTagRepository.saveAll(productCreateOrUpdateRequest.makeProductTags(savedProduct));
     }
 
     @Transactional
-    public void updateProduct(String email, Long productNum, ProductCreateOrUpdateRequest productCreateOrUpdateRequest) {
+    public void updateProduct(MemberAccount memberAccount, Long productNum, ProductCreateOrUpdateRequest productCreateOrUpdateRequest) {
         Store store = storeRepository.findById(productCreateOrUpdateRequest.getStoreNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(productNum).orElseThrow(NotExistProductException::new);
         FirstProductCategory firstProductCategory = firstProductCategoryRepository.findById(productCreateOrUpdateRequest.getFirstCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         SecondProductCategory secondProductCategory = secondProductCategoryRepository.findById(productCreateOrUpdateRequest.getSecondCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         ThirdProductCategory thirdProductCategory = thirdProductCategoryRepository.findById(productCreateOrUpdateRequest.getThirdCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
-        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(email, store);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         product.productUpdate(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory);
 
@@ -61,19 +63,19 @@ public class ProductService {
     }
 
     @Transactional
-    public void updateProductTradeState(String requesterEmail, Long productNum, ProductTradeStateUpdateRequest productTradeStateUpdateRequest) {
+    public void updateProductTradeState(MemberAccount memberAccount, Long productNum, ProductTradeStateUpdateRequest productTradeStateUpdateRequest) {
         Product product = productRepository.findById(productNum).orElseThrow(NotExistProductException::new);
         Store store = product.checkAndReturnStore();
-        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(requesterEmail, store);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         product.updateProductTradeState(productTradeStateUpdateRequest.getProductTradeState());
     }
 
     @Transactional
-    public void deleteProduct(String requesterEmail, ProductDeleteRequest productDeleteRequest) {
+    public void deleteProduct(MemberAccount memberAccount, ProductDeleteRequest productDeleteRequest) {
         Store store = storeRepository.findById(productDeleteRequest.getStoreNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(productDeleteRequest.getProductNum()).orElseThrow(NotExistProductException::new);
-        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(requesterEmail, store);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         productTagRepository.deleteByProductNum(product.getNum());
         productRepository.deleteById(productDeleteRequest.getProductNum());

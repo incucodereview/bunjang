@@ -1,5 +1,6 @@
 package com.min.bunjang.storereview.repository;
 
+import com.min.bunjang.common.database.DatabaseFormat;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
@@ -11,6 +12,7 @@ import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import com.min.bunjang.storereview.model.StoreReview;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

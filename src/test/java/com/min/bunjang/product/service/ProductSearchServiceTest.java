@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class ProductSearchServiceBaseTest extends ServiceBaseTest {
+public class ProductSearchServiceTest extends ServiceBaseTest {
     @Autowired
     private ProductRepository productRepository;
     @Autowired

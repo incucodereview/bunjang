@@ -9,6 +9,7 @@ import com.min.bunjang.productinquire.dto.request.ProductInquireCreateRequest;
 import com.min.bunjang.productinquire.exception.NotExistProductInquireException;
 import com.min.bunjang.productinquire.model.ProductInquire;
 import com.min.bunjang.productinquire.repository.ProductInquireRepository;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -24,10 +25,11 @@ public class ProductInquireService {
     private final StoreRepository storeRepository;
 
     @Transactional
-    public void createProductInquire(String email, ProductInquireCreateRequest productInquireCreateRequest) {
+    public void createProductInquire(MemberAccount memberAccount, ProductInquireCreateRequest productInquireCreateRequest) {
         Store store = storeRepository.findById(productInquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(productInquireCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
-        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(email, store);
+        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         ProductInquire savedProductInquire = productInquireRepository.save(ProductInquire.createProductInquire(
                 store.getNum(),
@@ -47,13 +49,14 @@ public class ProductInquireService {
     }
 
     @Transactional
-    public void deleteProductInquire(String email, Long inquireNum) {
+    public void deleteProductInquire(MemberAccount memberAccount, Long inquireNum) {
         if (inquireNum == null) {
             throw new ImpossibleException("상품문의 정보가 없습니다. 다시 요청해 주세요");
         }
         ProductInquire productInquire = productInquireRepository.findById(inquireNum).orElseThrow(NotExistProductInquireException::new);
         Store store = storeRepository.findById(productInquire.getWriterNum()).orElseThrow(NotExistStoreException::new);
-        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(email, store);
+        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         productInquireRepository.delete(productInquire);
     }

@@ -13,6 +13,7 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 
@@ -94,5 +95,10 @@ public class MemberAcceptanceTest extends AcceptanceTestConfig {
     private void 회원_폰넘버_변경_응답_검증(Member member, String phoneNum) {
         Member updatePhoneMember = memberRepository.findById(member.getMemberNum()).get();
         Assertions.assertThat(updatePhoneMember.getPhone()).isEqualTo(phoneNum);
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseFormat.clean();
     }
 }

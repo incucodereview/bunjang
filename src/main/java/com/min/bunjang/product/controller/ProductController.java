@@ -38,7 +38,7 @@ public class ProductController {
             @Validated @RequestBody ProductCreateOrUpdateRequest productCreateOrUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        productService.createProduct(memberAccount.getEmail(), productCreateOrUpdateRequest);
+        productService.createProduct(memberAccount, productCreateOrUpdateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -49,7 +49,7 @@ public class ProductController {
             @Validated @RequestBody ProductCreateOrUpdateRequest productCreateOrUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        productService.updateProduct(memberAccount.getEmail(), productNum, productCreateOrUpdateRequest);
+        productService.updateProduct(memberAccount, productNum, productCreateOrUpdateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -59,7 +59,7 @@ public class ProductController {
             @Validated @RequestBody ProductDeleteRequest productDeleteRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        productService.deleteProduct(memberAccount.getEmail(), productDeleteRequest);
+        productService.deleteProduct(memberAccount, productDeleteRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -70,7 +70,7 @@ public class ProductController {
             @Validated @RequestBody ProductTradeStateUpdateRequest productTradeStateUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        productService.updateProductTradeState(memberAccount.getEmail(), productNum, productTradeStateUpdateRequest);
+        productService.updateProductTradeState(memberAccount, productNum, productTradeStateUpdateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 

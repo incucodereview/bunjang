@@ -6,6 +6,7 @@ import com.min.bunjang.category.model.ThirdProductCategory;
 import com.min.bunjang.category.repository.FirstProductCategoryRepository;
 import com.min.bunjang.category.repository.SecondProductCategoryRepository;
 import com.min.bunjang.category.repository.ThirdProductCategoryRepository;
+import com.min.bunjang.common.database.DatabaseFormat;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
@@ -19,6 +20,8 @@ import com.min.bunjang.product.model.ProductQualityState;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
 import org.assertj.core.api.Assertions;
+import org.hibernate.tuple.IdentifierAttribute;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +50,7 @@ class ProductRepositoryTest {
 
     @Autowired
     private ProductRepository productRepository;
+
 
     @DisplayName("상품조회 findByNum 메서드 실행시 @EntityGraph에 명시된 관계들이 패치조인 된다.")
     @Test

@@ -8,6 +8,7 @@ import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.security.MemberAccount;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,4 +130,8 @@ class MemberServiceTest extends ServiceBaseTest {
                 .isInstanceOf(NotExistMemberException.class);
     }
 
+    @AfterEach
+    void tearDown() {
+        databaseFormat.clean();
+    }
 }

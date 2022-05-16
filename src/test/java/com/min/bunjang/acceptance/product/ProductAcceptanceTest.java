@@ -28,6 +28,7 @@ import com.min.bunjang.product.repository.ProductTagRepository;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.token.dto.TokenValuesDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.TestFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -247,5 +248,10 @@ public class ProductAcceptanceTest extends AcceptanceTestConfig {
     private void 상품_삭제_응답_검증() {
         List<Product> products = productRepository.findAll();
         Assertions.assertThat(products).isEmpty();
+    }
+
+    @AfterEach
+    void tearDown() {
+        databaseFormat.clean();
     }
 }

@@ -4,7 +4,7 @@ import com.min.bunjang.config.ControllerBaseTest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-public class ProductControllerBaseTest extends ControllerBaseTest {
+public class ProductControllerTest extends ControllerBaseTest {
 
 
 //    @DisplayName("임시 회원가입 요청에 200 코드를 응답한다")
