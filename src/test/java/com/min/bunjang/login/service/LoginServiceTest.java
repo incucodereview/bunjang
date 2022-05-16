@@ -19,7 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.time.LocalDate;
 
-class LoginServiceBaseTest extends ServiceBaseTest {
+class LoginServiceTest extends ServiceBaseTest {
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;
 

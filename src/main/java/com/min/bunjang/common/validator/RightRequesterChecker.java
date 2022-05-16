@@ -36,6 +36,7 @@ public class RightRequesterChecker {
         return memberAccount.getEmail();
     }
 
+    //TODO 밑에 껄로 해야한다. 위에꺼 사용하는 곳 로직만 변경하고 밑에 걸로 대체할것.
     public static void verifyLoginRequestTmp(MemberAccount memberAccount) {
         if (memberAccount == null) {
             throw new WrongRequesterException("요청자가 없습니다. 잘못된 요청입니다.");
