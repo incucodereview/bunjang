@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 public class TokenAcceptanceTest extends AcceptanceTestConfig {
 
-    @DisplayName("토큰 인증 인수테스트 - 요청은 한경우 밖에 없기에 다이나믹 테스트 보단 일반 테스트로 진행한다.")
+    @DisplayName("토큰 인증 인수테스트")
     @Test
     void name() throws JsonProcessingException {
         //given

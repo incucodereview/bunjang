@@ -19,6 +19,7 @@ public class TokenService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final TokenProvider tokenProvider;
 
+    //TODO 방식이 조금 보안적으로 허술한듯.
     @Transactional
     public TokenValidResponse handleTokenOnTokenStatus(TokenValuesDto tokenValuesDto) {
         if (tokenProvider.isExpiredAccessToken(tokenValuesDto.getAccessToken(), new Date())) {

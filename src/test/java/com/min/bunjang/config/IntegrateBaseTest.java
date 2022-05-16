@@ -10,6 +10,9 @@ import com.min.bunjang.member.repository.MemberRepository;
 import com.min.bunjang.product.repository.ProductRepository;
 import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
 import com.min.bunjang.store.repository.StoreRepository;
+import com.min.bunjang.storereview.controller.StoreReviewControllerPath;
+import com.min.bunjang.storereview.dto.request.StoreReviewUpdateRequest;
+import com.min.bunjang.token.dto.TokenValuesDto;
 import com.min.bunjang.token.jwt.TokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -24,6 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -86,6 +90,15 @@ public class IntegrateBaseTest {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, accessToken)
                         .content(objectMapper.writeValueAsString(body)))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    protected ResultActions putRequest(TokenValuesDto loginResult, StoreReviewUpdateRequest storeReviewUpdateRequest) throws Exception {
+        return mockMvc.perform(put(StoreReviewControllerPath.REVIEW_UPDATE)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, loginResult.getAccessToken())
+                        .content(objectMapper.writeValueAsString(storeReviewUpdateRequest)))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

@@ -42,7 +42,7 @@ public class StoreReviewController {
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
-    @PutMapping(StoreReviewControllerPath.REVIEW_CREATE)
+    @PutMapping(StoreReviewControllerPath.REVIEW_UPDATE)
     public RestResponse<Void> updateStoreReview(
             @Validated @RequestBody StoreReviewUpdateRequest storeReviewUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
