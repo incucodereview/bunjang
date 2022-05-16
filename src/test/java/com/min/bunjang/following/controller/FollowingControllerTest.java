@@ -10,31 +10,28 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = FollowingController.class)
-class FollowingControllerBaseTest extends ControllerBaseTest {
+class FollowingControllerTest extends ControllerBaseTest {
 
     @MockBean
     private FollowingService followingService;
 
     @Disabled
-    @DisplayName("로그인 없이 접근한 경우 ")
+    @DisplayName("로그인 없이 접근한 경우")
     @Test
     public void following_403_exception() throws Exception {
         //given
         FollowingCreateRequest followingCreateRequest = new FollowingCreateRequest(1L, 2L);
 
         //when && then
-        mockMvc.perform(post(FollowingControllerPath.FOLLOWING_CREATE)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, "")
-                .content(objectMapper.writeValueAsString(followingCreateRequest)))
-                .andDo(print())
-                .andExpect(status().isForbidden());
+        MockHttpServletRequestBuilder post = post(FollowingControllerPath.FOLLOWING_CREATE);
+        requestExpect403(followingCreateRequest, post);
     }
 
 //    @DisplayName("로그인은 했으나 권한이 없는 경우 ")
