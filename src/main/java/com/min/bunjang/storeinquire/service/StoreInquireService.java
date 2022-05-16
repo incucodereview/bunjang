@@ -1,6 +1,7 @@
 package com.min.bunjang.storeinquire.service;
 
 import com.min.bunjang.common.validator.RightRequesterChecker;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.exception.NotExistStoreException;
 import com.min.bunjang.store.model.Store;
 import com.min.bunjang.store.repository.StoreRepository;
@@ -20,10 +21,11 @@ public class StoreInquireService {
     private final StoreRepository storeRepository;
 
     @Transactional
-    public InquireCreateResponse createStoreInquiry(String memberEmail, InquireCreateRequest inquireCreateRequest) {
+    public InquireCreateResponse createStoreInquiry(MemberAccount memberAccount, InquireCreateRequest inquireCreateRequest) {
         Store owner = storeRepository.findById(inquireCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
         Store writer = storeRepository.findById(inquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
-        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberEmail, writer);
+        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), writer);
         StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer, inquireCreateRequest.getInquireContent());
         defineMentionIfExistMentionNum(inquireCreateRequest, storeInquire);
 
@@ -39,9 +41,10 @@ public class StoreInquireService {
     }
 
     @Transactional
-    public void deleteStoreInquire(String email, Long inquireNum) {
+    public void deleteStoreInquire(MemberAccount memberAccount, Long inquireNum) {
         StoreInquire storeInquire = storeInquiryRepository.findById(inquireNum).orElseThrow(NotExistStoreInquireException::new);
-        RightRequesterChecker.verifyMemberAndStoreInquireWriterMatchByEmail(email, storeInquire);
+        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyMemberAndStoreInquireWriterMatchByEmail(memberAccount.getEmail(), storeInquire);
 
         storeInquiryRepository.deleteById(inquireNum);
     }

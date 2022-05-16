@@ -23,7 +23,7 @@ import org.springframework.data.domain.PageRequest;
 import java.util.Arrays;
 import java.util.List;
 
-class WishProductViewServiceBaseTest extends ServiceBaseTest {
+class WishProductViewServiceTest extends ServiceBaseTest {
     @Autowired
     private WishProductViewService wishProductViewService;
 

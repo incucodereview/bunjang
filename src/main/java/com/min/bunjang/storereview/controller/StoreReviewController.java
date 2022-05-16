@@ -37,7 +37,7 @@ public class StoreReviewController {
             @Validated @RequestBody StoreReviewCreateRequest storeReviewCreateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        StoreReviewResponse storeReview = storeReviewService.createStoreReview(memberAccount.getEmail(), storeReviewCreateRequest);
+        StoreReviewResponse storeReview = storeReviewService.createStoreReview(memberAccount, storeReviewCreateRequest);
         return RestResponse.of(HttpStatus.OK, storeReview);
     }
 
@@ -47,7 +47,7 @@ public class StoreReviewController {
             @Validated @RequestBody StoreReviewUpdateRequest storeReviewUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        storeReviewService.updateStoreReview(memberAccount.getEmail(), storeReviewUpdateRequest);
+        storeReviewService.updateStoreReview(memberAccount, storeReviewUpdateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -57,7 +57,7 @@ public class StoreReviewController {
             @NotNull @PathVariable Long reviewNum,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-       storeReviewService.deleteStoreReview(memberAccount.getEmail(), reviewNum);
+       storeReviewService.deleteStoreReview(memberAccount, reviewNum);
        return RestResponse.of(HttpStatus.OK, null);
     }
 

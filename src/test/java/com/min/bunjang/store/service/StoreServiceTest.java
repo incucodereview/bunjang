@@ -156,6 +156,7 @@ class StoreServiceTest {
         Store visitor = storeRepository.save(Store.createStore(storeName2, introduceContent2, null, newMember));
 
         VisitorPlusDto visitorPlusDto = new VisitorPlusDto(owner.getNum());
+
         //when
         storeService.plusVisitor(visitorPlusDto, newMember.getEmail());
         storeService.plusVisitor(visitorPlusDto, newMember.getEmail());

@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class WishProductServiceBaseTest extends ServiceBaseTest {
+class WishProductServiceTest extends ServiceBaseTest {
     @Autowired
     private WishProductService wishProductService;
 

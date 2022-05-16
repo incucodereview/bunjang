@@ -34,7 +34,7 @@ public class StoreInquireController {
             @Validated @RequestBody InquireCreateRequest inquireCreateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        return RestResponse.of(HttpStatus.CREATED, storeInquireService.createStoreInquiry(memberAccount.getEmail(), inquireCreateRequest));
+        return RestResponse.of(HttpStatus.CREATED, storeInquireService.createStoreInquiry(memberAccount, inquireCreateRequest));
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER')")
@@ -43,7 +43,7 @@ public class StoreInquireController {
             @NotNull @PathVariable Long inquireNum,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        storeInquireService.deleteStoreInquire(memberAccount.getEmail(), inquireNum);
+        storeInquireService.deleteStoreInquire(memberAccount, inquireNum);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
