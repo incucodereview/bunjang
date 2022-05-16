@@ -21,7 +21,7 @@ public class FollowingService {
 
     @Transactional
     public void createFollowing(MemberAccount memberAccount, FollowingCreateRequest followingCreateRequest) {
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         Store followerStore = storeRepository.findById(followingCreateRequest.getFollowerStoreNum()).orElseThrow(NotExistStoreException::new);
         Store followedStore = storeRepository.findById(followingCreateRequest.getFollowedStoreNum()).orElseThrow(NotExistStoreException::new);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), followerStore);
@@ -31,7 +31,7 @@ public class FollowingService {
 
     @Transactional
     public void deleteFollowing(MemberAccount memberAccount, Long storeNum, Long followingNum) {
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         Store follower = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), follower);
 

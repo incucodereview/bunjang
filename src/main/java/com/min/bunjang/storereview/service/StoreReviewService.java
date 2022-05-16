@@ -31,7 +31,7 @@ public class StoreReviewService {
         Store owner = storeRepository.findById(storeReviewCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
         Store writer = storeRepository.findById(storeReviewCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(storeReviewCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), writer);
         StoreReview storeReview = StoreReview.createStoreReview(
                 owner,
@@ -51,7 +51,7 @@ public class StoreReviewService {
     @Transactional
     public void updateStoreReview(MemberAccount memberAccount, StoreReviewUpdateRequest storeReviewUpdateRequest) {
         StoreReview storeReview = storeReviewRepository.findById(storeReviewUpdateRequest.getReviewNum()).orElseThrow(NotExistStoreReviewException::new);
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), storeReview.getWriter());
 
         storeReview.updateReviewContent(storeReviewUpdateRequest.getUpdatedReviewContent(), storeReviewUpdateRequest.getUpdatedDealScore());
@@ -64,7 +64,7 @@ public class StoreReviewService {
         }
 
         StoreReview storeReview = storeReviewRepository.findById(reviewNum).orElseThrow(NotExistStoreReviewException::new);
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), storeReview.getWriter());
 
         storeReviewRepository.deleteById(reviewNum);

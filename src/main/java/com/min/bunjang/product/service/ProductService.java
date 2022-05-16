@@ -40,7 +40,7 @@ public class ProductService {
         FirstProductCategory firstProductCategory = firstProductCategoryRepository.findById(productCreateOrUpdateRequest.getFirstCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         SecondProductCategory secondProductCategory = secondProductCategoryRepository.findById(productCreateOrUpdateRequest.getSecondCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
         ThirdProductCategory thirdProductCategory = thirdProductCategoryRepository.findById(productCreateOrUpdateRequest.getThirdCategoryNum()).orElseThrow(NotExistProductCategoryException::new);
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         Product savedProduct = productRepository.save(Product.createProduct(productCreateOrUpdateRequest, firstProductCategory, secondProductCategory, thirdProductCategory, store));

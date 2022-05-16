@@ -28,7 +28,7 @@ public class ProductInquireService {
     public void createProductInquire(MemberAccount memberAccount, ProductInquireCreateRequest productInquireCreateRequest) {
         Store store = storeRepository.findById(productInquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
         Product product = productRepository.findById(productInquireCreateRequest.getProductNum()).orElseThrow(NotExistProductException::new);
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         ProductInquire savedProductInquire = productInquireRepository.save(ProductInquire.createProductInquire(
@@ -55,7 +55,7 @@ public class ProductInquireService {
         }
         ProductInquire productInquire = productInquireRepository.findById(inquireNum).orElseThrow(NotExistProductInquireException::new);
         Store store = storeRepository.findById(productInquire.getWriterNum()).orElseThrow(NotExistStoreException::new);
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         productInquireRepository.delete(productInquire);

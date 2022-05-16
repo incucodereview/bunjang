@@ -17,27 +17,26 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
-    //TODO 요청 url 변경해서 토큰 값에서 추출한 값으로 할것. 일단 테스트도 미뤄놓을것. 테스트 작업 끝나고진행 ㄱ
     @Transactional
-    public void changeGender(Long memberNum, MemberGenderUpdateRequest memberGenderUpdateRequest, MemberAccount memberAccount) {
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
-        Member member = memberRepository.findById(memberNum).orElseThrow(NotExistMemberException::new);
+    public void changeGender(MemberGenderUpdateRequest memberGenderUpdateRequest, MemberAccount memberAccount) {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
+        Member member = memberRepository.findByEmail(memberAccount.getEmail()).orElseThrow(NotExistMemberException::new);
         member.verifyEmailMatch(memberAccount.getEmail());
         member.changeGender(memberGenderUpdateRequest.getMemberGender());
     }
 
     @Transactional
-    public void changeBirthDay(Long memberNum, MemberBirthDayUpdateRequest memberBirthDayUpdateRequest, MemberAccount memberAccount) {
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
-        Member member = memberRepository.findById(memberNum).orElseThrow(NotExistMemberException::new);
+    public void changeBirthDay(MemberBirthDayUpdateRequest memberBirthDayUpdateRequest, MemberAccount memberAccount) {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
+        Member member = memberRepository.findByEmail(memberAccount.getEmail()).orElseThrow(NotExistMemberException::new);
         member.verifyEmailMatch(memberAccount.getEmail());
         member.changeBirthDate(memberBirthDayUpdateRequest.getBirthDate());
     }
 
     @Transactional
-    public void changePhone(Long memberNum, MemberPhoneUpdateRequest memberPhoneUpdateRequest, MemberAccount memberAccount) {
-        RightRequesterChecker.verifyLoginRequestTmp(memberAccount);
-        Member member = memberRepository.findById(memberNum).orElseThrow(NotExistMemberException::new);
+    public void changePhone(MemberPhoneUpdateRequest memberPhoneUpdateRequest, MemberAccount memberAccount) {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
+        Member member = memberRepository.findByEmail(memberAccount.getEmail()).orElseThrow(NotExistMemberException::new);
         member.verifyEmailMatch(memberAccount.getEmail());
         member.changePhone(memberPhoneUpdateRequest.getPhone());
     }

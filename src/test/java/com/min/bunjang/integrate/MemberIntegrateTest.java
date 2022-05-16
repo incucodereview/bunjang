@@ -39,8 +39,7 @@ public class MemberIntegrateTest extends IntegrateBaseTest {
         MemberGenderUpdateRequest memberGenderUpdateRequest = new MemberGenderUpdateRequest(MemberGender.WOMEN);
 
         //when
-        String path = MemberControllerPath.MEMBER_CHANGE_GENDER.replace("{memberNum}", String.valueOf(member.getMemberNum()));
-        mockMvc.perform(patch(path)
+        mockMvc.perform(patch(MemberControllerPath.MEMBER_CHANGE_GENDER)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, tokenValuesDto.getAccessToken())
                         .content(objectMapper.writeValueAsString(memberGenderUpdateRequest)))
@@ -64,8 +63,7 @@ public class MemberIntegrateTest extends IntegrateBaseTest {
         MemberBirthDayUpdateRequest memberBirthDayUpdateRequest = new MemberBirthDayUpdateRequest(birthDate);
 
         //when
-        String path = MemberControllerPath.MEMBER_CHANGE_BIRTHDAY.replace("{memberNum}", String.valueOf(member.getMemberNum()));
-        mockMvc.perform(patch(path)
+        mockMvc.perform(patch(MemberControllerPath.MEMBER_CHANGE_BIRTHDAY)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, tokenValuesDto.getAccessToken())
                         .content(objectMapper.writeValueAsString(memberBirthDayUpdateRequest)))
@@ -89,8 +87,7 @@ public class MemberIntegrateTest extends IntegrateBaseTest {
         MemberPhoneUpdateRequest memberPhoneUpdateRequest = new MemberPhoneUpdateRequest(phoneNum);
 
         //when
-        String path = MemberControllerPath.MEMBER_CHANGE_PHONE.replace("{memberNum}", String.valueOf(member.getMemberNum()));
-        mockMvc.perform(patch(path)
+        mockMvc.perform(patch(MemberControllerPath.MEMBER_CHANGE_PHONE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .header(TokenProvider.ACCESS_TOKEN_KEY_NAME, tokenValuesDto.getAccessToken())
                         .content(objectMapper.writeValueAsString(memberPhoneUpdateRequest)))

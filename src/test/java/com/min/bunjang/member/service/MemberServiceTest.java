@@ -1,8 +1,11 @@
 package com.min.bunjang.member.service;
 
+import com.min.bunjang.common.exception.WrongRequesterException;
 import com.min.bunjang.config.ServiceBaseTest;
 import com.min.bunjang.helpers.MemberHelper;
+import com.min.bunjang.member.dto.MemberBirthDayUpdateRequest;
 import com.min.bunjang.member.dto.MemberGenderUpdateRequest;
+import com.min.bunjang.member.dto.MemberPhoneUpdateRequest;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
@@ -13,12 +16,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+
 class MemberServiceTest extends ServiceBaseTest {
 
     @Autowired
     private MemberService memberService;
 
-    //TODO 로직변경 이슈로 테스트 진행 잠시 중단. 테스트 작업 마치고 로직변경후 tdd 형식으로 진행해줄것.
     @DisplayName("회원의 성별이 변경된다.")
     @Test
     public void 회원_성별_변경() {
@@ -32,7 +36,7 @@ class MemberServiceTest extends ServiceBaseTest {
         MemberAccount memberAccount = new MemberAccount(member);
 
         //when
-        memberService.changeGender(member.getMemberNum(), memberGenderUpdateRequest, memberAccount);
+        memberService.changeGender(memberGenderUpdateRequest, memberAccount);
 
         //then
         Member updatedMember = memberRepository.findById(member.getMemberNum()).get();
@@ -52,8 +56,7 @@ class MemberServiceTest extends ServiceBaseTest {
         MemberAccount memberAccount = new MemberAccount(member);
 
         //when & then
-        Assertions.assertThatThrownBy(() -> memberService.changeGender(member.getMemberNum() + 1, memberGenderUpdateRequest, memberAccount))
-                .isInstanceOf(NotExistMemberException.class);
+        Assertions.assertThatThrownBy(() -> memberService.changeGender(memberGenderUpdateRequest, null)).isInstanceOf(WrongRequesterException.class);
     }
 
     @DisplayName("회원의 생년월일이 변경된다.")
@@ -64,16 +67,15 @@ class MemberServiceTest extends ServiceBaseTest {
         String password = "password";
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
 
-        MemberGenderUpdateRequest memberGenderUpdateRequest = new MemberGenderUpdateRequest(MemberGender.WOMEN);
-
+        MemberBirthDayUpdateRequest memberBirthDayUpdateRequest = new MemberBirthDayUpdateRequest(LocalDate.of(2021, 7, 7));
         MemberAccount memberAccount = new MemberAccount(member);
 
         //when
-        memberService.changeGender(member.getMemberNum(), memberGenderUpdateRequest, memberAccount);
+        memberService.changeBirthDay(memberBirthDayUpdateRequest, memberAccount);
 
         //then
         Member updatedMember = memberRepository.findById(member.getMemberNum()).get();
-        Assertions.assertThat(updatedMember.getMemberGender()).isEqualTo(memberGenderUpdateRequest.getMemberGender());
+        Assertions.assertThat(updatedMember.getBirthDate()).isEqualTo(memberBirthDayUpdateRequest.getBirthDate());
     }
 
     @DisplayName("[예외] 회원의 생년월일 변경시 회원이 없다면 예외가 발생한다.")
@@ -84,13 +86,12 @@ class MemberServiceTest extends ServiceBaseTest {
         String password = "password";
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
 
-        MemberGenderUpdateRequest memberGenderUpdateRequest = new MemberGenderUpdateRequest(MemberGender.WOMEN);
+        MemberBirthDayUpdateRequest memberBirthDayUpdateRequest = new MemberBirthDayUpdateRequest(LocalDate.of(2021, 7, 7));
 
         MemberAccount memberAccount = new MemberAccount(member);
 
         //when & then
-        Assertions.assertThatThrownBy(() -> memberService.changeGender(member.getMemberNum() + 1, memberGenderUpdateRequest, memberAccount))
-                .isInstanceOf(NotExistMemberException.class);
+        Assertions.assertThatThrownBy(() -> memberService.changeBirthDay(memberBirthDayUpdateRequest, null)).isInstanceOf(WrongRequesterException.class);
     }
 
     @DisplayName("회원의 폰넘버가 변경된다.")
@@ -101,19 +102,19 @@ class MemberServiceTest extends ServiceBaseTest {
         String password = "password";
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
 
-        MemberGenderUpdateRequest memberGenderUpdateRequest = new MemberGenderUpdateRequest(MemberGender.WOMEN);
-
+        String phone = "010-7777-7777";
+        MemberPhoneUpdateRequest memberPhoneUpdateRequest = new MemberPhoneUpdateRequest(phone);
         MemberAccount memberAccount = new MemberAccount(member);
 
         //when
-        memberService.changeGender(member.getMemberNum(), memberGenderUpdateRequest, memberAccount);
+        memberService.changePhone(memberPhoneUpdateRequest, memberAccount);
 
         //then
         Member updatedMember = memberRepository.findById(member.getMemberNum()).get();
-        Assertions.assertThat(updatedMember.getMemberGender()).isEqualTo(memberGenderUpdateRequest.getMemberGender());
+        Assertions.assertThat(updatedMember.getPhone()).isEqualTo(memberPhoneUpdateRequest.getPhone());
     }
 
-    @DisplayName("[예외] 회원의 폰넘버 변경시 회원이 없다면 예외가 발생한다.")
+    @DisplayName("[예외] 회원의 폰넘버 변경시 요청자가 없다면 예외가 발생한다.")
     @Test
     public void 예외_회원폰넘버변경_회원조회불가() {
         //given
@@ -121,13 +122,13 @@ class MemberServiceTest extends ServiceBaseTest {
         String password = "password";
         Member member = MemberHelper.회원가입(email, password, memberRepository, bCryptPasswordEncoder);
 
-        MemberGenderUpdateRequest memberGenderUpdateRequest = new MemberGenderUpdateRequest(MemberGender.WOMEN);
+        String phone = "010-7777-7777";
+        MemberPhoneUpdateRequest memberPhoneUpdateRequest = new MemberPhoneUpdateRequest(phone);
 
         MemberAccount memberAccount = new MemberAccount(member);
 
         //when & then
-        Assertions.assertThatThrownBy(() -> memberService.changeGender(member.getMemberNum() + 1, memberGenderUpdateRequest, memberAccount))
-                .isInstanceOf(NotExistMemberException.class);
+        Assertions.assertThatThrownBy(() -> memberService.changePhone(memberPhoneUpdateRequest, null)).isInstanceOf(WrongRequesterException.class);
     }
 
     @AfterEach

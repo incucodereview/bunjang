@@ -32,33 +32,30 @@ public class MemberController {
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PatchMapping(MemberControllerPath.MEMBER_CHANGE_GENDER)
     public RestResponse<Void> changeGender(
-            @NotNull @PathVariable Long memberNum,
             @Validated @RequestBody MemberGenderUpdateRequest memberGenderUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        memberService.changeGender(memberNum, memberGenderUpdateRequest, memberAccount);
+        memberService.changeGender(memberGenderUpdateRequest, memberAccount);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PatchMapping(MemberControllerPath.MEMBER_CHANGE_BIRTHDAY)
     public RestResponse<Void> changeBirthDay(
-            @NotNull @PathVariable Long memberNum,
             @Validated @RequestBody MemberBirthDayUpdateRequest memberBirthDayUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        memberService.changeBirthDay(memberNum, memberBirthDayUpdateRequest, memberAccount);
+        memberService.changeBirthDay(memberBirthDayUpdateRequest, memberAccount);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
     @PatchMapping(MemberControllerPath.MEMBER_CHANGE_PHONE)
     public RestResponse<Void> changePhone(
-            @NotNull @PathVariable Long memberNum,
             @Validated @RequestBody MemberPhoneUpdateRequest memberPhoneUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        memberService.changePhone(memberNum, memberPhoneUpdateRequest, memberAccount);
+        memberService.changePhone(memberPhoneUpdateRequest, memberAccount);
         return RestResponse.of(HttpStatus.OK, null);
     }
 

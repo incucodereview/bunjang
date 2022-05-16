@@ -17,7 +17,9 @@ import org.springframework.http.MediaType;
 
 import java.time.LocalDate;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -25,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = EmailJoinController.class)
-class EmailJoinControllerBaseTest extends ControllerBaseTest {
+class EmailJoinControllerTest extends ControllerBaseTest {
     @MockBean
     private EmailJoinService emailJoinService;
 
