@@ -33,7 +33,7 @@ public class ProductViewController {
             @NotNull @PathVariable Long productNum,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        ProductDetailResponse productDetailResponse = productViewService.getProduct(productNum, RightRequesterChecker.verifyLoginRequest(memberAccount));
+        ProductDetailResponse productDetailResponse = productViewService.getProduct(productNum, memberAccount);
         return RestResponse.of(HttpStatus.OK, productDetailResponse);
     }
 
@@ -43,7 +43,7 @@ public class ProductViewController {
             @AuthenticationPrincipal MemberAccount memberAccount,
             @PageableDefault(sort = "updatedDate", direction = Sort.Direction.DESC, size = 10) Pageable pageable
     ) {
-        ProductSimpleResponses productSimpleResponses = productViewService.findProductsByStore(RightRequesterChecker.verifyLoginRequest(memberAccount), storeNum, pageable);
+        ProductSimpleResponses productSimpleResponses = productViewService.findProductsByStore(memberAccount, storeNum, pageable);
         return RestResponse.of(HttpStatus.OK, productSimpleResponses);
     }
 
