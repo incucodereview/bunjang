@@ -6,4 +6,3 @@ spring:
       - aws
       - security
       - email
-      - oauth
