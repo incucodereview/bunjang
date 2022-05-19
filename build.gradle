@@ -73,36 +73,44 @@ dependencies {
 //== rest docs 설정 시작 ==
 
 tasks.named('test') {
-    outputs.dir snippetsDir
+//    outputs.dir snippetsDir
     useJUnitPlatform()
 }
 
-tasks.named('asciidoctor') {
-    inputs.dir snippetsDir
-    dependsOn test
-}
+//tasks.named('asciidoctor') {
+//    inputs.dir snippetsDir
+//    dependsOn test
+//}
 
-test {
-    outputs.dir snippetsDir
-}
+//test {
+//    outputs.dir snippetsDir
+//}
+//
+//asciidoctor {
+//    inputs.dir snippetsDir
+//    dependsOn test
+//}
+//
+//asciidoctor.doFirst {
+//    delete file('src/main/resources/static/docs')
+//}
 
-asciidoctor {
-    inputs.dir snippetsDir
-    dependsOn test
-}
-
-asciidoctor.doFirst {
-    delete file('src/main/resources/static/docs')
-}
-
-bootJar {
-    dependsOn asciidoctor
-    from ("build/docs/asciidoc") {
-        into 'BOOT-INF/classes/static/docs'
-    }
-}
+//bootJar {
+//    dependsOn asciidoctor
+//    from ("build/docs/asciidoc") {
+//        into 'BOOT-INF/classes/static/docs'
+//    }
+//}
 // == rest docs 설정 끝 ==
 
+bootJar {
+    mainClass = 'com.min.bunjang.BunjangApplication'
+}
+
+bootRun {
+    String activeProfile = System.properties['spring.profiles.active']
+    systemProperty "spring.profiles.active", activeProfile
+}
 
 // querydsl 추가 시작
 def querydslDir = "$buildDir/generated/querydsl"
