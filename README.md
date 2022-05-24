@@ -27,3 +27,4 @@
 - DB설정의 경우 db.yml파일의 버전을 local, dev, live로 개발환경에 맞게 나눠서 구현했습니다.
 - 검색기능의 경우 데이터가 많기 때문에 검색 컬럼들의 카디널리티를 기준으로 결합인덱스를 설정했습니다. 
 - 배포환경의 경우 Jenkins를 통한 CI/CD 구축과 배포시 서비스에 중단이 생기는 단점을 해소하고자 무중단배포 방식으로 구현했습니다.
+<img src = "src/main/resources/templates/images/번장 포폴 도식화.jpg" width="700" height="400">
