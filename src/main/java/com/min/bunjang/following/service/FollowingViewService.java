@@ -32,8 +32,7 @@ public class FollowingViewService {
     @Transactional(readOnly = true)
     public FollowingListResponse findFollowersOfStore(Long storeNum, Pageable pageable) {
         Slice<Following> followers = followingViewRepository.findByFollowedStoreNum(storeNum, pageable);
-        System.out.println("size"+ followers.getContent().get(0).getFollowedStore().getStoreReviews().size());
-        System.out.println("size"+ followers.getContent().get(0).getFollowerStore().getStoreReviews().size());
+        FollowingResponse.of(followers.getContent().get(0).getNum(), followers.getContent().get(0).getFollowedStore());
         List<FollowingResponse> followingResponses = followers.getContent().stream()
                 .map(following -> FollowingResponse.of(following.getNum(), following.getFollowedStore()))
                 .collect(Collectors.toList());
