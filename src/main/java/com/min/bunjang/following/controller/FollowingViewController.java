@@ -4,6 +4,9 @@ import com.min.bunjang.common.dto.RestResponse;
 import com.min.bunjang.following.dto.response.FollowingListResponse;
 import com.min.bunjang.following.service.FollowingViewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,15 +23,16 @@ public class FollowingViewController {
     public RestResponse<FollowingListResponse> findFollowingsByStore(
             @NotNull @PathVariable Long storeNum
     ) {
-        FollowingListResponse followingListResponse = followingViewService.findThatStoreHaveFollowings(storeNum);
+        FollowingListResponse followingListResponse = followingViewService.findFollowingsOfStore(storeNum);
         return RestResponse.of(HttpStatus.OK, followingListResponse);
     }
 
     @GetMapping(FollowingViewControllerPath.FOLLOWERS_FIND_BY_STORE)
     public RestResponse<FollowingListResponse> findFollowersByStore(
-            @NotNull @PathVariable Long storeNum
+            @NotNull @PathVariable Long storeNum,
+            @PageableDefault(sort = "num", direction = Sort.Direction.DESC, size = 30) Pageable pageable
     ) {
-        FollowingListResponse followerListResponse = followingViewService.findThatStoreHaveFollowers(storeNum);
+        FollowingListResponse followerListResponse = followingViewService.findFollowersOfStore(storeNum, pageable);
         return RestResponse.of(HttpStatus.OK, followerListResponse);
     }
 }

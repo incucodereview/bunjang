@@ -4,7 +4,9 @@ import com.min.bunjang.following.dto.response.FollowingListResponse;
 import com.min.bunjang.following.dto.response.FollowingResponse;
 import com.min.bunjang.following.model.Following;
 import com.min.bunjang.following.repository.FollowingRepository;
+import com.min.bunjang.following.repository.FollowingViewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,21 +18,24 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FollowingViewService {
     private final FollowingRepository followingRepository;
+    private final FollowingViewRepository followingViewRepository;
 
     @Transactional(readOnly = true)
-    public FollowingListResponse findThatStoreHaveFollowings(Long storeNum) {
+    public FollowingListResponse findFollowingsOfStore(Long storeNum) {
         Slice<Following> followings = followingRepository.findByFollowerStoreNum(storeNum);
         List<FollowingResponse> followingResponses = followings.getContent().stream()
-                .map(following -> FollowingResponse.of(following.getNum(), following.getFollowedStore()))
+                .map(following -> FollowingResponse.of(following.getNum(), following.getFollowerStore()))
                 .collect(Collectors.toList());
         return new FollowingListResponse(followingResponses);
     }
 
     @Transactional(readOnly = true)
-    public FollowingListResponse findThatStoreHaveFollowers(Long storeNum) {
-        Slice<Following> followers = followingRepository.findByFollowedStoreNum(storeNum);
+    public FollowingListResponse findFollowersOfStore(Long storeNum, Pageable pageable) {
+        Slice<Following> followers = followingViewRepository.findByFollowedStoreNum(storeNum, pageable);
+        System.out.println("size"+ followers.getContent().get(0).getFollowedStore().getStoreReviews().size());
+        System.out.println("size"+ followers.getContent().get(0).getFollowerStore().getStoreReviews().size());
         List<FollowingResponse> followingResponses = followers.getContent().stream()
-                .map(following -> FollowingResponse.of(following.getNum(), following.getFollowerStore()))
+                .map(following -> FollowingResponse.of(following.getNum(), following.getFollowedStore()))
                 .collect(Collectors.toList());
         return new FollowingListResponse(followingResponses);
     }
