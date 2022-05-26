@@ -37,7 +37,7 @@ public class StoreController {
             @Validated @RequestBody StoreCreateOrUpdateRequest storeCreateOrUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) throws IOException {
-        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateOrUpdateRequest, memberAccount.getEmail());
+        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateOrUpdateRequest, memberAccount);
         return RestResponse.of(HttpStatus.OK, storeCreateResponse);
     }
 
@@ -47,7 +47,7 @@ public class StoreController {
             @Validated @RequestBody StoreIntroduceUpdateRequest storeIntroduceUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        storeService.updateIntroduceContent(memberAccount.getEmail(), storeIntroduceUpdateRequest);
+        storeService.updateIntroduceContent(memberAccount, storeIntroduceUpdateRequest);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -57,7 +57,7 @@ public class StoreController {
             @Validated @RequestBody StoreNameUpdateRequest storeNameUpdateRequest,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        storeService.updateStoreName(storeNameUpdateRequest, memberAccount.getEmail());
+        storeService.updateStoreName(storeNameUpdateRequest, memberAccount);
         return RestResponse.of(HttpStatus.OK, null);
     }
 
@@ -67,7 +67,7 @@ public class StoreController {
             @Validated @RequestBody VisitorPlusDto visitorPlusDto,
             @AuthenticationPrincipal MemberAccount memberAccount
     ) {
-        storeService.plusVisitor(visitorPlusDto, memberAccount.getEmail());
+        storeService.plusVisitor(visitorPlusDto, memberAccount);
         return RestResponse.of(HttpStatus.OK, null);
     }
 

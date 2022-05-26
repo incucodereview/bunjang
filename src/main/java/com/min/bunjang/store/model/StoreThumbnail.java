@@ -21,16 +21,16 @@ public class StoreThumbnail extends BasicEntity {
     @NotBlank
     private String filePath;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private Store store;
+    @NotNull
+    private Long storeNum;
 
-    public StoreThumbnail(String filePath, Store store) {
+    public StoreThumbnail(String filePath, Long storeNum) {
         this.filePath = filePath;
-        this.store = store;
+        this.storeNum = storeNum;
     }
 
-    public static StoreThumbnail createStoreThumbnail(String filePath, Store store) {
-        return new StoreThumbnail(filePath, store);
+    public static StoreThumbnail createStoreThumbnail(String filePath, Long storeNum) {
+        return new StoreThumbnail(filePath, storeNum);
     }
 }
 

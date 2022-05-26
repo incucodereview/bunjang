@@ -17,11 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
     private final MemberRepository memberRepository;
 
+    //TODO 회원검증이 애매함 이건 무조건 토큰값이 올바른 값이라고 가정하는 코드임.. 요청DTO에 비교할 값을 더 주는것도 괜찮아 보임.
     @Transactional
     public void changeGender(MemberGenderUpdateRequest memberGenderUpdateRequest, MemberAccount memberAccount) {
         RightRequesterChecker.verifyLoginRequest(memberAccount);
         Member member = memberRepository.findByEmail(memberAccount.getEmail()).orElseThrow(NotExistMemberException::new);
-        member.verifyEmailMatch(memberAccount.getEmail());
         member.changeGender(memberGenderUpdateRequest.getMemberGender());
     }
 

@@ -5,6 +5,7 @@ import com.min.bunjang.common.validator.RightRequesterChecker;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.repository.MemberRepository;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
 import com.min.bunjang.store.dto.response.StoreCreateResponse;
 import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
@@ -30,68 +31,60 @@ public class StoreService {
     private final StoreThumbnailRepository storeThumbnailRepository;
     private final S3UploadService s3UploadService;
 
+    //memberAccount
     @Transactional
-    public StoreCreateResponse createStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, String memberEmail) throws IOException {
-        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
+    public StoreCreateResponse createStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, MemberAccount memberAccount) throws IOException {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
+        Member member = memberRepository.findByEmail(memberAccount.getEmail()).orElseThrow(NotExistMemberException::new);
         StoreThumbnail storeThumbnail = refineStoreThumbnail(storeCreateOrUpdateRequest.getStoreThumbnail(), null);
         Store store = Store.createStore(storeCreateOrUpdateRequest.getStoreName(), storeCreateOrUpdateRequest.getIntroduceContent(), storeThumbnail, member);
         return StoreCreateResponse.of(storeRepository.save(store));
     }
 
     @Transactional
-    public void updateIntroduceContent(String memberEmail, StoreIntroduceUpdateRequest storeIntroduceUpdateRequest) {
-        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
-        if (member.getStore() == null) {
-            throw new NotExistStoreException();
-        }
-
-        Store store = storeRepository.findById(member.getStore().getNum()).orElseThrow(NotExistStoreException::new);
+    public void updateIntroduceContent(MemberAccount memberAccount, StoreIntroduceUpdateRequest storeIntroduceUpdateRequest) {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
+        Store store = storeRepository.findByMember(memberAccount.getMember()).orElseThrow(NotExistStoreException::new);
         store.updateIntroduceContent(storeIntroduceUpdateRequest.getUpdateIntroduceContent());
     }
 
+    //? 컨트롤러 없는데?
     @Transactional
-    public void updateStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, Long storeNum, String memberEmail) throws IOException {
+    public void updateStore(StoreCreateOrUpdateRequest storeCreateOrUpdateRequest, Long storeNum, MemberAccount memberAccount) throws IOException {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         Store store = storeRepository.findById(storeNum).orElseThrow(NotExistStoreException::new);
-        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberEmail, store);
+        RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), store);
 
         store.updateStore(storeCreateOrUpdateRequest);
         store.updateThumbnail(refineStoreThumbnail(storeCreateOrUpdateRequest.getStoreThumbnail(), store));
     }
 
     private StoreThumbnail refineStoreThumbnail(MultipartFile multipartFile, Store store) throws IOException {
-        if (multipartFile == null) {
+        if (multipartFile == null || store == null) {
             return null;
         }
 
-        if (store != null && store.checkExistThumbnail()) {
+        if (store.checkExistThumbnail()) {
             storeThumbnailRepository.delete(store.getStoreThumbnail());
             //기존 파일 삭제
 //                s3UploadService.
         }
-        StoreThumbnail updatedThumbnail = StoreThumbnail.createStoreThumbnail(s3UploadService.uploadForMultiFile(multipartFile), store);
+        StoreThumbnail updatedThumbnail = StoreThumbnail.createStoreThumbnail(s3UploadService.uploadForMultiFile(multipartFile), store.getNum());
         return storeThumbnailRepository.save(updatedThumbnail);
     }
 
     @Transactional
-    public void updateStoreName(StoreNameUpdateRequest storeNameUpdateRequest, String memberEmail) {
-        Member member = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
-        if (member.getStore() == null) {
-            throw new NotExistStoreException();
-        }
-
-        Store store = storeRepository.findById(member.getStore().getNum()).orElseThrow(NotExistStoreException::new);
+    public void updateStoreName(StoreNameUpdateRequest storeNameUpdateRequest, MemberAccount memberAccount) {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
+        Store store = storeRepository.findByMember(memberAccount.getMember()).orElseThrow(NotExistStoreException::new);
         store.updateStoreName(storeNameUpdateRequest.getUpdatedStoreName());
     }
 
     @Transactional
-    public void plusVisitor(VisitorPlusDto visitorPlusDto, String memberEmail) {
-        Member visitorMember = memberRepository.findByEmail(memberEmail).orElseThrow(NotExistMemberException::new);
-        if (visitorMember.getStore() == null) {
-            throw new NotExistStoreException();
-        }
-
+    public void plusVisitor(VisitorPlusDto visitorPlusDto, MemberAccount memberAccount) {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         Store owner = storeRepository.findById(visitorPlusDto.getOwnerNum()).orElseThrow(NotExistStoreException::new);
-        Store visitor = storeRepository.findByMember(visitorMember).orElseThrow(NotExistStoreException::new);
+        Store visitor = storeRepository.findByMember(memberAccount.getMember()).orElseThrow(NotExistStoreException::new);
         owner.plusVisitor(visitor.getNum());
     }
 

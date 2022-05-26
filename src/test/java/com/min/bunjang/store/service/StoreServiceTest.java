@@ -1,12 +1,14 @@
 package com.min.bunjang.store.service;
 
 import com.min.bunjang.common.database.DatabaseFormat;
+import com.min.bunjang.common.exception.WrongRequesterException;
 import com.min.bunjang.member.dto.MemberDirectCreateDto;
 import com.min.bunjang.member.exception.NotExistMemberException;
 import com.min.bunjang.member.model.Member;
 import com.min.bunjang.member.model.MemberGender;
 import com.min.bunjang.member.model.MemberRole;
 import com.min.bunjang.member.repository.MemberRepository;
+import com.min.bunjang.security.MemberAccount;
 import com.min.bunjang.store.dto.request.StoreCreateOrUpdateRequest;
 import com.min.bunjang.store.dto.response.StoreCreateResponse;
 import com.min.bunjang.store.dto.request.StoreIntroduceUpdateRequest;
@@ -58,8 +60,10 @@ class StoreServiceTest {
         String introduceContent = "introduceContent";
         StoreCreateOrUpdateRequest storeCreateOrUpdateRequest = new StoreCreateOrUpdateRequest(storeName, introduceContent, null, null, null, null);
 
+        MemberAccount memberAccount = new MemberAccount(savedMember);
+
         //when
-        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateOrUpdateRequest, savedMember.getEmail());
+        StoreCreateResponse storeCreateResponse = storeService.createStore(storeCreateOrUpdateRequest, memberAccount);
 
         //then
         Assertions.assertThat(storeCreateResponse.getStoreId()).isNotNull();
@@ -68,7 +72,7 @@ class StoreServiceTest {
     }
 
 
-    @DisplayName("[예외] 상정 생성시 조회한 멤버가 null 이면 NotExistMemberException 예외 발생")
+    @DisplayName("[예외] 상정 생성시 조회한 멤버가 null 이면 WrongRequesterException 예외 발생")
     @Test
     void store_NotExistMemberException() {
         //given
@@ -76,8 +80,9 @@ class StoreServiceTest {
         String introduceContent = "introduceContent";
 
         StoreCreateOrUpdateRequest storeCreateOrUpdateRequest = new StoreCreateOrUpdateRequest(storeName, introduceContent, null, null, null, null);
+
         //when & then
-        Assertions.assertThatThrownBy(() -> storeService.createStore(storeCreateOrUpdateRequest, "notExistEmail")).isInstanceOf(NotExistMemberException.class);
+        Assertions.assertThatThrownBy(() -> storeService.createStore(storeCreateOrUpdateRequest, null)).isInstanceOf(WrongRequesterException.class);
 
     }
 
@@ -97,8 +102,10 @@ class StoreServiceTest {
                 "구매후 환불 불가니 정보 잘 확인하세요!"
         );
 
+        MemberAccount memberAccount = new MemberAccount(savedMember);
+
         //when
-        storeService.updateStore(storeCreateOrUpdateRequest, store.getNum(), savedMember.getEmail());
+        storeService.updateStore(storeCreateOrUpdateRequest, store.getNum(), memberAccount);
 
         //then
         Store updatedStore = storeRepository.findById(store.getNum()).get();
@@ -121,15 +128,17 @@ class StoreServiceTest {
         String updateIntroduceContent = "updateIntroduceContent";
         StoreIntroduceUpdateRequest storeIntroduceUpdateRequest = new StoreIntroduceUpdateRequest(updateIntroduceContent);
 
+        MemberAccount memberAccount = new MemberAccount(savedMember);
+
         //when
-        storeService.updateIntroduceContent(savedMember.getEmail(), storeIntroduceUpdateRequest);
+        storeService.updateIntroduceContent(memberAccount, storeIntroduceUpdateRequest);
 
         //then
         Store updatedStore = storeRepository.findById(savedStore.getNum()).get();
         Assertions.assertThat(updatedStore.getIntroduceContent()).isEqualTo(updateIntroduceContent);
     }
 
-    @DisplayName("[예외] 상점 소개글 수정시 조회한 상점이 null 이면 NotExistStoreException 예외 발생")
+    @DisplayName("[예외] 상점 소개글 수정시 요청자가 null 이면 WrongRequesterException 예외 발생")
     @Test
     void store_NotExistStoreException() {
         //given
@@ -137,7 +146,7 @@ class StoreServiceTest {
         StoreIntroduceUpdateRequest storeIntroduceUpdateRequest = new StoreIntroduceUpdateRequest(updateIntroduceContent);
 
         //when & then
-        Assertions.assertThatThrownBy(() -> storeService.updateIntroduceContent(savedMember.getEmail(), storeIntroduceUpdateRequest)).isInstanceOf(NotExistStoreException.class);
+        Assertions.assertThatThrownBy(() -> storeService.updateIntroduceContent(null, storeIntroduceUpdateRequest)).isInstanceOf(WrongRequesterException.class);
     }
 
     @DisplayName("상점 방문자를 계산한다")
@@ -157,9 +166,11 @@ class StoreServiceTest {
 
         VisitorPlusDto visitorPlusDto = new VisitorPlusDto(owner.getNum());
 
+        MemberAccount memberAccount = new MemberAccount(savedMember);
+
         //when
-        storeService.plusVisitor(visitorPlusDto, newMember.getEmail());
-        storeService.plusVisitor(visitorPlusDto, newMember.getEmail());
+        storeService.plusVisitor(visitorPlusDto, memberAccount);
+        storeService.plusVisitor(visitorPlusDto, memberAccount);
 
         //then
         Store store = storeRepository.findById(owner.getNum()).get();

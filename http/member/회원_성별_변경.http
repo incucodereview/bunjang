@@ -1,6 +1,6 @@
-PATCH http://localhost:8080/member/4/gender
+PATCH http://localhost:8080/member/gender
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0ODU1ODA4OCwiZXhwIjoxNjQ4NTU5ODg4fQ.XL28oZ9NAXVt2RGqjW8ZmLB0qMm-_MPG6E_sgdqHL1s
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY1MzU4MTk2MCwiZXhwIjoxNjUzNTgzNzYwfQ.TIEHilwctqglVzoS8UanxLGjkn5k-X1TV_V6RRW5hO8
 
 #res
 #{
@@ -13,5 +13,5 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
 
 #req
 {
-  "memberGender": "WOMEN"
+  "memberGender": "MEN"
 }

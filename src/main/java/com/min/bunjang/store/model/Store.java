@@ -42,7 +42,8 @@ public class Store extends BasicEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "store", orphanRemoval = true)
+    //TODO 애매함... mappedby가 없는 이상태가 맞는 상태일까..
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private StoreThumbnail storeThumbnail;
 
     @ElementCollection(fetch = FetchType.LAZY)
@@ -60,10 +61,10 @@ public class Store extends BasicEntity {
     private Set<StoreReview> storeReviews = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "followerStore", orphanRemoval = true)
-    private List<Following> followings = new ArrayList<>();
+    private Set<Following> followings = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "followedStore", orphanRemoval = true)
-    private List<Following> followers = new ArrayList<>();
+    private Set<Following> followers = new HashSet<>();
 
     private int hits;
 

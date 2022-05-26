@@ -67,9 +67,6 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private MemberGender memberGender;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "member", orphanRemoval = true)
-    private Store store;
-
     @Builder(access = AccessLevel.PRIVATE)
     public Member(
             Long memberNum,
@@ -143,12 +140,12 @@ public class Member {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
-        return Objects.equals(memberNum, member.memberNum) && Objects.equals(email, member.email) && Objects.equals(password, member.password) && Objects.equals(name, member.name) && Objects.equals(phone, member.phone) && Objects.equals(birthDate, member.birthDate) && Objects.equals(joinDate, member.joinDate) && Objects.equals(updatedDate, member.updatedDate) && memberRole == member.memberRole && Objects.equals(store, member.store);
+        return Objects.equals(memberNum, member.memberNum) && Objects.equals(email, member.email) && Objects.equals(password, member.password) && Objects.equals(name, member.name) && Objects.equals(phone, member.phone) && Objects.equals(birthDate, member.birthDate) && Objects.equals(joinDate, member.joinDate) && Objects.equals(updatedDate, member.updatedDate) && memberRole == member.memberRole;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberNum, email, password, name, phone, birthDate, joinDate, updatedDate, memberRole, store);
+        return Objects.hash(memberNum, email, password, name, phone, birthDate, joinDate, updatedDate, memberRole);
     }
 
     @Override
