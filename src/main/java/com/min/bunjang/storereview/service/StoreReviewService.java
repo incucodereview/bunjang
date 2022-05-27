@@ -16,6 +16,7 @@ import com.min.bunjang.storereview.exception.NotExistStoreReviewException;
 import com.min.bunjang.storereview.model.StoreReview;
 import com.min.bunjang.storereview.repository.StoreReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

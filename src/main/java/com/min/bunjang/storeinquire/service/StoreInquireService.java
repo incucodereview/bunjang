@@ -22,9 +22,9 @@ public class StoreInquireService {
 
     @Transactional
     public InquireCreateResponse createStoreInquiry(MemberAccount memberAccount, InquireCreateRequest inquireCreateRequest) {
+        RightRequesterChecker.verifyLoginRequest(memberAccount);
         Store owner = storeRepository.findById(inquireCreateRequest.getOwnerNum()).orElseThrow(NotExistStoreException::new);
         Store writer = storeRepository.findById(inquireCreateRequest.getWriterNum()).orElseThrow(NotExistStoreException::new);
-        RightRequesterChecker.verifyLoginRequest(memberAccount);
         RightRequesterChecker.verifyMemberAndStoreMatchByEmail(memberAccount.getEmail(), writer);
         StoreInquire storeInquire = StoreInquire.of(owner.getNum(), writer, inquireCreateRequest.getInquireContent());
         defineMentionIfExistMentionNum(inquireCreateRequest, storeInquire);
@@ -42,8 +42,8 @@ public class StoreInquireService {
 
     @Transactional
     public void deleteStoreInquire(MemberAccount memberAccount, Long inquireNum) {
-        StoreInquire storeInquire = storeInquiryRepository.findById(inquireNum).orElseThrow(NotExistStoreInquireException::new);
         RightRequesterChecker.verifyLoginRequest(memberAccount);
+        StoreInquire storeInquire = storeInquiryRepository.findById(inquireNum).orElseThrow(NotExistStoreInquireException::new);
         RightRequesterChecker.verifyMemberAndStoreInquireWriterMatchByEmail(memberAccount.getEmail(), storeInquire);
 
         storeInquiryRepository.deleteById(inquireNum);

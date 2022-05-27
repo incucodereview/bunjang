@@ -44,7 +44,7 @@ public class StoreService {
     @Transactional
     public void updateIntroduceContent(MemberAccount memberAccount, StoreIntroduceUpdateRequest storeIntroduceUpdateRequest) {
         RightRequesterChecker.verifyLoginRequest(memberAccount);
-        Store store = storeRepository.findByMember(memberAccount.getMember()).orElseThrow(NotExistStoreException::new);
+        Store store = storeRepository.findByMemberEmail(memberAccount.getEmail()).orElseThrow(NotExistStoreException::new);
         store.updateIntroduceContent(storeIntroduceUpdateRequest.getUpdateIntroduceContent());
     }
 
@@ -76,7 +76,7 @@ public class StoreService {
     @Transactional
     public void updateStoreName(StoreNameUpdateRequest storeNameUpdateRequest, MemberAccount memberAccount) {
         RightRequesterChecker.verifyLoginRequest(memberAccount);
-        Store store = storeRepository.findByMember(memberAccount.getMember()).orElseThrow(NotExistStoreException::new);
+        Store store = storeRepository.findByMemberEmail(memberAccount.getEmail()).orElseThrow(NotExistStoreException::new);
         store.updateStoreName(storeNameUpdateRequest.getUpdatedStoreName());
     }
 
@@ -84,7 +84,7 @@ public class StoreService {
     public void plusVisitor(VisitorPlusDto visitorPlusDto, MemberAccount memberAccount) {
         RightRequesterChecker.verifyLoginRequest(memberAccount);
         Store owner = storeRepository.findById(visitorPlusDto.getOwnerNum()).orElseThrow(NotExistStoreException::new);
-        Store visitor = storeRepository.findByMember(memberAccount.getMember()).orElseThrow(NotExistStoreException::new);
+        Store visitor = storeRepository.findByMemberEmail(memberAccount.getEmail()).orElseThrow(NotExistStoreException::new);
         owner.plusVisitor(visitor.getNum());
     }
 

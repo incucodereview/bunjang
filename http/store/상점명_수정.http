@@ -1,6 +1,6 @@
-PUT http://localhost:8080/store/name
+PATCH http://localhost:8080/store/name
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NjU0MDAxOSwiZXhwIjoxNjQ2NTQxODE5fQ.Sku5dpLWpEZTyNhHvoXfEKQuK7qFvWp0OwCKfT9bFxg
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY1MzYzODU1NCwiZXhwIjoxNjUzNjQwMzU0fQ.Arxdb-8xiJB3zQDVbM02bvxnnH_M63VKLhGf1Iss-jA
 
 #res
 #{

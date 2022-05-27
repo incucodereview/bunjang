@@ -13,15 +13,28 @@ import org.springframework.security.core.userdetails.User;
 @Getter
 public class MemberAccount extends User {
 
-    private Member member;
+    private Long memberNum;
+    private String email;
+    private String memberName;
 
     public MemberAccount(Member member) {
         super(member.getEmail(), member.getPassword(), Arrays.asList(new SimpleGrantedAuthority(String.valueOf(member.getMemberRole()))));
-        this.member = member;
+        this.memberNum = member.getMemberNum();
+        this.email = member.getEmail();
+        this.memberName = member.getName();
+    }
+
+
+    public Long getMemberNum() {
+        return Optional.ofNullable(memberNum).orElse(null);
     }
 
     public String getEmail() {
-        return Optional.ofNullable(member.getEmail()).orElse(null);
+        return Optional.ofNullable(email).orElse(null);
+    }
+
+    public String getMemberName() {
+        return Optional.ofNullable(memberName).orElse(null);
     }
 
     //Member memberFetch = Optional.ofNullable(memberDetails)

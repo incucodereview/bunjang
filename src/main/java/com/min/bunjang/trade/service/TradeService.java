@@ -24,6 +24,7 @@ public class TradeService {
     private final StoreRepository storeRepository;
     private final ProductRepository productRepository;
 
+    //TODO 거래 조회 기능 구현 필요
     @Transactional
     public TradeCreateResponse createTrade(String email, TradeCreateRequest tradeCreateRequest) {
         Store seller = storeRepository.findById(tradeCreateRequest.getSellerNum()).orElseThrow(NotExistStoreException::new);

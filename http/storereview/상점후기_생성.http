@@ -1,6 +1,6 @@
 POST http://localhost:8080/store-review
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0ODM1NzA5NCwiZXhwIjoxNjQ4MzU4ODk0fQ.o6DG4pwznh-FSdOv0bm-xuGjBOytEfnMUsj9uubuA0U
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY1MzY0MDM3NiwiZXhwIjoxNjUzNjQyMTc2fQ.3mgLw2JKlZJ7xQPCMDrSA4AjVCbM3nVxteqrsNa7fJw
 
 
 #res
@@ -27,5 +27,5 @@ Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlh
   "writerNum": 1,
   "dealScore": 4.0,
   "productNum": 9,
-  "reviewContent": "1->2테스트용 상점후기 입니다."
+  "reviewContent": "1->2테스트용 상점후기2 입니다."
 }
