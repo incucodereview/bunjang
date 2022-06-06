@@ -1,0 +1,19 @@
+POST http://localhost:8080/product-inquire
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzQ0MTIyNSwiZXhwIjoxNjQ3NDQzMDI1fQ.EOPFg-c4VxydVfUfmPFqhvD_vehnZQBuxgAO2tK5WDI
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#Response code: 200; Time: 419ms; Content length: 48 bytes
+
+#req
+{
+  "writerNum" :  1,
+  "productNum" : 5,
+  "inquireContent" :  "제품 문의 입니다.",
+  "inquireWriterNumForAnswer" : null
+}

@@ -1,0 +1,130 @@
+GET http://localhost:8080/product/2
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzUwNzExMywiZXhwIjoxNjQ3NTA4OTEzfQ.8pDh_ojyvXhmUOTDnVus15-VkHNo3WDeZ50E1IjNUL4
+
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "productNum": 2,
+#    "firstCategoryNum": 1,
+#    "secondCategoryNum": 1,
+#    "thirdCategoryNum": 1,
+#    "productPhotos": [
+#      {
+#        "photoNum": 1,
+#        "filePath": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/bird-gecdf2e455_1920.jpg"
+#      }
+#    ],
+#    "productName": "productTempName",
+#    "productPrice": 100009,
+#    "wishCount": 0,
+#    "hits": 0,
+#    "updateDateTime": "2022-03-12T23:32:48",
+#    "productTradeState": null,
+#    "productQualityState": null,
+#    "exchangeState": "POSSIBILITY",
+#    "deliveryChargeInPrice": "INCLUDED",
+#    "exchangeLocation": "exchangeLocation",
+#    "productExplanation": "상품설명필드 입니다.",
+#    "productTags": [
+#      "tag1",
+#      "tag2"
+#    ],
+#    "productInquiries": [],
+#    "productSimpleResponses": [
+#      {
+#        "productNum": 2,
+#        "productPhotos": [
+#          {
+#            "photoNum": 1,
+#            "filePath": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/bird-gecdf2e455_1920.jpg"
+#          }
+#        ],
+#        "productName": "productTempName",
+#        "productPrice": 100009,
+#        "updateDateTime": "2022-03-12T23:32:48",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": null
+#      },
+#      {
+#        "productNum": 3,
+#        "productPhotos": [],
+#        "productName": "productTempName2",
+#        "productPrice": 100009,
+#        "updateDateTime": "2022-03-13T22:46:40",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_ING"
+#      },
+#      {
+#        "productNum": 4,
+#        "productPhotos": [],
+#        "productName": "productTempName3",
+#        "productPrice": 20000,
+#        "updateDateTime": "2022-03-15T22:59:06",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_ING"
+#      },
+#      {
+#        "productNum": 5,
+#        "productPhotos": [],
+#        "productName": "productTempName4",
+#        "productPrice": 200021,
+#        "updateDateTime": "2022-03-17T18:38:17",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_OUT"
+#      },
+#      {
+#        "productNum": 6,
+#        "productPhotos": [],
+#        "productName": "productTempName5",
+#        "productPrice": 200021,
+#        "updateDateTime": "2022-03-15T22:59:30",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_ING"
+#      },
+#      {
+#        "productNum": 7,
+#        "productPhotos": [],
+#        "productName": "productTempName6",
+#        "productPrice": 20066,
+#        "updateDateTime": "2022-03-15T23:18:36",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_ING"
+#      },
+#      {
+#        "productNum": 8,
+#        "productPhotos": [],
+#        "productName": "productTempName7",
+#        "productPrice": 20066,
+#        "updateDateTime": "2022-03-15T23:19:15",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_ING"
+#      },
+#      {
+#        "productNum": 9,
+#        "productPhotos": [],
+#        "productName": "productTempName7",
+#        "productPrice": 20066,
+#        "updateDateTime": "2022-03-22T22:35:49",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_ING"
+#      }
+#    ],
+#    "storeSimpleResponse": {
+#      "storeNum": 1,
+#      "storeName": "생성 테스트용 상점명 변경 테스트",
+#      "storeThumbnail": {
+#        "fileNum": 29,
+#        "fileLocation": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/petit-minou-lighthouse-g7a7213b31_1920.jpg"
+#      },
+#      "productCount": 7,
+#      "followerCount": 0,
+#      "storeReviewCount": 2
+#    }
+#  }
+#}
+#
+#Response code: 200; Time: 206ms; Content length: 2611 bytes

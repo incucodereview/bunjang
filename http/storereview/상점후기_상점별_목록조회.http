@@ -1,0 +1,38 @@
+GET http://localhost:8080/store/2/reviews
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5vdEV4aXN0RW1haWxAZW1haS5jb20iLCJpYXQiOjE2NDgzNTYwNTAsImV4cCI6MTY0ODM1Nzg1MH0.XIwBjh5XHa3FqS1qwVVruUuDs1nJczHRssTNvbvoTwQ
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "storeReviewListResponses": [
+#      {
+#        "reviewNum": 3,
+#        "writerNum": 1,
+#        "writerThumbnail": {
+#          "fileNum": 29,
+#          "fileLocation": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/petit-minou-lighthouse-g7a7213b31_1920.jpg"
+#        },
+#        "writerName": "생성 테스트용 상점명 변경 테스트",
+#        "dealScore": 4.0,
+#        "productNum": 9,
+#        "productName": "productTempName7",
+#        "reviewContent": "1->2테스트용 상점후기 입니다.",
+#        "postingDate": "2022-03-27"
+#      }
+#    ],
+#    "pageDto": {
+#      "startPage": 1,
+#      "endPage": 0,
+#      "prev": false,
+#      "next": false,
+#      "total": 1,
+#      "realEndPage": 0,
+#      "currentPage": 0
+#    }
+#  }
+#}
+#
+#Response code: 200; Time: 145ms; Content length: 525 bytes

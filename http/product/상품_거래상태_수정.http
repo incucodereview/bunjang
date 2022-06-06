@@ -1,0 +1,19 @@
+PATCH http://localhost:8080/product/5
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzUwOTg3OSwiZXhwIjoxNjQ3NTExNjc5fQ.oJ8qfoLANItvsLWUFZRsGzhqwCpcxDxnSnrhQ9foPIA
+
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#
+#Response code: 200; Time: 116ms; Content length: 48 bytes
+
+#req
+{
+  "productTradeState": "SOLD_OUT"
+}
+

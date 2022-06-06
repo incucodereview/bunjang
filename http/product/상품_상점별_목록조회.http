@@ -1,0 +1,42 @@
+GET http://localhost:8080/store/1/products?page=1&size=5
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzM1NDYwMywiZXhwIjoxNjQ3MzU2NDAzfQ.77xdN3ztk0UpbBudEz-sTLsWRAw1K6UMIaxhDFb8uPk
+
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "productSimpleResponses": [
+#      {
+#        "productNum": 3,
+#        "productPhotos": [],
+#        "productName": "productTempName2",
+#        "productPrice": 100009,
+#        "updateDateTime": "2022-03-13T22:46:40",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_ING"
+#      },
+#      {
+#        "productNum": 2,
+#        "productPhotos": [
+#          {
+#            "photoNum": 1,
+#            "filePath": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/bird-gecdf2e455_1920.jpg"
+#          }
+#        ],
+#        "productName": "productTempName",
+#        "productPrice": 100009,
+#        "updateDateTime": "2022-03-12T23:32:48",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": null
+#      }
+#    ],
+#    "pageDto": null
+#  }
+#}
+#
+#Response code: 200; Time: 108ms; Content length: 590 bytes
+
+#req

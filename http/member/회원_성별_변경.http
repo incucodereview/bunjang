@@ -1,0 +1,17 @@
+PATCH http://localhost:8080/member/gender
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY1MzU4MTk2MCwiZXhwIjoxNjUzNTgzNzYwfQ.TIEHilwctqglVzoS8UanxLGjkn5k-X1TV_V6RRW5hO8
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#
+#Response code: 200; Time: 339ms; Content length: 48 bytes
+
+#req
+{
+  "memberGender": "MEN"
+}

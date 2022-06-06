@@ -1,0 +1,32 @@
+POST http://localhost:8080/product
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5vdEV4aXN0RW1haWxAZW1haS5jb20iLCJpYXQiOjE2NDc5NTYxMjksImV4cCI6MTY0Nzk1NzkyOX0.elUXGdXKC2OnZzNQqfGk8T31Lpmep_odHtuZJfP2G4A
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#Response code: 200; Time: 139ms; Content length: 48 bytes
+
+
+{
+  "storeNum": 2,
+  "productPhotos": null,
+  "productName": "productTempName7",
+  "firstCategoryNum": 1,
+  "secondCategoryNum": 1,
+  "thirdCategoryNum": 1,
+  "exchangeLocation": "exchangeLocation",
+  "productQualityState": "NEW_PRODUCT",
+  "exchangeState": "POSSIBILITY",
+  "productPrice": 20066,
+  "deliveryChargeInPrice": "INCLUDED",
+  "productExplanation": "상품설명필드 입니다.7",
+  "tags": [
+    "tag5",
+    "tag1"
+  ],
+  "productAmount": 2
+}

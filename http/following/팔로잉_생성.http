@@ -1,0 +1,18 @@
+POST http://localhost:8080/following
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY1MjM3MzIxOSwiZXhwIjoxNjUyMzc1MDE5fQ.wrG5Osdm5cF7bEa8GE3m51reS6KrPgnyslHbdpJfgZA
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#Response code: 200; Time: 196ms; Content length: 48 bytes
+
+
+#req
+{
+  "followerStoreNum": 1,
+  "followedStoreNum": 2
+}

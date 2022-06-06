@@ -1,0 +1,30 @@
+GET http://localhost:8080/store/2/followers
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0NzY5MTk3NSwiZXhwIjoxNjQ3NjkzNzc1fQ.6NH7EkeLlbb1AWpxAWQfdE0YbBUBR8DmvI_j8qdZWyc
+
+# before : 455ms
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "followingResponseList": [
+#      {
+#        "followingNum": 2,
+#        "storeSimpleResponses": {
+#          "storeNum": 1,
+#          "storeName": "생성 테스트용 상점명 변경 테스트",
+#          "storeThumbnail": {
+#            "fileNum": 29,
+#            "fileLocation": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/petit-minou-lighthouse-g7a7213b31_1920.jpg"
+#          },
+#          "productCount": 7,
+#          "followerCount": 0,
+#          "storeReviewCount": 2
+#        }
+#      }
+#    ]
+#  }
+#}
+#
+#Response code: 200; Time: 154ms; Content length: 369 bytes

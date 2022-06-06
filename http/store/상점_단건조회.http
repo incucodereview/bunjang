@@ -1,0 +1,26 @@
+GET http://localhost:8080/store/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Im5vdEV4aXN0RW1haWxAZW1haS5jb20iLCJpYXQiOjE2NDgzNTYwNTAsImV4cCI6MTY0ODM1Nzg1MH0.XIwBjh5XHa3FqS1qwVVruUuDs1nJczHRssTNvbvoTwQ
+
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "storeNum": 1,
+#    "storeThumbnail": {
+#      "fileNum": 29,
+#      "fileLocation": "https://mins-bunjang-bucket.s3.ap-northeast-2.amazonaws.com/petit-minou-lighthouse-g7a7213b31_1920.jpg"
+#    },
+#    "storeName": "생성 테스트용 상점명 변경 테스트",
+#    "storeScore": 3.0,
+#    "openDate": "P22D",
+#    "hits": 5,
+#    "introduceContent": "생성 테스트용 상점 소개글 수정"
+#  }
+#}
+#
+#Response code: 200; Time: 250ms; Content length: 326 bytes
+
+#req

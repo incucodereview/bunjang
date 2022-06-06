@@ -1,0 +1,14 @@
+PATCH http://localhost:8080/trade/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0ODM5ODA0OCwiZXhwIjoxNjQ4Mzk5ODQ4fQ.t7r6IfW2yaMpzzgKL1RR3GTaMFPvfQC5cwfRiwyaDZw
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": null
+#}
+#
+#Response code: 200; Time: 149ms; Content length: 48 bytes
+
+#req

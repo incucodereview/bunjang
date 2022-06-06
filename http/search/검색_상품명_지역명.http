@@ -1,0 +1,33 @@
+GET http://localhost:8080/product/search?keyword=3
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InVyaXNlZ2VhQG5hdmVyLmNvbSIsImlhdCI6MTY0ODcwNzM2MywiZXhwIjoxNjQ4NzA5MTYzfQ.y28bsfns5yeamcIK3OUiGwI9lj6D6CDjm7S0UbYfFbg
+
+#res
+#{
+#  "statusCode": "OK",
+#  "message": null,
+#  "result": {
+#    "productSimpleResponses": [
+#      {
+#        "productNum": 4,
+#        "productPhotos": [],
+#        "productName": "productTempName3",
+#        "productPrice": 20000,
+#        "updateDateTime": "2022-03-15T22:59:06",
+#        "exchangeLocation": "exchangeLocation",
+#        "productTradeState": "SOLD_ING"
+#      }
+#    ],
+#    "pageDto": {
+#      "startPage": 1,
+#      "endPage": 0,
+#      "prev": false,
+#      "next": false,
+#      "total": 1,
+#      "realEndPage": 0,
+#      "currentPage": 0
+#    }
+#  }
+#}
+#
+#Response code: 200; Time: 204ms; Content length: 376 bytes
